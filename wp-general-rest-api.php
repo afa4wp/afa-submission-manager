@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Plugin Name:       WP GENERAL REST API
+* Plugin Name:       WP General Rest API
 * Plugin URI:        https://example.com/plugins/the-basics/
 * Description:       Este é um plugin que gera as rotas para obter os dados do site wordpress, permitindo requisições autencticadas usando jwt
 * Version:           1.0.0
@@ -10,7 +10,7 @@
 * Author:            Oi.Mark
 * Author URI:        https://author.example.com/
 * License:           GPL v2 or later
-* License URI:       https://oimark.com.br/gpl-2.0.html
+* License URI:       https://claudionhangapc/gpl-2.0.html
 * Update URI:        https://oimark.com.br/
 * Text Domain:       https://oimark.com.br/
 */
