@@ -1,0 +1,15 @@
+{
+    "name": "claud/wp-general-rest-api",
+    "autoload": {
+        "psr-4": {
+            "Claud\\WpGeneralRestApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "claudionhangapc",
+            "email": "claudionhangapc@gmail.com"
+        }
+    ],
+    "require": {}
+}
