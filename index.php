@@ -23,9 +23,10 @@ use Routes\UserRoute;
 function oi_mark_api_init(){
   // definindo a name-space
   $name_space = "wp-general-rest-api/v1";
-  $novoUser =  new Routes\UserRoute();
 
-  $novoUser->getUser($name_space);
+  $novoUser =  new UserRoute($name_space);
+
+  $novoUser->initRoutes();
 }
 
 

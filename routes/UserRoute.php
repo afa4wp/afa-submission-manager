@@ -2,32 +2,42 @@
 
 namespace Routes;
 
+use Controllers\UserController;
+
 class UserRoute{
+
+  private $nameSpace; 
+
+  function __construct($nameSpace)
+  {
+    $this->nameSpace = $nameSpace;
+  }
 
   /*
   *
   */
 
-   function getUser($name_space){
+   function login(){
     
     register_rest_route(
-      $name_space, 
+      $this->nameSpace, 
       '/user',
       array(
         'methods'  => 'GET',
-        'callback' => array($this,'daina'),
+        'callback' => array(new UserController,'login'),
         'permission_callback' => '__return_true'
       )
     );
 
+  }
+
+  /*
+  *
+  */
+
+  public function initRoutes(){
+    $this->login();
+  }
+
   
-  }
-
-  function daina(){
-    return rest_ensure_response(array(
-      'ping'=>'pong'
-    ));
-  }
-
-
 }

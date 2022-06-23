@@ -2,7 +2,8 @@
     "name": "claud/wp-general-rest-api",
     "autoload": {
         "psr-4": {
-            "Routes\\": "Routes/"
+            "Routes\\": "Routes/",
+            "Controllers\\": "Controllers/"
         }
     },
     "authors": [
