@@ -1,1 +1,67 @@
 https://github.com/dphiffer/wp-json-api
+
+https://developer.wordpress.org/rest-api/extending-the-rest-api/adding-custom-endpoints/
+
+
+========================= teste ===================
+https://aheadcreative.co.uk/articles/mocking-wp_http-in-wordpress-php-unit-tests/
+https://infinum.com/handbook/wordpress/automated-testing-in-wordpress/basic-tests-using-phpunit/unit-testing
+
+https://torquemag.io/2017/01/testing-api-endpoints/
+=================
+
+
+
+=========== autoload=============
+https://www.treinaweb.com.br/blog/psr-4-a-recomendacao-de-autoload-do-php
+
+
+composer dump-autoload -> commando para gerar o autoload
+==============
+
+
+============= debugar erro wordpress = =====================
+
+https://wpml.org/forums/topic/plugin-not-activating/
+
+Hello,
+
+I would need to see the detail of the error. You can see how to enable debug logging here:
+https://wpml.org/documentation/support/debugging-wpml/
+
+Go in your wp-config.php file and look for define(‘WP_DEBUG’, false);. Change it to:
+define('WP_DEBUG', true);
+
+Edit your wp-config.php file and add these lines, just before it says 'stop editing here':
+
+ini_set('log_errors',TRUE);
+ini_set('error_reporting', E_ALL);
+ini_set('error_log', dirname(__FILE__) . 'https://cdn.wpml.org/error_log.txt');
+
+This will create an error_log.txt file in your site's root directory. Please send me its contents.
+
+
+===============================================================================
+
+How to call a class method as a callback function in wordpress custom endpoint?
+
+https://stackoverflow.com/questions/55720528/how-to-call-a-class-method-as-a-callback-function-in-wordpress-custom-endpoint
+
+
+If the hook is called within the class if-self and yout callback method is defined there:
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 't2mchat/v2', '/get_curr_user_lang', array(
+        'methods' => 'GET',
+        'callback' => array($this,'get_user_lang')
+    ));
+});
+If from different class:
+
+add_action( 'rest_api_init', function () {
+    register_rest_route( 't2mchat/v2', '/get_curr_user_lang', array(
+        'methods' => 'GET',
+        'callback' => array(new className,'get_user_lang')
+    ));
+});
+If this solution is not working, a bit more details of your problem will help in defining.

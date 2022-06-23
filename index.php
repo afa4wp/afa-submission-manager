@@ -1,5 +1,7 @@
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
+
 /**
 * Plugin Name:       WP General Rest API
 * Plugin URI:        https://example.com/plugins/the-basics/
@@ -14,3 +16,18 @@
 * Update URI:        https://oimark.com.br/
 * Text Domain:       https://oimark.com.br/
 */
+
+use Routes\UserRoute;
+
+
+function oi_mark_api_init(){
+  // definindo a name-space
+  $name_space = "wp-general-rest-api/v1";
+  $novoUser =  new Routes\UserRoute();
+
+  $novoUser->getUser($name_space);
+}
+
+
+add_action('rest_api_init','oi_mark_api_init');
+//add_action('init', 'oi_mark_api_init');
