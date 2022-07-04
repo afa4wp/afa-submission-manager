@@ -9,8 +9,8 @@ class UserController
 
     $username = $request['username'];
     $password = $request['password'];
-
-    return rest_ensure_response($request);
+    
+    return rest_ensure_response($request['username']);
 
   }
 }

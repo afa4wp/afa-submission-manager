@@ -20,15 +20,22 @@ require __DIR__ . '/vendor/autoload.php';
 use Routes\UserRoute;
 
 
-function oi_mark_api_init(){
+function oi_mark_api_inituu(){
   // definindo a name-space
   $name_space = "wp-general-rest-api/v1";
 
   $novoUser =  new UserRoute($name_space);
 
   $novoUser->initRoutes();
+
+  // pre hendler
+  //add_filter('rest_pre_dispatch','oi_mark_api_rest_pre_dispatchi',10,3);
+ 
+
 }
 
+function oi_mark_api_rest_pre_dispatchi($url, $server, $request){}
 
-add_action('rest_api_init','oi_mark_api_init');
+
+add_action('rest_api_init','oi_mark_api_inituu');
 //add_action('init', 'oi_mark_api_init');

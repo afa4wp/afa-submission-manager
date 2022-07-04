@@ -65,3 +65,16 @@ add_action( 'rest_api_init', function () {
     ));
 });
 If this solution is not working, a bit more details of your problem will help in defining.
+
+=====================================
+
+schema
+
+https://bloggingwizard.com/wordpress-rest-api/
+
+==============================================
+
+padrão de criacao de api do wordpress
+https://developer.wordpress.org/rest-api/extending-the-rest-api/controller-classes/#extending-internal-classes
+===================================
+C:\xampp\htdocs\wordpress-claudio\wp-content\plugins\woocommerce\includes\rest-api\Controllers\Version1\class-wc-rest-product-reviews-v1-controller.php
