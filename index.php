@@ -9,7 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
 * Version:           1.0.0
 * Requires at least: 5.2
 * Requires PHP:      7.2
-* Author:            Oi.Mark
+* Author:            claudionhangapc
 * Author URI:        https://author.example.com/
 * License:           GPL v2 or later
 * License URI:       https://claudionhangapc/gpl-2.0.html
@@ -18,6 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
 */
 
 use Routes\UserRoute;
+use Routes\PingRoute;
 
 
 function oi_mark_api_inituu(){
@@ -25,7 +26,9 @@ function oi_mark_api_inituu(){
   $name_space = "wp-general-rest-api/v1";
 
   $novoUser =  new UserRoute($name_space);
+  $ping   = new PingRoute($name_space);
 
+  $ping->initRoutes();
   $novoUser->initRoutes();
 
   // pre hendler
