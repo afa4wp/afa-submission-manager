@@ -25,7 +25,7 @@ class PingRoute{
         array(
           'methods'  => 'GET',
           'callback' => array( $this,'pingFunc'),
-          'permission_callback' => '__return_true'
+          'permission_callback' => '__return_false'
           ),
       )
     );
