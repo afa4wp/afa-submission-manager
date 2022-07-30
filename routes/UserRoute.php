@@ -27,16 +27,17 @@ class UserRoute{
         array(
           'methods'  => 'POST',
           'callback' => array(new UserController,'login'),
-          'permission_callback' => '__return_true',  
+          'permission_callback' =>  '__return_true',  
           'args' => array(
             'username' => array(
               'required'    => true,
               'type'        => 'string',
-              'description' => __( 'Review content.', 'woocommerce' ),
-              'validate_callback' => array( $this, 'prefix_validate_my_arg')
+              'validate_callback'=> function($value, $request, $key) {
+                return true;
+              }
             )
           ),
-          ),
+        ),
   
       )
     );

@@ -3,7 +3,11 @@
     "autoload": {
         "psr-4": {
             "Routes\\": "Routes/",
-            "Controllers\\": "Controllers/"
+            "Controllers\\": "Controllers/",
+            "Models\\": "Models/",
+            "Schema\\": "Schema/",
+            "Plugins\\": "Plugins/",
+            "Plugins\\JWT\\": "Plugins/JWT/"
         }
     },
     "authors": [
@@ -12,5 +16,7 @@
             "email": "claudionhangapc@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "firebase/php-jwt": "^6.3"
+    }
 }

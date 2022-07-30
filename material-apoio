@@ -78,3 +78,9 @@ padrão de criacao de api do wordpress
 https://developer.wordpress.org/rest-api/extending-the-rest-api/controller-classes/#extending-internal-classes
 ===================================
 C:\xampp\htdocs\wordpress-claudio\wp-content\plugins\woocommerce\includes\rest-api\Controllers\Version1\class-wc-rest-product-reviews-v1-controller.php
+
+
+
+
+=============== Schemma =======================
+https://developer.wordpress.org/rest-api/extending-the-rest-api/schema/

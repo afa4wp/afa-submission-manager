@@ -21,7 +21,7 @@ use Routes\UserRoute;
 use Routes\PingRoute;
 
 
-function oi_mark_api_inituu(){
+function wp_general_rest_api_init(){
   // definindo a name-space
   $name_space = "wp-general-rest-api/v1";
 
@@ -40,5 +40,5 @@ function oi_mark_api_inituu(){
 function oi_mark_api_rest_pre_dispatchi($url, $server, $request){}
 
 
-add_action('rest_api_init','oi_mark_api_inituu');
+add_action('rest_api_init','wp_general_rest_api_init');
 //add_action('init', 'oi_mark_api_init');
