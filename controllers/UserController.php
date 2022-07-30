@@ -23,15 +23,24 @@ class UserController
     $username = $request['username'];
     $password = $request['password'];
     
-    $result = $this->userModel->login($username, $password);
+    $user = $this->userModel->login($username, $password);
 
     // retorna o erro se usuario não conseguir logar
-    if(!isset($result->data)){
-      return rest_ensure_response($result);
+    if(is_wp_error($user)){
+      return rest_ensure_response($user);
     }
 
+    $token = $this->JWTPlugin->generateToken($user->data->ID);
+    
+    $data = array(
+      'token' => $token,
+      'id' => $user->data->ID,
+      'user_email' => $user->data->user_email,
+      'user_nicename' => $user->data->user_nicename,
+      'user_display_name' => $user->data->display_name,
+    );
     
     //return rest_ensure_response($result);
-    return rest_ensure_response( $this->JWTPlugin->generateToken());
+    return rest_ensure_response($data);
   }
 }

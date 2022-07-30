@@ -9,7 +9,7 @@ class JWTPlugin
 { 
   
 
-    public function generateToken(){
+    public function generateToken($id){
 
         $issuedAt = time();
        
@@ -18,7 +18,7 @@ class JWTPlugin
         $payload = array(
             'iss' => get_bloginfo('url'),
             'iat' => $issuedAt,
-           
+            'id' =>$id 
         );
 
         $jwt = JWT::encode($payload, $key, 'HS256');
