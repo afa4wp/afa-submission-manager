@@ -84,3 +84,7 @@ C:\xampp\htdocs\wordpress-claudio\wp-content\plugins\woocommerce\includes\rest-a
 
 =============== Schemma =======================
 https://developer.wordpress.org/rest-api/extending-the-rest-api/schema/
+
+
+===============  rest_pre_dispatch  =================
+https://github.com/Tmeister/wp-api-jwt-auth/issues/53

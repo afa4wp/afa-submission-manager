@@ -18,7 +18,7 @@ class UserRoute{
   *
   */
 
-   function login(){
+  function login(){
     
     register_rest_route(
       $this->name, 
@@ -44,6 +44,23 @@ class UserRoute{
 
   }
 
+  function user(){
+    
+    register_rest_route(
+      $this->name, 
+      '/user',
+      array(
+        array(
+          'methods'  => 'GET',
+          'callback' => array(new UserController,'user'),
+          'permission_callback' =>  '__return_true'
+        ),
+  
+      )
+    );
+
+  }
+
   
 
 
@@ -59,6 +76,8 @@ class UserRoute{
 
   public function initRoutes(){
     $this->login();
+    $this->user();
+    
   }
 
   

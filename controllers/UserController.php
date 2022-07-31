@@ -37,10 +37,17 @@ class UserController
       'id' => $user->data->ID,
       'user_email' => $user->data->user_email,
       'user_nicename' => $user->data->user_nicename,
-      'user_display_name' => $user->data->display_name,
+      'user_display_name' => $user->data->display_name
     );
     
     //return rest_ensure_response($result);
     return rest_ensure_response($data);
+  }
+
+  public function user($request){
+
+   
+    //return rest_ensure_response($result);
+    return rest_ensure_response('ola');
   }
 }
