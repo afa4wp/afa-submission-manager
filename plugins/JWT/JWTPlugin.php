@@ -4,6 +4,8 @@ namespace Plugins\JWT;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Plugins\PublicRoute;
+
 use WP_Error;
 
 class JWTPlugin 
@@ -33,9 +35,11 @@ class JWTPlugin
         
         $authorization = $request->get_header('authorization');
 
-        $url = strtok($_SERVER["REQUEST_URI"],'?');
+        $url = $request->get_route();//strtok($_SERVER["REQUEST_URI"],'?');
 
-        if(!empty($authorization)){
+        $publicRoute = new PublicRoute('wp-general-rest-api/v1');
+
+        /*if(!empty($authorization)){
             
             $key = 'example_key';
             $splitAuthorization =  explode(' ',$authorization);
@@ -49,7 +53,12 @@ class JWTPlugin
            
         }
 
-        return new WP_Error( 'not-logged-in', 'API Requests to '.$url.' are only supported for authenticated requests', array( 'status' => 401 ) );
+        */
+        //$tringMinha =serialize(rest_get_server()->get_namespaces());
+
+        $tringMinha = serialize($publicRoute->isPublicRoute(substr($url,1)));
+
+        return new WP_Error( 'not-logged-in', 'API Requests to '.$tringMinha.' are only supported for authenticated requests', array( 'status' => 401 ) );
         
     }
 }
