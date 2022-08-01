@@ -9,6 +9,7 @@ class PublicRoute{
 
     private  $publicRoutes = [
         '/user/login',
+        '/ping'
     ];
 
     function __construct($nameSpace)

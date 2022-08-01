@@ -73,7 +73,7 @@ class JWTPlugin
            
 
         }else{
-            return new WP_Error( 'not-logged-in', 'API Requests to '.$authorization.' are only supported for authenticated requests', array( 'status' => 401 ) );
+            return new WP_Error( 'not-logged-in', 'API Requests to '.$url.' are only supported for authenticated requests', array( 'status' => 401 ) );
         }  
               
         
