@@ -23,4 +23,20 @@ class UserModel{
     
    }
 
+   public function user(){
+    
+        $user = wp_get_current_user();
+
+        return array(
+                'id'   => $user->ID,
+                'email'  => $user->data->user_email,
+                'display_name'  => $user->data->display_name,
+                'user_login' => $user->data->user_login
+        );
+    
+   }
+
+
+   
+
 }

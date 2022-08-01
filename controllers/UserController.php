@@ -45,9 +45,8 @@ class UserController
   }
 
   public function user($request){
-
-   
     //return rest_ensure_response($result);
-    return rest_ensure_response('ola');
+    return rest_ensure_response($this->userModel->user());
   }
+
 }
