@@ -9,7 +9,6 @@ class PublicRoute{
 
     private  $publicRoutes = [
         '/user/login',
-        '/user'
     ];
 
     function __construct($nameSpace)
