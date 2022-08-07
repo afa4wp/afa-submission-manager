@@ -4,6 +4,7 @@ namespace Routes;
 use WP_Error;
 
 use Controllers\UserController;
+use Schema\UserSchema;
 
 class UserRoute{
 
@@ -28,15 +29,7 @@ class UserRoute{
           'methods'  => 'POST',
           'callback' => array(new UserController,'login'),
           'permission_callback' =>  '__return_true',  
-          'args' => array(
-            'username' => array(
-              'required'    => true,
-              'type'        => 'string',
-              'validate_callback'=> function($value, $request, $key) {
-                return true;
-              }
-            )
-          ),
+          'args' => (new UserSchema())->login(),
         ),
   
       )

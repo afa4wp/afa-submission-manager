@@ -1,11 +1,12 @@
-<?php 
+<?php
 
 namespace Plugins;
 
 
-class PublicRoute{
+class PublicRoute
+{
 
-    private $nameSpace;//"wp-general-rest-api/v1";
+    private $nameSpace; //"wp-general-rest-api/v1";
 
     private  $publicRoutes = [
         '/user/login',
@@ -17,15 +18,18 @@ class PublicRoute{
         $this->nameSpace = $nameSpace;
     }
 
-    public function getPublicRoutes(){
+    public function getPublicRoutes()
+    {
         return array_map(
-            function($value) { return $this->nameSpace.$value; },
-            $this->publicRoutes 
+            function ($value) {
+                return $this->nameSpace . $value;
+            },
+            $this->publicRoutes
         );
     }
 
-    public function isPublicRoute($route){
-        return in_array( $route,  $this->getPublicRoutes());
+    public function isPublicRoute($route)
+    {
+        return in_array($route,  $this->getPublicRoutes());
     }
-  
 }
