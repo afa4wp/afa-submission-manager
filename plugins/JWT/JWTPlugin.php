@@ -80,7 +80,7 @@ class JWTPlugin
 
         $url = $request->get_route(); //strtok($_SERVER["REQUEST_URI"],'?');
         
-        if(strpos('wp-general-rest-api', $url) !== false){
+        if(strpos($url, 'wp-general-rest-api') !== false){
 
        
             $publicRoute = new PublicRoute('wp-general-rest-api/v1');
