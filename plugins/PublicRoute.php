@@ -2,18 +2,17 @@
 
 namespace Plugins;
 
-
 class PublicRoute
 {
 
     private $nameSpace; //"wp-general-rest-api/v1";
 
-    private  $publicRoutes = [
+    private $publicRoutes = [
         '/user/login',
-        '/ping'
+        '/ping',
     ];
 
-    function __construct($nameSpace)
+    public function __construct($nameSpace)
     {
         $this->nameSpace = $nameSpace;
     }
@@ -30,6 +29,6 @@ class PublicRoute
 
     public function isPublicRoute($route)
     {
-        return in_array($route,  $this->getPublicRoutes());
+        return in_array($route, $this->getPublicRoutes());
     }
 }

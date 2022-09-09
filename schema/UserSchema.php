@@ -1,39 +1,36 @@
-<?php 
+<?php
 
 namespace Schema;
 
+class UserSchema
+{
 
+    /*
+     *
+     */
 
-class UserSchema{
+    public function login()
+    {
 
-  /*
-  *
-  */
- 
-  function login(){
-    
-    $schema = array(
+        $schema = array(
 
-      'username'=>array(
-        'required'    => true,
-        'type'        => 'string',
-        'validate_callback'=> function($value, $request, $key) {
-          return true;
-        }
-      ),
+            'username' => array(
+                'required' => true,
+                'type' => 'string',
+                'validate_callback' => function ($value, $request, $key) {
+                    return true;
+                },
+            ),
 
-      'password'=>array(
-        'required'    => true,
-        'type'        => 'string',
-      )
+            'password' => array(
+                'required' => true,
+                'type' => 'string',
+            ),
 
-    );
+        );
 
-    return  $schema;
+        return $schema;
 
-  }
+    }
 
-
-
-  
 }
