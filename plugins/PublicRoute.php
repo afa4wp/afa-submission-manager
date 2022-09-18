@@ -5,7 +5,7 @@ namespace Plugins;
 class PublicRoute
 {
 
-    private $nameSpace; //"wp-general-rest-api/v1";
+    private $nameSpace; 
 
     private $publicRoutes = [
         '/user/login',

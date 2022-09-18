@@ -21,26 +21,24 @@ use Plugins\JWT\JWTPlugin;
 use Routes\PingRoute;
 use Routes\UserRoute;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 function wp_general_rest_api_init()
 {
-    // definindo a name-space
-    $name_space = "wp-general-rest-api/v1";
+    //  name-space
+    $name_space =  $_ENV['NAME_SPACE'];
 
-    $novoUser = new UserRoute($name_space);
-    $ping = new PingRoute($name_space);
-
-    $ping->initRoutes();
-    $novoUser->initRoutes();
+    // init all route
+    (new PingRoute($name_space))->initRoutes();
+    (new UserRoute($name_space))->initRoutes();
+    
 
     // pre hendler
-    //add_filter('rest_pre_dispatch','oi_mark_api_rest_pre_dispatchi',10,3);
     add_filter('rest_pre_dispatch', [new JWTPlugin, 'validateTokenRestPreDispatch'], 10, 3);
 
 }
 
-function oi_mark_api_rest_pre_dispatchi($url, $server, $request)
-{}
 
+// init api
 add_action('rest_api_init', 'wp_general_rest_api_init');
-//add_action('rest_api_init', array('JWTPlugin','login'));
-//add_action('init', 'oi_mark_api_init');

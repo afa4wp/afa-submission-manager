@@ -57,12 +57,6 @@ class UserRoute
 
     }
 
-    public function prefix_validate_my_arg($value, $request, $param)
-    {
-        return new WP_Error('rest_invalid_param', sprintf(esc_html__('%s was not registered as a request argument.', 'my-textdomain'), $param), array('status' => 400));
-
-    }
-
     /*
      *
      */
@@ -71,7 +65,6 @@ class UserRoute
     {
         $this->login();
         $this->user();
-
     }
 
 }

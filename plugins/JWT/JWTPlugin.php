@@ -10,6 +10,12 @@ use WP_Error;
 
 class JWTPlugin
 {
+    private $nameSpace;
+
+    public function __construct()
+    {
+        $this->nameSpace = $_ENV['NAME_SPACE'];
+    }
 
     public function generateToken($id)
     {
@@ -76,20 +82,26 @@ class JWTPlugin
     public function validateTokenRestPreDispatch($url, $server, $request)
     {
 
-        $url = $request->get_route(); //strtok($_SERVER["REQUEST_URI"],'?');
+        $url = $request->get_route(); 
 
-        if (strpos($url, 'wp-general-rest-api') !== false) {
+        $explodeNameSpace = explode('/', $this->nameSpace);
+        
+        if(count($explodeNameSpace) == 2){
+            
+            if (strpos($url, $explodeNameSpace[0]) !== false) {
 
-            $publicRoute = new PublicRoute('wp-general-rest-api/v1');
+                $publicRoute = new PublicRoute($this->nameSpace);
 
-            $requireToken = !$publicRoute->isPublicRoute(substr($url, 1));
+                $requireToken = !$publicRoute->isPublicRoute(substr($url, 1));
 
-            if ($requireToken) {
+                if ($requireToken) {
 
-                $response = $this->validateToken($url, $server, $request);
-                if (is_wp_error($response)) {
-                    return $response;
+                    $response = $this->validateToken($url, $server, $request);
+                    if (is_wp_error($response)) {
+                        return $response;
+                    }
                 }
+                
             }
         }
     }
