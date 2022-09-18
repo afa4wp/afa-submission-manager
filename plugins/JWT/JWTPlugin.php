@@ -21,10 +21,16 @@ class JWTPlugin
     {
 
         $issuedAt = time();
-        $expire = $issuedAt + (MINUTE_IN_SECONDS * 77);
+        $expTokenInMinute = $_ENV['EXP_TOKEN_IN_MINUTE'];
+        
+        if(empty($expTokenInMinute) || !is_numeric($expTokenInMinute)){
+            $expTokenInMinute = 15;
+        } 
 
-        $key = 'example_key';
+        $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
 
+        $key = $_ENV['KEY'];
+        
         $payload = array(
             'iss' => get_bloginfo('url'),
             'iat' => $issuedAt,
@@ -101,7 +107,7 @@ class JWTPlugin
                         return $response;
                     }
                 }
-                
+
             }
         }
     }
