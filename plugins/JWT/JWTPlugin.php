@@ -51,13 +51,14 @@ class JWTPlugin
 
         if (!empty($authorization)) {
 
-            $key = 'example_key';
+            $key = $_ENV['KEY'];
             $splitAuthorization = explode(' ', $authorization);
 
             if (count($splitAuthorization) == 2) {
                 try {
 
                     $jwt = $splitAuthorization[1];
+                    //$decoded = JWT::decode($jwt, $key, array("HS256"));
                     $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
                     wp_set_current_user($decoded->id);
                     return $request;
