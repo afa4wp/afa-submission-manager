@@ -2,7 +2,9 @@
 Este é um plugin desenvolvido com objectivo de ajudar as pessoas a desenvolverem com mais facilidades novas APIS, atraves da interface do wordpress.
 # Instalação
 1. Clone o diretório do plug-in no `/wp-content/plugins/` diretório.
-```git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-general-rest-api ```
+```
+git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-general-rest-api
+```
 2. Renomeie o arquivo `.env.exemple` para `.env` e altere o valor da `KEY`
 3. Instala as dependendencias do projeto `composer install`
 3. Ative o plugin através da tela 'Plugins' no WordPress
