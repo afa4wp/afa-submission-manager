@@ -17,12 +17,18 @@ require __DIR__ . '/vendor/autoload.php';
  * Text Domain:       https://oimark.com.br/
  */
 
+define('GENERAL_REST_API_PLUGIN', __FILE__);
+
 use Plugins\JWT\JWTPlugin;
 use Routes\PingRoute;
 use Routes\UserRoute;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+
+
+// DataBase
+use Database\DatabaseInstaller;
 
 function wp_general_rest_api_init()
 {
@@ -42,3 +48,14 @@ function wp_general_rest_api_init()
 
 // init api
 add_action('rest_api_init', 'wp_general_rest_api_init');
+
+// create table on install plugin
+function wp_general_rest_api_installer(){
+  
+    (new DatabaseInstaller())->install();
+  
+}
+
+
+// Hooks 
+register_activation_hook(GENERAL_REST_API_PLUGIN, 'wp_general_rest_api_installer');
