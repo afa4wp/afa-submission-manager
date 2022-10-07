@@ -4,6 +4,7 @@ namespace Database;
 
 class UserTokens{
 
+  public const DATABASE_NAME = "gra_user_tokens";
   /*
   *
   */
@@ -15,7 +16,7 @@ class UserTokens{
 
     // criando a primeira tabela
 
-    $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix."oi_markform_users_tokens (
+    $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.SELF::DATABASE_NAME."oi_markform_users_tokens (
         id BIGINT(20) NOT NULL AUTO_INCREMENT,
         user_id BIGINT(20)  UNSIGNED NOT NULL,
         access_token VARCHAR(255) NOT NULL,
