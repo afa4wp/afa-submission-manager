@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\UserModel;
+use Models\UserTokensModel;
 use Plugins\JWT\JWTPlugin;
 
 class UserController
@@ -11,10 +12,13 @@ class UserController
 
     private $JWTPlugin;
 
+    private $userTokensModel;
+
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->JWTPlugin = new JWTPlugin();
+        $this->userTokensModel = new UserTokensModel();
     }
 
     public function login($request)
@@ -30,8 +34,12 @@ class UserController
             return rest_ensure_response($user);
         }
 
+        $this->userTokensModel->deleteUserTokenByID($user->data->ID);
+
         $access_token = $this->JWTPlugin->generateToken($user->data->ID);
         $access_refresh_token = $this->JWTPlugin->generateRefreshToken($user->data->ID);
+
+        $this->userTokensModel->create($user->data->ID, $access_token, $access_refresh_token);
 
         $data = array(
             'access_token' => $access_token,
@@ -63,7 +71,7 @@ class UserController
         }
         
         $user_id = $validate->id;
-
-        return rest_ensure_response($user_id);
+        $check_resfresh_token = $this->userTokensModel->checkIfRefreshTokenExist($user_id,  $refresh_token);
+        return rest_ensure_response(['result'=>$check_resfresh_token]);
     }
 }

@@ -32,6 +32,29 @@ class UserTokensModel
      *
      */
 
+    public function create($user_id, $access_token, $refresh_token)
+    {
+        global $wpdb;
+        
+        $item = array(
+            "user_id" =>$user_id,
+            "access_token" => $access_token,
+            "refresh_token" => $refresh_token
+        );
+        
+        $results = $wpdb->insert(
+            $wpdb->prefix.SELF::DATABASE_NAME,
+            $item
+        );
+
+        return  $results;
+
+    }
+
+    /*
+     *
+     */
+
     public function deleteUserTokenByID($user_id)
     {
         global $wpdb;
