@@ -113,13 +113,13 @@ class JWTPlugin
         }
     }
 
-    private function validateRefreshToken($jwt)
+    public function validateRefreshToken($jwt)
     {
         try {
             //$decoded = JWT::decode($jwt, $key, array("HS256"))
             $key = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
             $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-            return true;
+            return $decoded->id;
         } catch (Exception $e) {
 
             return new WP_Error(

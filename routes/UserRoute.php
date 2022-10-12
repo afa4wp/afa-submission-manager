@@ -44,11 +44,29 @@ class UserRoute
 
         register_rest_route(
             $this->name,
-            '/user',
+            '/user/me',
             array(
                 array(
                     'methods' => 'GET',
                     'callback' => array(new UserController, 'user'),
+                    'permission_callback' => '__return_true',
+                ),
+
+            )
+        );
+
+    }
+
+    public function user()
+    {
+
+        register_rest_route(
+            $this->name,
+            '/user/token',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new UserController, 'token'),
                     'permission_callback' => '__return_true',
                 ),
 

@@ -9,6 +9,7 @@ class PublicRoute
 
     private $publicRoutes = [
         '/user/login',
+        '/user/token',
         '/ping',
     ];
 
