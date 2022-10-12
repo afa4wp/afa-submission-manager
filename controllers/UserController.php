@@ -5,7 +5,7 @@ namespace Controllers;
 use Models\UserModel;
 use Models\UserTokensModel;
 use Plugins\JWT\JWTPlugin;
-
+use WP_Error;
 class UserController
 {
     private $userModel;
@@ -72,6 +72,30 @@ class UserController
         
         $user_id = $validate->id;
         $check_resfresh_token = $this->userTokensModel->checkIfRefreshTokenExist($user_id,  $refresh_token);
-        return rest_ensure_response(['result'=>$check_resfresh_token]);
+        
+        if(!$check_resfresh_token){
+            return new WP_Error(
+                'jwt_auth_invalid_token',
+                "Refresh token not found",
+                array(
+                    'status' => 403,
+                )
+            );
+        }
+        
+        $this->userTokensModel->deleteUserTokenByID($user_id);
+
+        $access_token = $this->JWTPlugin->generateToken($user_id);
+        $access_refresh_token = $this->JWTPlugin->generateRefreshToken($user_id);
+
+        $this->userTokensModel->create($user_id, $access_token, $access_refresh_token);
+
+        $data = array(
+            'access_token' => $access_token,
+            'refresh_token' => $access_refresh_token,
+            'id' => $user_id,
+        );
+
+        return rest_ensure_response($data);
     }
 }
