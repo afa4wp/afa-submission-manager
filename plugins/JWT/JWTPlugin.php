@@ -14,14 +14,14 @@ class JWTPlugin
 
     public function __construct()
     {
-        $this->nameSpace = $_ENV['NAME_SPACE'];
+        $this->nameSpace = $_ENV['API_NAME_SPACE'];
     }
 
     public function generateToken($id)
     {
 
         $issuedAt = time();
-        $expTokenInMinute = $_ENV['EXP_TOKEN_IN_MINUTE'];
+        $expTokenInMinute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
         
         if(empty($expTokenInMinute) || !is_numeric($expTokenInMinute)){
             $expTokenInMinute = 15;
@@ -29,7 +29,7 @@ class JWTPlugin
 
         $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
 
-        $key = $_ENV['KEY'];
+        $key = $_ENV['ACCESS_TOKEN_KEY'];
         
         $payload = array(
             'iss' => get_bloginfo('url'),
@@ -43,6 +43,33 @@ class JWTPlugin
         return $jwt;
     }
 
+    public function generateRefreshToken($id)
+    {
+
+        $issuedAt = time();
+        $expTokenInMinute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
+        
+        if(empty($expTokenInMinute) || !is_numeric($expTokenInMinute)){
+            $expTokenInMinute = 15;
+        } 
+
+        $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
+
+        $key = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
+        
+        $payload = array(
+            'iss' => get_bloginfo('url'),
+            'iat' => $issuedAt,
+            'id' => $id,
+            'exp' => $expire,
+        );
+
+        $jwt = JWT::encode($payload, $key, 'HS256');
+
+        return $jwt;
+    }
+
+
     private function validateToken($url, $server, $request)
     {
 
@@ -51,7 +78,7 @@ class JWTPlugin
 
         if (!empty($authorization)) {
 
-            $key = $_ENV['KEY'];
+            $key = $_ENV['ACCESS_TOKEN_KEY'];
             $splitAuthorization = explode(' ', $authorization);
 
             if (count($splitAuthorization) == 2) {
@@ -83,6 +110,25 @@ class JWTPlugin
             }
         } else {
             return new WP_Error('not-logged-in', 'API Requests to ' . $url . ' are only supported for authenticated requests', array('status' => 401));
+        }
+    }
+
+    private function validateRefreshToken($jwt)
+    {
+        try {
+            //$decoded = JWT::decode($jwt, $key, array("HS256"))
+            $key = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
+            $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+            return true;
+        } catch (Exception $e) {
+
+            return new WP_Error(
+                'jwt_auth_invalid_token',
+                $e->getMessage(),
+                array(
+                    'status' => 403,
+                )
+            );
         }
     }
 
