@@ -28,5 +28,25 @@ class UserTokensModel
        
     }
 
+    /*
+     *
+     */
+
+    public function deleteUserTokenByID($user_id)
+    {
+        global $wpdb;
+        
+        $item = array(
+            "user_id" =>$user_id,
+            ) ;
+        
+        $results = $wpdb->delete(
+            $wpdb->prefix.SELF::DATABASE_NAME,
+            $item 
+        );
+
+        return  $results;
+    }
+
 
 }
