@@ -30,10 +30,12 @@ class UserController
             return rest_ensure_response($user);
         }
 
-        $token = $this->JWTPlugin->generateToken($user->data->ID);
+        $access_token = $this->JWTPlugin->generateToken($user->data->ID);
+        $access_refresh_token = $this->JWTPlugin->generateRefreshToken($user->data->ID);
 
         $data = array(
-            'token' => $token,
+            'access_token' => $access_token,
+            'refresh_token' => $access_refresh_token,
             'id' => $user->data->ID,
             'user_email' => $user->data->user_email,
             'user_nicename' => $user->data->user_nicename,

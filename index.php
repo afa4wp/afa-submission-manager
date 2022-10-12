@@ -33,7 +33,7 @@ use Database\DatabaseInstaller;
 function wp_general_rest_api_init()
 {
     //  name-space
-    $name_space =  $_ENV['NAME_SPACE'];
+    $name_space =  $_ENV['API_NAME_SPACE'];
 
     // init all route
     (new PingRoute($name_space))->initRoutes();
