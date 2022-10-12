@@ -51,4 +51,19 @@ class UserController
         //return rest_ensure_response($result);
         return rest_ensure_response($this->userModel->user());
     }
+
+    public function token($request)
+    {
+        
+        $refresh_token = $request['refresh_token'];
+        $validate = $this->JWTPlugin->validateRefreshToken($refresh_token);
+        
+        if (is_wp_error($validate)) {
+            return rest_ensure_response($validate);
+        }
+        
+        $user_id = $validate->id;
+
+        return rest_ensure_response($user_id);
+    }
 }

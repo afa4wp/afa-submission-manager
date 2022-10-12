@@ -57,7 +57,7 @@ class UserRoute
 
     }
 
-    public function user()
+    public function token()
     {
 
         register_rest_route(
@@ -83,6 +83,7 @@ class UserRoute
     {
         $this->login();
         $this->user();
+        $this->token();
     }
 
 }

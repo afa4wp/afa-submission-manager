@@ -47,7 +47,7 @@ class JWTPlugin
     {
 
         $issuedAt = time();
-        $expTokenInMinute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
+        $expTokenInMinute = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
         
         if(empty($expTokenInMinute) || !is_numeric($expTokenInMinute)){
             $expTokenInMinute = 15;
@@ -55,7 +55,7 @@ class JWTPlugin
 
         $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
 
-        $key = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
+        $key = $_ENV['REFRESH_TOKEN_KEY'];
         
         $payload = array(
             'iss' => get_bloginfo('url'),
@@ -117,9 +117,9 @@ class JWTPlugin
     {
         try {
             //$decoded = JWT::decode($jwt, $key, array("HS256"))
-            $key = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
+            $key = $_ENV['REFRESH_TOKEN_KEY'];
             $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-            return $decoded->id;
+            return $decoded;
         } catch (Exception $e) {
 
             return new WP_Error(
