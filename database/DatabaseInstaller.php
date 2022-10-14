@@ -4,22 +4,13 @@ namespace Database;
 
 use Database\UserTokens;
 
-
-
 class DatabaseInstaller{
 
-  /*
-  *
-  */
-
+  /**
+	 * Setup action & filter hooks.
+	 */
   public function install(){
-
-    // create users_tokens_table
     (new UserTokens())->createTable();
- 
   }
-
-
-
   
 }

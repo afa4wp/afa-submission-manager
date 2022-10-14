@@ -21,9 +21,11 @@ class UserController
         $this->userTokensModel = new UserTokensModel();
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function login($request)
     {
-
         $username = $request['username'];
         $password = $request['password'];
 
@@ -49,20 +51,22 @@ class UserController
             'user_nicename' => $user->data->user_nicename,
             'user_display_name' => $user->data->display_name,
         );
-
-        //return rest_ensure_response($result);
         return rest_ensure_response($data);
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function user($request)
     {
-        //return rest_ensure_response($result);
         return rest_ensure_response($this->userModel->user());
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function token($request)
     {
-        
         $refresh_token = $request['refresh_token'];
         $validate = $this->JWTPlugin->validateRefreshToken($refresh_token);
         

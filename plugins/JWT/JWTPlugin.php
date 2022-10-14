@@ -17,9 +17,11 @@ class JWTPlugin
         $this->nameSpace = $_ENV['API_NAME_SPACE'];
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function generateToken($id)
     {
-
         $issuedAt = time();
         $expTokenInMinute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
         
@@ -43,9 +45,11 @@ class JWTPlugin
         return $jwt;
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function generateRefreshToken($id)
     {
-
         $issuedAt = time();
         $expTokenInMinute = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
         
@@ -69,10 +73,11 @@ class JWTPlugin
         return $jwt;
     }
 
-
+    /**
+	 * Setup action & filter hooks.
+	 */
     private function validateToken($url, $server, $request)
     {
-
         $authorization = $request->get_header('authorization');
         $url = strtok($_SERVER["REQUEST_URI"], '?');
 
@@ -113,6 +118,9 @@ class JWTPlugin
         }
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function validateRefreshToken($jwt)
     {
         try {
@@ -132,9 +140,18 @@ class JWTPlugin
         }
     }
 
+    /**
+	 * Filter to hook the rest_pre_dispatch, if there is an error in the request
+	 * send it, if there is no error just continue with the current request.
+	 *
+	 * @param mixed           $result Can be anything a normal endpoint can return, or null to not hijack the request..
+	 * @param WP_REST_Server  $server Server instance.
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $payload The modified token's payload.
+	 */
     public function validateTokenRestPreDispatch($url, $server, $request)
     {
-
         $url = $request->get_route(); 
 
         $explodeNameSpace = explode('/', $this->nameSpace);
@@ -148,7 +165,6 @@ class JWTPlugin
                 $requireToken = !$publicRoute->isPublicRoute(substr($url, 1));
 
                 if ($requireToken) {
-
                     $response = $this->validateToken($url, $server, $request);
                     if (is_wp_error($response)) {
                         return $response;

@@ -5,10 +5,10 @@ namespace Database;
 class UserTokens{
 
   public const DATABASE_NAME = "gra_user_tokens";
-  /*
-  *
-  */
-
+ 
+  /**
+	 * Setup action & filter hooks.
+	 */
   public function createTable(){
 
     require_once(ABSPATH.'wp-admin/includes/upgrade.php');
@@ -27,12 +27,7 @@ class UserTokens{
         UNIQUE(refresh_token)
       )".$wpdb->get_charset_collate();
    
-   
        dbDelta($sql);
-
     }
 
-
-
-  
 }

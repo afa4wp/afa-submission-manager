@@ -11,10 +11,9 @@ class UserTokensModel
 
     }
 
-    /*
-     *
-     */
-
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function checkIfRefreshTokenExist($user_id, $refresh_token)
     {
         global $wpdb; 
@@ -26,13 +25,11 @@ class UserTokensModel
         } 
 
         return false;
-
     }
 
-    /*
-     *
-     */
-
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function create($user_id, $access_token, $refresh_token)
     {
         global $wpdb;
@@ -49,20 +46,18 @@ class UserTokensModel
         );
 
         return  $results;
-
     }
 
-    /*
-     *
-     */
-
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function deleteUserTokenByID($user_id)
     {
         global $wpdb;
         
         $item = array(
             "user_id" =>$user_id,
-            ) ;
+        );
         
         $results = $wpdb->delete(
             $wpdb->prefix.SELF::DATABASE_NAME,

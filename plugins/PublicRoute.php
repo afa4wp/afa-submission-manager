@@ -4,7 +4,6 @@ namespace Plugins;
 
 class PublicRoute
 {
-
     private $nameSpace; 
 
     private $publicRoutes = [
@@ -13,11 +12,17 @@ class PublicRoute
         '/ping',
     ];
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function __construct($nameSpace)
     {
         $this->nameSpace = $nameSpace;
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function getPublicRoutes()
     {
         return array_map(
@@ -28,6 +33,9 @@ class PublicRoute
         );
     }
 
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function isPublicRoute($route)
     {
         return in_array($route, $this->getPublicRoutes());

@@ -13,16 +13,13 @@ class Route
         $this->name = $name;
     }
 
-    /*
-     *
-     */
-
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function init()
     {
-        // init all route
         (new PingRoute($this->name))->initRoutes();
-        (new UserRoute($this->name))->initRoutes();
-            
+        (new UserRoute($this->name))->initRoutes();      
     }
 
 

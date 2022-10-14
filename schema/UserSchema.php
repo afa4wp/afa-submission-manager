@@ -5,15 +5,12 @@ namespace Schema;
 class UserSchema
 {
 
-    /*
-     *
-     */
-
+    /**
+	 * Setup action & filter hooks.
+	 */
     public function login()
     {
-
         $schema = array(
-
             'username' => array(
                 'required' => true,
                 'type' => 'string',
@@ -21,16 +18,12 @@ class UserSchema
                     return true;
                 },
             ),
-
             'password' => array(
                 'required' => true,
                 'type' => 'string',
             ),
-
         );
-
         return $schema;
-
     }
 
 }

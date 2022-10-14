@@ -26,7 +26,9 @@ use Database\DatabaseInstaller;
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-
+/**
+* Setup action & filter hooks.
+*/
 function wp_general_rest_api_init()
 {
     $name_space =  $_ENV['API_NAME_SPACE'];
@@ -36,9 +38,12 @@ function wp_general_rest_api_init()
 
 }
 
-
-// init api
+/**
+* Setup action & filter hooks.
+*/
 add_action('rest_api_init', 'wp_general_rest_api_init');
 
-// Hooks 
+/**
+* Setup action & filter hooks.
+*/
 register_activation_hook(GENERAL_REST_API_PLUGIN, [new DatabaseInstaller, 'install']);
