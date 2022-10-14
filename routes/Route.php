@@ -2,14 +2,11 @@
 
 namespace Routes;
 
-use Controllers\UserController;
-use Schema\UserSchema;
-use WP_Error;
+use Routes\PingRoute;
+use Routes\UserRoute;
 
-class UserRoute
+class Route
 {
-
-    protected $name;
 
     public function __construct($name)
     {
@@ -20,70 +17,13 @@ class UserRoute
      *
      */
 
-    public function login()
+    public function init()
     {
-
-        register_rest_route(
-            $this->name,
-            '/user/login',
-            array(
-                array(
-                    'methods' => 'POST',
-                    'callback' => array(new UserController, 'login'),
-                    'permission_callback' => '__return_true',
-                    'args' => (new UserSchema())->login(),
-                ),
-
-            )
-        );
-
+        // init all route
+        (new PingRoute($this->name))->initRoutes();
+        (new UserRoute($this->name))->initRoutes();
+            
     }
 
-    public function user()
-    {
-
-        register_rest_route(
-            $this->name,
-            '/user/me',
-            array(
-                array(
-                    'methods' => 'GET',
-                    'callback' => array(new UserController, 'user'),
-                    'permission_callback' => '__return_true',
-                ),
-
-            )
-        );
-
-    }
-
-    public function token()
-    {
-
-        register_rest_route(
-            $this->name,
-            '/user/token',
-            array(
-                array(
-                    'methods' => 'GET',
-                    'callback' => array(new UserController, 'token'),
-                    'permission_callback' => '__return_true',
-                ),
-
-            )
-        );
-
-    }
-
-    /*
-     *
-     */
-
-    public function initRoutes()
-    {
-        $this->login();
-        $this->user();
-        $this->token();
-    }
 
 }

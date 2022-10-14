@@ -20,27 +20,18 @@ require __DIR__ . '/vendor/autoload.php';
 define('GENERAL_REST_API_PLUGIN', __FILE__);
 
 use Plugins\JWT\JWTPlugin;
-use Routes\PingRoute;
-use Routes\UserRoute;
+use Routes\Route;
+use Database\DatabaseInstaller;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 
-// DataBase
-use Database\DatabaseInstaller;
-
 function wp_general_rest_api_init()
 {
-    //  name-space
     $name_space =  $_ENV['API_NAME_SPACE'];
-
-    // init all route
-    (new PingRoute($name_space))->initRoutes();
-    (new UserRoute($name_space))->initRoutes();
-    
-
-    // pre hendler
+    (new Route($name_space) )->init();
+ 
     add_filter('rest_pre_dispatch', [new JWTPlugin, 'validateTokenRestPreDispatch'], 10, 3);
 
 }
@@ -49,13 +40,5 @@ function wp_general_rest_api_init()
 // init api
 add_action('rest_api_init', 'wp_general_rest_api_init');
 
-// create table on install plugin
-function wp_general_rest_api_installer(){
-  
-    (new DatabaseInstaller())->install();
-  
-}
-
-
 // Hooks 
-register_activation_hook(GENERAL_REST_API_PLUGIN, 'wp_general_rest_api_installer');
+register_activation_hook(GENERAL_REST_API_PLUGIN, [new DatabaseInstaller, 'install']);
