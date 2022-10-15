@@ -5,12 +5,15 @@ namespace Models;
 class UserModel
 {
     public function __construct()
-    {
-
-    }
+    {}
 
     /**
-	 * Setup action & filter hooks.
+	 * Login user
+     * 
+     * @param string            $username The user name.
+     * @param string            $password The user password.   
+     * 
+     * @return WP_User|WP_Error $user WP User object.
 	 */
     public function login($username, $password)
     {
@@ -19,11 +22,12 @@ class UserModel
             'user_password' => $password,
         ));
         return $login;
-
     }
 
-    /**
-	 * Setup action & filter hooks.
+     /**
+	 * Get user
+     * 
+     * @return WP_User $user Some User info.
 	 */
     public function user()
     {
