@@ -22,8 +22,12 @@ class UserController
     }
 
     /**
-	 * Setup action & filter hooks.
-	 */
+     * Login user.
+     *
+     * @param WP_REST_Request $request The request.
+     *
+    * @return WP_User|WP_Error $user WP User with tokens info
+     */
     public function login($request)
     {
         $username = $request['username'];
@@ -55,12 +59,11 @@ class UserController
     }
 
     /**
-     * Decodes a JWT string into a PHP object.
-     * if sucess force user login and keep on
+     * Get user.
      *
      * @param WP_REST_Request $request The request.
      *
-     * @return array $decoded The token's payload.
+     * @return array $user Some User info.
      */
     public function user($request)
     {
