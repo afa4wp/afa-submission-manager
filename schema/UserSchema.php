@@ -4,9 +4,8 @@ namespace Schema;
 
 class UserSchema
 {
-
     /**
-	 * Setup action & filter hooks.
+	 * Create login schema.
 	 */
     public function login()
     {

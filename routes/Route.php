@@ -14,7 +14,7 @@ class Route
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Init all routes.
 	 */
     public function init()
     {
