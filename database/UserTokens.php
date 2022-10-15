@@ -7,14 +7,12 @@ class UserTokens{
   public const DATABASE_NAME = "gra_user_tokens";
  
   /**
-	 * Setup action & filter hooks.
+	 * create gra_user_tokens table .
 	 */
   public function createTable(){
 
     require_once(ABSPATH.'wp-admin/includes/upgrade.php');
     global $wpdb;
-
-    // criando a primeira tabela
 
     $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.SELF::DATABASE_NAME." (
         id BIGINT(20) NOT NULL AUTO_INCREMENT,

@@ -4,19 +4,18 @@ namespace Routes;
 
 class PingRoute
 {
-
+    /**
+     * The slugs in the URL before the endpoint.
+     */
     protected $name;
 
-    /**
-	 * Setup action & filter hooks.
-	 */
     public function __construct($name)
     {
         $this->name = $name;
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Create ping endpoint.
 	 */
     public function ping()
     {
@@ -35,7 +34,7 @@ class PingRoute
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Create ping callback.
 	 */
     public function pingFunc()
     {
@@ -45,7 +44,7 @@ class PingRoute
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Call all endpoints
 	 */
     public function initRoutes()
     {

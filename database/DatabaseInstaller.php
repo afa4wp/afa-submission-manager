@@ -7,7 +7,7 @@ use Database\UserTokens;
 class DatabaseInstaller{
 
   /**
-	 * Setup action & filter hooks.
+	 * Create tables.
 	 */
   public function install(){
     (new UserTokens())->createTable();

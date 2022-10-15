@@ -56,7 +56,7 @@ class UserRoute
     }
 
     /**
-	 * Create refres token endpoint.
+	 * Create refresh token endpoint.
 	 */
     public function token()
     {
