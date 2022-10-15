@@ -17,7 +17,7 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 ## End-point: ping
 ### Method: GET
 >```
->undefined
+>{{baseURL}}/ping
 >```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
@@ -25,7 +25,7 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 ## End-point: login
 ### Method: POST
 >```
->undefined
+>{{baseURL}}/user/login
 >```
 ### Body (**raw**)
 
@@ -54,7 +54,7 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 ## End-point: token
 ### Method: GET
 >```
->undefined
+>{{baseURL}}/user/token
 >```
 ### Body (**raw**)
 
