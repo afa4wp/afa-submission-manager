@@ -1,7 +1,6 @@
 <?php
 
 namespace Models;
-
 class UserModel
 {
     public function __construct()

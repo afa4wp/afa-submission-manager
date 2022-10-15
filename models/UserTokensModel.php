@@ -1,18 +1,20 @@
 <?php
 
 namespace Models;
-
 class UserTokensModel
 {
     public const DATABASE_NAME = "gra_user_tokens";
 
     public function __construct()
-    {
-
-    }
+    {}
 
     /**
-	 * Setup action & filter hooks.
+	 * Verify if Refresh token exist
+     * 
+     * @param string $user_id The user ID 
+     * @param string $refresh_token The user refresh token   
+     * 
+     * @return bool
 	 */
     public function checkIfRefreshTokenExist($user_id, $refresh_token)
     {
@@ -28,7 +30,13 @@ class UserTokensModel
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Create new token register
+     * 
+     * @param string $user_id The user ID
+     * @param string $access_token The user access token
+     * @param string $refresh_token The user refresh token   
+     * 
+     * @return int|false 
 	 */
     public function create($user_id, $access_token, $refresh_token)
     {
@@ -48,8 +56,10 @@ class UserTokensModel
         return  $results;
     }
 
-    /**
-	 * Setup action & filter hooks.
+     /**
+	 * Delete token register
+     * 
+     * @return int|false 
 	 */
     public function deleteUserTokenByID($user_id)
     {
