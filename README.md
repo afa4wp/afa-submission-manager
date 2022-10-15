@@ -19,6 +19,12 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 ```
 {{baseURL}}/ping
 ```
+#### Response: 200
+```json
+{
+    "ping": "pong"
+}
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -47,7 +53,14 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
     "user_display_name": "claudio"
 }
 ```
-
+#### Response: 500
+```json
+{
+    "code": "incorrect_password",
+    "message": "<strong>Erro</strong>: A senha informada para o usuário <strong>claudio</strong> está incorreta. <a href=\"http://localhost/wordpress/minha-conta/lost-password/\">Perdeu a senha?</a>",
+    "data": null
+}
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
@@ -63,7 +76,14 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
   "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L3dvcmRwcmVzcyIsImlhdCI6MTY2NTgwMTM5NSwiaWQiOiIxIiwiZXhwIjoxNjY1ODA2MzE1fQ.k9o4ao6GNKAjglGg9wLJwEwhHpu1a9oxyUF2aCI0eBY"
 }
 ```
-
+#### Response: 200
+```json
+{
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L3dvcmRwcmVzcyIsImlhdCI6MTY2NTgwMTQyNSwiaWQiOiIxIiwiZXhwIjoxNjY1ODAxNDg1fQ.mCa_5fjHxad_w7Zbs9TGLTGM_cXtBSMeJb85mxISZc0",
+    "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L3dvcmRwcmVzcyIsImlhdCI6MTY2NTgwMTQyNSwiaWQiOiIxIiwiZXhwIjoxNjY1ODA2MzQ1fQ.C31UWfB_Mpu6t1N1GkmWuzbhCURY_18NMsBAvPqNXdA",
+    "id": "1"
+}
+```
 #### Response: 403
 ```json
 {
