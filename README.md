@@ -14,20 +14,20 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 4. Depois de ativado o plugin em sua maquina, a rota de acesso será formada pela base do site, ```https://meusite.com.br/``` pela base api ```wp-json/wp-general-rest-api/v1``` e endpoint, ex:. ```/ping```, deste modo
   rota ```https://meusite.com.br/wp-json/wp-general-rest-api/v1/ping``` permite saber se a api esta funcionando corretamente retornando um ```{"ping": "pong"}``` como resposta.
 # Rotas
-## End-point: ping
-### Method: GET
->```
->{{baseURL}}/ping
->```
+### End-point: ping
+#### Method: GET
+```
+{{baseURL}}/ping
+```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: login
-### Method: POST
->```
->{{baseURL}}/user/login
->```
-### Body (**raw**)
+### End-point: login
+#### Method: POST
+```
+{{baseURL}}/user/login
+```
+#### Body (**raw**)
 
 ```json
 {
@@ -36,7 +36,7 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 }
 ```
 
-### Response: 200
+#### Response: 200
 ```json
 {
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L3dvcmRwcmVzcyIsImlhdCI6MTY2NTgwMTM5NSwiaWQiOiIxIiwiZXhwIjoxNjY1ODAxNDU1fQ.Cy7JBTFlrq5qspBMlaBOqd4SAzcXZNWp2g9r8nW1ZME",
@@ -51,12 +51,12 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
-## End-point: token
-### Method: GET
->```
->{{baseURL}}/user/token
->```
-### Body (**raw**)
+### End-point: token
+#### Method: GET
+```
+{{baseURL}}/user/token
+```
+#### Body (**raw**)
 
 ```json
 {
@@ -64,7 +64,7 @@ git clone https://github.com/claudionhangapc/wp-general-rest-api.git && cd wp-ge
 }
 ```
 
-### Response: 403
+#### Response: 403
 ```json
 {
     "code": "jwt_auth_invalid_token",
