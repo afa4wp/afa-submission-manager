@@ -55,16 +55,26 @@ class UserController
     }
 
     /**
-	 * Setup action & filter hooks.
-	 */
+     * Decodes a JWT string into a PHP object.
+     * if sucess force user login and keep on
+     *
+     * @param WP_REST_Request $request The request.
+     *
+     * @return array $decoded The token's payload.
+     */
     public function user($request)
     {
         return rest_ensure_response($this->userModel->user());
     }
 
     /**
-	 * Setup action & filter hooks.
-	 */
+     * Decodes a JWT string into a PHP object.
+     * if sucess force user login and keep on
+     *
+     * @param WP_REST_Request $request The request.
+     *
+     * @return array $data The info with user id, acess token and  refresh token.
+     */
     public function token($request)
     {
         $refresh_token = $request['refresh_token'];

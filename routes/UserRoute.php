@@ -4,9 +4,11 @@ namespace Routes;
 
 use Controllers\UserController;
 use Schema\UserSchema;
-
 class UserRoute
-{
+{   
+    /**
+     * The slugs in the URL before the endpoint.
+     */
     protected $name;
 
     public function __construct($name)
@@ -15,7 +17,7 @@ class UserRoute
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Create login endpoint.
 	 */
     public function login()
     {
@@ -35,9 +37,9 @@ class UserRoute
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Create info endpoint.
 	 */
-    public function user()
+    public function user_me()
     {
         register_rest_route(
             $this->name,
@@ -54,7 +56,7 @@ class UserRoute
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Create refres token endpoint.
 	 */
     public function token()
     {
@@ -72,12 +74,12 @@ class UserRoute
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Call all endpoints
 	 */
     public function initRoutes()
     {
         $this->login();
-        $this->user();
+        $this->user_me();
         $this->token();
     }
 
