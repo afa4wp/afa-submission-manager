@@ -1,27 +1,31 @@
 <?php
 
 namespace Plugins;
-
 class PublicRoute
-{
+{   
+    /**
+     * The slugs in the URL before the endpoint.
+     */
     private $nameSpace; 
 
+    /**
+	 * Add public route.
+	 */
     private $publicRoutes = [
         '/user/login',
         '/user/token',
         '/ping',
     ];
 
-    /**
-	 * Setup action & filter hooks.
-	 */
     public function __construct($nameSpace)
     {
         $this->nameSpace = $nameSpace;
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Get publix routes  
+     * 
+     * @return array $publicRoutes all public route with namespace
 	 */
     public function getPublicRoutes()
     {
@@ -34,7 +38,11 @@ class PublicRoute
     }
 
     /**
-	 * Setup action & filter hooks.
+	 * Verify if some rote is public or not
+     * 
+     * @param string $route The route that route being accessed  
+     * 
+     * @return bool
 	 */
     public function isPublicRoute($route)
     {

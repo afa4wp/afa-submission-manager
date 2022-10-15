@@ -27,7 +27,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 /**
-* Setup action & filter hooks.
+* Init api.
 */
 function wp_general_rest_api_init()
 {
@@ -35,15 +35,14 @@ function wp_general_rest_api_init()
     (new Route($name_space) )->init();
  
     add_filter('rest_pre_dispatch', [new JWTPlugin, 'validateTokenRestPreDispatch'], 10, 3);
-
 }
 
 /**
-* Setup action & filter hooks.
+* Add actions 
 */
 add_action('rest_api_init', 'wp_general_rest_api_init');
 
 /**
-* Setup action & filter hooks.
+* Register hooks.
 */
 register_activation_hook(GENERAL_REST_API_PLUGIN, [new DatabaseInstaller, 'install']);
