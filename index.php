@@ -34,7 +34,7 @@ function wp_forms_rest_api_init()
     $name_space =  $_ENV['API_NAME_SPACE'];
     (new Route($name_space) )->init();
  
-    add_filter('rest_pre_dispatch', [new JWTPlugin, 'validateTokenRestPreDispatch'], 10, 3);
+    //add_filter('rest_pre_dispatch', [new JWTPlugin, 'validateTokenRestPreDispatch'], 10, 3);
 }
 
 /**

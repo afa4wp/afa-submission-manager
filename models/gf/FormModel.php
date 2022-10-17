@@ -12,12 +12,12 @@ class FormModel
     /**
 	 * Get Forms 
      * 
-     * @return WP_User|WP_Error $user WP User object.
+     * @return array
 	 */
     public function forms()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." ",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." ORDER BY id DESC LIMIT 1,20",OBJECT);
         
         $forms = [];
 
@@ -28,6 +28,7 @@ class FormModel
             $form['id'] = $value->id;
             $form['title'] = $value->title;
             $form['date_created'] = $value->date_created;
+            $form['registers'] = \GFAPI::count_entries($value->id);
             $form['user_created'] = null;
 
             $forms[] =  $form;
@@ -36,4 +37,17 @@ class FormModel
         return $forms;
     }
 
+
+    /**
+	 * Get Forms 
+     * 
+     * @return array
+	 */
+    public function mumberItems()
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME."");
+        $number_of_rows = intval( $results[0]->number_of_rows );
+        return $number_of_rows ;  
+    }
 }
