@@ -3,7 +3,7 @@
 namespace Models;
 class UserTokensModel
 {
-    public const DATABASE_NAME = "gra_user_tokens";
+    public const DATABASE_NAME = "frapi_user_tokens";
 
     public function __construct()
     {}

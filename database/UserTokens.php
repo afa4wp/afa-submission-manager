@@ -4,10 +4,10 @@ namespace Database;
 
 class UserTokens{
 
-  public const DATABASE_NAME = "gra_user_tokens";
+  public const DATABASE_NAME = "frapi_user_tokens";
  
   /**
-	 * create gra_user_tokens table .
+	 * create fra_user_tokens table .
 	 */
   public function createTable(){
 
