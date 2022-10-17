@@ -4,6 +4,7 @@ namespace Routes;
 
 use Routes\PingRoute;
 use Routes\UserRoute;
+use Routes\GF\Route as GFRoute;
 
 class Route
 {
@@ -19,7 +20,9 @@ class Route
     public function init()
     {
         (new PingRoute($this->name))->initRoutes();
-        (new UserRoute($this->name))->initRoutes();      
+        (new UserRoute($this->name))->initRoutes();
+        (new GFRoute($this->name))->initRoutes();    
+        
     }
 
 

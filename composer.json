@@ -3,9 +3,13 @@
     "autoload": {
         "psr-4": {
             "Routes\\": "routes/",
+            "Routes\\GF\\": "routes/gf/",
             "Controllers\\": "controllers/",
+            "Controllers\\GF\\": "controllers/gf/",
             "Models\\": "models/",
+            "Models\\GF\\": "models/gf/",
             "Schema\\": "schema/",
+            "Schema\\GF\\": "schema/gf/",
             "Plugins\\": "plugins/",
             "Plugins\\JWT\\": "plugins/JWT/",
             "Database\\": "database/"
