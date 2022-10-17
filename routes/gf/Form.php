@@ -2,6 +2,7 @@
 
 namespace Routes\GF;
 
+use Controllers\GF\FormController;
 
 
 class Form
@@ -23,19 +24,13 @@ class Form
             array(
                 array(
                     'methods' => 'GET',
-                    'callback' => array($this, 'token'),
+                    'callback' => array(new FormController, 'forms'),
                     'permission_callback' => '__return_true',
                 ),
             )
         );
     }
 
-    public function token(){
-        return rest_ensure_response(array(
-            'ping' => 'pong',
-        ));
-    }
-    
     /**
 	 * Call all endpoints
 	 */
