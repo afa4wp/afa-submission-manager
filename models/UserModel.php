@@ -39,4 +39,29 @@ class UserModel
         );
     }
 
+    /**
+	 * Get user by id
+     * 
+     * @return WP_User $user Some User info.
+	 */
+    public function userInfoByID($id)
+    {
+        if(empty($id)){
+            return [] ; 
+         }
+    
+         $user = get_user_by('ID',$id);
+         
+         if(empty($user)){
+            return [] ; 
+         }
+         $user_info  = [];
+    
+         $user_info["user_name"] =  $user->display_name;
+         $user_info["user_email"] =  $user->user_email;
+         $user_info["avatar_url"] =  get_avatar_url($id);
+    
+         return  $user_info;
+    }
+
 }
