@@ -3,7 +3,7 @@
 namespace Models\GF;
 
 use Models\UserModel;
-
+use Models\GF\FormModel;
 class EntryModel
 {   
     public const DATABASE_NAME = "gf_entry";
@@ -37,6 +37,9 @@ class EntryModel
                 $user_model = new UserModel();
                 $entry['author_info'] = $user_model->userInfoByID($value->created_by);
             }
+
+            $form_model = new FormModel();
+            $entry['form_info'] = $form_model->formByID($value->form_id);
 
             $entries[] =  $entry;
         }

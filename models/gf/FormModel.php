@@ -47,7 +47,7 @@ class FormModel
     public function formByID($id)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME."WHERE id = $id ",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE id = $id ",OBJECT);
         
         $forms = [];
 
@@ -67,11 +67,9 @@ class FormModel
         if(count($forms) > 0){
             return $forms[0];
         }
-        
+
         return $forms;
     }
-
-
 
     /**
 	 * Get Forms 
