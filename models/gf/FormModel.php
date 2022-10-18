@@ -14,10 +14,10 @@ class FormModel
      * 
      * @return array
 	 */
-    public function forms()
+    public function forms($offset, $number_of_records_per_page)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." ORDER BY id DESC LIMIT 1,20",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
         
         $forms = [];
 
@@ -41,7 +41,7 @@ class FormModel
     /**
 	 * Get Forms 
      * 
-     * @return array
+     * @return int
 	 */
     public function mumberItems()
     {

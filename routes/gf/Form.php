@@ -32,12 +32,31 @@ class Form
     }
 
     /**
+	 * get forms by pagination.
+	 */
+    public function formsPagination()
+    {
+        register_rest_route(
+            $this->name,
+            '/gf/forms/page/(?P<page_number>[0-9]+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new FormController, 'formsPagination'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
+
+
+    /**
 	 * Call all endpoints
 	 */
     public function initRoutes()
     {
         $this->forms();
+        $this->formsPagination();
     }
-
 
 }

@@ -26,7 +26,7 @@ class UserController
      *
      * @param WP_REST_Request $request The request.
      *
-    * @return WP_User|WP_Error $user WP User with tokens info
+     * @return WP_User|WP_Error $user WP User with tokens info
      */
     public function login($request)
     {
