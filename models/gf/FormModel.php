@@ -37,6 +37,41 @@ class FormModel
         return $forms;
     }
 
+    /**
+	 * Get Form by id 
+     * 
+     * @param int     $id The form ID.
+     * 
+     * @return array
+	 */
+    public function formByID($id)
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME."WHERE id = $id ",OBJECT);
+        
+        $forms = [];
+
+        foreach($results as $key => $value){
+            
+            $form = [];
+
+            $form['id'] = $value->id;
+            $form['title'] = $value->title;
+            $form['date_created'] = $value->date_created;
+            $form['registers'] = \GFAPI::count_entries($value->id);
+            $form['user_created'] = null;
+
+            $forms[] =  $form;
+        }
+
+        if(count($forms) > 0){
+            return $forms[0];
+        }
+        
+        return $forms;
+    }
+
+
 
     /**
 	 * Get Forms 
