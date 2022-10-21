@@ -15,7 +15,7 @@ class FormController
     }
 
     /**
-     * GF forms.
+     * WPF forms.
      *
      * @return array $forms GF forms.
      */
@@ -25,7 +25,6 @@ class FormController
         
         $offset = 0;
 
-    
         $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
 
         $info = [];
@@ -39,7 +38,7 @@ class FormController
     }
 
     /**
-     * GF forms.
+     * WPF forms.
      *
      * @param WP_REST_Request $request The request.
      * 

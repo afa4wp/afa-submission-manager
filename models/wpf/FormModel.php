@@ -6,7 +6,7 @@ use WP_Query;
 
 class FormModel
 {   
-    public const DATABASE_NAME = "pots";
+    public const DATABASE_NAME = "posts";
 
     public function __construct()
     {}
@@ -68,11 +68,18 @@ class FormModel
             
             $form = [];
 
-            $form['id'] = $value->id;
-            $form['title'] = $value->title;
-            $form['date_created'] = $value->date_created;
-            $form['registers'] = \GFAPI::count_entries($value->id);
-            $form['user_created'] = null;
+            $form['id'] = $value->ID;
+            $form['title'] = $value->post_title;
+            $form['date_created'] = $value->post_date;
+            
+            $form['registers'] = wpforms()->entry->get_entries(
+                array(
+                    'form_id' => $value->ID,
+                ),
+                true
+            );
+
+            $form['user_created'] = $value->post_author;
 
             $forms[] =  $form;
         }
