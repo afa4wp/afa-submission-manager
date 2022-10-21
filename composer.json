@@ -4,10 +4,13 @@
         "psr-4": {
             "Routes\\": "routes/",
             "Routes\\GF\\": "routes/gf/",
+            "Routes\\WPF\\": "routes/wpf/",
             "Controllers\\": "controllers/",
             "Controllers\\GF\\": "controllers/gf/",
+            "Controllers\\WPF\\": "controllers/wpf/",
             "Models\\": "models/",
             "Models\\GF\\": "models/gf/",
+            "Models\\WPF\\": "models/wpf/",
             "Schema\\": "schema/",
             "Schema\\GF\\": "schema/gf/",
             "Plugins\\": "plugins/",
