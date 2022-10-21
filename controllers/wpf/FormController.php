@@ -2,7 +2,7 @@
 
 namespace Controllers\WPF;
 
-use Models\GF\FormModel;
+use Models\WPF\FormModel;
 use WP_Error;
 
 class FormController
@@ -25,17 +25,17 @@ class FormController
         
         $offset = 0;
 
-        //$forms = \GFAPI::get_forms();
-       /* $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
+    
+        $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
 
         $info = [];
         $info["count"]  = $this->formModel->mumberItems();
         $info["pages"]  = ceil($info["count"]/$this->number_of_records_per_page);
         
         $forms_results["info"] = $info;
-        $forms_results["results"] = $forms; */
+        $forms_results["results"] = $forms; 
  
-        return rest_ensure_response("teste");
+        return rest_ensure_response($forms_results);
     }
 
     /**
