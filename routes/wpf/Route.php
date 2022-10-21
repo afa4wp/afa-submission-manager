@@ -2,9 +2,8 @@
 
 namespace Routes\WPF;
 
-use Routes\GF\Form;
-use Routes\GF\Entry;
-use Routes\GF\EntryMeta;
+use Routes\WPF\Form;
+
 
 class Route
 {
@@ -19,9 +18,7 @@ class Route
 	 */
     public function initRoutes()
     {
-        (new Form($this->name))->initRoutes();
-        (new Entry($this->name))->initRoutes();
-        (new EntryMeta($this->name))->initRoutes();       
+        (new Form($this->name))->initRoutes();    
     }
 
 
