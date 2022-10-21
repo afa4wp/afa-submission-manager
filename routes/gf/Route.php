@@ -4,6 +4,7 @@ namespace Routes\GF;
 
 use Routes\GF\Form;
 use Routes\GF\Entry;
+use Routes\GF\EntryMeta;
 
 class Route
 {
@@ -19,7 +20,8 @@ class Route
     public function initRoutes()
     {
         (new Form($this->name))->initRoutes();
-        (new Entry($this->name))->initRoutes();      
+        (new Entry($this->name))->initRoutes();
+        (new EntryMeta($this->name))->initRoutes();       
     }
 
 
