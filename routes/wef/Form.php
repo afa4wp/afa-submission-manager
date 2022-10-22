@@ -38,7 +38,7 @@ class Form
     {
         register_rest_route(
             $this->name,
-            '/wpf/forms/page/(?P<page_number>[0-9]+)',
+            '/wef/forms/page/(?P<page_number>[0-9]+)',
             array(
                 array(
                     'methods' => 'GET',
