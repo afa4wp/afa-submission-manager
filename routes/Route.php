@@ -6,6 +6,7 @@ use Routes\PingRoute;
 use Routes\UserRoute;
 use Routes\GF\Route as GFRoute;
 use Routes\WPF\Route as WPFRoute;
+use Routes\WEF\Route as WEFRoute;
 
 class Route
 {
@@ -22,9 +23,10 @@ class Route
     {
         (new PingRoute($this->name))->initRoutes();
         (new UserRoute($this->name))->initRoutes();
-        (new GFRoute($this->name))->initRoutes();
         
-        (new WPFRoute($this->name))->initRoutes(); 
+        (new GFRoute($this->name))->initRoutes();
+        (new WPFRoute($this->name))->initRoutes();
+        (new WEFRoute($this->name))->initRoutes();
         
     }
 
