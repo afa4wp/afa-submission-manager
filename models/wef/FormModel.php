@@ -3,7 +3,7 @@
 namespace Models\WEF;
 
 use WP_Query;
-
+use Models\WEF\EntryModel;
 class FormModel
 {   
     public const DATABASE_NAME = "posts";
@@ -35,12 +35,7 @@ class FormModel
             $form['title'] = $posts->post->post_title;
             $form['date_created'] = $posts->post->post_date;
             
-            $form['registers'] = wpforms()->entry->get_entries(
-                array(
-                    'form_id' => $posts->post->ID,
-                ),
-                true
-            );
+            $form['registers'] = (new EntryModel())->mumberItemsByFormID($posts->post->ID);
 
             $form['user_created'] = $posts->post->post_author;
 
@@ -99,8 +94,8 @@ class FormModel
     public function mumberItems()
     {   
         global $wpdb;
-        $result = $wpdb->get_results("SELECT count(*) as numberOfPosts FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE post_type = 'wpuf_contact_form' AND post_status = 'publish' ");
-        //$published_posts = wp_count_posts('wpuf_contact_form');
-        return $result[0]->numberOfPosts;  
+        $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE post_type = 'wpuf_contact_form' AND post_status = 'publish' ");
+        $number_of_rows = intval( $results[0]->number_of_rows );
+        return $number_of_rows ;    
     }
 }
