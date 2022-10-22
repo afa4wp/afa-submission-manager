@@ -15,7 +15,7 @@ class FormController
     }
 
     /**
-     * WPF forms.
+     * WEF forms.
      *
      * @return array $forms GF forms.
      */
@@ -38,7 +38,7 @@ class FormController
     }
 
     /**
-     * WPF forms.
+     * WEF forms.
      *
      * @param WP_REST_Request $request The request.
      * 

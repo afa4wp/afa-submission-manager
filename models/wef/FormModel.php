@@ -67,12 +67,7 @@ class FormModel
             $form['title'] = $value->post_title;
             $form['date_created'] = $value->post_date;
             
-            $form['registers'] = wpforms()->entry->get_entries(
-                array(
-                    'form_id' => $value->ID,
-                ),
-                true
-            );
+            $form['registers'] = (new EntryModel())->mumberItemsByFormID($value->ID);
 
             $form['user_created'] = $value->post_author;
 

@@ -29,13 +29,13 @@ class EntryModel
 
             $entry['id'] = $value->id;
             $entry['form_id'] = $value->form_id;
-            $entry['date_created'] = $value->date_created;
-            $entry['created_by'] = $value->created_by;
+            $entry['date_created'] = $value->created_at;
+            $entry['created_by'] = $value->user_id;
             $entry['author_info'] = [];
 
-            if(!empty($value->created_by)){
+            if(!empty($value->user_id)){
                 $user_model = new UserModel();
-                $entry['author_info'] = $user_model->userInfoByID($value->created_by);
+                $entry['author_info'] = $user_model->userInfoByID($value->user_id);
             }
 
             $form_model = new FormModel();
