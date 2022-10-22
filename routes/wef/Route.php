@@ -20,8 +20,8 @@ class Route
     public function initRoutes()
     {
         (new Form($this->name))->initRoutes();
-        /*(new Entry($this->name))->initRoutes();
-        (new EntryMeta($this->name))->initRoutes();  */  
+        (new Entry($this->name))->initRoutes();
+        /*(new EntryMeta($this->name))->initRoutes();  */  
     }
 
 }
