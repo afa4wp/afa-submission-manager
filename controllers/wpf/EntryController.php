@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers\WEP;
+namespace Controllers\WPF;
 
-use Models\GF\EntryModel;
+use Models\WPF\EntryModel;
 use WP_Error;
 
 class EntryController
@@ -15,7 +15,7 @@ class EntryController
     }
 
     /**
-     * GF forms entry.
+     * WPF forms entry.
      *
      * @return array $forms GF forms.
      */
