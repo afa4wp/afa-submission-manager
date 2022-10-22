@@ -4,7 +4,7 @@ namespace Routes\WPF;
 
 use Routes\WPF\Form;
 use Routes\WPF\Entry;
-
+use Routes\WPF\EntryMeta;
 
 class Route
 {
@@ -23,6 +23,5 @@ class Route
         (new Entry($this->name))->initRoutes();
         (new EntryMeta($this->name))->initRoutes();    
     }
-
 
 }

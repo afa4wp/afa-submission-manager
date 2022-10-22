@@ -20,7 +20,7 @@ class EntryMeta
     {
         register_rest_route(
             $this->name,
-            '/gf/entrymeta/entry_id/(?P<entry_id>[0-9]+)',
+            '/wpf/entrymeta/entry_id/(?P<entry_id>[0-9]+)',
             array(
                 array(
                     'methods' => 'GET',
