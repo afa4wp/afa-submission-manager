@@ -21,7 +21,7 @@ class Route
     {
         (new Form($this->name))->initRoutes();
         (new Entry($this->name))->initRoutes();
-        //(new EntryMeta($this->name))->initRoutes();    
+        (new EntryMeta($this->name))->initRoutes();    
     }
 
 
