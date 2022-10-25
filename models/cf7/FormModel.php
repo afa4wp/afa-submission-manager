@@ -93,4 +93,20 @@ class FormModel
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;    
     }
+
+    /**
+	 * Get Form chanel by id
+     * 
+     * @return string
+	 */
+    public function formChanelByID($id)
+    {   
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE id = $id ",OBJECT);
+        
+        if(count($results) > 0){
+            return $results[0]->post_name;
+        }
+        return "";    
+    }
 }
