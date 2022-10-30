@@ -22,24 +22,37 @@ class EntryModel
         $results = \Flamingo_Inbound_Message::find( [] );
         
         $entries = [];
-        return $results;
+        //return $results;
         foreach($results as $key => $value){
-            
-            $entry = [];
-            $entry['id'] = $value->meta['post_id'];
-            $entry['form_id'] = $value->channel;
-            //$entry['date_created'] = null;
-            $entry['created_by'] = $value->user_id;
-            $entry['author_info'] = [];
-
-            if(!empty($value->user_id)){
-                $user_model = new UserModel();
-                $entry['author_info'] = $user_model->userInfoByID($value->user_id);
-            }
 
             $form_model = new FormModel();
-            $entry['form_info'] = $form_model->formByID($value->form_id);
+            $post = $form_model->formByChannel($value->channel);
 
+            $entry = [];
+
+            $entry['id'] = $value->id();
+            $entry['form_id'] = $value->meta['post_id'];
+            $entry['date_created'] = "";
+            $entry['created_by']  = "";
+            $entry['author_info'] = [];
+            $entry['form_info'] = [];
+
+            if ( $post ) {
+                $entry['date_created'] = $post->post_date;
+            }
+            
+            $user = get_user_by_email( $value->from_email );
+            
+            if($user){
+                $user_model = new UserModel();
+                $entry['created_by'] = $user->ID;
+                $entry['author_info'] = $user_model->userInfoByID($user->ID);
+            }
+
+            if ( $post ) {
+                $entry['form_info'] = $form_model->formByID($post->ID);
+            }
+            
             $entries[] =  $entry;
         }
 
