@@ -33,9 +33,8 @@ class FormModel
 
             $form['id'] = $posts->post->ID;
             $form['title'] = $posts->post->post_title;
-            $form['date_created'] = $posts->post->post_date;
-            
-            //$form['registers'] = (new EntryModel())->mumberItemsByFormID($posts->post->ID);
+            $form['date_created'] = $posts->post->post_date; 
+            $form['registers'] = (new EntryModel())->mumberItemsByChannel($posts->post->post_name);
 
             $form['user_created'] = $posts->post->post_author;
 
@@ -109,4 +108,6 @@ class FormModel
         }
         return "";    
     }
+
+    
 }
