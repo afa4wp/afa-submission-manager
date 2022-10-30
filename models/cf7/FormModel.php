@@ -52,7 +52,7 @@ class FormModel
      * @return array
 	 */
     public function formByID($id)
-    {
+    {   
         global $wpdb;
         $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE id = $id ",OBJECT);
         
@@ -66,7 +66,7 @@ class FormModel
             $form['title'] = $value->post_title;
             $form['date_created'] = $value->post_date;
             
-            $form['registers'] = (new EntryModel())->mumberItemsByFormID($value->ID);
+            $form['registers'] = (new EntryModel())->mumberItemsByChannel($value->post_name);
 
             $form['user_created'] = $value->post_author;
 
@@ -78,6 +78,7 @@ class FormModel
         }
 
         return $forms;
+
     }
 
     /**
@@ -107,6 +108,23 @@ class FormModel
             return $results[0]->post_name;
         }
         return "";    
+    }
+
+     /**
+	 * Get Form chanel by id
+     * 
+     * @return object
+	 */
+    public function formByChannel($channel)
+    {   
+        global $wpdb;
+        $forms = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE post_name = '$channel' ",OBJECT);
+        
+        if(count($forms) > 0){
+            return $forms[0];
+        }
+
+        return $forms;
     }
 
     
