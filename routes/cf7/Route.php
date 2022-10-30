@@ -3,7 +3,7 @@
 namespace Routes\CF7;
 
 use Routes\CF7\Form;
-//use Routes\WEF\Entry;
+use Routes\CF7\Entry;
 //use Routes\WEF\EntryMeta;
 
 class Route
@@ -20,7 +20,7 @@ class Route
     public function initRoutes()
     {
         (new Form($this->name))->initRoutes();
-        //(new Entry($this->name))->initRoutes();
+        (new Entry($this->name))->initRoutes();
         //(new EntryMeta($this->name))->initRoutes(); 
     }
 
