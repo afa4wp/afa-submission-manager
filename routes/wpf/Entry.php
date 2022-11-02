@@ -14,7 +14,7 @@ class Entry
     }
 
     /**
-	 * get all forms.
+	 * get all entries.
 	 */
     public function entries()
     {
