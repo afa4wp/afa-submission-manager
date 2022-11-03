@@ -17,7 +17,7 @@ class FormController
     /**
      * WEF forms.
      *
-     * @return array $forms GF forms.
+     * @return array $forms WEF forms.
      */
     public function forms()
     {   
@@ -42,7 +42,7 @@ class FormController
      *
      * @param WP_REST_Request $request The request.
      * 
-     * @return array $forms GF forms.
+     * @return array $forms WEF forms.
      */
     public function formsPagination($request)
     {   

@@ -18,7 +18,7 @@ class EntryMetaController
      *
      * @param WP_REST_Request $request The request.
      * 
-     * @return array $forms GF forms.
+     * @return array $forms WPF forms.
      */
     public function entryMetaByEntryID($request)
     {   

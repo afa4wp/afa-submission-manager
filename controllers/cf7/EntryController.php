@@ -15,9 +15,9 @@ class EntryController
     }
 
     /**
-     * GF forms entry.
+     * CF7 forms entry.
      *
-     * @return array $forms GF forms.
+     * @return array $forms CF7 forms.
      */
     public function entries()
     {   

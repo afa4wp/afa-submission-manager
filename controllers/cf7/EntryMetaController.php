@@ -16,11 +16,11 @@ class EntryMetaController
     }
 
     /**
-     * GF forms entry.
+     * CF7 forms entry.
      *
      * @param WP_REST_Request $request The request.
      * 
-     * @return array $forms GF forms.
+     * @return array $forms CF7 forms.
      */
     public function entryMetaByEntryID($request)
     {   
