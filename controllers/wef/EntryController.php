@@ -15,9 +15,9 @@ class EntryController
     }
 
     /**
-     * GF forms entry.
+     * WEF forms entry.
      *
-     * @return array $forms GF forms.
+     * @return array $forms WEF forms.
      */
     public function entries()
     {   

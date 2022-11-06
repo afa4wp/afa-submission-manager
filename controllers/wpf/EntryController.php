@@ -17,7 +17,7 @@ class EntryController
     /**
      * WPF forms entry.
      *
-     * @return array $forms GF forms.
+     * @return array $forms WPF forms.
      */
     public function entries()
     {   
