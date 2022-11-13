@@ -1,5 +1,5 @@
 <?php
-
+namespace Plugins\Helpers\GF;
 /**
  * Finds pages that contain a particular Gravity Form.
  */

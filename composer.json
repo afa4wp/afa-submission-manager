@@ -21,6 +21,7 @@
             "Schema\\GF\\": "schema/gf/",
             "Plugins\\": "plugins/",
             "Plugins\\JWT\\": "plugins/JWT/",
+            "Plugins\\Helpers\\GF\\": "plugins/Helpers/gf/",
             "Database\\": "database/"
         }
     },
