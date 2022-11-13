@@ -3,7 +3,7 @@ namespace Plugins\Helpers\GF;
 /**
  * Finds pages that contain a particular Gravity Form.
  */
-class Gravity_Forms_Shortcode_Finder {
+class GravityFormsShortcodeFinder {
 	/**
 	 * ID of the Gravity Form to search for.
 	 *
@@ -35,7 +35,7 @@ class Gravity_Forms_Shortcode_Finder {
 	 * @return array Post IDs for all pages.
 	 */
 	private function get_all_page_ids() {
-		return ( new WP_Query( [
+		return ( new \WP_Query( [
 			'post_type'              => 'page',
 			'posts_per_page'         => 1000,
 			'no_found_rows'          => true,
