@@ -22,6 +22,7 @@
             "Plugins\\": "plugins/",
             "Plugins\\JWT\\": "plugins/JWT/",
             "Plugins\\Helpers\\GF\\": "plugins/helpers/gf/",
+            "Plugins\\Helpers\\WEF\\": "plugins/helpers/wef/",
             "Database\\": "database/"
         }
     },
