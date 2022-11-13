@@ -2,6 +2,7 @@
 
 namespace Models\WPF;
 
+use Plugins\Helpers\FormsShortcodeFinder;
 use WP_Query;
 
 class FormModel
@@ -43,6 +44,7 @@ class FormModel
             );
 
             $form['user_created'] = $posts->post->post_author;
+            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
 
             $forms[] =  $form;
         }
@@ -80,7 +82,7 @@ class FormModel
             );
 
             $form['user_created'] = $value->post_author;
-
+            $form['perma_links'] = $this->pagesLinks($value->ID);
             $forms[] =  $form;
         }
 
@@ -99,5 +101,32 @@ class FormModel
     public function mumberItems()
     {
         return wp_count_posts('wpforms')->publish ;  
+    }
+
+    /**
+	 * Get form pages links  
+     * 
+     * @param int     $formID The form ID.
+     * 
+     * @return array
+	 */
+    public function pagesLinks($formID)
+    {
+        $pages_with_form = (new FormsShortcodeFinder( $formID ))->wefFind();
+        
+        if(empty($pages_with_form)){
+            return $pages_with_form;
+        }
+
+        $results = [];
+
+        foreach ($pages_with_form as $key => $value) {
+            $result = [];
+            $result['page_name'] = $value;
+            $result['page_link'] = get_page_link($key);
+            $results = $result;
+        }
+
+        return $results;
     }
 }
