@@ -2,6 +2,7 @@
 
 namespace Models\WEF;
 
+use Plugins\Helpers\WEF\WeFormsShortcodeFinder;
 use WP_Query;
 use Models\WEF\EntryModel;
 class FormModel
@@ -38,6 +39,7 @@ class FormModel
             $form['registers'] = (new EntryModel())->mumberItemsByFormID($posts->post->ID);
 
             $form['user_created'] = $posts->post->post_author;
+            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
 
             $forms[] =  $form;
         }
@@ -70,6 +72,7 @@ class FormModel
             $form['registers'] = (new EntryModel())->mumberItemsByFormID($value->ID);
 
             $form['user_created'] = $value->post_author;
+            $form['perma_links'] = $this->pagesLinks($value->ID);
 
             $forms[] =  $form;
         }
@@ -92,5 +95,32 @@ class FormModel
         $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE post_type = 'wpuf_contact_form' AND post_status = 'publish' ");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;    
+    }
+
+     /**
+	 * Get form pages links  
+     * 
+     * @param int     $formID The form ID.
+     * 
+     * @return array
+	 */
+    public function pagesLinks($formID)
+    {
+        $pages_with_form = (new WeFormsShortcodeFinder( $formID ))->find();
+        
+        if(empty($pages_with_form)){
+            return $pages_with_form;
+        }
+
+        $results = [];
+
+        foreach ($pages_with_form as $key => $value) {
+            $result = [];
+            $result['page_name'] = $value;
+            $result['page_link'] = get_page_link($key);
+            $results = $result;
+        }
+
+        return $results;
     }
 }
