@@ -58,6 +58,19 @@ class FormsShortcodeFinder {
 	}
 
 	/**
+	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
+	 */
+	public function wpfFind() {
+		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
+			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "wpforms"), true ) ) {
+				$pages[ $page_id ] = get_the_title( $page_id );
+			}
+	
+			return $pages;
+		}, [] );
+	}
+
+	/**
 	 * @return array Post IDs for all pages.
 	 */
 	private function get_all_page_ids() {
