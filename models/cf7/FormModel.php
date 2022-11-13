@@ -2,6 +2,7 @@
 
 namespace Models\CF7;
 
+use Plugins\Helpers\FormsShortcodeFinder;
 use WP_Query;
 use Models\CF7\EntryModel;
 class FormModel
@@ -37,7 +38,7 @@ class FormModel
             $form['registers'] = (new EntryModel())->mumberItemsByChannel($posts->post->post_name);
 
             $form['user_created'] = $posts->post->post_author;
-
+            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
             $forms[] =  $form;
         }
 
@@ -69,6 +70,7 @@ class FormModel
             $form['registers'] = (new EntryModel())->mumberItemsByChannel($value->post_name);
 
             $form['user_created'] = $value->post_author;
+            $form['perma_links'] = $this->pagesLinks($value->ID);
 
             $forms[] =  $form;
         }
@@ -125,6 +127,33 @@ class FormModel
         }
 
         return $forms;
+    }
+
+    /**
+	 * Get form pages links  
+     * 
+     * @param int     $formID The form ID.
+     * 
+     * @return array
+	 */
+    public function pagesLinks($formID)
+    {
+        $pages_with_form = (new FormsShortcodeFinder( $formID ))->find();
+        
+        if(empty($pages_with_form)){
+            return $pages_with_form;
+        }
+
+        $results = [];
+
+        foreach ($pages_with_form as $key => $value) {
+            $result = [];
+            $result['page_name'] = $value;
+            $result['page_link'] = get_page_link($key);
+            $results = $result;
+        }
+
+        return $results;
     }
 
     
