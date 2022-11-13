@@ -2,7 +2,7 @@
 
 namespace Models\WEF;
 
-use Plugins\Helpers\WEF\WeFormsShortcodeFinder;
+use Plugins\Helpers\FormsShortcodeFinder;
 use WP_Query;
 use Models\WEF\EntryModel;
 class FormModel
@@ -106,7 +106,7 @@ class FormModel
 	 */
     public function pagesLinks($formID)
     {
-        $pages_with_form = (new WeFormsShortcodeFinder( $formID ))->find();
+        $pages_with_form = (new FormsShortcodeFinder( $formID ))->wefFind();
         
         if(empty($pages_with_form)){
             return $pages_with_form;

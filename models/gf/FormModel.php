@@ -2,7 +2,7 @@
 
 namespace Models\GF;
 
-use Plugins\Helpers\GF\GravityFormsShortcodeFinder;
+use Plugins\Helpers\FormsShortcodeFinder;
 class FormModel
 {   
     public const DATABASE_NAME = "gf_form";
@@ -95,7 +95,7 @@ class FormModel
 	 */
     public function pagesLinks($formID)
     {
-        $pages_with_form = (new GravityFormsShortcodeFinder( $formID ))->find();
+        $pages_with_form = (new FormsShortcodeFinder( $formID ))->gfFind();
         
         if(empty($pages_with_form)){
             return $pages_with_form;

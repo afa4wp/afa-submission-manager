@@ -138,7 +138,7 @@ class FormModel
 	 */
     public function pagesLinks($formID)
     {
-        $pages_with_form = (new FormsShortcodeFinder( $formID ))->find();
+        $pages_with_form = (new FormsShortcodeFinder( $formID ))->cf7Find();
         
         if(empty($pages_with_form)){
             return $pages_with_form;

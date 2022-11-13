@@ -21,9 +21,35 @@ class FormsShortcodeFinder {
 	/**
 	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
 	 */
-	public function find() {
+	public function cf7Find() {
 		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
 			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "contact-form-7"), true ) ) {
+				$pages[ $page_id ] = get_the_title( $page_id );
+			}
+	
+			return $pages;
+		}, [] );
+	}
+
+	/**
+	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
+	 */
+	public function wefFind() {
+		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
+			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "weforms"), true ) ) {
+				$pages[ $page_id ] = get_the_title( $page_id );
+			}
+	
+			return $pages;
+		}, [] );
+	}
+
+	/**
+	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
+	 */
+	public function gfFind() {
+		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
+			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "gravityform"), true ) ) {
 				$pages[ $page_id ] = get_the_title( $page_id );
 			}
 	
