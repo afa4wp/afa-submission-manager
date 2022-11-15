@@ -31,6 +31,23 @@ class Entry
         );
     }
 
+    /**
+	 * get all entries from specific user.
+	 */
+    public function searchEntriesUser()
+    {
+        register_rest_route(
+            $this->name,
+            '/gf/entries/user/search/(?P<user_info>\S+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new EntryController, 'searchEntriesUser'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
 
     /**
 	 * Call all endpoints
@@ -38,6 +55,7 @@ class Entry
     public function initRoutes()
     {
         $this->entries();
+        $this->searchEntriesUser();
     }
 
 }
