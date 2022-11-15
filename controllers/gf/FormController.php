@@ -66,5 +66,35 @@ class FormController
         return rest_ensure_response($forms_results);
     }
 
+
+    /**
+     * GF forms.
+     *
+     * @param WP_REST_Request $request The request.
+     * 
+     * @return array $forms GF forms.
+     */
+    public function searchForms($request)
+    {   
+        $post_name = urldecode($request['post_name']);
+
+        $forms_results = [];
+        
+        $offset = 0;
+
+        $forms =  $this->formModel->searchForms($post_name, $offset, $this->number_of_records_per_page);
+
+        $info = [];
+        $info["count"]  = $this->formModel->mumberItemsOnSerach($post_name);
+        $info["pages"]  = ceil($info["count"]/$this->number_of_records_per_page);
+        
+        $forms_results["info"] = $info;
+        $forms_results["results"] = $forms;
+ 
+        return rest_ensure_response($forms_results);
+
+    }
+
+
     
 }
