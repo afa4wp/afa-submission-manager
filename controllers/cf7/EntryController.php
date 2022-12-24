@@ -37,5 +37,17 @@ class EntryController
         return rest_ensure_response($entries_results["results"]);
     }
 
+    /**
+     * CF7 forms entry.
+     *
+     * @return array $forms CF7 forms.
+     */
+    public function entryByID($request)
+    {   
+        $entry_id = $request['entry_id'];
+        $entry =  $this->entryModel->entryByID($entry_id);
+        return rest_ensure_response($entry);
+
+    }
     
 }
