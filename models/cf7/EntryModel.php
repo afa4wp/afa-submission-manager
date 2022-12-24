@@ -117,6 +117,64 @@ class EntryModel
     }
 
     /**
+	 * Get Forms entries by form_id
+     * 
+     * @return array
+	 */
+    public function entriesByFormID($form_id, $offset, $number_of_records_per_page)
+    {   
+        global $wpdb;
+
+        $form_model = new FormModel();
+        $channel = $form_model->formChanelByID($form_id);
+        
+        $results = \Flamingo_Inbound_Message::find( 
+            [
+                'channel' => $channel,
+                'posts_per_page' => $number_of_records_per_page,
+                'offset' =>$offset
+            ] 
+        );
+
+        $entries = [];
+
+        foreach($results as $key => $value){
+
+            $form_model = new FormModel();
+            $post = $form_model->formByChannel($value->channel);
+
+            $entry = [];
+
+            $entry['id'] = $value->id();
+            $entry['form_id'] = $value->meta['post_id'];
+            $entry['date_created'] = "";
+            $entry['created_by']  = "";
+            $entry['author_info'] = [];
+            $entry['form_info'] = [];
+
+            if ( $post ) {
+                $entry['date_created'] = $post->post_date;
+            }
+            
+            $user = get_user_by_email( $value->from_email );
+            
+            if($user){
+                $user_model = new UserModel();
+                $entry['created_by'] = $user->ID;
+                $entry['author_info'] = $user_model->userInfoByID($user->ID);
+            }
+
+            if ( $post ) {
+                $entry['form_info'] = $form_model->formByID($post->ID);
+            }
+            
+            $entries[] =  $entry;
+        }
+
+        return $entries;
+    }
+
+    /**
 	 * Get Forms 
      * 
      * @return int
@@ -148,9 +206,9 @@ class EntryModel
 	 */
     public function mumberItemsByFormID($form_id)
     {
-        global $wpdb;
+       /* global $wpdb;
         $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE form_id = $form_id ");
         $number_of_rows = intval( $results[0]->number_of_rows );
-        return $number_of_rows ;  
+        return $number_of_rows ;  */
     }
 }
