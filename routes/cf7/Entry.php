@@ -49,12 +49,31 @@ class Entry
     }
 
     /**
+	 * get entry by id.
+	 */
+    public function entriesByFormID()
+    {
+        register_rest_route(
+            $this->name,
+            '/cf7/entries/form_id/(?P<form_id>[0-9]+)/page/(?P<page_number>[0-9]+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new EntryController, 'entriesByFormID'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
+
+    /**
 	 * Call all endpoints
 	 */
     public function initRoutes()
     {
         $this->entries();
         $this->entryByID();
+        $this->entriesByFormID();
     }
 
 }
