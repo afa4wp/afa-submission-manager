@@ -59,6 +59,62 @@ class EntryModel
         return $entries;
     }
 
+    /**
+	 * Get Forms entry by id
+     * 
+     * @return object
+	 */
+    public function entryByID($entry_id)
+    {
+        global $wpdb;
+        $post = new \Flamingo_Inbound_Message( $entry_id );
+        $results = [];
+
+        if (empty($post->channel)){
+            return $results;
+        }
+
+        $results[] = $post;
+
+        $results = \Flamingo_Inbound_Message::find( [] );
+        
+        $entries = [];
+
+        foreach($results as $key => $value){
+
+            $form_model = new FormModel();
+            $post = $form_model->formByChannel($value->channel);
+
+            $entry = [];
+
+            $entry['id'] = $value->id();
+            $entry['form_id'] = $value->meta['post_id'];
+            $entry['date_created'] = "";
+            $entry['created_by']  = "";
+            $entry['author_info'] = [];
+            $entry['form_info'] = [];
+
+            if ( $post ) {
+                $entry['date_created'] = $post->post_date;
+            }
+            
+            $user = get_user_by_email( $value->from_email );
+            
+            if($user){
+                $user_model = new UserModel();
+                $entry['created_by'] = $user->ID;
+                $entry['author_info'] = $user_model->userInfoByID($user->ID);
+            }
+
+            if ( $post ) {
+                $entry['form_info'] = $form_model->formByID($post->ID);
+            }
+            
+            $entries[] =  $entry;
+        }
+
+        return $entries[0];
+    }
 
     /**
 	 * Get Forms 

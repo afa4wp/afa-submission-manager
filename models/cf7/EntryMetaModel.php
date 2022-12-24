@@ -35,8 +35,8 @@ class EntryMetaModel
         foreach ( (array) $post->fields as $key => $value ){
             $item = [];
 
-            $item['id'] = $form_id;
-            $item['form_id'] = null;
+            $item['id'] = null;
+            $item['form_id'] = $form_id;
             $item['entry_id'] = $entry_id;
             $item['meta_key'] = null;
             $item['meta_value'] = $value;
