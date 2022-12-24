@@ -37,7 +37,7 @@ class Entry
     {
         register_rest_route(
             $this->name,
-            '/cf7/entries//(?P<entry_id>[0-9]+)',
+            '/cf7/entries/(?P<entry_id>[0-9]+)',
             array(
                 array(
                     'methods' => 'GET',
