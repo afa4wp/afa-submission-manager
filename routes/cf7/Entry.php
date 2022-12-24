@@ -30,6 +30,23 @@ class Entry
         );
     }
 
+    /**
+	 * get entry by id.
+	 */
+    public function entryByID()
+    {
+        register_rest_route(
+            $this->name,
+            '/cf7/entries//(?P<entry_id>[0-9]+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new EntryController, 'entryByID'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
 
     /**
 	 * Call all endpoints
@@ -37,6 +54,7 @@ class Entry
     public function initRoutes()
     {
         $this->entries();
+        $this->entryByID();
     }
 
 }
