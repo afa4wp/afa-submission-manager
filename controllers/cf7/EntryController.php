@@ -3,6 +3,7 @@
 namespace Controllers\CF7;
 
 use Models\CF7\EntryModel;
+use Models\CF7\FormModel;
 use WP_Error;
 
 class EntryController
@@ -49,5 +50,36 @@ class EntryController
         return rest_ensure_response($entry);
 
     }
+
+    /**
+     * CF7 forms entries by id.
+     *
+     * @return array $forms CF7 forms.
+     */
+    public function entriesByFormID($request)
+    {   
+        $form_id = $request['form_id'];
+        $page_number = $request['page_number'];
+
+        $entries_results = [];
+        
+        $offset = ($page_number - 1) * $this->number_of_records_per_page;
+
+        $entries = $this->entryModel->entriesByFormID($form_id, $offset, $this->number_of_records_per_page);
+
+        $info = [];
+        
+        $form_model = new FormModel();
+        $channel = $form_model->formChanelByID($form_id);
+
+        $info["count"]  =  $this->entryModel->mumberItemsByChannel($channel);
+        $info["pages"]  = ceil($info["count"]/$this->number_of_records_per_page);
+        
+        $entries_results["info"] = $info;
+        $entries_results["results"] = $entries;
+ 
+        return rest_ensure_response($entries_results);
+    }
+
     
 }
