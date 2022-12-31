@@ -51,5 +51,32 @@ class EntryController
 
     }
 
+    /**
+     * GF forms entries by id.
+     *
+     * @return array $forms GF forms.
+     */
+    public function entriesByFormID($request)
+    {   
+        $form_id = $request['form_id'];
+        $page_number = $request['page_number'];
+
+        $entries_results = [];
+        
+        $offset = ($page_number - 1) * $this->number_of_records_per_page;
+
+        $entries = $this->entryModel->entriesByFormID($form_id, $offset, $this->number_of_records_per_page);
+
+        $info = [];
+  
+        $info["count"]  = $this->entryModel->mumberItemsByFormID($form_id);
+        $info["pages"]  = ceil($info["count"]/$this->number_of_records_per_page);
+        
+        $entries_results["info"] = $info;
+        $entries_results["results"] = $entries;
+ 
+        return rest_ensure_response($entries_results);
+    }
+
     
 }
