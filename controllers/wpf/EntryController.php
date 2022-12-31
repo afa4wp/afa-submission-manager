@@ -38,5 +38,18 @@ class EntryController
         return rest_ensure_response($entries_results);
     }
 
+    /**
+     * GF forms entry.
+     *
+     * @return array $forms GF forms.
+     */
+    public function entryByID($request)
+    {   
+        $entry_id = $request['entry_id'];
+        $entry =  $this->entryModel->entryByID($entry_id);
+        return rest_ensure_response($entry);
+
+    }
+
     
 }
