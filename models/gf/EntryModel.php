@@ -47,6 +47,47 @@ class EntryModel
         return $entries;
     }
 
+    /**
+	 * Get Forms entry by id
+     * 
+     * @return object
+	 */
+    public function entryByID($entry_id)
+    {   
+
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE id = $entry_id ", OBJECT);
+
+        $entries = [];
+
+        foreach($results as $key => $value){
+            
+            $entry = [];
+
+            $entry['id'] = $value->id;
+            $entry['form_id'] = $value->form_id;
+            $entry['date_created'] = $value->date_created;
+            $entry['created_by'] = $value->created_by;
+            $entry['author_info'] = [];
+
+            if(!empty($value->created_by)){
+                $user_model = new UserModel();
+                $entry['author_info'] = $user_model->userInfoByID($value->created_by);
+            }
+
+            $form_model = new FormModel();
+            $entry['form_info'] = $form_model->formByID($value->form_id);
+
+            $entries[] =  $entry;
+        }
+        
+        if (empty($entries)){
+            return [];
+        }
+        
+        return $entries[0];
+    }
+
 
     /**
 	 * Get Forms 
