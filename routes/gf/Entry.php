@@ -50,6 +50,24 @@ class Entry
     }
 
     /**
+	 * get entry by id.
+	 */
+    public function entriesByFormID()
+    {
+        register_rest_route(
+            $this->name,
+            '/gf/entries/form_id/(?P<form_id>[0-9]+)/page/(?P<page_number>[0-9]+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new EntryController, 'entriesByFormID'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
+
+    /**
 	 * get all entries from specific user.
 	 */
     public function searchEntriesUser()
@@ -74,6 +92,7 @@ class Entry
     {
         $this->entries();
         $this->entryByID();
+        $this->entriesByFormID();
         $this->searchEntriesUser();
     }
 
