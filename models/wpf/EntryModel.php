@@ -90,7 +90,7 @@ class EntryModel
         return $number_of_rows ;  
     }
 
-     /**
+    /**
 	 * Get Forms entries
      * 
      * @return array
