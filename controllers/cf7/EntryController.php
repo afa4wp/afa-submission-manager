@@ -66,7 +66,7 @@ class EntryController
 
         $count =  $this->entryModel->mumberItemsByChannel($channel);
          
-        $offset = $this->paginationHelper->getOffset($page, $count);;
+        $offset = $this->paginationHelper->getOffset($page, $count);
 
         $entries = $this->entryModel->entriesByFormID($form_id, $offset, $this->number_of_records_per_page);
 
