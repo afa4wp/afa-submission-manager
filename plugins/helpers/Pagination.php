@@ -9,7 +9,7 @@ class Pagination
 {
     private $number_of_records_per_page = 20;
 
-    private $count ;
+    private $count  = 0;
 
     /**
      * Number of item per page.
@@ -27,10 +27,12 @@ class Pagination
      */
     public function prepareDataForRestWithPagination($count, $data){
         
-        $this->count = $count;
+        if(!empty($count)){
+            $this->count = intval($count);
+        }
         
         $info = [];
-        $info["count"] = $count;
+        $info["count"] = $this->count;
         $info["pages"]  = $this->getPages();
 
         $data_results = [];
