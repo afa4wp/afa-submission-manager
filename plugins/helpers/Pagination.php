@@ -50,4 +50,18 @@ class Pagination
         return  ceil($this->count/$this->number_of_records_per_page);
     }
 
+    /**
+     * Calculate offset.
+     *
+     * @return int
+     */
+
+    public function getOffset($page , $count){
+         
+        $offset  = ($page - 1) * $count;
+        
+        return $offset;
+    
+    }
+
 }
