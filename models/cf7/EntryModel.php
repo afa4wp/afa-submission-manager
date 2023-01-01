@@ -18,43 +18,9 @@ class EntryModel
 	 */
     public function entries($offset, $number_of_records_per_page)
     {
-        global $wpdb;
         $results = \Flamingo_Inbound_Message::find( [] );
         
-        $entries = [];
-        //return $results;
-        foreach($results as $key => $value){
-
-            $form_model = new FormModel();
-            $post = $form_model->formByChannel($value->channel);
-
-            $entry = [];
-
-            $entry['id'] = $value->id();
-            $entry['form_id'] = $value->meta['post_id'];
-            $entry['date_created'] = "";
-            $entry['created_by']  = "";
-            $entry['author_info'] = [];
-            $entry['form_info'] = [];
-
-            if ( $post ) {
-                $entry['date_created'] = $post->post_date;
-            }
-            
-            $user = get_user_by_email( $value->from_email );
-            
-            if($user){
-                $user_model = new UserModel();
-                $entry['created_by'] = $user->ID;
-                $entry['author_info'] = $user_model->userInfoByID($user->ID);
-            }
-
-            if ( $post ) {
-                $entry['form_info'] = $form_model->formByID($post->ID);
-            }
-            
-            $entries[] =  $entry;
-        }
+        $entries = $this->prepareData($results);
 
         return $entries;
     }
@@ -78,41 +44,12 @@ class EntryModel
 
         $results = \Flamingo_Inbound_Message::find( [] );
         
-        $entries = [];
+        $entries = $this->prepareData($results);
 
-        foreach($results as $key => $value){
-
-            $form_model = new FormModel();
-            $post = $form_model->formByChannel($value->channel);
-
-            $entry = [];
-
-            $entry['id'] = $value->id();
-            $entry['form_id'] = $value->meta['post_id'];
-            $entry['date_created'] = "";
-            $entry['created_by']  = "";
-            $entry['author_info'] = [];
-            $entry['form_info'] = [];
-
-            if ( $post ) {
-                $entry['date_created'] = $post->post_date;
-            }
-            
-            $user = get_user_by_email( $value->from_email );
-            
-            if($user){
-                $user_model = new UserModel();
-                $entry['created_by'] = $user->ID;
-                $entry['author_info'] = $user_model->userInfoByID($user->ID);
-            }
-
-            if ( $post ) {
-                $entry['form_info'] = $form_model->formByID($post->ID);
-            }
-            
-            $entries[] =  $entry;
+        if (empty($entries)){
+            return [];
         }
-
+        
         return $entries[0];
     }
 
@@ -136,40 +73,7 @@ class EntryModel
             ] 
         );
 
-        $entries = [];
-
-        foreach($results as $key => $value){
-
-            $form_model = new FormModel();
-            $post = $form_model->formByChannel($value->channel);
-
-            $entry = [];
-
-            $entry['id'] = $value->id();
-            $entry['form_id'] = $value->meta['post_id'];
-            $entry['date_created'] = "";
-            $entry['created_by']  = "";
-            $entry['author_info'] = [];
-            $entry['form_info'] = [];
-
-            if ( $post ) {
-                $entry['date_created'] = $post->post_date;
-            }
-            
-            $user = get_user_by_email( $value->from_email );
-            
-            if($user){
-                $user_model = new UserModel();
-                $entry['created_by'] = $user->ID;
-                $entry['author_info'] = $user_model->userInfoByID($user->ID);
-            }
-
-            if ( $post ) {
-                $entry['form_info'] = $form_model->formByID($post->ID);
-            }
-            
-            $entries[] =  $entry;
-        }
+        $entries = $this->prepareData($results);
 
         return $entries;
     }
@@ -200,15 +104,47 @@ class EntryModel
     }
 
     /**
-	 * Get Forms 
+	 * Get Forms entries
      * 
-     * @return int
+     * @return array
 	 */
-    public function mumberItemsByFormID($form_id)
-    {
-       /* global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE form_id = $form_id ");
-        $number_of_rows = intval( $results[0]->number_of_rows );
-        return $number_of_rows ;  */
+    private function prepareData($results)
+    { 
+        $entries = [];
+
+        foreach($results as $key => $value){
+
+            $form_model = new FormModel();
+            $post = $form_model->formByChannel($value->channel);
+
+            $entry = [];
+
+            $entry['id'] = $value->id();
+            $entry['form_id'] = $value->meta['post_id'];
+            $entry['date_created'] = "";
+            $entry['created_by']  = "";
+            $entry['author_info'] = [];
+            $entry['form_info'] = [];
+
+            if ( $post ) {
+                $entry['date_created'] = $post->post_date;
+            }
+            
+            $user = get_user_by_email( $value->from_email );
+            
+            if($user){
+                $user_model = new UserModel();
+                $entry['created_by'] = $user->ID;
+                $entry['author_info'] = $user_model->userInfoByID($user->ID);
+            }
+
+            if ( $post ) {
+                $entry['form_info'] = $form_model->formByID($post->ID);
+            }
+            
+            $entries[] =  $entry;
+        }
+
+        return $entries;
     }
 }
