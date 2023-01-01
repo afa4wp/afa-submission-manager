@@ -25,7 +25,7 @@ class EntryController
      */
     public function entries()
     {   
-        $count = $this->entryModel->mumberItems();;
+        $count = $this->entryModel->mumberItems();
         
         $offset = 0;
 

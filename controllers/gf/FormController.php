@@ -9,7 +9,9 @@ use WP_Error;
 class FormController
 {   
     private $formModel;
+
     private $number_of_records_per_page;
+    
     public function __construct()
     {
         $this->formModel = new FormModel();
@@ -53,7 +55,7 @@ class FormController
         $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
 
         $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
-        
+
         return rest_ensure_response($forms_results);
     }
 
@@ -85,7 +87,5 @@ class FormController
         return rest_ensure_response($forms_results);
 
     }
-
-
-    
+  
 }
