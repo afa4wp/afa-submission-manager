@@ -46,20 +46,14 @@ class FormController
     {   
         $page = $request['page_number'];
 
-        $forms_results = [];
+        $count = $this->formModel->mumberItems();
 
-        $offset  = ($page - 1) * $this->formModel->mumberItems();
+        $offset = $this->paginationHelper->getOffset($page, $count);
 
-        //$forms = \GFAPI::get_forms();
         $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
 
-        $info = [];
-        $info["count"]  = $this->formModel->mumberItems();
-        $info["pages"]  = ceil($info["count"]/$this->number_of_records_per_page);
+        $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
         
-        $forms_results["info"] = $info;
-        $forms_results["results"] = $forms;
- 
         return rest_ensure_response($forms_results);
     }
 
