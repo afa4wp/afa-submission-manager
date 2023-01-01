@@ -35,7 +35,7 @@ class EntryController
         $entries_results["info"] = $info;
         $entries_results["results"] = $entries;
  
-        return rest_ensure_response($entries_results["results"]);
+        return rest_ensure_response($entries_results);
     }
 
     /**
