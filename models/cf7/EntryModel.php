@@ -120,7 +120,7 @@ class EntryModel
             $entry = [];
 
             $entry['id'] = $value->id();
-            $entry['form_id'] = $value->meta['post_id'];
+            $entry['form_id'] = $value->meta['post_id']; // form_id esta diferente do form_info->form_id corrigir
             $entry['date_created'] = "";
             $entry['created_by']  = "";
             $entry['author_info'] = [];
