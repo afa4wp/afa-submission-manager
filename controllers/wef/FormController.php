@@ -3,15 +3,18 @@
 namespace Controllers\WEF;
 
 use Models\WEF\FormModel;
+use Plugins\Helpers\Pagination;
 use WP_Error;
 
 class FormController
 {   
     private $formModel;
-    private $number_of_records_per_page = 20;
+    private $number_of_records_per_page;
     public function __construct()
     {
         $this->formModel = new FormModel();
+        $this->paginationHelper = new Pagination();
+        $this->number_of_records_per_page = $this->paginationHelper->getNumberofRecordsPerPage();
     }
 
     /**
@@ -21,18 +24,13 @@ class FormController
      */
     public function forms()
     {   
-        $forms_results = [];
+        $count = $this->formModel->mumberItems();
         
         $offset = 0;
 
         $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
 
-        $info = [];
-        $info["count"]  = $this->formModel->mumberItems();
-        $info["pages"]  = ceil($info["count"]/$this->number_of_records_per_page);
-        
-        $forms_results["info"] = $info;
-        $forms_results["results"] = $forms; 
+        $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
  
         return rest_ensure_response($forms_results); 
     }
