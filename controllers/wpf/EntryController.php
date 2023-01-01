@@ -56,20 +56,16 @@ class EntryController
     public function entriesByFormID($request)
     {   
         $form_id = $request['form_id'];
-        $page_number = $request['page_number'];
-
-        $entries_results = [];
         
-        $offset = ($page_number - 1) * $this->number_of_records_per_page;
+        $page = $request['page_number'];
+
+        $count = $this->entryModel->mumberItemsByFormID($form_id);
+        
+        $offset = $this->paginationHelper->getOffset($page, $count);
 
         $entries = $this->entryModel->entriesByFormID($form_id, $offset, $this->number_of_records_per_page);
 
-        $info = [];
-        $info["count"]  = $this->entryModel->mumberItemsByFormID($form_id);
-        $info["pages"]  = ceil($info["count"]/$this->number_of_records_per_page);
-        
-        $entries_results["info"] = $info;
-        $entries_results["results"] = $entries;
+        $entries_results = $this->paginationHelper->prepareDataForRestWithPagination($count, $entries);
  
         return rest_ensure_response($entries_results);
     }
