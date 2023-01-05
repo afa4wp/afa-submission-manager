@@ -9,7 +9,11 @@ use WP_Error;
 class FormController
 {   
     private $formModel;
+
     private $number_of_records_per_page;
+
+    private $paginationHelper;
+
     public function __construct()
     {
         $this->formModel = new FormModel();
@@ -33,6 +37,22 @@ class FormController
         $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
  
         return rest_ensure_response($forms_results); 
+    }
+
+    /**
+     * WEF forms.
+     *
+     * @param WP_REST_Request $request The request.
+     * 
+     * @return aobject $form WEF form.
+     */
+    public function formByID($request)
+    {   
+        $id = $request["id"];
+
+        $form =  $this->formModel->formByID($id);
+
+        return rest_ensure_response($form); 
     }
 
     /**
