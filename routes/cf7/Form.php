@@ -15,17 +15,35 @@ class Form
     }
 
     /**
-	 * get all forms.
+	 * get form by id.
 	 */
     public function forms()
     {
         register_rest_route(
             $this->name,
-            '/cf7/forms',
+            '/cf7/forms/',
             array(
                 array(
                     'methods' => 'GET',
                     'callback' => array(new FormController, 'forms'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
+
+    /**
+	 * get all forms.
+	 */
+    public function formByID()
+    {
+        register_rest_route(
+            $this->name,
+            '/cf7/forms/(?P<id>[0-9]+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new FormController, 'formByID'),
                     'permission_callback' => '__return_true',
                 ),
             )
@@ -55,7 +73,8 @@ class Form
 	 * Call all endpoints
 	 */
     public function initRoutes()
-    {
+    {   
+        $this->formByID();
         $this->forms();
         $this->formsPagination();
     }
