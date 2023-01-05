@@ -11,7 +11,9 @@ class FormController
     private $formModel;
 
     private $number_of_records_per_page;
-
+    
+    private $paginationHelper;
+    
     public function __construct()
     {
         $this->formModel = new FormModel();
@@ -42,6 +44,22 @@ class FormController
      *
      * @param WP_REST_Request $request The request.
      * 
+     * @return aobject $form WPF form.
+     */
+    public function formByID($request)
+    {   
+        $id = $request["id"];
+
+        $form =  $this->formModel->formByID($id);
+
+        return rest_ensure_response($form); 
+    }
+
+    /**
+     * WPF forms.
+     *
+     * @param WP_REST_Request $request The request.
+     * 
      * @return array $forms GF forms.
      */
     public function formsPagination($request)
@@ -50,11 +68,11 @@ class FormController
 
         $count = $this->formModel->mumberItems();
 
-        $offset  = $this->paginationHelper->getOffset($page, $count);
+        $offset = $this->paginationHelper->getOffset($page, $count);
 
-        $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
+        $forms = $this->formModel->forms($offset, $this->number_of_records_per_page);
 
-        $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
+        $forms_results = $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
         
         return rest_ensure_response($forms_results);
     }
