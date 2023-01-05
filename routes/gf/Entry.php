@@ -7,7 +7,8 @@ use Controllers\GF\EntryController;
 
 class Entry
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;

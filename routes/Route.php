@@ -11,7 +11,8 @@ use Routes\CF7\Route as CF7Route;
 
 class Route
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;

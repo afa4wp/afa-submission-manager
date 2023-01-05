@@ -7,7 +7,8 @@ use Controllers\WPF\EntryMetaController;
 
 class EntryMeta
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;

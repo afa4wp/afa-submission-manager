@@ -6,7 +6,8 @@ use Controllers\CF7\EntryController;
 
 class Entry
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;

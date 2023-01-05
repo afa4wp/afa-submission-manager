@@ -7,7 +7,7 @@ class PingRoute
     /**
      * The slugs in the URL before the endpoint.
      */
-    protected $name;
+    private $name;
 
     public function __construct($name)
     {

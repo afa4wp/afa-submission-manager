@@ -8,7 +8,8 @@ use Routes\WEF\EntryMeta;
 
 class Route
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;

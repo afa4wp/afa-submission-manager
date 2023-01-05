@@ -7,7 +7,8 @@ use Controllers\CF7\EntryMetaController;
 
 class EntryMeta
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;

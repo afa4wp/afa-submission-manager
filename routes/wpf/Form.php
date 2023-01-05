@@ -7,7 +7,8 @@ use Controllers\WPF\FormController;
 
 class Form
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;

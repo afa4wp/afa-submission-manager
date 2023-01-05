@@ -8,6 +8,7 @@ use Routes\CF7\EntryMeta;
 
 class Route
 {
+    private $name;
 
     public function __construct($name)
     {

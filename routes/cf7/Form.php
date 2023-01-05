@@ -7,7 +7,8 @@ use Controllers\CF7\FormController;
 
 class Form
 {
-
+    private $name;
+    
     public function __construct($name)
     {
         $this->name = $name;
