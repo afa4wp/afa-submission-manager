@@ -33,6 +33,24 @@ class Form
     }
 
     /**
+	 * get form by id.
+	 */
+    public function formByID()
+    {
+        register_rest_route(
+            $this->name,
+            '/gf/forms/(?P<id>[0-9]+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new FormController, 'formByID'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
+
+    /**
 	 * get forms by pagination.
 	 */
     public function formsPagination()
@@ -72,7 +90,8 @@ class Form
 	 * Call all endpoints
 	 */
     public function initRoutes()
-    {
+    {   
+        $this->formByID();
         $this->forms();
         $this->formsPagination();
         $this->searchForms();
