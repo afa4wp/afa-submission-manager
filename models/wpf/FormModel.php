@@ -7,10 +7,14 @@ use WP_Query;
 
 class FormModel
 {   
-    public const DATABASE_NAME = "posts";
+    public const TABLE_NAME = "posts";
 
+    private  $post_type ;
+    
     public function __construct()
-    {}
+    {
+        $this->post_type = "wpforms";
+    }
 
     /**
 	 * Get Forms 
@@ -20,10 +24,10 @@ class FormModel
     public function forms($offset, $number_of_records_per_page)
     {
         $posts =   new WP_Query(array(
-            'post_type'=>'wpforms',
-            'posts_per_page' =>$number_of_records_per_page,
-            'paged'=>$offset,
-            'post_status'            => array( 'publish' ),
+            'post_type'      => $this->post_type,
+            'posts_per_page' => $number_of_records_per_page,
+            'paged'          => $offset,
+            'post_status'    => array( 'publish' ),
         ));
 
         $forms = [];
@@ -62,7 +66,7 @@ class FormModel
     public function formByID($id)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE id = $id ",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ",OBJECT);
         
         $forms = [];
 
