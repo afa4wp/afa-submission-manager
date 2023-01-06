@@ -6,7 +6,7 @@ use Models\UserModel;
 use Models\WEF\FormModel;
 class EntryMetaModel
 {   
-    public const DATABASE_NAME = "weforms_entrymeta";
+    public const TABLE_NAME = "weforms_entrymeta";
 
     public function __construct()
     {}
@@ -19,7 +19,7 @@ class EntryMetaModel
     public function entryMetaByEntryID($entry_id)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE weforms_entry_id = $entry_id",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE weforms_entry_id = $entry_id",OBJECT);
         
         $items = [];
         $entry_data = weforms_get_entry_data( $entry_id );

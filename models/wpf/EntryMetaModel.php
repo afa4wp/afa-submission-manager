@@ -6,8 +6,6 @@ use Models\UserModel;
 use Models\WPF\FormModel;
 class EntryMetaModel
 {   
-    public const DATABASE_NAME = "wpforms_entries";
-
     public function __construct()
     {}
 

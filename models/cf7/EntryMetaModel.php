@@ -6,8 +6,6 @@ use Models\UserModel;
 use Models\CF7\FormModel;
 class EntryMetaModel
 {   
-    public const DATABASE_NAME = "gf_entry_meta";
-
     public function __construct()
     {}
 
