@@ -6,7 +6,7 @@ use Models\UserModel;
 use Models\WPF\FormModel;
 class EntryModel
 {   
-    public const DATABASE_NAME = "wpforms_entries";
+    public const TABLE_NAME = "wpforms_entries";
 
     public function __construct()
     {}
@@ -20,7 +20,7 @@ class EntryModel
     {
         global $wpdb;
         
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." ORDER BY entry_id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." ORDER BY entry_id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
         
         $entries = $this->prepareData($results);
 
@@ -36,7 +36,7 @@ class EntryModel
     {   
         global $wpdb;
         
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE entry_id = $entry_id ", OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE entry_id = $entry_id ", OBJECT);
         
         $entries = $this->prepareData($results);
 
@@ -56,7 +56,7 @@ class EntryModel
     {   
         global $wpdb;
         
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE form_id = $form_id ORDER BY entry_id DESC LIMIT ".$offset.",".$number_of_records_per_page, OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE form_id = $form_id ORDER BY entry_id DESC LIMIT ".$offset.",".$number_of_records_per_page, OBJECT);
         
         $entries = $this->prepareData($results);
 
@@ -72,7 +72,7 @@ class EntryModel
     public function mumberItems()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME."");
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME."");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;  
     }
@@ -85,7 +85,7 @@ class EntryModel
     public function mumberItemsByFormID($form_id)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE form_id = $form_id ");
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE form_id = $form_id ");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;  
     }

@@ -6,7 +6,7 @@ use Models\UserModel;
 use Models\CF7\FormModel;
 class EntryModel
 {   
-    public const DATABASE_NAME = "weforms_entries";
+    public const TABLE_NAME = "weforms_entries";
 
     public function __construct()
     {}
@@ -86,7 +86,7 @@ class EntryModel
     public function mumberItems()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME."");
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME."");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;  
     }
