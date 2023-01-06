@@ -84,7 +84,7 @@ class FormModel
     }
 
     /**
-	 * Get Forms 
+	 * Get number of Forms 
      * 
      * @return int
 	 */
@@ -94,6 +94,22 @@ class FormModel
         $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE post_type = 'wpuf_contact_form' AND post_status = 'publish' ");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;    
+    }
+
+     /**
+	 * Get Forms 
+     * 
+     * @return int
+	 */
+    public function mumberItemsByPostTitle($post_title)
+    {   
+        $posts =   new WP_Query(array(
+            'post_type'      => 'wpcf7_contact_form',
+            'post_status'    => array( 'publish' ),
+            's'              => $post_title
+        ));
+        
+        return  $posts->found_posts;
     }
 
     /**
@@ -156,5 +172,39 @@ class FormModel
         return $results;
     }
 
+    /**
+	 * Get Forms 
+     * 
+     * @return array
+	 */
+
+    public function searchForms($post_name, $offset, $number_of_records_per_page)
+    {
+       $posts =   new WP_Query(array(
+            'post_type'      => 'wpcf7_contact_form',
+            'posts_per_page' => $number_of_records_per_page,
+            'paged'          => $offset,
+            'post_status'    => array( 'publish' ),
+            's'              => $post_name
+        ));
+
+        $forms = [];
+
+        while($posts->have_posts()){
+           
+            $posts->the_post();
+
+            $form['id'] = $posts->post->ID;
+            $form['title'] = $posts->post->post_title;
+            $form['date_created'] = $posts->post->post_date; 
+            $form['registers'] = (new EntryModel())->mumberItemsByChannel($posts->post->post_name);
+
+            $form['user_created'] = $posts->post->post_author;
+            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
+            $forms[] =  $form;
+        }
+
+        return $forms;
+    }
     
 }
