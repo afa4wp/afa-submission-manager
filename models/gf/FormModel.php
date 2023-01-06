@@ -6,7 +6,7 @@ use WP_Query;
 use Plugins\Helpers\FormsShortcodeFinder;
 class FormModel
 {   
-    public const DATABASE_NAME = "gf_form";
+    public const TABLE_NAME = "gf_form";
 
     public function __construct()
     {}
@@ -19,7 +19,7 @@ class FormModel
     public function forms($offset, $number_of_records_per_page)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
         
         $forms = [];
 
@@ -50,7 +50,7 @@ class FormModel
     public function formByID($id)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE id = $id ",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ",OBJECT);
         
         $forms = [];
 
@@ -82,7 +82,7 @@ class FormModel
     public function mumberItems()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME."");
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME."");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;  
     }
@@ -95,7 +95,7 @@ class FormModel
     public function mumberItemsOnSerach($post_name)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::DATABASE_NAME."  WHERE title LIKE '%$post_name%' ");
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME."  WHERE title LIKE '%$post_name%' ");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;  
     }
@@ -135,7 +135,7 @@ class FormModel
     public function searchForms($post_name, $offset, $number_of_records_per_page)
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE title LIKE '%$post_name%' ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE title LIKE '%$post_name%' ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
         
         $forms = [];
 
