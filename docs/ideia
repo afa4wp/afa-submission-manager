@@ -1,0 +1,2 @@
+$username = sanitize_text_field( $parameters['username'] );
+$password = sanitize_text_field( $parameters['password'] );
