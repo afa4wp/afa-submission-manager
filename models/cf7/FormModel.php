@@ -96,23 +96,6 @@ class FormModel extends MainFormModel
         return "";    
     }
 
-     /**
-	 * Get Form chanel by id
-     * 
-     * @return object
-	 */
-    public function formByChannel($channel)
-    {   
-        global $wpdb;
-        $forms = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_name = '$channel' ",OBJECT);
-        
-        if(count($forms) > 0){
-            return $forms[0];
-        }
-
-        return $forms;
-    }
-
     /**
 	 * Get form pages links  
      * 
@@ -148,14 +131,8 @@ class FormModel extends MainFormModel
 
     public function searchForms($post_name, $offset, $number_of_records_per_page)
     {
-       $posts =   new WP_Query(array(
-            'post_type'      => $this->post_type,
-            'posts_per_page' => $number_of_records_per_page,
-            'paged'          => $offset,
-            'post_status'    => array( 'publish' ),
-            's'              => $post_name
-        ));
-
+        $posts =  parent::searchForms($post_name, $offset, $number_of_records_per_page);
+        
         $forms = $this->prepareData($posts);
 
         return $forms;
