@@ -7,8 +7,6 @@ use Models\CF7\EntryModel;
 use Models\FormModel as MainFormModel;
 class FormModel extends MainFormModel
 {   
-    public const TABLE_NAME = "posts";
-
     public function __construct()
     {
         parent::__construct("wpcf7_contact_form");
