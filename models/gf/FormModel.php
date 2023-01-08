@@ -4,12 +4,16 @@ namespace Models\GF;
 
 use WP_Query;
 use Plugins\Helpers\FormsShortcodeFinder;
-class FormModel
+use Models\FormModel as MainFormModel;
+
+class FormModel extends MainFormModel
 {   
     public const TABLE_NAME = "gf_form";
 
     public function __construct()
-    {}
+    {
+        parent::__construct("", SELF::TABLE_NAME);
+    }
 
     /**
 	 * Get Forms 
@@ -17,26 +21,11 @@ class FormModel
      * @return array
 	 */
     public function forms($offset, $number_of_records_per_page)
-    {
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
+    { 
+        $results = parent::forms($offset, $number_of_records_per_page);
         
-        $forms = [];
-
-        foreach($results as $key => $value){
-            
-            $form = [];
-
-            $form['id'] = $value->id;
-            $form['title'] = $value->title;
-            $form['date_created'] = $value->date_created;
-            $form['registers'] = \GFAPI::count_entries($value->id);
-            $form['user_created'] = null;
-            $form['perma_links'] = $this->pagesLinks($value->id);
-
-            $forms[] =  $form;
-        }
-
+        $forms = $this->prepareData($results);
+        
         return $forms;
     }
 
@@ -137,6 +126,32 @@ class FormModel
         global $wpdb;
         $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE title LIKE '%$post_name%' ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
         
+        $forms = [];
+
+        foreach($results as $key => $value){
+            
+            $form = [];
+
+            $form['id'] = $value->id;
+            $form['title'] = $value->title;
+            $form['date_created'] = $value->date_created;
+            $form['registers'] = \GFAPI::count_entries($value->id);
+            $form['user_created'] = null;
+            $form['perma_links'] = $this->pagesLinks($value->id);
+
+            $forms[] =  $form;
+        }
+
+        return $forms;
+    }
+
+    /**
+	 * Format Forms 
+     * 
+     * @return array
+	 */
+    private function prepareData($results)
+    { 
         $forms = [];
 
         foreach($results as $key => $value){
