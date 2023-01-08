@@ -23,7 +23,11 @@ class FormModel
      * @return object
 	 */
     public function forms($offset, $number_of_records_per_page)
-    {
+    {   
+        if($this->table_name !== "posts"){
+            return $this->formsFromCustomTable($offset, $number_of_records_per_page); 
+        } 
+
         $posts =   new WP_Query(array(
             'post_type'      => $this->post_type,
             'posts_per_page' => $number_of_records_per_page,
@@ -32,6 +36,20 @@ class FormModel
         ));
 
         return $posts;
+    }
+
+    /**
+	 * Get Forms 
+     * 
+     * @return object
+	 */
+    public function formsFromCustomTable($offset, $number_of_records_per_page)
+    {
+        global $wpdb;
+        
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.$this->table_name." ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
+
+        return  $results;
     }
 
     /**
