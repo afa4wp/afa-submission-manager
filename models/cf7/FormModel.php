@@ -37,9 +37,7 @@ class FormModel extends MainFormModel
 	 */
     public function formByID($id)
     {   
-        global $wpdb;
-       
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ",OBJECT);
+        $results = parent::formByID($id);
         
         $forms = $this->prepareDataArray($results);
 
