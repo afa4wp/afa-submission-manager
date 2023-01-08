@@ -6,13 +6,15 @@ use WP_Query;
 
 class FormModel
 {   
-    public const TABLE_NAME = "posts";
-    
     public  $post_type ;
+    
+    public  $table_name ;
 
-    public function __construct($post_type)
+    public function __construct($post_type, $table_name="posts")
     {
         $this->post_type = $post_type;
+
+        $this->table_name = $table_name;
     }
 
     /**
@@ -59,7 +61,7 @@ class FormModel
     public function formByChannel($channel)
     {   
         global $wpdb;
-        $forms = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_name = '$channel' ",OBJECT);
+        $forms = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.$this->table_name." WHERE post_name = '$channel' ",OBJECT);
         
         if(count($forms) > 0){
             return $forms[0];
@@ -76,7 +78,7 @@ class FormModel
     public function mumberItems()
     {   
         global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_type = '$this->post_type' AND post_status = 'publish' ");
+        $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.$this->table_name." WHERE post_type = '$this->post_type' AND post_status = 'publish' ");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;    
     }
@@ -106,7 +108,7 @@ class FormModel
     {   
         global $wpdb;
         
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.$this->table_name." WHERE id = $id ",OBJECT);
         
         if(count($results) > 0){
             return $results[0]->post_name;
@@ -125,7 +127,7 @@ class FormModel
     {   
         global $wpdb;
        
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ", OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.$this->table_name." WHERE id = $id ", OBJECT);
 
         return $results;
     }
