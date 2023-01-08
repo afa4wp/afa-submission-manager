@@ -18,7 +18,7 @@ class FormModel
     /**
 	 * Get Forms 
      * 
-     * @return array
+     * @return object
 	 */
     public function forms($offset, $number_of_records_per_page)
     {
