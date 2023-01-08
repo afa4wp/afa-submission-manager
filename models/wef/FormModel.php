@@ -9,8 +9,6 @@ use Models\FormModel as MainFormModel;
 
 class FormModel extends MainFormModel
 {   
-    public const TABLE_NAME = "posts";
-
     public function __construct()
     {   
         parent::__construct("wpuf_contact_form");
@@ -39,62 +37,15 @@ class FormModel extends MainFormModel
 	 */
     public function formByID($id)
     {
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ",OBJECT);
+        $results = parent::formByID($id);
         
-        $forms = [];
-
-        foreach($results as $key => $value){
-            
-            $form = [];
-
-            $form['id'] = $value->ID;
-            $form['title'] = $value->post_title;
-            $form['date_created'] = $value->post_date;
-            
-            $form['registers'] = (new EntryModel())->mumberItemsByFormID($value->ID);
-
-            $form['user_created'] = $value->post_author;
-            $form['perma_links'] = $this->pagesLinks($value->ID);
-
-            $forms[] =  $form;
-        }
+        $forms = $this->prepareDataArray($results);
 
         if(count($forms) > 0){
             return $forms[0];
         }
 
         return $forms;
-    }
-
-    /**
-	 * Get Forms 
-     * 
-     * @return int
-	 */
-    public function mumberItems()
-    {   
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_type = '$this->post_type' AND post_status = 'publish' ");
-        $number_of_rows = intval( $results[0]->number_of_rows );
-        return $number_of_rows ;    
-    }
-
-    
-    /**
-	 * Get Forms 
-     * 
-     * @return int
-	 */
-    public function mumberItemsByPostTitle($post_title)
-    {   
-        $posts =   new WP_Query(array(
-            'post_type'      => $this->post_type,
-            'post_status'    => array( 'publish' ),
-            's'              => $post_title
-        ));
-        
-        return  $posts->found_posts;
     }
 
      /**
@@ -159,6 +110,34 @@ class FormModel extends MainFormModel
 
             $form['user_created'] = $posts->post->post_author;
             $form['perma_links'] = $this->pagesLinks($posts->post->ID);
+
+            $forms[] =  $form;
+        }
+
+        return $forms;
+    }
+
+    /**
+	 * Format Forms 
+     * 
+     * @return array
+	 */
+    private function prepareDataArray($results)
+    { 
+        $forms = [];
+
+        foreach($results as $key => $value){
+            
+            $form = [];
+
+            $form['id'] = $value->ID;
+            $form['title'] = $value->post_title;
+            $form['date_created'] = $value->post_date;
+            
+            $form['registers'] = (new EntryModel())->mumberItemsByFormID($value->ID);
+
+            $form['user_created'] = $value->post_author;
+            $form['perma_links'] = $this->pagesLinks($value->ID);
 
             $forms[] =  $form;
         }
