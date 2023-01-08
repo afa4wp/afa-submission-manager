@@ -68,6 +68,23 @@ class Form
         );
     }
 
+    /**
+	 * search forms by name.
+	 */
+    public function searchForms()
+    {
+        register_rest_route(
+            $this->name,
+            '/wef/forms/search/(?P<post_name>\S+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new FormController, 'searchForms'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
 
     /**
 	 * Call all endpoints
@@ -77,6 +94,7 @@ class Form
         $this->formByID();
         $this->forms();
         $this->formsPagination();
+        $this->searchForms();
     }
 
 }
