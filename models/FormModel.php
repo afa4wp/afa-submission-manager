@@ -80,5 +80,22 @@ class FormModel
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;    
     }
-    
+
+    /**
+	 * Get Forms 
+     * 
+     * @return int
+	 */
+    public function mumberItemsByPostTitle($post_title)
+    {   
+        $posts =   new WP_Query(array(
+            'post_type'      => $this->post_type,
+            'post_status'    => array( 'publish' ),
+            's'              => $post_title
+        ));
+        
+        return  $posts->found_posts;
+    }
+
+
 }
