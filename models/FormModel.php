@@ -68,4 +68,17 @@ class FormModel
         return $forms;
     }
     
+    /**
+	 * Get number of Forms 
+     * 
+     * @return int
+	 */
+    public function mumberItems()
+    {   
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_type = '$this->post_type' AND post_status = 'publish' ");
+        $number_of_rows = intval( $results[0]->number_of_rows );
+        return $number_of_rows ;    
+    }
+    
 }

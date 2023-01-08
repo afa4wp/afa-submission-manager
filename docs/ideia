@@ -1,2 +1,8 @@
 $username = sanitize_text_field( $parameters['username'] );
 $password = sanitize_text_field( $parameters['password'] );
+
+https://www.edureka.co/community/1931/what-is-the-difference-between-implements-and-extends
+
+=================== herança php ======================
+https://www.phptutorial.net/php-oop/php-inheritance/
+https://www.phptutorial.net/php-oop/php-call-parent-constructor/
