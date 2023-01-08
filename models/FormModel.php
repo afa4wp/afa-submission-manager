@@ -38,14 +38,14 @@ class FormModel
      * @return array
 	 */
 
-     public function searchForms($post_name, $offset, $number_of_records_per_page)
+     public function searchForms($post_title, $offset, $number_of_records_per_page)
      {
         $posts =   new WP_Query(array(
              'post_type'      => $this->post_type,
              'posts_per_page' => $number_of_records_per_page,
              'paged'          => $offset,
              'post_status'    => array( 'publish' ),
-             's'              => $post_name
+             's'              => $post_title
          ));
  
          return $posts;
