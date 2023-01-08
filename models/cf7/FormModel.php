@@ -5,6 +5,7 @@ namespace Models\CF7;
 use Plugins\Helpers\FormsShortcodeFinder;
 use Models\CF7\EntryModel;
 use Models\FormModel as MainFormModel;
+
 class FormModel extends MainFormModel
 {   
     public function __construct()
