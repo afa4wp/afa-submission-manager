@@ -108,6 +108,22 @@ class FormModel
     }
 
     /**
+	 * Get Forms 
+     * 
+     * @return int
+	 */
+    public function mumberItemsByPostTitle($post_title)
+    {   
+        $posts =   new WP_Query(array(
+            'post_type'      => $this->post_type,
+            'post_status'    => array( 'publish' ),
+            's'              => $post_title
+        ));
+        
+        return  $posts->found_posts;
+    }
+
+    /**
 	 * Get form pages links  
      * 
      * @param int     $formID The form ID.
@@ -132,5 +148,46 @@ class FormModel
         }
 
         return $results;
+    }
+
+    /**
+	 * Get Forms 
+     * 
+     * @return array
+	 */
+    public function searchForms($post_name, $offset, $number_of_records_per_page)
+    {
+        $posts =   new WP_Query(array(
+            'post_type'      => $this->post_type,
+            'posts_per_page' => $number_of_records_per_page,
+            'paged'          => $offset,
+            'post_status'    => array( 'publish' ),
+            's'              => $post_name
+        ));
+
+        $forms = [];
+
+        while($posts->have_posts()){
+           
+            $posts->the_post();
+
+            $form['id'] = $posts->post->ID;
+            $form['title'] = $posts->post->post_title;
+            $form['date_created'] = $posts->post->post_date;
+            
+            $form['registers'] = wpforms()->entry->get_entries(
+                array(
+                    'form_id' => $posts->post->ID,
+                ),
+                true
+            );
+
+            $form['user_created'] = $posts->post->post_author;
+            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
+
+            $forms[] =  $form;
+        }
+
+        return $forms;
     }
 }
