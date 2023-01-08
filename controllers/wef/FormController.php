@@ -77,5 +77,27 @@ class FormController
         return rest_ensure_response($forms_results);
     }
 
+    /**
+     * WEF forms.
+     *
+     * @param WP_REST_Request $request The request.
+     * 
+     * @return array $forms WEF forms.
+     */
+    public function searchForms($request)
+    {   
+        $post_name = urldecode($request['post_name']);
+
+        $count = $this->formModel->mumberItemsByPostTitle($post_name);
+
+        $offset = $this->paginationHelper->getOffset(1, $count);
+        
+        $forms =  $this->formModel->searchForms($post_name, $offset, $this->number_of_records_per_page);
+
+        $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
+
+        return rest_ensure_response($forms_results); 
+
+    }
     
 }
