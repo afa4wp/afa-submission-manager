@@ -50,5 +50,22 @@ class FormModel
  
          return $posts;
      }
+
+     /**
+	 * Get Form chanel by id
+     * 
+     * @return object
+	 */
+    public function formByChannel($channel)
+    {   
+        global $wpdb;
+        $forms = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_name = '$channel' ",OBJECT);
+        
+        if(count($forms) > 0){
+            return $forms[0];
+        }
+
+        return $forms;
+    }
     
 }
