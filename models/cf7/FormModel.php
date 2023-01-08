@@ -3,7 +3,6 @@
 namespace Models\CF7;
 
 use Plugins\Helpers\FormsShortcodeFinder;
-use WP_Query;
 use Models\CF7\EntryModel;
 use Models\FormModel as MainFormModel;
 class FormModel extends MainFormModel
@@ -49,38 +48,6 @@ class FormModel extends MainFormModel
         }
 
         return $forms;
-    }
-
-     /**
-	 * Get Forms 
-     * 
-     * @return int
-	 */
-    public function mumberItemsByPostTitle($post_title)
-    {   
-        $posts =   new WP_Query(array(
-            'post_type'      => $this->post_type,
-            'post_status'    => array( 'publish' ),
-            's'              => $post_title
-        ));
-        
-        return  $posts->found_posts;
-    }
-
-    /**
-	 * Get Form chanel by id
-     * 
-     * @return string
-	 */
-    public function formChanelByID($id)
-    {   
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ",OBJECT);
-        
-        if(count($results) > 0){
-            return $results[0]->post_name;
-        }
-        return "";    
     }
 
     /**
