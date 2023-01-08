@@ -5,15 +5,15 @@ namespace Models\CF7;
 use Plugins\Helpers\FormsShortcodeFinder;
 use WP_Query;
 use Models\CF7\EntryModel;
-class FormModel
+use Models\FormModel as MainFormModel;
+class FormModel extends MainFormModel
 {   
     public const TABLE_NAME = "posts";
-    
-    private  $post_type ;
 
     public function __construct()
     {
-        $this->post_type = "wpcf7_contact_form";
+        //$this->post_type = "wpcf7_contact_form";
+        parent::__construct("wpcf7_contact_form");
     }
 
     /**
@@ -23,28 +23,9 @@ class FormModel
 	 */
     public function forms($offset, $number_of_records_per_page)
     {
-        $posts =   new WP_Query(array(
-            'post_type'      => $this->post_type,
-            'posts_per_page' => $number_of_records_per_page,
-            'paged'          => $offset,
-            'post_status'    => array( 'publish' ),
-        ));
+        $posts = parent::forms($offset, $number_of_records_per_page);
 
-        $forms = [];
-
-        while($posts->have_posts()){
-           
-            $posts->the_post();
-
-            $form['id'] = $posts->post->ID;
-            $form['title'] = $posts->post->post_title;
-            $form['date_created'] = $posts->post->post_date; 
-            $form['registers'] = (new EntryModel())->mumberItemsByChannel($posts->post->post_name);
-
-            $form['user_created'] = $posts->post->post_author;
-            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
-            $forms[] =  $form;
-        }
+        $forms = $this->prepareData($posts);
 
         return $forms;
     }
@@ -211,4 +192,29 @@ class FormModel
         return $forms;
     }
     
+    /**
+	 * Format Forms 
+     * 
+     * @return array
+	 */
+    private function prepareData($posts)
+    { 
+        $forms = [];
+
+        while($posts->have_posts()){
+           
+            $posts->the_post();
+
+            $form['id'] = $posts->post->ID;
+            $form['title'] = $posts->post->post_title;
+            $form['date_created'] = $posts->post->post_date; 
+            $form['registers'] = (new EntryModel())->mumberItemsByChannel($posts->post->post_name);
+
+            $form['user_created'] = $posts->post->post_author;
+            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
+            $forms[] =  $form;
+        }
+
+        return $forms;
+    }
 }
