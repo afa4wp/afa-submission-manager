@@ -8,8 +8,6 @@ use Models\FormModel as MainFormModel;
 
 class FormModel extends MainFormModel
 {   
-    public const TABLE_NAME = "posts";
-    
     public function __construct()
     {
         parent::__construct("wpforms");
@@ -38,31 +36,10 @@ class FormModel extends MainFormModel
 	 */
     public function formByID($id)
     {
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $id ",OBJECT);
+        $results = parent::formByID($id);
         
-        $forms = [];
-
-        foreach($results as $key => $value){
-            
-            $form = [];
-
-            $form['id'] = $value->ID;
-            $form['title'] = $value->post_title;
-            $form['date_created'] = $value->post_date;
-            
-            $form['registers'] = wpforms()->entry->get_entries(
-                array(
-                    'form_id' => $value->ID,
-                ),
-                true
-            );
-
-            $form['user_created'] = $value->post_author;
-            $form['perma_links'] = $this->pagesLinks($value->ID);
-            $forms[] =  $form;
-        }
-
+        $forms = $this->prepareDataArray($results);
+        
         if(count($forms) > 0){
             return $forms[0];
         }
@@ -78,22 +55,6 @@ class FormModel extends MainFormModel
     public function mumberItems()
     {
         return wp_count_posts('wpforms')->publish ;  
-    }
-
-    /**
-	 * Get Forms 
-     * 
-     * @return int
-	 */
-    public function mumberItemsByPostTitle($post_title)
-    {   
-        $posts =   new WP_Query(array(
-            'post_type'      => $this->post_type,
-            'post_status'    => array( 'publish' ),
-            's'              => $post_title
-        ));
-        
-        return  $posts->found_posts;
     }
 
     /**
@@ -164,6 +125,38 @@ class FormModel extends MainFormModel
             $form['user_created'] = $posts->post->post_author;
             $form['perma_links'] = $this->pagesLinks($posts->post->ID);
 
+            $forms[] =  $form;
+        }
+
+        return $forms;
+    }
+
+    /**
+	 * Format Forms 
+     * 
+     * @return array
+	 */
+    private function prepareDataArray($results)
+    { 
+        $forms = [];
+
+        foreach($results as $key => $value){
+            
+            $form = [];
+
+            $form['id'] = $value->ID;
+            $form['title'] = $value->post_title;
+            $form['date_created'] = $value->post_date;
+            
+            $form['registers'] = wpforms()->entry->get_entries(
+                array(
+                    'form_id' => $value->ID,
+                ),
+                true
+            );
+
+            $form['user_created'] = $value->post_author;
+            $form['perma_links'] = $this->pagesLinks($value->ID);
             $forms[] =  $form;
         }
 
