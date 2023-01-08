@@ -95,9 +95,31 @@ class FormModel
 	 */
     public function mumberItems()
     {   
+        if($this->table_name !== "posts"){
+            return $this->mumberItemsFromCustomTable(); 
+        } 
+
         global $wpdb;
+
         $results = $wpdb->get_results("SELECT count(*) as number_of_rows FROM ".$wpdb->prefix.$this->table_name." WHERE post_type = '$this->post_type' AND post_status = 'publish' ");
+        
         $number_of_rows = intval( $results[0]->number_of_rows );
+        
+        return $number_of_rows ;    
+    }
+    /**
+	 * Get number of Forms 
+     * 
+     * @return int
+	 */
+    public function mumberItemsFromCustomTable()
+    {   
+        global $wpdb;
+        
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.$this->table_name."");
+        
+        $number_of_rows = intval( $results[0]->number_of_rows );
+        
         return $number_of_rows ;    
     }
 
