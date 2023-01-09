@@ -4,23 +4,26 @@ namespace Models\GF;
 
 use Models\UserModel;
 use Models\GF\FormModel;
-class EntryModel
+use Models\EntryModel as MainEntryModel;
+
+class EntryModel extends MainEntryModel
 {   
     public const TABLE_NAME = "gf_entry";
 
     public function __construct()
-    {}
+    {
+        parent::__construct(SELF::TABLE_NAME);
+    }
 
     /**
 	 * Get Forms entries
      * 
      * @return array
 	 */
-    public function entries($offset, $number_of_records_per_page)
+    public function entries($offset, $number_of_records_per_page, $order_by = 'id')
     {
-        global $wpdb;
         
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
+        $results = parent::entries($offset, $number_of_records_per_page, $order_by);
         
         $entries = $this->prepareData($results);
 
@@ -32,12 +35,9 @@ class EntryModel
      * 
      * @return object
 	 */
-    public function entryByID($entry_id)
-    {   
-
-        global $wpdb;
-        
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE id = $entry_id ", OBJECT);
+    public function entryByID($entry_id, $id = 'id')
+    {    
+        $results =  parent::entryByID($entry_id, $id = 'id');
 
         $entries = $this->prepareData($results);
         
@@ -62,33 +62,6 @@ class EntryModel
         $entries = $this->prepareData($results);
         
         return $entries;
-    }
-
-
-    /**
-	 * Get number of Forms 
-     * 
-     * @return int
-	 */
-    public function mumberItems()
-    {
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME."");
-        $number_of_rows = intval( $results[0]->number_of_rows );
-        return $number_of_rows ;  
-    }
-
-    /**
-	 * Get number of Forms by form_id 
-     * 
-     * @return int
-	 */
-    public function mumberItemsByFormID($form_id)
-    {
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE form_id = ".$form_id);
-        $number_of_rows = intval( $results[0]->number_of_rows );
-        return $number_of_rows ;  
     }
 
     /**
