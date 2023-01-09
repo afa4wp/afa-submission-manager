@@ -4,23 +4,25 @@ namespace Models\WPF;
 
 use Models\UserModel;
 use Models\WPF\FormModel;
-class EntryModel
+use Models\EntryModel as MainEntryModel;
+
+class EntryModel extends MainEntryModel
 {   
     public const TABLE_NAME = "wpforms_entries";
 
     public function __construct()
-    {}
+    {
+        parent::__construct(SELF::TABLE_NAME);
+    }
 
     /**
 	 * Get Forms entries
      * 
      * @return array
 	 */
-    public function entries($offset, $number_of_records_per_page)
+    public function entries($offset, $number_of_records_per_page, $order_by = 'entry_id')
     {
-        global $wpdb;
-        
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." ORDER BY entry_id DESC LIMIT ".$offset.",".$number_of_records_per_page,OBJECT);
+        $results = parent::entries($offset, $number_of_records_per_page, $order_by);
         
         $entries = $this->prepareData($results);
 
@@ -32,11 +34,9 @@ class EntryModel
      * 
      * @return array
 	 */
-    public function entryByID($entry_id)
-    {   
-        global $wpdb;
-        
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE entry_id = $entry_id ", OBJECT);
+    public function entryByID($entry_id, $id = 'entry_id')
+    {  
+        $results = parent::entryByID($entry_id, $id);
         
         $entries = $this->prepareData($results);
 
@@ -61,20 +61,6 @@ class EntryModel
         $entries = $this->prepareData($results);
 
         return $entries;
-    }
-
-
-    /**
-	 * Get Forms 
-     * 
-     * @return int
-	 */
-    public function mumberItems()
-    {
-        global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME."");
-        $number_of_rows = intval( $results[0]->number_of_rows );
-        return $number_of_rows ;  
     }
 
     /**

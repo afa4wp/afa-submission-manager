@@ -37,7 +37,7 @@ class EntryModel extends MainEntryModel
 	 */
     public function entryByID($entry_id, $id = 'id')
     {    
-        $results =  parent::entryByID($entry_id, $id = 'id');
+        $results =  parent::entryByID($entry_id, $id);
 
         $entries = $this->prepareData($results);
         
