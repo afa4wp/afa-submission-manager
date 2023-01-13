@@ -32,6 +32,23 @@ class EntryMeta
         );
     }
 
+    /**
+	 * get entry_meta by search.
+	 */
+    public function searchEntryMetaAnswer()
+    {
+        register_rest_route(
+            $this->name,
+            '/gf/entrymeta/search/(?P<answer>\S+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new EntryMetaController, 'searchEntryMetaAnswer'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
 
     /**
 	 * Call all endpoints
@@ -39,6 +56,7 @@ class EntryMeta
     public function initRoutes()
     {
         $this->entrymetaByEntryID();
+        $this->searchEntryMetaAnswer();
     }
 
 }
