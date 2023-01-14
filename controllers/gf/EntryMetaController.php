@@ -8,7 +8,9 @@ use WP_Error;
 class EntryMetaController
 {   
     private $entryMetaModel;
+
     private $number_of_records_per_page = 20;
+
     public function __construct()
     {
         $this->entryMetaModel= new EntryMetaModel();
@@ -31,5 +33,19 @@ class EntryMetaController
         return rest_ensure_response($items);
     }
 
-    
+    /**
+     * GF forms entry.
+     *
+     * @param WP_REST_Request $request The request.
+     * 
+     * @return array $forms GF forms.
+     */
+    public function searchEntryMetaAnswer($request)
+    {   
+        $answer = urldecode($request['answer']);
+
+        $items = $this->entryMetaModel->searchEntryMetaAnswer($answer);
+      
+        return rest_ensure_response($items);
+    }
 }
