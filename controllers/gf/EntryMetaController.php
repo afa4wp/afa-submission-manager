@@ -44,7 +44,7 @@ class EntryMetaController
     {   
         $answer = urldecode($request['answer']);
 
-        $items = $this->entryMetaModel->searchEntryMetaAnswer($answer);
+        $items = $this->entryMetaModel->searchEntryMetaAnswer($answer, 0, $this->number_of_records_per_page);
       
         return rest_ensure_response($items);
     }
