@@ -10,11 +10,11 @@ require __DIR__ . '/vendor/autoload.php';
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            claudionhangapc
- * Author URI:        https://author.example.com/
+ * Author URI:        https://claudionhangapc.com/
  * License:           GPL v2 or later
  * License URI:       https://claudionhangapc/gpl-2.0.html
- * Update URI:        https://oimark.com.br/
- * Text Domain:       https://oimark.com.br/
+ * Update URI:        https://claudionhangapc.com
+ * Text Domain:       https://claudionhangapc.com
  */
 
 define('WP_FORMS_REST_API_PLUGIN', __FILE__);

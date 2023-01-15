@@ -1,5 +1,5 @@
-# wp-general-rest-api
-Este é um plugin desenvolvido com objectivo de ajudar as pessoas a desenvolverem com mais facilidades novas APIS, atraves da interface do wordpress.
+# wp-forms-api
+Este é um plugin para consulta de dados de diversos formulário presentes no ecossistema do wordpress.
 # Pré-requisito
 - [x] Instancia do WordPress - você pode saber mais <a href="https://wordpress.org/support/article/how-to-install-wordpress/">aqui</a>
 - [x] Composer - você pode saber mais <a href="https://getcomposer.org/doc/00-intro.md">aqui</a>
