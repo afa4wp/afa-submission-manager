@@ -54,7 +54,7 @@ class EntryMetaModel
     {   
         global $wpdb;
 
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE meta_value LIKE '%$answer%' ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page,);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE meta_value LIKE '%$answer%' ORDER BY id DESC LIMIT ".$offset.",".$number_of_records_per_page);
         
         $items = [];
 
