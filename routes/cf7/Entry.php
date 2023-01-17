@@ -70,7 +70,7 @@ class Entry
     /**
 	 * get entry by user info.
 	 */
-    public function searchEntryByUser()
+    public function searchEntriesByUser()
     {
         register_rest_route(
             $this->name,
@@ -78,7 +78,7 @@ class Entry
             array(
                 array(
                     'methods' => 'GET',
-                    'callback' => array(new EntryController, 'searchEntryByUser'),
+                    'callback' => array(new EntryController, 'searchEntriesByUser'),
                     'permission_callback' => '__return_true',
                 ),
             )
@@ -93,6 +93,7 @@ class Entry
         $this->entries();
         $this->entryByID();
         $this->entriesByFormID();
+        $this->searchEntriesByUser();
     }
 
 }
