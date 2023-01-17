@@ -35,9 +35,9 @@ class EntryModel
      * @return object
 	 */
     public function entryByID($entry_id)
-    {
-        global $wpdb;
+    {   
         $post = new \Flamingo_Inbound_Message( $entry_id );
+        
         $results = [];
 
         if (empty($post->channel)){
@@ -45,8 +45,6 @@ class EntryModel
         }
 
         $results[] = $post;
-
-        $results = \Flamingo_Inbound_Message::find( [] );
         
         $entries = $this->prepareData($results);
 
