@@ -6,10 +6,14 @@ use Models\UserModel;
 use Models\CF7\FormModel;
 class EntryModel
 {   
-    public const TABLE_NAME = "weforms_entries";
+    public const TABLE_NAME = "posts";
+
+    private $post_type_entry ;
 
     public function __construct()
-    {}
+    {
+        $this->post_type_entry = "flamingo_inbound";
+    }
 
     /**
 	 * Get Forms entries
@@ -79,6 +83,27 @@ class EntryModel
     }
 
     /**
+	 * Get Forms entries by user info
+     * 
+     * @return array
+	 */
+    public function searchEntriesByUser($user_info, $offset, $number_of_records_per_page)
+    {   
+        global $wpdb;
+     
+        $results = $wpdb->get_results("SELECT fla.ID, fla.post_type FROM ".$wpdb->prefix.SELF::TABLE_NAME." fla INNER JOIN ".$wpdb->prefix."users wpu ON  
+        fla.post_author = wpu.id WHERE fla.post_type ='$this->post_type_entry' AND ( wpu.user_login LIKE '%$user_info%' OR wpu.user_email LIKE '%$user_info%' ) ORDER BY fla.id DESC LIMIT ".$offset.",".$number_of_records_per_page, OBJECT); 
+        
+        $entries = [];
+
+        foreach($results as $key => $value){
+            $entries[] = $this->entryByID($value->ID);
+        }
+
+        return $entries;
+    }
+
+    /**
 	 * Get Forms 
      * 
      * @return int
@@ -86,7 +111,7 @@ class EntryModel
     public function mumberItems()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME."");
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_type='$this->post_type_entry' ");
         $number_of_rows = intval( $results[0]->number_of_rows );
         return $number_of_rows ;  
     }
@@ -116,6 +141,7 @@ class EntryModel
 
             $form_model = new FormModel();
             $post = $form_model->formByChannel($value->channel);
+            $flamingo_post = get_post($value->id());
 
             $entry = [];
 
@@ -123,14 +149,14 @@ class EntryModel
             $entry['form_id'] = $value->meta['post_id']; // form_id esta diferente do form_info->form_id corrigir
             $entry['date_created'] = "";
             $entry['created_by']  = "";
-            $entry['author_info'] = [];
-            $entry['form_info'] = [];
+            $entry['author_info'] = (object)[];
+            $entry['form_info'] = (object)[];
 
             if ( $post ) {
-                $entry['date_created'] = $post->post_date;
+                $entry['date_created'] = $flamingo_post->post_date;
             }
             
-            $user = get_user_by_email( $value->from_email );
+            $user = get_user_by('ID', $flamingo_post->post_author);
             
             if($user){
                 $user_model = new UserModel();
@@ -147,4 +173,5 @@ class EntryModel
 
         return $entries;
     }
+
 }
