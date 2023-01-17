@@ -20,6 +20,9 @@ node_modules/
 # ignore vendor dependency directories
 vendor/
 
+# ignore vendor dependency directories
+docs/
+
 # ignore log files and databases
 *.log
 *.sql
