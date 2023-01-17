@@ -68,6 +68,24 @@ class Entry
     }
 
     /**
+	 * get entry by user info.
+	 */
+    public function searchEntryByUser()
+    {
+        register_rest_route(
+            $this->name,
+            '/cf7/entries/user/search/(?P<user_info>\S+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new EntryController, 'searchEntryByUser'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
+
+    /**
 	 * Call all endpoints
 	 */
     public function initRoutes()
