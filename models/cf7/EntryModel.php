@@ -109,8 +109,23 @@ class EntryModel
     public function mumberItems()
     {
         global $wpdb;
+        
         $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." WHERE post_type='$this->post_type_entry' ");
+        
         $number_of_rows = intval( $results[0]->number_of_rows );
+        
+        return $number_of_rows ;  
+    }
+
+    public function mumberItemsByUserInfo($user_info)
+    {
+        global $wpdb;
+     
+        $results = $wpdb->get_results("SELECT count(*)  as number_of_rows FROM ".$wpdb->prefix.SELF::TABLE_NAME." fla INNER JOIN ".$wpdb->prefix."users wpu ON  
+        fla.post_author = wpu.id WHERE fla.post_type ='$this->post_type_entry' AND ( wpu.user_login LIKE '%$user_info%' OR wpu.user_email LIKE '%$user_info%' ) ", OBJECT); 
+        
+        $number_of_rows = intval( $results[0]->number_of_rows );
+        
         return $number_of_rows ;  
     }
 
