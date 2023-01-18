@@ -70,5 +70,23 @@ class EntryController
         return rest_ensure_response($entries_results);
     }
 
-    
+    /**
+     * WEF forms entries by user info.
+     *
+     * @return array $forms WEF forms.
+     */
+    public function searchEntriesByUser($request)
+    {   
+        $user_info = $request['user_info'];
+        
+        $offset = 0;
+
+        $entries =  $this->entryModel->searchEntriesByUser($user_info, $offset, $this->number_of_records_per_page);
+
+        $count = $this->entryModel->mumberItemsByUserInfo($user_info);
+
+        $entries_results = $this->paginationHelper->prepareDataForRestWithPagination($count, $entries);
+ 
+        return rest_ensure_response($entries_results);
+    }
 }
