@@ -66,7 +66,24 @@ class Entry
             )
         );
     }
-
+    
+     /**
+	 * get all entries from specific user.
+	 */
+    public function searchEntriesByUser()
+    {
+        register_rest_route(
+            $this->name,
+            '/wef/entries/user/search/(?P<user_info>\S+)',
+            array(
+                array(
+                    'methods' => 'GET',
+                    'callback' => array(new EntryController, 'searchEntriesByUser'),
+                    'permission_callback' => '__return_true',
+                ),
+            )
+        );
+    }
 
     /**
 	 * Call all endpoints
@@ -76,6 +93,7 @@ class Entry
         $this->entries();
         $this->entryByID();
         $this->entriesByFormID();
+        $this->searchEntriesByUser();
     }
 
 }
