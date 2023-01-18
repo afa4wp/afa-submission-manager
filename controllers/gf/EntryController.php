@@ -11,11 +11,15 @@ class EntryController
     private $entryModel;
 
     private $number_of_records_per_page;
+    
+    private $paginationHelper;
 
     public function __construct()
     {
         $this->entryModel = new EntryModel();
+        
         $this->paginationHelper = new Pagination();
+        
         $this->number_of_records_per_page = $this->paginationHelper->getNumberofRecordsPerPage();
     }
 
@@ -45,7 +49,9 @@ class EntryController
     public function entryByID($request)
     {   
         $entry_id = $request['entry_id'];
+        
         $entry =  $this->entryModel->entryByID($entry_id);
+        
         return rest_ensure_response($entry);
 
     }
@@ -69,6 +75,26 @@ class EntryController
 
         $entries_results = $this->paginationHelper->prepareDataForRestWithPagination($count, $entries);
 
+        return rest_ensure_response($entries_results);
+    }
+
+    /**
+     * GF forms entries by user info.
+     *
+     * @return array $forms GF forms.
+     */
+    public function searchEntriesByUser($request)
+    {   
+        $user_info = $request['user_info'];
+        
+        $offset = 0;
+
+        $entries =  $this->entryModel->searchEntriesByUser($user_info, $offset, $this->number_of_records_per_page);
+
+        $count = $this->entryModel->mumberItemsByUserInfo($user_info);
+
+        $entries_results = $this->paginationHelper->prepareDataForRestWithPagination($count, $entries);
+ 
         return rest_ensure_response($entries_results);
     }
 
