@@ -36,9 +36,9 @@ class EntryController
     }
 
     /**
-     * GF forms entry.
+     * WPF forms entry.
      *
-     * @return array $forms GF forms.
+     * @return array $forms WPF forms.
      */
     public function entryByID($request)
     {   
@@ -49,9 +49,9 @@ class EntryController
     }
 
     /**
-     * WEF forms entries by id.
+     * WPF forms entries by id.
      *
-     * @return array $forms CF7 forms.
+     * @return array $forms WPF forms.
      */
     public function entriesByFormID($request)
     {   
@@ -70,6 +70,25 @@ class EntryController
         return rest_ensure_response($entries_results);
     }
 
+    /**
+     * WPF forms entries by user info.
+     *
+     * @return array $forms WPF forms.
+     */
+    public function searchEntriesByUser($request)
+    {   
+        $user_info = $request['user_info'];
+        
+        $offset = 0;
+
+        $entries =  $this->entryModel->searchEntriesByUser($user_info, $offset, $this->number_of_records_per_page);
+
+        $count = $this->entryModel->mumberItemsByUserInfo($user_info);
+
+        $entries_results = $this->paginationHelper->prepareDataForRestWithPagination($count, $entries);
+ 
+        return rest_ensure_response($entries_results);
+    }
     
 
     
