@@ -66,7 +66,7 @@ class FormModel extends MainFormModel
 	 */
     public function pagesLinks($formID)
     {
-        $pages_with_form = (new FormsShortcodeFinder( $formID ))->wefFind();
+        $pages_with_form = (new FormsShortcodeFinder( $formID ))->wpfFind();
         
         if(empty($pages_with_form)){
             return $pages_with_form;
@@ -78,7 +78,7 @@ class FormModel extends MainFormModel
             $result = [];
             $result['page_name'] = $value;
             $result['page_link'] = get_page_link($key);
-            $results = $result;
+            $results[] = $result;
         }
 
         return $results;

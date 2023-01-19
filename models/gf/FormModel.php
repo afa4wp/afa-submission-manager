@@ -86,7 +86,7 @@ class FormModel extends MainFormModel
             $result = [];
             $result['page_name'] = $value;
             $result['page_link'] = get_page_link($key);
-            $results = $result;
+            $results[] = $result;
         }
 
         return $results;
