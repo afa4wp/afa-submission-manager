@@ -19,9 +19,9 @@ require __DIR__ . '/vendor/autoload.php';
 
 define('WP_FORMS_REST_API_PLUGIN', __FILE__);
 
-use Plugins\JWT\JWTPlugin;
-use Routes\Route;
-use Database\DatabaseInstaller;
+use Includes\Plugins\JWT\JWTPlugin;
+use Includes\Routes\Route;
+use Includes\Database\DatabaseInstaller;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
