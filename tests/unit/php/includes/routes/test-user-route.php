@@ -14,8 +14,7 @@ class UserRouteTest extends WP_UnitTestCase {
     /**
 	 * A single example test.
 	 */
-    public function teste_init_routes() {
-        // Replace this with some actual testing code.
-        $this->assertTrue( true );
+    public function test_init_routes() {
+    
     }
 }
