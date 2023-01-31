@@ -22,7 +22,8 @@
             "Includes\\Plugins\\": "includes/plugins/",
             "Includes\\Plugins\\JWT\\": "includes/plugins/JWT/",
             "Includes\\Plugins\\Helpers\\": "includes/plugins/helpers/",
-            "Includes\\Database\\": "includes/database/"
+            "Includes\\Database\\": "includes/database/",
+            "Includes\\Admin\\": "includes/admin/"
         }
     },
     "scripts": {
