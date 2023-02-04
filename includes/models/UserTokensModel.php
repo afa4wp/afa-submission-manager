@@ -4,10 +4,13 @@ namespace Includes\Models;
 
 class UserTokensModel
 {
-    public const DATABASE_NAME = "frapi_user_tokens";
+    
+    private $dataBaseName;
 
     public function __construct()
-    {}
+    {
+        $this->dataBaseName = $_ENV['DATA_BASE_PREFIX']."user_tokens";
+    }
 
     /**
 	 * Verify if Refresh token exist
@@ -21,7 +24,7 @@ class UserTokensModel
     {
         global $wpdb; 
         
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.SELF::DATABASE_NAME." WHERE user_id = $user_id AND refresh_token = '$refresh_token' ",OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.$this->dataBaseName." WHERE user_id = $user_id AND refresh_token = '$refresh_token' ",OBJECT);
 
         if(count($results) > 0){
             return true;
@@ -50,7 +53,7 @@ class UserTokensModel
         );
         
         $results = $wpdb->insert(
-            $wpdb->prefix.SELF::DATABASE_NAME,
+            $wpdb->prefix. $this->dataBaseName,
             $item
         );
 
@@ -71,7 +74,7 @@ class UserTokensModel
         );
         
         $results = $wpdb->delete(
-            $wpdb->prefix.SELF::DATABASE_NAME,
+            $wpdb->prefix.$this->dataBaseName,
             $item 
         );
 
