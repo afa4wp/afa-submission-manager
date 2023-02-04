@@ -211,6 +211,19 @@ class JWTPlugin
         
     }
 
-    
+    /**
+    * Get a JWT key.
+    * 
+    * @return string $key The token key.
+    */
+    private function getRefressTokenSecretKey(){
+        
+        if (!defined('WP_AFA_REFRESH_TOKEN_SECRET_KEY') && empty(WP_AFA_REFRESH_TOKEN_SECRET_KEY)) {
+            return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
+        }
+
+        return get_option('WP_AFA_REFRESH_TOKEN_SECRET_KEY');
+        
+    }
 
 }
