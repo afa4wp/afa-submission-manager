@@ -3,8 +3,8 @@
 namespace Includes\Plugins\JWT;
 
 use Exception;
-use Includes\Firebase\JWT\JWT;
-use Includes\Firebase\JWT\Key;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Includes\Plugins\PublicRoute;
 use WP_Error;
 
@@ -38,8 +38,8 @@ class JWTPlugin
 
         $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
 
-        $key = $_ENV['ACCESS_TOKEN_KEY'];
-
+        $key = $this->getAccessTokenSecretKey();
+    
         $payload = array(
             'iss' => get_bloginfo('url'),
             'iat' => $issuedAt,
@@ -70,7 +70,7 @@ class JWTPlugin
 
         $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
 
-        $key = $_ENV['REFRESH_TOKEN_KEY'];
+        $key = $this->getRefressTokenSecretKey();
 
         $payload = array(
             'iss' => get_bloginfo('url'),
@@ -101,7 +101,7 @@ class JWTPlugin
 
         if (!empty($authorization)) {
 
-            $key = $_ENV['ACCESS_TOKEN_KEY'];
+            $key = $this->getAccessTokenSecretKey();
             $splitAuthorization = explode(' ', $authorization);
 
             if (count($splitAuthorization) == 2) {
@@ -147,7 +147,7 @@ class JWTPlugin
     {
         try {
             //$decoded = JWT::decode($jwt, $key, array("HS256"))
-            $key = $_ENV['REFRESH_TOKEN_KEY'];
+            $key = $this->getRefressTokenSecretKey();
             $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
             return $decoded;
         } catch (Exception $e) {
@@ -203,7 +203,7 @@ class JWTPlugin
     */
     private function getAccessTokenSecretKey(){
         
-        if (!defined('WP_AFA_ACCESS_TOKEN_SECRET_KEY') && empty(WP_AFA_ACCESS_TOKEN_SECRET_KEY)) {
+        if (defined('WP_AFA_ACCESS_TOKEN_SECRET_KEY') && !empty(WP_AFA_ACCESS_TOKEN_SECRET_KEY)) {
             return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
         }
 
@@ -218,7 +218,7 @@ class JWTPlugin
     */
     private function getRefressTokenSecretKey(){
         
-        if (!defined('WP_AFA_REFRESH_TOKEN_SECRET_KEY') && empty(WP_AFA_REFRESH_TOKEN_SECRET_KEY)) {
+        if (defined('WP_AFA_REFRESH_TOKEN_SECRET_KEY') && !empty(WP_AFA_REFRESH_TOKEN_SECRET_KEY)) {
             return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
         }
 
