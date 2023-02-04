@@ -4,8 +4,12 @@ namespace Includes\Database;
 
 class UserTokens{
 
-  public const DATABASE_NAME = "frapi_user_tokens";
- 
+  private $dataBaseName;
+
+  public function __construct()
+  {
+    $this->dataBaseName = $_ENV['DATA_BASE_PREFIX']."user_tokens";
+  }
   /**
 	 * create fra_user_tokens table .
 	 */
@@ -14,7 +18,7 @@ class UserTokens{
     require_once(ABSPATH.'wp-admin/includes/upgrade.php');
     global $wpdb;
 
-    $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.SELF::DATABASE_NAME." (
+    $sql = "CREATE TABLE IF NOT EXISTS ".$wpdb->prefix.$this->dataBaseName." (
         id BIGINT(20) NOT NULL AUTO_INCREMENT,
         user_id BIGINT(20)  UNSIGNED NOT NULL,
         access_token VARCHAR(255) NOT NULL,
