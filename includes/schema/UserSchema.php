@@ -34,6 +34,7 @@ class UserSchema
             'refresh_token' => array(
                 'required' => true,
                 'type' => 'string',
+                'pattern' => '^[A-Za-z0-9_-]{2,}(?:\.[A-Za-z0-9_-]{2,}){2}$',
                 'validate_callback' => function ($value, $request, $key) {
                     return true;
                 },
