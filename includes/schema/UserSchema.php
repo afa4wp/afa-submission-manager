@@ -25,4 +25,20 @@ class UserSchema
         return $schema;
     }
 
+    /**
+	 * Create token schema.
+	 */
+    public function token()
+    {
+        $schema = array(
+            'refresh_token' => array(
+                'required' => true,
+                'type' => 'string',
+                'validate_callback' => function ($value, $request, $key) {
+                    return true;
+                },
+            ),
+        );
+        return $schema;
+    }
 }
