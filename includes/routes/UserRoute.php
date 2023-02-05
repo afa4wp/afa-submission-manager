@@ -63,10 +63,10 @@ class UserRoute
     {
         register_rest_route(
             $this->name,
-            '/user/token',
+            '/user/tokens/refresh',
             array(
                 array(
-                    'methods' => 'GET',
+                    'methods' => 'POST',
                     'callback' => array(new UserController, 'token'),
                     'permission_callback' => '__return_true',
                     'args' => (new UserSchema())->token(),
