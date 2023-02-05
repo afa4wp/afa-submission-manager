@@ -69,6 +69,7 @@ class UserRoute
                     'methods' => 'GET',
                     'callback' => array(new UserController, 'token'),
                     'permission_callback' => '__return_true',
+                    'args' => (new UserSchema())->token(),
                 ),
             )
         );
