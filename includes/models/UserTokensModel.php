@@ -81,5 +81,19 @@ class UserTokensModel
         return  $results;
     }
 
+    /**
+	 * Get UserTokens 
+     * 
+     * @return array
+	 */
+    public function usersTokens($offset, $number_of_records_per_page)
+    {
+        global $wpdb;
+        
+        $results = $wpdb->get_results("SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM ".$wpdb->prefix.$this->dataBaseName." afa_ut INNER JOIN ".$wpdb->prefix."users wp_u ON afa_ut.user_id = wp_u.ID" ,ARRAY_A);
+
+        return  $results;
+    }
+
 
 }
