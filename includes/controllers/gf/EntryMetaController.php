@@ -5,47 +5,44 @@ namespace Includes\Controllers\GF;
 use Includes\Models\GF\EntryMetaModel;
 use WP_Error;
 
-class EntryMetaController
-{   
-    private $entryMetaModel;
+class EntryMetaController {
 
-    private $number_of_records_per_page = 20;
+	private $entryMetaModel;
 
-    public function __construct()
-    {
-        $this->entryMetaModel= new EntryMetaModel();
-         
-    }
+	private $number_of_records_per_page = 20;
 
-    /**
-     * GF forms entry.
-     *
-     * @param WP_REST_Request $request The request.
-     * 
-     * @return array $forms GF forms.
-     */
-    public function entryMetaByEntryID($request)
-    {   
-        $entry_id = $request['entry_id'];
+	public function __construct() {
+		 $this->entryMetaModel = new EntryMetaModel();
 
-        $items = $this->entryMetaModel->entryMetaByEntryID($entry_id);
-      
-        return rest_ensure_response($items);
-    }
+	}
 
-    /**
-     * GF forms entry.
-     *
-     * @param WP_REST_Request $request The request.
-     * 
-     * @return array $forms GF forms.
-     */
-    public function searchEntryMetaAnswer($request)
-    {   
-        $answer = urldecode($request['answer']);
+	/**
+	 * GF forms entry.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $forms GF forms.
+	 */
+	public function entryMetaByEntryID( $request ) {
+		$entry_id = $request['entry_id'];
 
-        $items = $this->entryMetaModel->searchEntryMetaAnswer($answer, 0, $this->number_of_records_per_page);
-      
-        return rest_ensure_response($items);
-    }
+		$items = $this->entryMetaModel->entryMetaByEntryID( $entry_id );
+
+		return rest_ensure_response( $items );
+	}
+
+	/**
+	 * GF forms entry.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $forms GF forms.
+	 */
+	public function searchEntryMetaAnswer( $request ) {
+		 $answer = urldecode( $request['answer'] );
+
+		$items = $this->entryMetaModel->searchEntryMetaAnswer( $answer, 0, $this->number_of_records_per_page );
+
+		return rest_ensure_response( $items );
+	}
 }

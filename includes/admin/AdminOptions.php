@@ -3,9 +3,9 @@
 namespace Includes\Admin;
 
 use Includes\Admin\Pages\UserListTable;
-class AdminOptions
-{
-    /**
+class AdminOptions {
+
+	/**
 	 * WO Options Name
 	 *
 	 * @var string
@@ -18,27 +18,26 @@ class AdminOptions
 	 * @return [type] [description]
 	 */
 	public function init() {
-        
-		//add_action( 'admin_init', array( new self(), 'admin_init' ) );
+
+		// add_action( 'admin_init', array( new self(), 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_page' ), 1 );
 	}
-    
-    /**
+
+	/**
 	 * [admin_init description]
 	 *
 	 * @return [type] [description]
 	 */
 	public function admin_init() {
-		//register_setting( 'wo-options-group', $this->option_name );
+		// register_setting( 'wo-options-group', $this->option_name );
 
 		// New Pages Layout
-
 	}
-    /**
+	/**
 	 * [add_page description]
 	 */
 	public function add_page() {
-		add_menu_page( 'WP All Forms API', 'WP All Forms API', 'manage_options', 'wp_all_forms_api',  array(new UserListTable, 'render'), 'dashicons-rest-api');
+		add_menu_page( 'WP All Forms API', 'WP All Forms API', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
 	}
 
 }

@@ -8,222 +8,216 @@ use Firebase\JWT\Key;
 use Includes\Plugins\PublicRoute;
 use WP_Error;
 
-class JWTPlugin
-{
-    /**
-     * The slugs in the URL before the endpoint.
-     */
-    private $nameSpace;
+class JWTPlugin {
 
-    public function __construct()
-    {
-        $this->nameSpace = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
-    }
+	/**
+	 * The slugs in the URL before the endpoint.
+	 */
+	private $nameSpace;
 
-    /**
-     * Generate new acces token.
-     *
-     * @param int     $id The User ID.
-     *
-     * @return string $jwt The JWT.
-     */
-    public function generateToken($id)
-    {
-        $issuedAt = time();
-        $expTokenInMinute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
+	public function __construct() {
+		 $this->nameSpace = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
+	}
 
-        if (empty($expTokenInMinute) || !is_numeric($expTokenInMinute)) {
-            $expTokenInMinute = 15;
-        }
+	/**
+	 * Generate new acces token.
+	 *
+	 * @param int $id The User ID.
+	 *
+	 * @return string $jwt The JWT.
+	 */
+	public function generateToken( $id ) {
+		$issuedAt         = time();
+		$expTokenInMinute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
 
-        $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
+		if ( empty( $expTokenInMinute ) || ! is_numeric( $expTokenInMinute ) ) {
+			$expTokenInMinute = 15;
+		}
 
-        $key = $this->getAccessTokenSecretKey();
-    
-        $payload = array(
-            'iss' => get_bloginfo('url'),
-            'iat' => $issuedAt,
-            'id' => $id,
-            'exp' => $expire,
-        );
+		$expire = $issuedAt + ( MINUTE_IN_SECONDS * $expTokenInMinute );
 
-        $jwt = JWT::encode($payload, $key, 'HS256');
+		$key = $this->getAccessTokenSecretKey();
 
-        return $jwt;
-    }
+		$payload = array(
+			'iss' => get_bloginfo( 'url' ),
+			'iat' => $issuedAt,
+			'id'  => $id,
+			'exp' => $expire,
+		);
 
-    /**
-     * Generate new refresh token.
-     *
-     * @param int     $id The User ID.
-     *
-     * @return string $jwt The JWT.
-     */
-    public function generateRefreshToken($id)
-    {
-        $issuedAt = time();
-        $expTokenInMinute = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
+		$jwt = JWT::encode( $payload, $key, 'HS256' );
 
-        if (empty($expTokenInMinute) || !is_numeric($expTokenInMinute)) {
-            $expTokenInMinute = 15;
-        }
+		return $jwt;
+	}
 
-        $expire = $issuedAt + (MINUTE_IN_SECONDS * $expTokenInMinute);
+	/**
+	 * Generate new refresh token.
+	 *
+	 * @param int $id The User ID.
+	 *
+	 * @return string $jwt The JWT.
+	 */
+	public function generateRefreshToken( $id ) {
+		$issuedAt         = time();
+		$expTokenInMinute = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
 
-        $key = $this->getRefressTokenSecretKey();
+		if ( empty( $expTokenInMinute ) || ! is_numeric( $expTokenInMinute ) ) {
+			$expTokenInMinute = 15;
+		}
 
-        $payload = array(
-            'iss' => get_bloginfo('url'),
-            'iat' => $issuedAt,
-            'id' => $id,
-            'exp' => $expire,
-        );
+		$expire = $issuedAt + ( MINUTE_IN_SECONDS * $expTokenInMinute );
 
-        $jwt = JWT::encode($payload, $key, 'HS256');
+		$key = $this->getRefressTokenSecretKey();
 
-        return $jwt;
-    }
+		$payload = array(
+			'iss' => get_bloginfo( 'url' ),
+			'iat' => $issuedAt,
+			'id'  => $id,
+			'exp' => $expire,
+		);
 
-    /**
-     * Decodes a JWT string into a PHP object.
-     * if sucess force user login and keep on
-     *
-     * @param string          $url The JWT
-     * @param WP_REST_Server  $server Server instance.
-     * @param WP_REST_Request $request The request.
-     *
-     * @return array $decoded The token's payload.
-     */
-    private function validateToken($url, $server, $request)
-    {
-        $authorization = $request->get_header('authorization');
-        $url = strtok($_SERVER["REQUEST_URI"], '?');
+		$jwt = JWT::encode( $payload, $key, 'HS256' );
 
-        if (!empty($authorization)) {
+		return $jwt;
+	}
 
-            $key = $this->getAccessTokenSecretKey();
-            $splitAuthorization = explode(' ', $authorization);
+	/**
+	 * Decodes a JWT string into a PHP object.
+	 * if sucess force user login and keep on
+	 *
+	 * @param string          $url The JWT
+	 * @param WP_REST_Server  $server Server instance.
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $decoded The token's payload.
+	 */
+	private function validateToken( $url, $server, $request ) {
+		 $authorization = $request->get_header( 'authorization' );
+		$url            = strtok( $_SERVER['REQUEST_URI'], '?' );
 
-            if (count($splitAuthorization) == 2) {
-                try {
+		if ( ! empty( $authorization ) ) {
 
-                    $jwt = $splitAuthorization[1];
-                    //$decoded = JWT::decode($jwt, $key, array("HS256"));
-                    $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-                    wp_set_current_user($decoded->id);
-                    return $request;
-                } catch (Exception $e) {
+			$key                = $this->getAccessTokenSecretKey();
+			$splitAuthorization = explode( ' ', $authorization );
 
-                    return new WP_Error(
-                        'jwt_auth_invalid_token',
-                        $e->getMessage(),
-                        array(
-                            'status' => 403,
-                        )
-                    );
-                }
-            } else {
-                return new WP_Error(
-                    'jwt_auth_invalid_token',
-                    'Incorrect JWT format',
-                    array(
-                        'status' => 403,
-                    )
-                );
-            }
-        } else {
-            return new WP_Error('not-logged-in', 'API Requests to ' . $url . ' are only supported for authenticated requests', array('status' => 401));
-        }
-    }
+			if ( count( $splitAuthorization ) == 2 ) {
+				try {
 
-    /**
-     * Decodes a JWT string into a PHP object.
-     *
-     * @param string          $jwt The JWT
-     *
-     * @return array $decoded The token's payload.
-     */
-    public function validateRefreshToken($jwt)
-    {
-        try {
-            //$decoded = JWT::decode($jwt, $key, array("HS256"))
-            $key = $this->getRefressTokenSecretKey();
-            $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-            return $decoded;
-        } catch (Exception $e) {
+					$jwt = $splitAuthorization[1];
+					// $decoded = JWT::decode($jwt, $key, array("HS256"));
+					$decoded = JWT::decode( $jwt, new Key( $key, 'HS256' ) );
+					wp_set_current_user( $decoded->id );
+					return $request;
+				} catch ( Exception $e ) {
 
-            return new WP_Error(
-                'jwt_auth_invalid_token',
-                $e->getMessage(),
-                array(
-                    'status' => 403,
-                )
-            );
-        }
-    }
+					return new WP_Error(
+						'jwt_auth_invalid_token',
+						$e->getMessage(),
+						array(
+							'status' => 403,
+						)
+					);
+				}
+			} else {
+				return new WP_Error(
+					'jwt_auth_invalid_token',
+					'Incorrect JWT format',
+					array(
+						'status' => 403,
+					)
+				);
+			}
+		} else {
+			return new WP_Error( 'not-logged-in', 'API Requests to ' . $url . ' are only supported for authenticated requests', array( 'status' => 401 ) );
+		}
+	}
 
-    /**
-     * Filter to hook the rest_pre_dispatch, if there is an error in the request
-     * send it, if there is no error just continue with the current request.
-     *
-     * @param mixed           $result Can be anything a normal endpoint can return, or null to not hijack the request..
-     * @param WP_REST_Server  $server Server instance.
-     * @param WP_REST_Request $request The request.
-     *
-     * @return array $payload The modified token's payload.
-     */
-    public function validateTokenRestPreDispatch($url, $server, $request)
-    {
-        $url = $request->get_route();
+	/**
+	 * Decodes a JWT string into a PHP object.
+	 *
+	 * @param string $jwt The JWT
+	 *
+	 * @return array $decoded The token's payload.
+	 */
+	public function validateRefreshToken( $jwt ) {
+		try {
+			// $decoded = JWT::decode($jwt, $key, array("HS256"))
+			$key     = $this->getRefressTokenSecretKey();
+			$decoded = JWT::decode( $jwt, new Key( $key, 'HS256' ) );
+			return $decoded;
+		} catch ( Exception $e ) {
 
-        $explodeNameSpace = explode('/', $this->nameSpace);
+			return new WP_Error(
+				'jwt_auth_invalid_token',
+				$e->getMessage(),
+				array(
+					'status' => 403,
+				)
+			);
+		}
+	}
 
-        if (count($explodeNameSpace) == 2) {
+	/**
+	 * Filter to hook the rest_pre_dispatch, if there is an error in the request
+	 * send it, if there is no error just continue with the current request.
+	 *
+	 * @param mixed           $result Can be anything a normal endpoint can return, or null to not hijack the request..
+	 * @param WP_REST_Server  $server Server instance.
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $payload The modified token's payload.
+	 */
+	public function validateTokenRestPreDispatch( $url, $server, $request ) {
+		$url = $request->get_route();
 
-            if (strpos($url, $explodeNameSpace[0]) !== false) {
+		$explodeNameSpace = explode( '/', $this->nameSpace );
 
-                $publicRoute = new PublicRoute($this->nameSpace);
+		if ( count( $explodeNameSpace ) == 2 ) {
 
-                $requireToken = !$publicRoute->isPublicRoute(substr($url, 1));
+			if ( strpos( $url, $explodeNameSpace[0] ) !== false ) {
 
-                if ($requireToken) {
-                    $response = $this->validateToken($url, $server, $request);
-                    if (is_wp_error($response)) {
-                        return $response;
-                    }
-                }
-            }
-        }
-    }
+				$publicRoute = new PublicRoute( $this->nameSpace );
 
-    /**
-    * Get a JWT key.
-    * 
-    * @return string $key The token key.
-    */
-    private function getAccessTokenSecretKey(){
-        
-        if (defined('WP_AFA_ACCESS_TOKEN_SECRET_KEY') && !empty(WP_AFA_ACCESS_TOKEN_SECRET_KEY)) {
-            return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
-        }
+				$requireToken = ! $publicRoute->isPublicRoute( substr( $url, 1 ) );
 
-        return get_option('WP_AFA_ACCESS_TOKEN_SECRET_KEY');
-        
-    }
+				if ( $requireToken ) {
+					$response = $this->validateToken( $url, $server, $request );
+					if ( is_wp_error( $response ) ) {
+						return $response;
+					}
+				}
+			}
+		}
+	}
 
-    /**
-    * Get a JWT key.
-    * 
-    * @return string $key The token key.
-    */
-    private function getRefressTokenSecretKey(){
-        
-        if (defined('WP_AFA_REFRESH_TOKEN_SECRET_KEY') && !empty(WP_AFA_REFRESH_TOKEN_SECRET_KEY)) {
-            return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
-        }
+	/**
+	 * Get a JWT key.
+	 *
+	 * @return string $key The token key.
+	 */
+	private function getAccessTokenSecretKey() {
 
-        return get_option('WP_AFA_REFRESH_TOKEN_SECRET_KEY');
-        
-    }
+		if ( defined( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY' ) && ! empty( WP_AFA_ACCESS_TOKEN_SECRET_KEY ) ) {
+			return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
+		}
+
+		return get_option( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY' );
+
+	}
+
+	/**
+	 * Get a JWT key.
+	 *
+	 * @return string $key The token key.
+	 */
+	private function getRefressTokenSecretKey() {
+
+		if ( defined( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' ) && ! empty( WP_AFA_REFRESH_TOKEN_SECRET_KEY ) ) {
+			return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
+		}
+
+		return get_option( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' );
+
+	}
 
 }

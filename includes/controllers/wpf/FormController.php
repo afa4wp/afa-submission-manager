@@ -6,98 +6,93 @@ use Includes\Models\WPF\FormModel;
 use Includes\Plugins\Helpers\Pagination;
 use WP_Error;
 
-class FormController
-{   
-    private $formModel;
+class FormController {
 
-    private $number_of_records_per_page;
-    
-    private $paginationHelper;
-    
-    public function __construct()
-    {
-        $this->formModel = new FormModel();
-        $this->paginationHelper = new Pagination();
-        $this->number_of_records_per_page = $this->paginationHelper->getNumberofRecordsPerPage();
-    }
+	private $formModel;
 
-    /**
-     * WPF forms.
-     *
-     * @return array $forms GF forms.
-     */
-    public function forms()
-    {   
-        $count = $this->formModel->mumberItems();
-        
-        $offset = 0;
+	private $number_of_records_per_page;
 
-        $forms =  $this->formModel->forms($offset, $this->number_of_records_per_page);
+	private $paginationHelper;
 
-        $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
- 
-        return rest_ensure_response($forms_results);
-    }
+	public function __construct() {
+		 $this->formModel                 = new FormModel();
+		$this->paginationHelper           = new Pagination();
+		$this->number_of_records_per_page = $this->paginationHelper->getNumberofRecordsPerPage();
+	}
 
-    /**
-     * WPF forms.
-     *
-     * @param WP_REST_Request $request The request.
-     * 
-     * @return aobject $form WPF form.
-     */
-    public function formByID($request)
-    {   
-        $id = $request["id"];
+	/**
+	 * WPF forms.
+	 *
+	 * @return array $forms GF forms.
+	 */
+	public function forms() {
+		$count = $this->formModel->mumberItems();
 
-        $form =  $this->formModel->formByID($id);
+		$offset = 0;
 
-        return rest_ensure_response($form); 
-    }
+		$forms = $this->formModel->forms( $offset, $this->number_of_records_per_page );
 
-    /**
-     * WPF forms.
-     *
-     * @param WP_REST_Request $request The request.
-     * 
-     * @return array $forms GF forms.
-     */
-    public function formsPagination($request)
-    {   
-        $page = $request['page_number'];
+		$forms_results = $this->paginationHelper->prepareDataForRestWithPagination( $count, $forms );
 
-        $count = $this->formModel->mumberItems();
+		return rest_ensure_response( $forms_results );
+	}
 
-        $offset = $this->paginationHelper->getOffset($page, $count);
+	/**
+	 * WPF forms.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return aobject $form WPF form.
+	 */
+	public function formByID( $request ) {
+		$id = $request['id'];
 
-        $forms = $this->formModel->forms($offset, $this->number_of_records_per_page);
+		$form = $this->formModel->formByID( $id );
 
-        $forms_results = $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
-        
-        return rest_ensure_response($forms_results);
-    }
+		return rest_ensure_response( $form );
+	}
 
-    /**
-     * WEF forms.
-     *
-     * @param WP_REST_Request $request The request.
-     * 
-     * @return array $forms WEF forms.
-     */
-    public function searchForms($request)
-    {   
-        $post_name = urldecode($request['post_name']);
+	/**
+	 * WPF forms.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $forms GF forms.
+	 */
+	public function formsPagination( $request ) {
+		$page = $request['page_number'];
 
-        $count = $this->formModel->mumberItemsByPostTitle($post_name);
+		$count = $this->formModel->mumberItems();
 
-        $offset = $this->paginationHelper->getOffset(1, $count);
-        
-        $forms =  $this->formModel->searchForms($post_name, $offset, $this->number_of_records_per_page);
+		$offset = $this->paginationHelper->getOffset( $page, $count );
 
-        $forms_results =  $this->paginationHelper->prepareDataForRestWithPagination($count, $forms);
+		$forms = $this->formModel->forms( $offset, $this->number_of_records_per_page );
 
-        return rest_ensure_response($forms_results); 
+		$forms_results = $this->paginationHelper->prepareDataForRestWithPagination( $count, $forms );
 
-    }
+		return rest_ensure_response( $forms_results );
+	}
+
+	/**
+	 * WEF forms.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $forms WEF forms.
+	 */
+	public function searchForms( $request ) {
+		$post_name = urldecode( $request['post_name'] );
+
+		$count = $this->formModel->mumberItemsByPostTitle( $post_name );
+
+		$offset = $this->paginationHelper->getOffset( 1, $count );
+
+		$forms = $this->formModel->searchForms( $post_name, $offset, $this->number_of_records_per_page );
+
+		$forms_results = $this->paginationHelper->prepareDataForRestWithPagination( $count, $forms );
+
+		return rest_ensure_response( $forms_results );
+
+	}
 
 }

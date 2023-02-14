@@ -1,5 +1,6 @@
 <?php
 namespace Includes\Plugins\Helpers;
+
 /**
  * Finds pages that contain a particular Gravity Form.
  */
@@ -22,66 +23,84 @@ class FormsShortcodeFinder {
 	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
 	 */
 	public function cf7Find() {
-		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
-			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "contact-form-7"), true ) ) {
-				$pages[ $page_id ] = get_the_title( $page_id );
-			}
-	
-			return $pages;
-		}, [] );
+		return array_reduce(
+			$this->get_all_page_ids(),
+			function( $pages, $page_id ) {
+				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'contact-form-7' ), true ) ) {
+					$pages[ $page_id ] = get_the_title( $page_id );
+				}
+
+				return $pages;
+			},
+			array()
+		);
 	}
 
 	/**
 	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
 	 */
 	public function wefFind() {
-		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
-			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "weforms"), true ) ) {
-				$pages[ $page_id ] = get_the_title( $page_id );
-			}
-	
-			return $pages;
-		}, [] );
+		return array_reduce(
+			$this->get_all_page_ids(),
+			function( $pages, $page_id ) {
+				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'weforms' ), true ) ) {
+					$pages[ $page_id ] = get_the_title( $page_id );
+				}
+
+				return $pages;
+			},
+			array()
+		);
 	}
 
 	/**
 	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
 	 */
 	public function gfFind() {
-		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
-			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "gravityform"), true ) ) {
-				$pages[ $page_id ] = get_the_title( $page_id );
-			}
-	
-			return $pages;
-		}, [] );
+		return array_reduce(
+			$this->get_all_page_ids(),
+			function( $pages, $page_id ) {
+				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'gravityform' ), true ) ) {
+					$pages[ $page_id ] = get_the_title( $page_id );
+				}
+
+				return $pages;
+			},
+			array()
+		);
 	}
 
 	/**
 	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
 	 */
 	public function wpfFind() {
-		return array_reduce( $this->get_all_page_ids(), function( $pages, $page_id ) {
-			if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, "wpforms"), true ) ) {
-				$pages[ $page_id ] = get_the_title( $page_id );
-			}
-	
-			return $pages;
-		}, [] );
+		return array_reduce(
+			$this->get_all_page_ids(),
+			function( $pages, $page_id ) {
+				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'wpforms' ), true ) ) {
+					$pages[ $page_id ] = get_the_title( $page_id );
+				}
+
+				return $pages;
+			},
+			array()
+		);
 	}
 
 	/**
 	 * @return array Post IDs for all pages.
 	 */
 	private function get_all_page_ids() {
-		return ( new \WP_Query( [
-			'post_type'              => 'page',
-			'posts_per_page'         => 1000,
-			'no_found_rows'          => true,
-			'fields'                 => 'ids',
-			'update_post_meta_cache' => false,
-			'update_post_term_cache' => false,
-		] ) )->get_posts();
+		return ( new \WP_Query(
+			array(
+				'post_type'              => 'page',
+				'posts_per_page'         => 1000,
+				'no_found_rows'          => true,
+				'fields'                 => 'ids',
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
+			)
+		) )->get_posts();
 	}
 
 	/**
@@ -89,7 +108,7 @@ class FormsShortcodeFinder {
 	 *
 	 * @return array Gravity Form IDs.
 	 */
-	private function get_form_ids_in_post_content( $page_id, $shortcode_name) {
+	private function get_form_ids_in_post_content( $page_id, $shortcode_name ) {
 		$content = get_post_field( 'post_content', $page_id );
 
 		return $this->get_shortcode_ids( $this->get_shortcodes_from_content( $content, $shortcode_name ) );
@@ -105,7 +124,7 @@ class FormsShortcodeFinder {
 		$matches_found = preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches );
 
 		if ( ! $matches_found || empty( $matches[2] ) || ! in_array( $shortcode, $matches[2], true ) ) {
-			return [];
+			return array();
 		}
 
 		return $matches[0];
@@ -119,15 +138,19 @@ class FormsShortcodeFinder {
 	 * @return array $ids        The shortcode IDs.
 	 */
 	private function get_shortcode_ids( array $shortcodes ) {
-		return array_reduce( $shortcodes, function( $ids, $shortcode ) {
-			$id = $this->get_shortcode_id( $shortcode );
+		return array_reduce(
+			$shortcodes,
+			function( $ids, $shortcode ) {
+				$id = $this->get_shortcode_id( $shortcode );
 
-			if ( $id ) {
-				$ids[] = $id;
-			}
+				if ( $id ) {
+					$ids[] = $id;
+				}
 
-			return $ids;
-		}, [] );
+				return $ids;
+			},
+			array()
+		);
 	}
 
 	/**

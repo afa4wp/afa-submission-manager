@@ -6,141 +6,134 @@ use Includes\Plugins\Helpers\FormsShortcodeFinder;
 use Includes\Models\CF7\EntryModel;
 use Includes\Models\FormModel as MainFormModel;
 
-class FormModel extends MainFormModel
-{   
-    public function __construct()
-    {
-        parent::__construct("wpcf7_contact_form");
-    }
+class FormModel extends MainFormModel {
 
-    /**
-	 * Get Forms 
-     * 
-     * @return array
+	public function __construct() {
+		 parent::__construct( 'wpcf7_contact_form' );
+	}
+
+	/**
+	 * Get Forms
+	 *
+	 * @return array
 	 */
-    public function forms($offset, $number_of_records_per_page)
-    {
-        $posts = parent::forms($offset, $number_of_records_per_page);
+	public function forms( $offset, $number_of_records_per_page ) {
+		 $posts = parent::forms( $offset, $number_of_records_per_page );
 
-        $forms = $this->prepareData($posts);
+		$forms = $this->prepareData( $posts );
 
-        return $forms;
-    }
+		return $forms;
+	}
 
-    /**
-	 * Get Form by id 
-     * 
-     * @param int     $id The form ID.
-     * 
-     * @return array
+	/**
+	 * Get Form by id
+	 *
+	 * @param int $id The form ID.
+	 *
+	 * @return array
 	 */
-    public function formByID($id)
-    {   
-        $results = parent::formByID($id);
-        
-        $forms = $this->prepareDataArray($results);
+	public function formByID( $id ) {
+		$results = parent::formByID( $id );
 
-        if(count($forms) > 0){
-            return $forms[0];
-        }
+		$forms = $this->prepareDataArray( $results );
 
-        return $forms;
-    }
+		if ( count( $forms ) > 0 ) {
+			return $forms[0];
+		}
 
-    /**
-	 * Get form pages links  
-     * 
-     * @param int     $formID The form ID.
-     * 
-     * @return array
+		return $forms;
+	}
+
+	/**
+	 * Get form pages links
+	 *
+	 * @param int $formID The form ID.
+	 *
+	 * @return array
 	 */
-    public function pagesLinks($formID)
-    {
-        $pages_with_form = (new FormsShortcodeFinder( $formID ))->cf7Find();
-        
-        if(empty($pages_with_form)){
-            return $pages_with_form;
-        }
+	public function pagesLinks( $formID ) {
+		 $pages_with_form = ( new FormsShortcodeFinder( $formID ) )->cf7Find();
 
-        $results = [];
+		if ( empty( $pages_with_form ) ) {
+			return $pages_with_form;
+		}
 
-        foreach ($pages_with_form as $key => $value) {
-            $result = [];
-            $result['page_name'] = $value;
-            $result['page_link'] = get_page_link($key);
-            $results[] = $result;
-        }
+		$results = array();
 
-        return $results;
-    }
+		foreach ( $pages_with_form as $key => $value ) {
+			$result              = array();
+			$result['page_name'] = $value;
+			$result['page_link'] = get_page_link( $key );
+			$results[]           = $result;
+		}
 
-    /**
-	 * Get Forms 
-     * 
-     * @return array
+		return $results;
+	}
+
+	/**
+	 * Get Forms
+	 *
+	 * @return array
 	 */
 
-    public function searchForms($post_name, $offset, $number_of_records_per_page)
-    {
-        $posts =  parent::searchForms($post_name, $offset, $number_of_records_per_page);
-        
-        $forms = $this->prepareData($posts);
+	public function searchForms( $post_name, $offset, $number_of_records_per_page ) {
+		$posts = parent::searchForms( $post_name, $offset, $number_of_records_per_page );
 
-        return $forms;
-    }
-    
-    /**
-	 * Format Forms 
-     * 
-     * @return array
+		$forms = $this->prepareData( $posts );
+
+		return $forms;
+	}
+
+	/**
+	 * Format Forms
+	 *
+	 * @return array
 	 */
-    private function prepareData($posts)
-    { 
-        $forms = [];
+	private function prepareData( $posts ) {
+		$forms = array();
 
-        while($posts->have_posts()){
-           
-            $posts->the_post();
+		while ( $posts->have_posts() ) {
 
-            $form['id'] = $posts->post->ID;
-            $form['title'] = $posts->post->post_title;
-            $form['date_created'] = $posts->post->post_date; 
-            $form['registers'] = (new EntryModel())->mumberItemsByChannel($posts->post->post_name);
+			$posts->the_post();
 
-            $form['user_created'] = $posts->post->post_author;
-            $form['perma_links'] = $this->pagesLinks($posts->post->ID);
-            $forms[] =  $form;
-        }
+			$form['id']           = $posts->post->ID;
+			$form['title']        = $posts->post->post_title;
+			$form['date_created'] = $posts->post->post_date;
+			$form['registers']    = ( new EntryModel() )->mumberItemsByChannel( $posts->post->post_name );
 
-        return $forms;
-    }
+			$form['user_created'] = $posts->post->post_author;
+			$form['perma_links']  = $this->pagesLinks( $posts->post->ID );
+			$forms[]              = $form;
+		}
 
-    /**
-	 * Format Forms 
-     * 
-     * @return array
+		return $forms;
+	}
+
+	/**
+	 * Format Forms
+	 *
+	 * @return array
 	 */
-    private function prepareDataArray($results)
-    { 
-        $forms = [];
+	private function prepareDataArray( $results ) {
+		 $forms = array();
 
-        foreach($results as $key => $value){
-            
-            $form = [];
+		foreach ( $results as $key => $value ) {
 
-            $form['id'] = $value->ID;
-            $form['title'] = $value->post_title;
-            $form['date_created'] = $value->post_date;
-            
-            $form['registers'] = (new EntryModel())->mumberItemsByChannel($value->post_name);
+			$form = array();
 
-            $form['user_created'] = $value->post_author;
-            $form['perma_links'] = $this->pagesLinks($value->ID);
+			$form['id']           = $value->ID;
+			$form['title']        = $value->post_title;
+			$form['date_created'] = $value->post_date;
 
-            $forms[] =  $form;
-        }
+			$form['registers'] = ( new EntryModel() )->mumberItemsByChannel( $value->post_name );
 
-        return $forms;
+			$form['user_created'] = $value->post_author;
+			$form['perma_links']  = $this->pagesLinks( $value->ID );
 
-    }
+			$forms[] = $form;
+		}
+
+		return $forms;
+
+	}
 }

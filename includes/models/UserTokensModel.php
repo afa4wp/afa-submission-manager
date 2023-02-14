@@ -2,98 +2,93 @@
 
 namespace Includes\Models;
 
-class UserTokensModel
-{
-    
-    private $dataBaseName;
+class UserTokensModel {
 
-    public function __construct()
-    {
-        $this->dataBaseName = $_ENV['DATA_BASE_PREFIX']."user_tokens";
-    }
 
-    /**
+	private $dataBaseName;
+
+	public function __construct() {
+		 $this->dataBaseName = $_ENV['DATA_BASE_PREFIX'] . 'user_tokens';
+	}
+
+	/**
 	 * Verify if Refresh token exist
-     * 
-     * @param string $user_id The user ID 
-     * @param string $refresh_token The user refresh token   
-     * 
-     * @return bool
+	 *
+	 * @param string $user_id The user ID
+	 * @param string $refresh_token The user refresh token
+	 *
+	 * @return bool
 	 */
-    public function checkIfRefreshTokenExist($user_id, $refresh_token)
-    {
-        global $wpdb; 
-        
-        $results = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix.$this->dataBaseName." WHERE user_id = $user_id AND refresh_token = '$refresh_token' ",OBJECT);
+	public function checkIfRefreshTokenExist( $user_id, $refresh_token ) {
+		global $wpdb;
 
-        if(count($results) > 0){
-            return true;
-        } 
+		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->dataBaseName . " WHERE user_id = $user_id AND refresh_token = '$refresh_token' ", OBJECT );
 
-        return false;
-    }
+		if ( count( $results ) > 0 ) {
+			return true;
+		}
 
-    /**
+		return false;
+	}
+
+	/**
 	 * Create new token register
-     * 
-     * @param string $user_id The user ID
-     * @param string $access_token The user access token
-     * @param string $refresh_token The user refresh token   
-     * 
-     * @return int|false 
+	 *
+	 * @param string $user_id The user ID
+	 * @param string $access_token The user access token
+	 * @param string $refresh_token The user refresh token
+	 *
+	 * @return int|false
 	 */
-    public function create($user_id, $access_token, $refresh_token)
-    {
-        global $wpdb;
-        
-        $item = array(
-            "user_id" =>$user_id,
-            "access_token" => $access_token,
-            "refresh_token" => $refresh_token
-        );
-        
-        $results = $wpdb->insert(
-            $wpdb->prefix. $this->dataBaseName,
-            $item
-        );
+	public function create( $user_id, $access_token, $refresh_token ) {
+		 global $wpdb;
 
-        return  $results;
-    }
+		$item = array(
+			'user_id'       => $user_id,
+			'access_token'  => $access_token,
+			'refresh_token' => $refresh_token,
+		);
 
-     /**
-	 * Delete token register
-     * 
-     * @return int|false 
+		$results = $wpdb->insert(
+			$wpdb->prefix . $this->dataBaseName,
+			$item
+		);
+
+		return $results;
+	}
+
+	 /**
+	  * Delete token register
+	  *
+	  * @return int|false
+	  */
+	public function deleteUserTokenByID( $user_id ) {
+		global $wpdb;
+
+		$item = array(
+			'user_id' => $user_id,
+		);
+
+		$results = $wpdb->delete(
+			$wpdb->prefix . $this->dataBaseName,
+			$item
+		);
+
+		return $results;
+	}
+
+	/**
+	 * Get UserTokens
+	 *
+	 * @return array
 	 */
-    public function deleteUserTokenByID($user_id)
-    {
-        global $wpdb;
-        
-        $item = array(
-            "user_id" =>$user_id,
-        );
-        
-        $results = $wpdb->delete(
-            $wpdb->prefix.$this->dataBaseName,
-            $item 
-        );
+	public function usersTokens( $offset, $number_of_records_per_page ) {
+		global $wpdb;
 
-        return  $results;
-    }
+		$results = $wpdb->get_results( 'SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM ' . $wpdb->prefix . $this->dataBaseName . ' afa_ut INNER JOIN ' . $wpdb->prefix . 'users wp_u ON afa_ut.user_id = wp_u.ID', ARRAY_A );
 
-    /**
-	 * Get UserTokens 
-     * 
-     * @return array
-	 */
-    public function usersTokens($offset, $number_of_records_per_page)
-    {
-        global $wpdb;
-        
-        $results = $wpdb->get_results("SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM ".$wpdb->prefix.$this->dataBaseName." afa_ut INNER JOIN ".$wpdb->prefix."users wp_u ON afa_ut.user_id = wp_u.ID" ,ARRAY_A);
-
-        return  $results;
-    }
+		return $results;
+	}
 
 
 }
