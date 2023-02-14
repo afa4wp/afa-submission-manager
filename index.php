@@ -3,9 +3,9 @@
 require __DIR__ . '/vendor/autoload.php';
 
 /**
- * Plugin Name:       WP Forms Rest API
+ * Plugin Name:       WP All Forms API
  * Plugin URI:        https://example.com/plugins/the-basics/
- * Description:       Este é um plugin que gera as rotas para obter os dados do site wordpress, permitindo requisições autencticadas usando jwt
+ * Description:       Este é um plugin que gera as rotas para obter os dados do site WordPress, permitindo requisições autencticadas usando jwt
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
@@ -17,32 +17,37 @@ require __DIR__ . '/vendor/autoload.php';
  * Text Domain:       https://claudionhangapc.com
  */
 
-define('WP_FORMS_REST_API_PLUGIN', __FILE__);
+define( 'WP_ALL_FORMS_API_PLUGIN_FILE', __FILE__ );
 
 use Includes\Plugins\JWT\JWTPlugin;
 use Includes\Routes\Route;
 use Includes\Database\DatabaseInstaller;
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+use Includes\Plugins\QRCode;
+use Includes\Admin\AdminOptions;
+$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ );
 $dotenv->load();
 
 /**
-* Init api.
-*/
-function wp_forms_rest_api_init()
-{
-    $name_space =  $_ENV['API_NAME_SPACE'];
-    (new Route($name_space) )->init();
- 
-    //add_filter('rest_pre_dispatch', [new JWTPlugin, 'validateTokenRestPreDispatch'], 10, 3);
+ * Init api.
+ */
+function wp_all_forms_api_rest_init() {
+	$name_space = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
+	( new Route( $name_space ) )->init();
+
+	add_filter( 'rest_pre_dispatch', array( new JWTPlugin(), 'validateTokenRestPreDispatch' ), 10, 3 );
 }
 
 /**
-* Add actions 
+* Add actions
 */
-add_action('rest_api_init', 'wp_forms_rest_api_init');
+add_action( 'rest_api_init', 'wp_all_forms_api_rest_init' );
 
 /**
 * Register hooks.
 */
-register_activation_hook(WP_FORMS_REST_API_PLUGIN, [new DatabaseInstaller, 'install']);
+register_activation_hook( WP_ALL_FORMS_API_PLUGIN_FILE, array( new DatabaseInstaller(), 'install' ) );
+
+
+( new AdminOptions() )->init();
+
+

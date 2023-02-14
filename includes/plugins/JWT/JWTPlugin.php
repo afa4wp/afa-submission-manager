@@ -17,7 +17,7 @@ class JWTPlugin
 
     public function __construct()
     {
-        $this->nameSpace = $_ENV['API_NAME_SPACE'];
+        $this->nameSpace = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
     }
 
     /**
