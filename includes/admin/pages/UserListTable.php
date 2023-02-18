@@ -50,7 +50,12 @@ class UserListTable extends \WP_List_Table {
 	}
 
 	public function prepare_items() {
+
+		/** Process bulk action */
+		$this->process_bulk_action();
+
 		$table_data = $this->fetch_table_data();
+
 		$this->set_pagination_args(
 			array(
 				'total_items' => 20,
@@ -98,8 +103,13 @@ class UserListTable extends \WP_List_Table {
 	}
 
 	public function process_bulk_action() {
-		echo 'ola: ' . $this->current_action();
-		exit;
+
+		if ( ( isset( $_POST['action'] ) && $_POST['action'] == 'delete' )
+		     || ( isset( $_POST['action2'] ) && $_POST['action2'] == 'delete' )
+		) {
+			
+		}
+			
 	}
 
 	public function view() {
@@ -115,7 +125,7 @@ class UserListTable extends \WP_List_Table {
 							?>
 								 
 						</form>		
-						<form id="wp-forms-api-user-list-form" method="get">
+						<form id="wp-forms-api-user-list-form" method="post">
 							<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
 							<?php
 								$this->display();
