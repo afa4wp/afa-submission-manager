@@ -16,12 +16,26 @@ class UserModel {
 	 * @return WP_User|WP_Error $user WP User object.
 	 */
 	public function login( $username, $password ) {
+
 		$login = wp_signon(
 			array(
 				'user_login'    => $username,
 				'user_password' => $password,
 			)
 		);
+
+		if ( ! is_wp_error( $login ) ) {
+			if ( ! $this->userCanManageWPAFA( $login->ID ) ) {
+				return new \WP_Error(
+					'invalid_role',
+					'Sorry, you are not allowed to login',
+					array(
+						'status' => 401,
+					)
+				);
+			}
+		}
+
 		return $login;
 	}
 
@@ -62,6 +76,10 @@ class UserModel {
 		 $user_info['avatar_url'] = get_avatar_url( $id );
 
 		 return $user_info;
+	}
+
+	public function userCanManageWPAFA( $user_id ) {
+		return ( user_can( $user_id, 'manage_options' ) || user_can( $user_id, 'manage_wp_afa' ) );
 	}
 
 }
