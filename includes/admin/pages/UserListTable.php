@@ -51,6 +51,8 @@ class UserListTable extends \WP_List_Table {
 
 	public function prepare_items() {
 
+		$this->handle_table_actions();
+
 		/** Process bulk action */
 		$this->process_bulk_action();
 
@@ -90,6 +92,20 @@ class UserListTable extends \WP_List_Table {
 		);
 	}
 
+	protected function column_user_login( $item ) {
+		$query_args_delete_user_token = array(
+			'page'       => wp_unslash( $_REQUEST['page'] ),
+			'action'     => 'delete',
+			'user_token' => absint( $item['id'] ),
+			'_wpnonce'   => wp_create_nonce( 'delete_user_token_nonce' ),
+		);
+
+		$delete_user_link         = esc_url( add_query_arg( $query_args_delete_user_token ) );
+		$row_value                = '<strong>' . $item['user_login'] . '</strong>';
+		$actions['view_usermeta'] = '<a class="submitdelete" href="' . $delete_user_link . '">' . __( 'Remover', 'Remover' ) . '</a>';
+		return $row_value . $this->row_actions( $actions );
+	}
+
 	public function render() {
 		$this->prepare_items();
 		$this->view();
@@ -104,12 +120,42 @@ class UserListTable extends \WP_List_Table {
 
 	public function process_bulk_action() {
 
-		if ( ( isset( $_POST['action'] ) && $_POST['action'] == 'delete' )
-		     || ( isset( $_POST['action2'] ) && $_POST['action2'] == 'delete' )
-		) {
-			
+	}
+
+	/**
+	 * Process actions triggered by the user
+	 *
+	 * @since    1.0.0
+	 */
+	public function handle_table_actions() {
+
+		if ( ( isset( $_GET['action'] ) && $_GET['action'] == 'delete' ) ) {
+
+			if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( wp_unslash( $_REQUEST['_wpnonce'] ), 'delete_user_token_nonce' ) ) {
+
+				// action to single delete
+
+			} else {
+
+				// die( __( 'Security check', 'textdomain' ) );
+
+			}
 		}
-			
+
+		if ( ( isset( $_POST['action'] ) && $_POST['action'] == 'delete' )
+			 || ( isset( $_POST['action2'] ) && $_POST['action2'] == 'delete' )
+		) {
+
+			if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( wp_unslash( $_REQUEST['_wpnonce'] ), 'bulk-' . $this->_args['plural'] ) ) {
+
+				$this->process_bulk_action();
+
+			} else {
+
+				// die( __( 'Security check', 'textdomain' ) );
+
+			}
+		}
 	}
 
 	public function view() {
@@ -119,14 +165,14 @@ class UserListTable extends \WP_List_Table {
 				<div id="wp-forms-api-list-table">			
 					<div id="nds-post-body">
 						<form id="wp-forms-api-user-search" method="get">
-							<input type="hidden" value="wp_all_forms_api" name="page">
+							<input type="hidden" value="<?php echo wp_unslash( $_REQUEST['page'] ); ?>" name="page">
 							<?php
 								$this->search_box( 'Search User', 'search_user_logged' );
 							?>
 								 
 						</form>		
 						<form id="wp-forms-api-user-list-form" method="post">
-							<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+							<input type="hidden" name="page" value="<?php echo wp_unslash( $_REQUEST['page'] ); ?>" />
 							<?php
 								$this->display();
 							?>
