@@ -19,6 +19,7 @@ class AdminOptions {
 	 */
 	public function init() {
 
+		add_action( 'init', array( $this, 'wp_init' ), 1 );
 		// add_action( 'admin_init', array( new self(), 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_page' ), 1 );
 	}
@@ -38,6 +39,19 @@ class AdminOptions {
 	 */
 	public function add_page() {
 		add_menu_page( 'WP All Forms API', 'WP All Forms API', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
+	}
+
+	private function add_role() {
+		add_role(
+			'wp_afa_staff',
+			'WP All Forms API Staff',
+			array( 'manage_wp_afa' => true )
+		);
+
+	}
+
+	public function wp_init() {
+		$this->add_role();
 	}
 
 }
