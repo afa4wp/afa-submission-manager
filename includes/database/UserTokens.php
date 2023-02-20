@@ -22,6 +22,7 @@ class UserTokens {
         user_id BIGINT(20)  UNSIGNED NOT NULL,
         access_token VARCHAR(255) NOT NULL,
         refresh_token VARCHAR(255) NOT NULL,
+		created_at DATETIME NOT NULL,
         PRIMARY KEY(id),
         FOREIGN KEY(user_id) REFERENCES ' . $wpdb->prefix . 'users(ID),
         UNIQUE(access_token),
