@@ -22,9 +22,13 @@ class UserTokensModel {
 	public function checkIfRefreshTokenExist( $user_id, $refresh_token ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->dataBaseName . " WHERE user_id = $user_id AND refresh_token = '$refresh_token' ", OBJECT );
+		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->dataBaseName . " WHERE user_id = $user_id", OBJECT );
 
-		if ( count( $results ) > 0 ) {
+		if ( ! ( count( $results ) > 0 ) ) {
+			return false;
+		}
+
+		if ( hash_equals( $results[0]->refresh_token, hash( 'sha256', $refresh_token ) ) ) {
 			return true;
 		}
 
@@ -45,8 +49,9 @@ class UserTokensModel {
 
 		$item = array(
 			'user_id'       => $user_id,
-			'access_token'  => $access_token,
-			'refresh_token' => $refresh_token,
+			'access_token'  => hash( 'sha256', $access_token ),
+			'refresh_token' => hash( 'sha256', $refresh_token ),
+			'created_at'    => date( 'Y-m-d H:i:s' ),
 		);
 
 		$results = $wpdb->insert(
