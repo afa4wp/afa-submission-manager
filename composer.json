@@ -24,12 +24,15 @@
             "Includes\\Plugins\\Helpers\\": "includes/plugins/helpers/",
             "Includes\\Database\\": "includes/database/",
             "Includes\\Admin\\": "includes/admin/",
-            "Includes\\Admin\\Pages\\": "includes/admin/pages/"
+            "Includes\\Admin\\Pages\\": "includes/admin/pages/",
+            "Includes\\Admin\\Sreens\\": "includes/admin/screens/"
             
         }
     },
     "scripts": {
-        "tests":"./vendor/bin/phpunit"
+        "tests":"./vendor/bin/phpunit",
+        "phpcs":"./vendor/bin/phpcs --standard=WordPress",
+        "phpcb":"./vendor/bin/phpcbf --standard=WordPress"
     },
     "authors": [
         {
