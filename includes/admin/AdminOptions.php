@@ -3,6 +3,8 @@
 namespace Includes\Admin;
 
 use Includes\Admin\Pages\UserListTable;
+use Includes\Admin\Pages\Settings;
+
 class AdminOptions {
 
 	/**
@@ -39,6 +41,8 @@ class AdminOptions {
 	 */
 	public function add_page() {
 		add_menu_page( 'WP All Forms API', 'WP All Forms API', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
+		add_submenu_page( 'wp_all_forms_api', 'Usuarios logados', 'Usuarios logados', 'manage_options', 'wp_all_forms_api');
+		add_submenu_page( 'wp_all_forms_api', 'WP All Forms API Settings', 'Configurações', 'manage_options', 'wp_all_forms_api_settings', array( new Settings(), 'render' ));
 	}
 
 	private function add_role() {
