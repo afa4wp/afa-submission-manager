@@ -1,5 +1,5 @@
 {
-    "name": "claud/wp-general-rest-api",
+    "name": "claud/wp-all-forms-api",
     "autoload": {
         "psr-4": {
             "Includes\\Routes\\": "includes/routes/",

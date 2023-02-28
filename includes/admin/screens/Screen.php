@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class WP_AFA_Screen {
+abstract class Screen {
 
 	/**
 	 * Screen ID

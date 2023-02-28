@@ -7,7 +7,8 @@
  */
 
 namespace Includes\Admin\Screens;
-use Includes\Admin\Screens\WP_AFA_Screen;
+
+use Includes\Admin\Screens\Screen;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -19,10 +20,10 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class WP_AFA_Screen_Staff extends WP_AFA_Screen{
+class ScreenAbout extends Screen{
 
 	// Tab param .
-	const ID = 'staff';
+	const ID = 'about';
 
 	/**
 	 * Connection constructor.
@@ -30,7 +31,7 @@ class WP_AFA_Screen_Staff extends WP_AFA_Screen{
 
 	 public function __construct() {
 		$this->id = self::ID;
-		$this->label = 'staff';
+		$this->label = 'About plugin';
 	}
 
 	/**
@@ -43,7 +44,7 @@ class WP_AFA_Screen_Staff extends WP_AFA_Screen{
 	public function render() {
 		?>
 			<div >
-				ola teste
+				about
 			</div>
 		<?php
 	}
