@@ -59,4 +59,12 @@ abstract class Screen {
 		return $this->label;
 	}
 
+	/**
+	 * Render the screen.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
+	abstract public function render();
 }
