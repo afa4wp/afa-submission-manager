@@ -28,6 +28,11 @@ class Settings {
 		$this->screens[ ScreenAbout::ID ]       = new ScreenAbout();
 	}
 
+	/**
+	 * Settings screens
+	 *
+	 * @return Screen[]
+	 */
 	public function get_screens() {
 
 		$screens = array_filter(
@@ -46,10 +51,10 @@ class Settings {
 
 		$tabs = $this->get_tabs();
 
-		$current_tab = '';
+		$current_tab = ScreenMobileLogin::ID;
 
-		if ( ! empty( $_GET['tab'] ) ) {
-			$current_tab = $_GET['tab'];
+		if ( isset( $_GET['tab'] ) && in_array( $_GET['tab'], array_keys( $tabs ), true ) ) {
+			$current_tab = sanitize_text_field( wp_unslash( $_GET['tab'] ) );
 		}
 
 		?>
@@ -65,11 +70,10 @@ class Settings {
 		<?php
 	}
 
-
 	/**
 	 * Gets the tabs.
 	 *
-	 * @return void
+	 * @return string[]
 	 */
 	public function get_tabs() {
 
