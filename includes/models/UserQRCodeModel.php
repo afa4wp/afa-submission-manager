@@ -28,17 +28,18 @@ class UserQRCodeModel {
 	const EXP_SECRET_IN_SECOND = 300;
 
 	/**
-	 * Data base name
+	 * Table base name
 	 *
 	 * @var string
 	 */
-	private $data_base_name;
+	private $table_name;
 
 	/**
 	 * UserQRCodeModel constructor.
 	 */
 	public function __construct() {
-		$this->data_base_name = $_ENV['DATA_BASE_PREFIX'] . 'user_qr_codes';
+		global $wpdb;
+		$this->table_name = $wpdb->prefix . $_ENV['DATA_BASE_PREFIX'] . 'user_qr_codes';
 	}
 
 	/**
@@ -60,10 +61,38 @@ class UserQRCodeModel {
 		);
 
 		$results = $wpdb->insert(
-			$wpdb->prefix . $this->data_base_name,
+			$this->table_name,
 			$item
-		);
+		); // db call ok; no-cache ok.
 
 		return $results;
+	}
+
+	/**
+	 * Get user QRCode register
+	 *
+	 * @param string $user_id The user ID.
+	 *
+	 * @return Object|null
+	 */
+	public function qr_code_by_user_id( $user_id ) {
+
+		global $wpdb;
+
+		$results = $wpdb->get_results(
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				"SELECT * FROM {$this->table_name} WHERE user_id=%d ",
+				$user_id
+			),
+			OBJECT
+		);
+
+		if ( count( $results ) > 0 ) {
+			return $results[0];
+		}
+
+		return null;
+
 	}
 }
