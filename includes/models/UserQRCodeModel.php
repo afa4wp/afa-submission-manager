@@ -95,4 +95,28 @@ class UserQRCodeModel {
 		return null;
 
 	}
+
+	/**
+	 * Delete user QRCode register
+	 *
+	 * @param string $user_id The user ID.
+	 *
+	 * @return int|false
+	 */
+	public function delete_qr_code_by_user_id( $user_id ) {
+
+		global $wpdb;
+
+		$item = array(
+			'user_id' => $user_id,
+		);
+
+		$results = $wpdb->delete(
+			$this->table_name,
+			$item
+		);
+
+		return $results;
+
+	}
 }
