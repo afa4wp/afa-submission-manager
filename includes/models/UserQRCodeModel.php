@@ -119,4 +119,31 @@ class UserQRCodeModel {
 		return $results;
 
 	}
+
+	/**
+	 * Check if QRCode register exist for user
+	 *
+	 * @param string $user_id The user ID.
+	 *
+	 * @return true|false
+	 */
+	public function check_if_exist_qr_code_for_user_id( $user_id ) {
+
+		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT id FROM {$this->table_name} WHERE user_id=%d ", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				(int) $user_id
+			)
+		);
+
+		if(!$results){
+			return false;
+		} 
+
+		return true;
+	}
+
 }
