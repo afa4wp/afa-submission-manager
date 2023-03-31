@@ -55,7 +55,7 @@ class UserQRCodeModel {
 
 		$item = array(
 			'user_id'       => $user_id,
-			'secret'        => $secret,
+			'secret'        => hash( 'sha256', $secret ),
 			'created_at'    => gmdate( 'Y-m-d H:i:s' ),
 			'expire_secret' => gmdate( 'Y-m-d H:i:s', time() + self::EXP_SECRET_IN_SECOND ),
 		);
