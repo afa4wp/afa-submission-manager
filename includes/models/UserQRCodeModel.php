@@ -139,11 +139,33 @@ class UserQRCodeModel {
 			)
 		);
 
-		if(!$results){
+		if ( ! $results ) {
 			return false;
-		} 
+		}
 
 		return true;
 	}
+
+	/**
+	 * Generate new QRCode for user
+	 *
+	 * @param string $user_id The user ID.
+	 * @param string $secret The user access token.
+	 *
+	 * @return void
+	 */
+	public function generate_new_qr_code( $user_id, $secret ) {
+
+		$qr_code_exist = $this->check_if_exist_qr_code_for_user_id( $user_id );
+
+		if ( $qr_code_exist ) {
+			$this->delete_qr_code_by_user_id( $user_id );
+		}
+
+		$this->create( $user_id, $secret );
+
+	}
+
+
 
 }
