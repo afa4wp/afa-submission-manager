@@ -1,36 +1,72 @@
 <?php
+/**
+ * The QRCOde Plugigin Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Plugins;
 
- use chillerlan\QRCode\QRCode as ChillerlanQRCode;
+use chillerlan\QRCode\QRCode as ChillerlanQRCode;
+use Includes\Models\UserQRCodeModel;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class QRCode
+ *
+ * Manipulate QRCode view
+ *
+ * @since 1.0.0
+ */
 class QRCode {
 
-	private $chillerlanQRCode;
+	/**
+	 * Class to generate QRCode
+	 *
+	 * @var ChillerlanQRCode
+	 */
+	private $chillerlan_qr_code;
 
+	/**
+	 * QRCode constructor.
+	 */
 	public function __construct() {
-		 $this->chillerlanQRCode = new ChillerlanQRCode();
+		$this->chillerlan_qr_code = new ChillerlanQRCode();
 	}
 
-	public function generateQRCode() {
-		$data = $this->getData();
-		return $this->chillerlanQRCode->render( $data );
+	/**
+	 * Generate new QRCode
+	 *
+	 * @return string
+	 */
+	public function generate_qr_code() {
+		$data = $this->get_data();
+		return $this->chillerlan_qr_code->render( $data );
 	}
 
-	private function getData() {
+	/**
+	 * Create new QRCode for logged user
+	 *
+	 * @return string
+	 */
+	private function get_data() {
+
+		$user_qrcode_model = new UserQRCodeModel();
 
 		$url = get_site_url();
 
-		$access_token = '12222222222222';
-
-		$refresh_token = '12222222222222';
+		$secret  = base64_encode( openssl_random_pseudo_bytes( 30 ) );
+		$user_id = get_current_user_id();
+		$user_qrcode_model->generate_new_qr_code( $user_id, $secret );
 
 		$data = array(
-			'url'           => $url,
-			'access_token'  => $access_token,
-			'refresh_token' => $refresh_token,
+			'url'    => $url,
+			'secret' => $secret,
 		);
 
-		return implode( ';', $data );
+		return wp_json_encode( $data );
 	}
 }
