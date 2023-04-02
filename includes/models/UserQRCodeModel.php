@@ -8,6 +8,8 @@
 
 namespace Includes\Models;
 
+use WP_Error;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -166,6 +168,63 @@ class UserQRCodeModel {
 
 	}
 
+	/**
+	 * Verify QRCode
+	 *
+	 * @param string $user_id The user ID.
+	 * @param string $secret The user token.
+	 *
+	 * @return void|WP_Error
+	 */
+	public function verify_qr_code( $user_id, $secret ) {
+
+		global $wpdb;
+
+		$results = $wpdb->get_results(
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				"SELECT * FROM {$this->table_name} WHERE user_id=%d ",
+				$user_id
+			),
+			OBJECT
+		);
+
+		if ( ! ( count( $results ) > 0 ) ) {
+			return new WP_Error(
+				'invalid_user',
+				'User not found',
+				array(
+					'status' => 403,
+				)
+			);
+		}
+
+		if ( ! hash_equals( $results[0]->secret, hash( 'sha256', $secret ) ) ) {
+			return new WP_Error(
+				'qr_code_auth_invalid_token',
+				'QRCode token not found',
+				array(
+					'status' => 403,
+				)
+			);
+		}
+
+		$date_time_now           = strtotime( gmdate( 'Y-m-d H:i:s' ) );
+		$date_time_expire_secret = strtotime( gmdate( $results[0]->expire_secret ) );
+
+		if ( $date_time_now > $date_time_expire_secret ) {
+			return new WP_Error(
+				'qr_code_auth_invalid_token',
+				'QRCode token is expired',
+				array(
+					'status' => 403,
+				)
+			);
+		}
+
+		return true;
+
+	}
 
 
 }
