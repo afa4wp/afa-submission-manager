@@ -1,24 +1,59 @@
 <?php
+/**
+ * The User Controller Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Controllers;
 
 use Includes\Models\UserModel;
 use Includes\Models\UserTokensModel;
 use Includes\Plugins\JWT\JWTPlugin;
+use Includes\Models\UserQRCodeModel;
 use WP_Error;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class UserController
+ *
+ * Manipulate User info
+ *
+ * @since 1.0.0
+ */
 class UserController {
 
-	private $userModel;
+	/**
+	 * User Model
+	 *
+	 * @var UserModel
+	 */
+	private $user_model;
 
-	private $JWTPlugin;
+	/**
+	 * JWT Plugin
+	 *
+	 * @var JWTPlugin
+	 */
+	private $jwt_plugin;
 
-	private $userTokensModel;
+	/**
+	 * User Tokens Model
+	 *
+	 * @var UserTokensModel
+	 */
+	private $user_tokens_model;
 
+	/**
+	 * UserController constructor.
+	 */
 	public function __construct() {
-		 $this->userModel      = new UserModel();
-		$this->JWTPlugin       = new JWTPlugin();
-		$this->userTokensModel = new UserTokensModel();
+		$this->user_model        = new UserModel();
+		$this->jwt_plugin        = new JWTPlugin();
+		$this->user_tokens_model = new UserTokensModel();
 	}
 
 	/**
@@ -29,22 +64,21 @@ class UserController {
 	 * @return WP_User|WP_Error $user WP User with tokens info
 	 */
 	public function login( $request ) {
-		 $username = $request['username'];
-		$password  = $request['password'];
+		$username = $request['username'];
+		$password = $request['password'];
 
-		$user = $this->userModel->login( $username, $password );
+		$user = $this->user_model->login( $username, $password );
 
-		// retorna o erro se usuario não conseguir logar
 		if ( is_wp_error( $user ) ) {
 			return rest_ensure_response( $user );
 		}
 
-		$this->userTokensModel->deleteUserTokenByID( $user->data->ID );
+		$this->user_tokens_model->deleteUserTokenByID( $user->data->ID );
 
-		$access_token         = $this->JWTPlugin->generateToken( $user->data->ID );
-		$access_refresh_token = $this->JWTPlugin->generateRefreshToken( $user->data->ID );
+		$access_token         = $this->jwt_plugin->generateToken( $user->data->ID );
+		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user->data->ID );
 
-		$this->userTokensModel->create( $user->data->ID, $access_token, $access_refresh_token );
+		$this->user_tokens_model->create( $user->data->ID, $access_token, $access_refresh_token );
 
 		$data = array(
 			'access_token'      => $access_token,
@@ -58,6 +92,67 @@ class UserController {
 	}
 
 	/**
+	 * Login with QRCode .
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return WP_User|WP_Error $user WP User with tokens info
+	 */
+	public function login_qr_code( $request ) {
+
+		$secret = $request['secret'];
+
+		$result = explode( '|', $secret, 2 );
+
+		if ( count( $result ) !== 2 ) {
+			return new WP_Error(
+				'qr_code_auth_invalid_token',
+				'QRCode token bad format',
+				array(
+					'status' => 403,
+				)
+			);
+		}
+
+		$user_id = $result[0];
+		$user    = get_user_by( 'ID', $user_id );
+
+		if ( false === $user ) {
+			return new WP_Error(
+				'invalid_user',
+				'User not found',
+				array(
+					'status' => 403,
+				)
+			);
+		}
+
+		$secret = $result[1];
+
+		$verify_qr_code = ( new UserQRCodeModel() )->verify_qr_code( $user_id, $secret );
+
+		if ( is_wp_error( $verify_qr_code ) ) {
+			return rest_ensure_response( $verify_qr_code );
+		}
+
+		$this->user_tokens_model->deleteUserTokenByID( $user->data->ID );
+
+		$access_token         = $this->jwt_plugin->generateToken( $user->data->ID );
+		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user->data->ID );
+
+		$this->user_tokens_model->create( $user->data->ID, $access_token, $access_refresh_token );
+
+		$data = array(
+			'access_token'  => $access_token,
+			'refresh_token' => $access_refresh_token,
+			'id'            => $user->data->ID,
+		);
+
+		return rest_ensure_response( $data );
+	}
+
+
+	/**
 	 * Get user.
 	 *
 	 * @param WP_REST_Request $request The request.
@@ -65,7 +160,7 @@ class UserController {
 	 * @return array $user Some User info.
 	 */
 	public function user( $request ) {
-		return rest_ensure_response( $this->userModel->user() );
+		return rest_ensure_response( $this->user_model->user() );
 	}
 
 	/**
@@ -77,15 +172,16 @@ class UserController {
 	 * @return array $data The info with user id, acess token and  refresh token.
 	 */
 	public function token( $request ) {
-		 $refresh_token = $request['refresh_token'];
-		$validate       = $this->JWTPlugin->validateRefreshToken( $refresh_token );
+
+		$refresh_token = $request['refresh_token'];
+		$validate      = $this->jwt_plugin->validateRefreshToken( $refresh_token );
 
 		if ( is_wp_error( $validate ) ) {
 			return rest_ensure_response( $validate );
 		}
 
 		$user_id              = $validate->id;
-		$check_resfresh_token = $this->userTokensModel->checkIfRefreshTokenExist( $user_id, $refresh_token );
+		$check_resfresh_token = $this->user_tokens_model->checkIfRefreshTokenExist( $user_id, $refresh_token );
 
 		if ( ! $check_resfresh_token ) {
 			return new WP_Error(
@@ -97,12 +193,12 @@ class UserController {
 			);
 		}
 
-		$this->userTokensModel->deleteUserTokenByID( $user_id );
+		$this->user_tokens_model->deleteUserTokenByID( $user_id );
 
-		$access_token         = $this->JWTPlugin->generateToken( $user_id );
-		$access_refresh_token = $this->JWTPlugin->generateRefreshToken( $user_id );
+		$access_token         = $this->jwt_plugin->generateToken( $user_id );
+		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user_id );
 
-		$this->userTokensModel->create( $user_id, $access_token, $access_refresh_token );
+		$this->user_tokens_model->create( $user_id, $access_token, $access_refresh_token );
 
 		$data = array(
 			'access_token'  => $access_token,
