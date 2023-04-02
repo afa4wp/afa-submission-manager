@@ -14,6 +14,7 @@ class PublicRoute {
 	 */
 	private $publicRoutes = array(
 		'/user/login',
+		'/user/login/qrcode',
 		'/user/token',
 		'/ping',
 	);

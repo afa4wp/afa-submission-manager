@@ -36,6 +36,24 @@ class UserRoute {
 	}
 
 	/**
+	 * Create login with qrcode.
+	 */
+	public function login_qr_code() {
+		register_rest_route(
+			$this->name,
+			'/user/login/qrcode',
+			array(
+				array(
+					'methods'             => 'POST',
+					'callback'            => array( new UserController(), 'login_qr_code' ),
+					'permission_callback' => '__return_true',
+				),
+
+			)
+		);
+	}
+
+	/**
 	 * Create info endpoint.
 	 */
 	public function user_me() {
@@ -76,6 +94,7 @@ class UserRoute {
 	 */
 	public function initRoutes() {
 		$this->login();
+		$this->login_qr_code();
 		$this->user_me();
 		$this->token();
 	}
