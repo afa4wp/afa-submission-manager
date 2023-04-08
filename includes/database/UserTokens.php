@@ -1,23 +1,49 @@
 <?php
+/**
+ * The UserTokens Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Database;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class UserTokens
+ *
+ * Create table user_tokens
+ *
+ * @since 1.0.0
+ */
 class UserTokens {
 
-	private $dataBaseName;
-
-	public function __construct() {
-		 $this->dataBaseName = $_ENV['DATA_BASE_PREFIX'] . 'user_tokens';
-	}
 	/**
-	 * create fra_user_tokens table .
+	 * Table name
+	 *
+	 * @var string
 	 */
-	public function createTable() {
+	private $table_name;
+
+	/**
+	 * UserTokens constructor.
+	 */
+	public function __construct() {
+		global $wpdb;
+		$this->table_name = $wpdb->prefix . $_ENV['DATA_BASE_PREFIX'] . 'user_tokens';
+	}
+	
+	/**
+	 * Create fra_user_tokens table .
+	 */
+	public function create_table() {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		global $wpdb;
 
-		$sql = 'CREATE TABLE IF NOT EXISTS ' . $wpdb->prefix . $this->dataBaseName . ' (
+		$sql = 'CREATE TABLE IF NOT EXISTS ' . $this->table_name . ' (
         id BIGINT(20) NOT NULL AUTO_INCREMENT,
         user_id BIGINT(20)  UNSIGNED NOT NULL,
         access_token VARCHAR(255) NOT NULL,
@@ -29,7 +55,7 @@ class UserTokens {
         UNIQUE(refresh_token)
       )' . $wpdb->get_charset_collate();
 
-		 dbDelta( $sql );
+		dbDelta( $sql );
 	}
 
 }
