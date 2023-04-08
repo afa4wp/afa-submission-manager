@@ -9,6 +9,7 @@
 namespace Includes\Admin\Screens;
 
 use Includes\Admin\Screens\Screen;
+use Includes\Plugins\QRCode;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -20,34 +21,43 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class ScreenMobileLogin extends Screen{
+class ScreenMobileLogin extends Screen {
 
-	// Tab param .
+	/**
+	 * Tab param
+	 *
+	 * @var string
+	 */
 	const ID = 'qrcode';
 
 	/**
-	 * Connection constructor.
+	 * ScreenMobileLogin constructor.
 	 */
-
-	 public function __construct() {
-		$this->id = self::ID;
+	public function __construct() {
+		$this->id    = self::ID;
 		$this->label = 'Generate QRCode';
 	}
 
 	/**
-	 * Show staff content
+	 * Render content
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return void
 	 */
 	public function render() {
+
+		$qr_code           = new QRCode();
+		$generated_qr_code = $qr_code->generate_qr_code();
+
 		?>
-			<div >
-				mobile
+			<div>
+				Scan the following QR Code using the WP AFA app.
+			</div>
+			<div>
+				<img src="<?php echo esc_html( $generated_qr_code ); ?>"  alt="QR Code"/>
 			</div>
 		<?php
 	}
 
 }
-
