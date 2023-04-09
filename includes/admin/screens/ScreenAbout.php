@@ -14,7 +14,7 @@ use Includes\Admin\Screens\Screen;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class WP_AFA_Staff
+ * Class ScreenAbout
  *
  * Render Staff content
  *

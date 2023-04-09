@@ -15,7 +15,7 @@ use Includes\Plugins\QRCode;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class WP_AFA_Staff
+ * Class ScreenMobileLogin
  *
  * Render Staff content
  *
