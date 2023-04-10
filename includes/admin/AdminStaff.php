@@ -73,7 +73,7 @@ class AdminStaff {
 	public function add_user_staff_column_content( $output, $column_name, $user_id ) {
 		if ( 'wp_all_forms_api_user_staff_column' === $column_name ) {
 
-			$user_can_manage_wp_afa = ( new UserModel() )->userCanManageWPAFA( $user_id );
+			$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
 
 			if ( $user_can_manage_wp_afa ) {
 				if ( user_can( $user_id, 'manage_options' ) ) {
@@ -132,7 +132,7 @@ class AdminStaff {
 	 */
 	public function add_staff( $user_id ) {
 
-		$user_can_manage_wp_afa = ( new UserModel() )->userCanManageWPAFA( $user_id );
+		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
 
 		if ( ! $user_can_manage_wp_afa ) {
 			$user = new \WP_User( $user_id );
@@ -154,7 +154,7 @@ class AdminStaff {
 	 * @return void
 	 */
 	public function remove_staff( $user_id ) {
-		$user_can_manage_wp_afa = ( new UserModel() )->userCanManageWPAFA( $user_id );
+		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
 
 		if ( $user_can_manage_wp_afa ) {
 			$user = new \WP_User( $user_id );

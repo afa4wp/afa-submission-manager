@@ -25,7 +25,7 @@ class UserModel {
 		);
 
 		if ( ! is_wp_error( $login ) ) {
-			if ( ! $this->userCanManageWPAFA( $login->ID ) ) {
+			if ( ! $this->user_can_manage_wp_afa( $login->ID ) ) {
 				return new \WP_Error(
 					'invalid_role',
 					'Sorry, you are not allowed to login',
@@ -78,7 +78,7 @@ class UserModel {
 		 return $user_info;
 	}
 
-	public function userCanManageWPAFA( $user_id ) {
+	public function user_can_manage_wp_afa( $user_id ) {
 		$user = new \WP_User( $user_id );
 		if($user->exists()){
 			if (user_can( $user_id, 'manage_options' )){

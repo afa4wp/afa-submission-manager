@@ -14,7 +14,7 @@ require __DIR__ . '/vendor/autoload.php';
  * License:           GPL v2 or later
  * License URI:       https://claudionhangapc/gpl-2.0.html
  * Update URI:        https://claudionhangapc.com
- * Text Domain:       https://claudionhangapc.com
+ * Text Domain:       wp-all-forms-api
  */
 
 define( 'WP_ALL_FORMS_API_PLUGIN_FILE', __FILE__ );
