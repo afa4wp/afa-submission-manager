@@ -4,15 +4,9 @@ namespace Includes\Admin;
 
 use Includes\Admin\Pages\UserListTable;
 use Includes\Admin\Pages\Settings;
+use Includes\Admin\AdminStaff;
 
 class AdminOptions {
-
-	/**
-	 * WO Options Name
-	 *
-	 * @var string
-	 */
-	protected $option_name = 'wo_options';
 
 	/**
 	 * WP OAuth Server Admin Setup
@@ -22,7 +16,7 @@ class AdminOptions {
 	public function init() {
 
 		add_action( 'init', array( $this, 'wp_init' ), 1 );
-		// add_action( 'admin_init', array( new self(), 'admin_init' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_page' ), 1 );
 	}
 
@@ -32,9 +26,7 @@ class AdminOptions {
 	 * @return [type] [description]
 	 */
 	public function admin_init() {
-		// register_setting( 'wo-options-group', $this->option_name );
-
-		// New Pages Layout
+		new AdminStaff();
 	}
 	/**
 	 * [add_page description]

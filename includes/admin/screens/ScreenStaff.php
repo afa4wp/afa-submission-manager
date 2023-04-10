@@ -1,6 +1,6 @@
 <?php
 /**
- * The staff tub item for configuration screen
+ * The staff tab item for configuration screen
  *
  * @package  WP_All_Forms_API
  * @since 1.0.0
