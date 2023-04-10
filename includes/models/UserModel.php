@@ -79,7 +79,17 @@ class UserModel {
 	}
 
 	public function userCanManageWPAFA( $user_id ) {
-		return ( user_can( $user_id, 'manage_options' ) || user_can( $user_id, 'manage_wp_afa' ) );
+		$user = new \WP_User( $user_id );
+		if($user->exists()){
+			if (user_can( $user_id, 'manage_options' )){
+				return true;
+			}
+			if ( in_array( 'wp_afa_staff', $user->roles, true ) ) {
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 
 }
