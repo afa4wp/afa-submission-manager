@@ -127,6 +127,16 @@ class UserController {
 			);
 		}
 
+		if ( ! $this->user_model->user_can_manage_wp_afa( $user_id ) ) {
+			return new \WP_Error(
+				'invalid_role',
+				'Sorry, you are not allowed to login',
+				array(
+					'status' => 401,
+				)
+			);
+		}
+
 		$secret = $result[1];
 
 		$verify_qr_code = ( new UserQRCodeModel() )->verify_qr_code( $user_id, $secret );
@@ -193,6 +203,16 @@ class UserController {
 			);
 		}
 
+		if ( ! $this->user_model->user_can_manage_wp_afa( $user_id ) ) {
+			return new \WP_Error(
+				'invalid_role',
+				'Sorry, you are not allowed to login',
+				array(
+					'status' => 401,
+				)
+			);
+		}
+		
 		$this->user_tokens_model->deleteUserTokenByID( $user_id );
 
 		$access_token         = $this->jwt_plugin->generateToken( $user_id );
