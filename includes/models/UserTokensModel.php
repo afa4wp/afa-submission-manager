@@ -5,10 +5,11 @@ namespace Includes\Models;
 class UserTokensModel {
 
 
-	private $dataBaseName;
+	private $table_name;
 
 	public function __construct() {
-		 $this->dataBaseName = $_ENV['DATA_BASE_PREFIX'] . 'user_tokens';
+		global $wpdb;
+		$this->table_name = $wpdb->prefix . $_ENV['DATA_BASE_PREFIX'] . 'user_tokens';
 	}
 
 	/**
@@ -22,7 +23,7 @@ class UserTokensModel {
 	public function checkIfRefreshTokenExist( $user_id, $refresh_token ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->dataBaseName . " WHERE user_id = $user_id", OBJECT );
+		$results = $wpdb->get_results( 'SELECT * FROM ' . $this->table_name . " WHERE user_id = $user_id", OBJECT );
 
 		if ( ! ( count( $results ) > 0 ) ) {
 			return false;
@@ -55,7 +56,7 @@ class UserTokensModel {
 		);
 
 		$results = $wpdb->insert(
-			$wpdb->prefix . $this->dataBaseName,
+			$this->table_name,
 			$item
 		);
 
@@ -75,7 +76,7 @@ class UserTokensModel {
 		);
 
 		$results = $wpdb->delete(
-			$wpdb->prefix . $this->dataBaseName,
+			$this->table_name,
 			$item
 		);
 
@@ -90,9 +91,25 @@ class UserTokensModel {
 	public function usersTokens( $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM ' . $wpdb->prefix . $this->dataBaseName . ' afa_ut INNER JOIN ' . $wpdb->prefix . 'users wp_u ON afa_ut.user_id = wp_u.ID', ARRAY_A );
+		$results = $wpdb->get_results( 'SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM ' . $this->table_name . ' afa_ut INNER JOIN ' . $wpdb->prefix . 'users wp_u ON afa_ut.user_id = wp_u.ID', ARRAY_A );
 
 		return $results;
+	}
+
+	/**
+	 * Get number of items
+	 *
+	 * @return int
+	 */
+	public function mumber_items() {
+
+		global $wpdb;
+
+		$results = $wpdb->get_results( 'SELECT count(*) as number_of_rows FROM ' . $this->table_name);
+
+		$number_of_rows = intval( $results[0]->number_of_rows );
+
+		return $number_of_rows;
 	}
 
 
