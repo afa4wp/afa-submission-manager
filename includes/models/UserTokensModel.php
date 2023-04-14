@@ -68,16 +68,21 @@ class UserTokensModel {
 	  *
 	  * @return int|false
 	  */
-	public function deleteUserTokenByID( $user_id ) {
+	public function delete_user_token_by_id( $user_id ) {
 		global $wpdb;
 
 		$item = array(
 			'user_id' => $user_id,
 		);
+		
+		$item_format = array(
+			'%d'
+		);
 
 		$results = $wpdb->delete(
 			$this->table_name,
-			$item
+			$item,
+			$item_format
 		);
 
 		return $results;
@@ -88,10 +93,15 @@ class UserTokensModel {
 	 *
 	 * @return array
 	 */
-	public function usersTokens( $offset, $number_of_records_per_page ) {
+	public function users_tokens( $offset = 0, $number_of_records_per_page = 20 ) {
+		
 		global $wpdb;
-
-		$results = $wpdb->get_results( 'SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM ' . $this->table_name . ' afa_ut INNER JOIN ' . $wpdb->prefix . 'users wp_u ON afa_ut.user_id = wp_u.ID', ARRAY_A );
+		
+		$sql = "SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afa_ut INNER JOIN  {$wpdb->prefix}users wp_u ON afa_ut.user_id = wp_u.ID ORDER BY id DESC LIMIT %d,%d";
+		
+		$sql = $wpdb->prepare($sql,array($offset, $number_of_records_per_page));// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		
+		$results = $wpdb->get_results($sql, ARRAY_A);
 
 		return $results;
 	}
