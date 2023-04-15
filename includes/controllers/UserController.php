@@ -73,7 +73,7 @@ class UserController {
 			return rest_ensure_response( $user );
 		}
 
-		$this->user_tokens_model->deleteUserTokenByID( $user->data->ID );
+		$this->user_tokens_model->delete_user_token_by_id( $user->data->ID );
 
 		$access_token         = $this->jwt_plugin->generateToken( $user->data->ID );
 		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user->data->ID );
@@ -145,7 +145,7 @@ class UserController {
 			return rest_ensure_response( $verify_qr_code );
 		}
 
-		$this->user_tokens_model->deleteUserTokenByID( $user->data->ID );
+		$this->user_tokens_model->delete_user_token_by_id( $user->data->ID );
 
 		$access_token         = $this->jwt_plugin->generateToken( $user->data->ID );
 		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user->data->ID );
@@ -212,8 +212,8 @@ class UserController {
 				)
 			);
 		}
-		
-		$this->user_tokens_model->deleteUserTokenByID( $user_id );
+
+		$this->user_tokens_model->delete_user_token_by_id( $user_id );
 
 		$access_token         = $this->jwt_plugin->generateToken( $user_id );
 		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user_id );
