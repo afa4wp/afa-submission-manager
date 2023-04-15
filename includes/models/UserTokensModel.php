@@ -1,12 +1,35 @@
 <?php
+/**
+ * The User Tokens Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class UserTokensModel
+ *
+ * Manipulate User logged info
+ *
+ * @since 1.0.0
+ */
 class UserTokensModel {
 
-
+	/**
+	 * Table name
+	 *
+	 * @var string
+	 */
 	private $table_name;
 
+	/**
+	 * UserQRCodeModel constructor.
+	 */
 	public function __construct() {
 		global $wpdb;
 		$this->table_name = $wpdb->prefix . $_ENV['DATA_BASE_PREFIX'] . 'user_tokens';
@@ -15,15 +38,15 @@ class UserTokensModel {
 	/**
 	 * Verify if Refresh token exist
 	 *
-	 * @param string $user_id The user ID
-	 * @param string $refresh_token The user refresh token
+	 * @param string $user_id The user ID.
+	 * @param string $refresh_token The user refresh token.
 	 *
 	 * @return bool
 	 */
-	public function checkIfRefreshTokenExist( $user_id, $refresh_token ) {
+	public function check_if_refresh_token_exist( $user_id, $refresh_token ) {
 		global $wpdb;
-
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $this->table_name . " WHERE user_id = $user_id", OBJECT );
+		$sql     = "SELECT * FROM {$this->table_name}  WHERE user_id = %d";
+		$results = $wpdb->get_results( $wpdb->prepare( $sql, array( $user_id ) ), OBJECT ); // phpcs:ignore
 
 		if ( ! ( count( $results ) > 0 ) ) {
 			return false;
@@ -39,22 +62,23 @@ class UserTokensModel {
 	/**
 	 * Create new token register
 	 *
-	 * @param string $user_id The user ID
-	 * @param string $access_token The user access token
-	 * @param string $refresh_token The user refresh token
+	 * @param int    $user_id The user ID.
+	 * @param string $access_token The user access token.
+	 * @param string $refresh_token The user refresh token.
 	 *
 	 * @return int|false
 	 */
 	public function create( $user_id, $access_token, $refresh_token ) {
-		 global $wpdb;
+		global $wpdb;
 
 		$item = array(
 			'user_id'       => $user_id,
 			'access_token'  => hash( 'sha256', $access_token ),
 			'refresh_token' => hash( 'sha256', $refresh_token ),
-			'created_at'    => date( 'Y-m-d H:i:s' ),
+			'created_at'    => gmdate( 'Y-m-d H:i:s' ),
 		);
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 		$results = $wpdb->insert(
 			$this->table_name,
 			$item
@@ -63,22 +87,25 @@ class UserTokensModel {
 		return $results;
 	}
 
-	 /**
-	  * Delete token register
-	  *
-	  * @return int|false
-	  */
+	/**
+	 * Delete token register
+	 *
+	 * @param string $user_id The user ID.
+	 *
+	 * @return int|false
+	 */
 	public function delete_user_token_by_id( $user_id ) {
 		global $wpdb;
 
 		$item = array(
 			'user_id' => $user_id,
 		);
-		
+
 		$item_format = array(
-			'%d'
+			'%d',
 		);
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->delete(
 			$this->table_name,
 			$item,
@@ -91,17 +118,45 @@ class UserTokensModel {
 	/**
 	 * Get UserTokens
 	 *
+	 * @param int $offset The offset page.
+	 * @param int $number_of_records_per_page The number of items.
+	 *
 	 * @return array
 	 */
 	public function users_tokens( $offset = 0, $number_of_records_per_page = 20 ) {
-		
+
 		global $wpdb;
-		
+
 		$sql = "SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afa_ut INNER JOIN  {$wpdb->prefix}users wp_u ON afa_ut.user_id = wp_u.ID ORDER BY id DESC LIMIT %d,%d";
-		
-		$sql = $wpdb->prepare($sql,array($offset, $number_of_records_per_page));// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		
-		$results = $wpdb->get_results($sql, ARRAY_A);
+
+		$sql = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( $sql, ARRAY_A );
+
+		return $results;
+	}
+
+	/**
+	 * Get UserTokens
+	 *
+	 * @param string $user_info The user info.
+	 * @param int    $offset The offset page.
+	 * @param int    $number_of_records_per_page The number of items.
+	 *
+	 * @return array
+	 */
+	public function search_users_tokens( $user_info, $offset = 0, $number_of_records_per_page = 20 ) {
+
+		global $wpdb;
+
+		$sql = "SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afa_ut INNER JOIN  {$wpdb->prefix}users wp_u ON afa_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s ORDER BY id DESC LIMIT %d,%d";
+
+		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
+
+		$sql = $wpdb->prepare( $sql, array( $user_info, $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( $sql, ARRAY_A );
 
 		return $results;
 	}
@@ -115,12 +170,37 @@ class UserTokensModel {
 
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT count(*) as number_of_rows FROM ' . $this->table_name);
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( "SELECT count(*) as number_of_rows FROM {$this->table_name}" );
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
 		return $number_of_rows;
 	}
 
+	/**
+	 * Get number of items by search
+	 *
+	 * @param string $user_info The user info.
+	 *
+	 * @return int
+	 */
+	public function mumber_items_search( $user_info ) {
+
+		global $wpdb;
+
+		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} afa_ut INNER JOIN {$wpdb->prefix}users wp_u ON afa_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s";
+
+		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
+
+		$sql = $wpdb->prepare( $sql, array( $user_info, $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( $sql, OBJECT );
+
+		$number_of_rows = intval( $results[0]->number_of_rows );
+
+		return $number_of_rows;
+	}
 
 }
