@@ -11,7 +11,7 @@ namespace Includes\Routes;
 /**
  * Class PingRoute
  *
- * Manipulate User info
+ * Show if plugin is active
  *
  * @since 1.0.0
  */
