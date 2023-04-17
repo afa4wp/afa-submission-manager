@@ -15,6 +15,7 @@ require __DIR__ . '/vendor/autoload.php';
  * License URI:       https://claudionhangapc/gpl-2.0.html
  * Update URI:        https://claudionhangapc.com
  * Text Domain:       wp-all-forms-api
+ * Domain Path:       /languages
  */
 
 define( 'WP_ALL_FORMS_API_PLUGIN_FILE', __FILE__ );
@@ -51,3 +52,8 @@ register_activation_hook( WP_ALL_FORMS_API_PLUGIN_FILE, array( new DatabaseInsta
 ( new AdminOptions() )->init();
 
 
+function wp_all_forms_api_rest_init_load_textdomain(){
+	load_plugin_textdomain( 'wp-all-forms-api', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+}
+
+add_action( 'init', 'wp_all_forms_api_rest_init_load_textdomain' );

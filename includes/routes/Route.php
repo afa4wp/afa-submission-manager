@@ -1,4 +1,10 @@
 <?php
+/**
+ * The Main Route Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Routes;
 
@@ -9,10 +15,30 @@ use Includes\Routes\WPF\Route as WPFRoute;
 use Includes\Routes\WEF\Route as WEFRoute;
 use Includes\Routes\CF7\Route as CF7Route;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class Route
+ *
+ * Manipulate User info
+ *
+ * @since 1.0.0
+ */
 class Route {
 
+	/**
+	 * User Tokens Model
+	 *
+	 * @var string
+	 */
 	private $name;
 
+	/**
+	 * Route constructor.
+	 *
+	 * @param string $name The route name.
+	 */
 	public function __construct( $name ) {
 		$this->name = $name;
 	}

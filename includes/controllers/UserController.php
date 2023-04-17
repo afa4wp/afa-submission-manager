@@ -191,7 +191,7 @@ class UserController {
 		}
 
 		$user_id              = $validate->id;
-		$check_resfresh_token = $this->user_tokens_model->checkIfRefreshTokenExist( $user_id, $refresh_token );
+		$check_resfresh_token = $this->user_tokens_model->check_if_refresh_token_exist( $user_id, $refresh_token );
 
 		if ( ! $check_resfresh_token ) {
 			return new WP_Error(

@@ -84,4 +84,15 @@ class UserTokensController {
 		return $results;
 	}
 
+	/**
+	 * Delete token register
+	 *
+	 * @param string $user_id The user ID.
+	 *
+	 * @return int|false
+	 */
+	public function delete_user_token_by_id( $user_id ) {
+		return $this->user_tokens_model->delete_user_token_by_id( $user_id );
+	}
+
 }
