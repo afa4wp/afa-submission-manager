@@ -1,14 +1,34 @@
 <?php
+/**
+ * The PingRoute Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Routes;
 
+/**
+ * Class PingRoute
+ *
+ * Manipulate User info
+ *
+ * @since 1.0.0
+ */
 class PingRoute {
 
 	/**
-	 * The slugs in the URL before the endpoint.
+	 * The route name space
+	 *
+	 * @var string
 	 */
 	private $name;
 
+	/**
+	 * Route constructor.
+	 *
+	 * @param string $name The route name space.
+	 */
 	public function __construct( $name ) {
 		$this->name = $name;
 	}
@@ -23,7 +43,7 @@ class PingRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( $this, 'pingFunc' ),
+					'callback'            => array( $this, 'ping_callback' ),
 					'permission_callback' => '__return_true',
 				),
 			)
@@ -34,7 +54,7 @@ class PingRoute {
 	/**
 	 * Create ping callback.
 	 */
-	public function pingFunc() {
+	public function ping_callback() {
 		return rest_ensure_response(
 			array(
 				'ping' => 'pong',
@@ -45,7 +65,7 @@ class PingRoute {
 	/**
 	 * Call all endpoints
 	 */
-	public function initRoutes() {
+	public function init_routes() {
 		$this->ping();
 	}
 
