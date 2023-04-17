@@ -21,14 +21,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Class Route
  *
- * Manipulate User info
+ * Init all routes
  *
  * @since 1.0.0
  */
 class Route {
 
 	/**
-	 * User Tokens Model
+	 * The route name space
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class Route {
 	/**
 	 * Route constructor.
 	 *
-	 * @param string $name The route name.
+	 * @param string $name The route name space.
 	 */
 	public function __construct( $name ) {
 		$this->name = $name;
@@ -47,13 +47,14 @@ class Route {
 	 * Init all routes.
 	 */
 	public function init() {
-		( new PingRoute( $this->name ) )->initRoutes();
-		( new UserRoute( $this->name ) )->initRoutes();
+		( new PingRoute( $this->name ) )->init_routes();
+		( new UserRoute( $this->name ) )->init_routes();
 
-		( new GFRoute( $this->name ) )->initRoutes();
-		( new WPFRoute( $this->name ) )->initRoutes();
-		( new WEFRoute( $this->name ) )->initRoutes();
-		( new CF7Route( $this->name ) )->initRoutes();
+		// Forms routes.
+		( new GFRoute( $this->name ) )->init_routes();
+		( new WPFRoute( $this->name ) )->init_routes();
+		( new WEFRoute( $this->name ) )->init_routes();
+		( new CF7Route( $this->name ) )->init_routes();
 
 	}
 
