@@ -178,7 +178,7 @@ class JWTPlugin {
 
 				$publicRoute = new PublicRoute( $this->nameSpace );
 
-				$requireToken = ! $publicRoute->isPublicRoute( substr( $url, 1 ) );
+				$requireToken = ! $publicRoute->is_public_route( substr( $url, 1 ) );
 
 				if ( $requireToken ) {
 					$response = $this->validateToken( $url, $server, $request );
