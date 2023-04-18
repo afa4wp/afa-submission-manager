@@ -1,6 +1,6 @@
 <?php
 /**
- * The staff tub item for configuration screen
+ * The Screen About
  *
  * @package  WP_All_Forms_API
  * @since 1.0.0
@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class ScreenAbout extends Screen{
+class ScreenAbout extends Screen {
 
 	// Tab param .
 	const ID = 'about';
@@ -28,9 +28,8 @@ class ScreenAbout extends Screen{
 	/**
 	 * Connection constructor.
 	 */
-
-	 public function __construct() {
-		$this->id = self::ID;
+	public function __construct() {
+		$this->id    = self::ID;
 		$this->label = 'About plugin';
 	}
 

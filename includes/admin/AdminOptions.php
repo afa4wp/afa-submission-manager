@@ -1,17 +1,32 @@
 <?php
 
+/**
+ * The Admin Options class
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
+
 namespace Includes\Admin;
 
 use Includes\Admin\Pages\UserListTable;
 use Includes\Admin\Pages\Settings;
 use Includes\Admin\AdminStaff;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class AdminOptions
+ *
+ * Render Staff content
+ *
+ * @since 1.0.0
+ */
 class AdminOptions {
 
 	/**
-	 * WP OAuth Server Admin Setup
-	 *
-	 * @return [type] [description]
+	 * Init options
 	 */
 	public function init() {
 
@@ -21,22 +36,24 @@ class AdminOptions {
 	}
 
 	/**
-	 * [admin_init description]
-	 *
-	 * @return [type] [description]
+	 * Execute on admin_init hook
 	 */
 	public function admin_init() {
 		new AdminStaff();
 	}
+
 	/**
-	 * [add_page description]
+	 * Add page for plugin
 	 */
 	public function add_page() {
 		add_menu_page( 'WP All Forms API', 'WP All Forms API', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
-		add_submenu_page( 'wp_all_forms_api', __('WP All Forms API Settings Logged in Users', 'wp-all-forms-api'), __('Logged in users', 'wp-all-forms-api'), 'manage_options', 'wp_all_forms_api');
-		add_submenu_page( 'wp_all_forms_api', __('WP All Forms API Settings', 'wp-all-forms-api'), __('Settings', 'wp-all-forms-api'), 'manage_options', 'wp_all_forms_api_settings', array( new Settings(), 'render' ));
+		add_submenu_page( 'wp_all_forms_api', __( 'WP All Forms API Settings Logged in Users', 'wp-all-forms-api' ), __( 'Logged in users', 'wp-all-forms-api' ), 'manage_options', 'wp_all_forms_api' );
+		add_submenu_page( 'wp_all_forms_api', __( 'WP All Forms API Settings', 'wp-all-forms-api' ), __( 'Settings', 'wp-all-forms-api' ), 'manage_options', 'wp_all_forms_api_settings', array( new Settings(), 'render' ) );
 	}
 
+	/**
+	 * Adds a role, if it does not exist
+	 */
 	private function add_role() {
 		add_role(
 			'wp_afa_staff',
@@ -46,6 +63,9 @@ class AdminOptions {
 
 	}
 
+	/**
+	 * Fires after WordPress has finished loading
+	 */
 	public function wp_init() {
 		$this->add_role();
 	}

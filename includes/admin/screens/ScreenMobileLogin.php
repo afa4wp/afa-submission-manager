@@ -1,6 +1,6 @@
 <?php
 /**
- * The staff tub item for configuration screen
+ * The Screen Mobile Login
  *
  * @package  WP_All_Forms_API
  * @since 1.0.0
