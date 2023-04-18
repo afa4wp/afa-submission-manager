@@ -43,7 +43,7 @@ class Route {
 	 * Init all routes.
 	 */
 	public function init_routes() {
-		( new Form( $this->name ) )->initRoutes();
+		( new Form( $this->name ) )->init_routes();
 		( new Entry( $this->name ) )->initRoutes();
 		( new EntryMeta( $this->name ) )->initRoutes();
 	}

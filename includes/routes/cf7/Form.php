@@ -1,20 +1,30 @@
 <?php
+/**
+ * The Form Route Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Routes\CF7;
 
 use Includes\Controllers\CF7\FormController;
+use Includes\Routes\AbstractFormRoute;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-class Form {
-
-	private $name;
-
-	public function __construct( $name ) {
-		$this->name = $name;
-	}
+/**
+ * Class Form
+ *
+ * Init all routes
+ *
+ * @since 1.0.0
+ */
+class Form extends AbstractFormRoute {
 
 	/**
-	 * get form by id.
+	 * Get form by id
 	 */
 	public function forms() {
 		register_rest_route(
@@ -31,9 +41,9 @@ class Form {
 	}
 
 	/**
-	 * get all forms.
+	 * Get all forms
 	 */
-	public function formByID() {
+	public function forms_by_id() {
 		register_rest_route(
 			$this->name,
 			'/cf7/forms/(?P<id>[0-9]+)',
@@ -48,9 +58,9 @@ class Form {
 	}
 
 	/**
-	 * get forms by pagination.
+	 * Get forms by pagination
 	 */
-	public function formsPagination() {
+	public function forms_pagination() {
 		register_rest_route(
 			$this->name,
 			'/cf7/forms/page/(?P<page_number>[0-9]+)',
@@ -65,9 +75,9 @@ class Form {
 	}
 
 	/**
-	 * search forms by name.
+	 * Search forms by name.
 	 */
-	public function searchForms() {
+	public function search_forms() {
 		register_rest_route(
 			$this->name,
 			'/cf7/forms/search/(?P<post_name>\S+)',
@@ -80,16 +90,4 @@ class Form {
 			)
 		);
 	}
-
-
-	/**
-	 * Call all endpoints
-	 */
-	public function initRoutes() {
-		$this->formByID();
-		$this->forms();
-		$this->formsPagination();
-		$this->searchForms();
-	}
-
 }
