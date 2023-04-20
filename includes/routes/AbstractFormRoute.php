@@ -12,7 +12,7 @@ namespace Includes\Routes;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class Route
+ * Class AbstractFormRoute
  *
  * Init all routes
  *
@@ -37,7 +37,7 @@ abstract class AbstractFormRoute {
 	}
 
 	/**
-	 * Rget all forms
+	 * Get all forms
 	 *
 	 * @since 1.0.0
 	 *
