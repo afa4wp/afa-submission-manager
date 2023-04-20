@@ -1,19 +1,30 @@
 <?php
+/**
+ * The Entry Route Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Routes\WEF;
 
 use Includes\Controllers\WEF\EntryController;
+use Includes\Routes\AbstractEntryRoute;
 
-class Entry {
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-	private $name;
-
-	public function __construct( $name ) {
-		$this->name = $name;
-	}
+/**
+ * Class Entry
+ *
+ * Init all routes
+ *
+ * @since 1.0.0
+ */
+class Entry extends AbstractEntryRoute {
 
 	/**
-	 * get all entries.
+	 * Get all entries
 	 */
 	public function entries() {
 		register_rest_route(
@@ -30,9 +41,9 @@ class Entry {
 	}
 
 	/**
-	 * get entry by id.
+	 * Get entry by id
 	 */
-	public function entryByID() {
+	public function entry_by_id() {
 		register_rest_route(
 			$this->name,
 			'/wef/entries/(?P<entry_id>[0-9]+)',
@@ -47,9 +58,9 @@ class Entry {
 	}
 
 	/**
-	 * get entry by id.
+	 * Get entries by form id
 	 */
-	public function entriesByFormID() {
+	public function entries_by_form_id() {
 		register_rest_route(
 			$this->name,
 			'/wef/entries/form_id/(?P<form_id>[0-9]+)/page/(?P<page_number>[0-9]+)',
@@ -63,10 +74,10 @@ class Entry {
 		);
 	}
 
-	 /**
-	  * get all entries from specific user.
-	  */
-	public function searchEntriesByUser() {
+	/**
+	 * Search entries by user info
+	 */
+	public function search_entries_by_user() {
 		register_rest_route(
 			$this->name,
 			'/wef/entries/user/search/(?P<user_info>\S+)',
@@ -78,16 +89,6 @@ class Entry {
 				),
 			)
 		);
-	}
-
-	/**
-	 * Call all endpoints
-	 */
-	public function initRoutes() {
-		$this->entries();
-		$this->entryByID();
-		$this->entriesByFormID();
-		$this->searchEntriesByUser();
 	}
 
 }

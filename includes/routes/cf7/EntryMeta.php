@@ -1,22 +1,32 @@
 <?php
+/**
+ * The Form Route Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Routes\CF7;
 
 use Includes\Controllers\CF7\EntryMetaController;
+use Includes\Routes\AbstractEntryMetaRoute;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-class EntryMeta {
-
-	private $name;
-
-	public function __construct( $name ) {
-		$this->name = $name;
-	}
+/**
+ * Class EntryMeta
+ *
+ * Init all routes
+ *
+ * @since 1.0.0
+ */
+class EntryMeta extends AbstractEntryMetaRoute {
 
 	/**
-	 * get entry_meta by entry ID.
+	 * Get entry_meta by entry id
 	 */
-	public function entrymetaByEntryID() {
+	public function entry_meta_by_entry_id() {
 		register_rest_route(
 			$this->name,
 			'/cf7/entrymeta/entry_id/(?P<entry_id>[0-9]+)',
@@ -31,9 +41,9 @@ class EntryMeta {
 	}
 
 	/**
-	 * get entry_meta by search.
+	 * Get entry meta by search
 	 */
-	public function searchEntryMetaAnswer() {
+	public function search_entry_meta_answer() {
 		register_rest_route(
 			$this->name,
 			'/cf7/entrymeta/search/(?P<answer>\S+)',
@@ -45,14 +55,6 @@ class EntryMeta {
 				),
 			)
 		);
-	}
-
-	/**
-	 * Call all endpoints
-	 */
-	public function initRoutes() {
-		$this->entrymetaByEntryID();
-		$this->searchEntryMetaAnswer();
 	}
 
 }

@@ -1,19 +1,29 @@
 <?php
+/**
+ * The Entry Route Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Routes\CF7;
 
 use Includes\Controllers\CF7\EntryController;
+use Includes\Routes\AbstractEntryRoute;
 
-class Entry {
-
-	private $name;
-
-	public function __construct( $name ) {
-		$this->name = $name;
-	}
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+/**
+ * Class Entry
+ *
+ * Init all routes
+ *
+ * @since 1.0.0
+ */
+class Entry extends AbstractEntryRoute {
 
 	/**
-	 * get all entries.
+	 * Get all entries
 	 */
 	public function entries() {
 		register_rest_route(
@@ -30,9 +40,9 @@ class Entry {
 	}
 
 	/**
-	 * get entry by id.
+	 * Get entry by id
 	 */
-	public function entryByID() {
+	public function entry_by_id() {
 		register_rest_route(
 			$this->name,
 			'/cf7/entries/(?P<entry_id>[0-9]+)',
@@ -47,9 +57,9 @@ class Entry {
 	}
 
 	/**
-	 * get entry by id.
+	 * Get entries by form id
 	 */
-	public function entriesByFormID() {
+	public function entries_by_form_id() {
 		register_rest_route(
 			$this->name,
 			'/cf7/entries/form_id/(?P<form_id>[0-9]+)/page/(?P<page_number>[0-9]+)',
@@ -64,9 +74,9 @@ class Entry {
 	}
 
 	/**
-	 * get entry by user info.
+	 * Search entries by user info
 	 */
-	public function searchEntriesByUser() {
+	public function search_entries_by_user() {
 		register_rest_route(
 			$this->name,
 			'/cf7/entries/user/search/(?P<user_info>\S+)',
@@ -78,16 +88,6 @@ class Entry {
 				),
 			)
 		);
-	}
-
-	/**
-	 * Call all endpoints
-	 */
-	public function initRoutes() {
-		$this->entries();
-		$this->entryByID();
-		$this->entriesByFormID();
-		$this->searchEntriesByUser();
 	}
 
 }
