@@ -1,16 +1,40 @@
 <?php
+/**
+ * The Entry Meta Controllers Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Controllers\CF7;
 
 use Includes\Models\CF7\EntryMetaModel;
-use WP_Error;
+use Includes\Controllers\AbstractEntryMetaControllers;
 
-class EntryMetaController {
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-	private $entryMetaModel;
-	private $number_of_records_per_page = 20;
+/**
+ * Class EntryMetaController
+ *
+ * Init all routes
+ *
+ * @since 1.0.0
+ */
+class EntryMetaController extends AbstractEntryMetaControllers {
+
+	/**
+	 * The entry meta model
+	 *
+	 * @var EntryMetaModel
+	 */
+	private $entry_meta_model;
+
+	/**
+	 * Entry Controllers constructor
+	 */
 	public function __construct() {
-		 $this->entryMetaModel = new EntryMetaModel();
+		$this->entry_meta_model = new EntryMetaModel();
 
 	}
 
@@ -19,27 +43,27 @@ class EntryMetaController {
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms CF7 forms.
+	 * @return array $entryMeta CF7 entries meta
 	 */
-	public function entryMetaByEntryID( $request ) {
+	public function entry_meta_by_entry_id( $request ) {
 		$entry_id = $request['entry_id'];
 
-		$items = $this->entryMetaModel->entryMetaByEntryID( $entry_id );
+		$items = $this->entry_meta_model->entryMetaByEntryID( $entry_id );
 
 		return rest_ensure_response( $items );
 	}
 
 	/**
-	 * CF7 forms entry.
+	 * Get all entry meta by entry id
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms CF7 forms.
+	 * @return array $entryMeta CF7 entries meta
 	 */
-	public function searchEntryMetaAnswer( $request ) {
-		 $answer = urldecode( $request['answer'] );
+	public function search_entry_meta_answer( $request ) {
+		$answer = urldecode( $request['answer'] );
 
-		$items = $this->entryMetaModel->searchEntryMetaAnswer( $answer );
+		$items = $this->entry_meta_model->searchEntryMetaAnswer( $answer );
 
 		return rest_ensure_response( $items );
 	}

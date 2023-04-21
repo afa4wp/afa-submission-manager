@@ -33,7 +33,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryMetaController(), 'entryMetaByEntryID' ),
+					'callback'            => array( new EntryMetaController(), 'entry_meta_by_entry_id' ),
 					'permission_callback' => '__return_true',
 				),
 			)
@@ -50,7 +50,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryMetaController(), 'searchEntryMetaAnswer' ),
+					'callback'            => array( new EntryMetaController(), 'search_entry_meta_answer' ),
 					'permission_callback' => '__return_true',
 				),
 			)
