@@ -54,11 +54,11 @@ class UserTokensController {
 	public function paginate( $page = 1 ) {
 
 		$count                      = $this->user_tokens_model->mumber_items();
-		$number_of_records_per_page = $this->pagination_helper->getNumberofRecordsPerPage();
-		$offset                     = $this->pagination_helper->getOffset( $page, $count );
+		$number_of_records_per_page = $this->pagination_helper->get_number_of_records_per_page();
+		$offset                     = $this->pagination_helper->get_offset( $page, $count );
 		$items                      = $this->user_tokens_model->users_tokens( $offset, $number_of_records_per_page );
 
-		$results = $this->pagination_helper->prepareDataForRestWithPagination( $count, $items );
+		$results = $this->pagination_helper->prepare_data_for_rest_with_pagination( $count, $items );
 
 		return $results;
 	}
@@ -75,11 +75,11 @@ class UserTokensController {
 
 		$count = $this->user_tokens_model->mumber_items_search( $user_info );
 
-		$number_of_records_per_page = $this->pagination_helper->getNumberofRecordsPerPage();
-		$offset                     = $this->pagination_helper->getOffset( $page, $count );
+		$number_of_records_per_page = $this->pagination_helper->get_number_of_records_per_page();
+		$offset                     = $this->pagination_helper->get_offset( $page, $count );
 		$items                      = $this->user_tokens_model->search_users_tokens( $user_info, $offset, $number_of_records_per_page );
 
-		$results = $this->pagination_helper->prepareDataForRestWithPagination( $count, $items );
+		$results = $this->pagination_helper->prepare_data_for_rest_with_pagination( $count, $items );
 
 		return $results;
 	}

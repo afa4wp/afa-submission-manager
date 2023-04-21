@@ -50,7 +50,7 @@ class Entry extends AbstractEntryRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryController(), 'entryByID' ),
+					'callback'            => array( new EntryController(), 'entry_by_id' ),
 					'permission_callback' => '__return_true',
 				),
 			)
@@ -67,7 +67,7 @@ class Entry extends AbstractEntryRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryController(), 'entriesByFormID' ),
+					'callback'            => array( new EntryController(), 'entries_by_form_id' ),
 					'permission_callback' => '__return_true',
 				),
 			)
@@ -84,7 +84,7 @@ class Entry extends AbstractEntryRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryController(), 'searchEntriesByUser' ),
+					'callback'            => array( new EntryController(), 'search_entries_by_user' ),
 					'permission_callback' => '__return_true',
 				),
 			)
