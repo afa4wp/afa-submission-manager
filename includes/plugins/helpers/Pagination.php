@@ -1,15 +1,34 @@
 <?php
+/**
+ * The Pagination Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Plugins\Helpers;
 
 /**
+ * Class Pagination
+ *
  * Handler with pagination info.
+ *
+ * @since 1.0.0
  */
-
 class Pagination {
 
+	/**
+	 * The number of items per page
+	 *
+	 * @var int
+	 */
 	private $number_of_records_per_page = 20;
 
+	/**
+	 * Count number of items
+	 *
+	 * @var int
+	 */
 	private $count = 0;
 
 	/**
@@ -17,16 +36,19 @@ class Pagination {
 	 *
 	 * @return int $number_of_records_per_page.
 	 */
-	public function getNumberofRecordsPerPage() {
+	public function get_number_of_records_per_page() {
 		return $this->number_of_records_per_page;
 	}
 
 	/**
-	 * Forms.
+	 * Prepare content with pagination before return
 	 *
-	 * @return array $forms.
+	 * @param int   $count The number of items.
+	 * @param array $data The data content.
+	 *
+	 * @return array $data
 	 */
-	public function prepareDataForRestWithPagination( $count, $data ) {
+	public function prepare_data_for_rest_with_pagination( $count, $data ) {
 
 		if ( ! empty( $count ) ) {
 			$this->count = intval( $count );
@@ -34,7 +56,7 @@ class Pagination {
 
 		$info          = array();
 		$info['count'] = $this->count;
-		$info['pages'] = $this->getPages();
+		$info['pages'] = $this->get_pages();
 
 		$data_results = array();
 
@@ -49,17 +71,19 @@ class Pagination {
 	 *
 	 * @return int
 	 */
-	private function getPages() {
+	private function get_pages() {
 		return ceil( $this->count / $this->number_of_records_per_page );
 	}
 
 	/**
 	 * Calculate offset.
 	 *
+	 * @param int $page The page.
+	 * @param int $count The number od items.
+	 *
 	 * @return int
 	 */
-
-	public function getOffset( $page, $count ) {
+	public function get_offset( $page, $count ) {
 
 		$offset = ( $page - 1 ) * $count;
 

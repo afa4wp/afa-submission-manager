@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 class Form extends AbstractFormRoute {
 
 	/**
-	 * Get form by id
+	 * Get all forms
 	 */
 	public function forms() {
 		register_rest_route(
@@ -41,16 +41,16 @@ class Form extends AbstractFormRoute {
 	}
 
 	/**
-	 * Get all forms
+	 * Get forms by id
 	 */
-	public function forms_by_id() {
+	public function form_by_id() {
 		register_rest_route(
 			$this->name,
 			'/cf7/forms/(?P<id>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'formByID' ),
+					'callback'            => array( new FormController(), 'form_by_id' ),
 					'permission_callback' => '__return_true',
 				),
 			)
@@ -67,7 +67,7 @@ class Form extends AbstractFormRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'formsPagination' ),
+					'callback'            => array( new FormController(), 'forms_pagination' ),
 					'permission_callback' => '__return_true',
 				),
 			)
@@ -84,7 +84,7 @@ class Form extends AbstractFormRoute {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'searchForms' ),
+					'callback'            => array( new FormController(), 'search_forms' ),
 					'permission_callback' => '__return_true',
 				),
 			)

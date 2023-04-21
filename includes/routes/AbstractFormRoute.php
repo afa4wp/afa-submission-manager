@@ -52,7 +52,7 @@ abstract class AbstractFormRoute {
 	 *
 	 * @return void
 	 */
-	abstract protected function forms_by_id();
+	abstract protected function form_by_id();
 
 	/**
 	 * Get forms with pagination
@@ -81,7 +81,7 @@ abstract class AbstractFormRoute {
 	 */
 	public function init_routes() {
 		$this->forms();
-		$this->forms_by_id();
+		$this->form_by_id();
 		$this->forms_pagination();
 		$this->search_forms();
 	}

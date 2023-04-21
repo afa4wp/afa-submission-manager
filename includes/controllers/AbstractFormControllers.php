@@ -27,7 +27,7 @@ abstract class AbstractFormControllers {
 	 *
 	 * @var string
 	 */
-	protected $number_of_records_per_page;
+	public $number_of_records_per_page;
 
 	/**
 	 * The route name space
@@ -41,7 +41,7 @@ abstract class AbstractFormControllers {
 	 */
 	public function __construct() {
 		$this->pagination_helper          = new Pagination();
-		$this->number_of_records_per_page = $this->pagination_helper->getNumberofRecordsPerPage();
+		$this->number_of_records_per_page = $this->pagination_helper->get_number_of_records_per_page();
 	}
 
 	/**
@@ -62,7 +62,7 @@ abstract class AbstractFormControllers {
 	 *
 	 * @return object $form WPAFA form
 	 */
-	abstract public function forms_by_id( \WP_REST_Request $request );
+	abstract public function form_by_id( \WP_REST_Request $request );
 
 	/**
 	 * Get forms with pagination
