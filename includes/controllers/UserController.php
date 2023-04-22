@@ -75,8 +75,8 @@ class UserController {
 
 		$this->user_tokens_model->delete_user_token_by_id( $user->data->ID );
 
-		$access_token         = $this->jwt_plugin->generateToken( $user->data->ID );
-		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user->data->ID );
+		$access_token         = $this->jwt_plugin->generate_token( $user->data->ID );
+		$access_refresh_token = $this->jwt_plugin->generate_refresh_token( $user->data->ID );
 
 		$this->user_tokens_model->create( $user->data->ID, $access_token, $access_refresh_token );
 
@@ -147,8 +147,8 @@ class UserController {
 
 		$this->user_tokens_model->delete_user_token_by_id( $user->data->ID );
 
-		$access_token         = $this->jwt_plugin->generateToken( $user->data->ID );
-		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user->data->ID );
+		$access_token         = $this->jwt_plugin->generate_token( $user->data->ID );
+		$access_refresh_token = $this->jwt_plugin->generate_refresh_token( $user->data->ID );
 
 		$this->user_tokens_model->create( $user->data->ID, $access_token, $access_refresh_token );
 
@@ -184,7 +184,7 @@ class UserController {
 	public function token( $request ) {
 
 		$refresh_token = $request['refresh_token'];
-		$validate      = $this->jwt_plugin->validateRefreshToken( $refresh_token );
+		$validate      = $this->jwt_plugin->validate_refresh_token( $refresh_token );
 
 		if ( is_wp_error( $validate ) ) {
 			return rest_ensure_response( $validate );
@@ -215,8 +215,8 @@ class UserController {
 
 		$this->user_tokens_model->delete_user_token_by_id( $user_id );
 
-		$access_token         = $this->jwt_plugin->generateToken( $user_id );
-		$access_refresh_token = $this->jwt_plugin->generateRefreshToken( $user_id );
+		$access_token         = $this->jwt_plugin->generate_token( $user_id );
+		$access_refresh_token = $this->jwt_plugin->generate_refresh_token( $user_id );
 
 		$this->user_tokens_model->create( $user_id, $access_token, $access_refresh_token );
 

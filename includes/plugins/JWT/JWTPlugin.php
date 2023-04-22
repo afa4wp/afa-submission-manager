@@ -1,4 +1,10 @@
 <?php
+/**
+ * The JWTPlugin handler
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Plugins\JWT;
 
@@ -8,15 +14,30 @@ use Firebase\JWT\Key;
 use Includes\Plugins\PublicRoute;
 use WP_Error;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class JWTPlugin
+ *
+ * Handler with token
+ *
+ * @since 1.0.0
+ */
 class JWTPlugin {
 
 	/**
-	 * The slugs in the URL before the endpoint.
+	 * The route name space
+	 *
+	 * @var string
 	 */
-	private $nameSpace;
+	private $namespace;
 
+	/**
+	 * JWTPlugin constructor.
+	 */
 	public function __construct() {
-		 $this->nameSpace = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
+		$this->namespace = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
 	}
 
 	/**
@@ -26,21 +47,21 @@ class JWTPlugin {
 	 *
 	 * @return string $jwt The JWT.
 	 */
-	public function generateToken( $id ) {
-		$issuedAt         = time();
-		$expTokenInMinute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
+	public function generate_token( $id ) {
+		$issued_at           = time();
+		$exp_token_in_minute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
 
-		if ( empty( $expTokenInMinute ) || ! is_numeric( $expTokenInMinute ) ) {
-			$expTokenInMinute = 15;
+		if ( empty( $exp_token_in_minute ) || ! is_numeric( $exp_token_in_minute ) ) {
+			$exp_token_in_minute = 15;
 		}
 
-		$expire = $issuedAt + ( MINUTE_IN_SECONDS * $expTokenInMinute );
+		$expire = $issued_at + ( MINUTE_IN_SECONDS * $exp_token_in_minute );
 
-		$key = $this->getAccessTokenSecretKey();
+		$key = $this->get_access_token_secret_key();
 
 		$payload = array(
 			'iss' => get_bloginfo( 'url' ),
-			'iat' => $issuedAt,
+			'iat' => $issued_at,
 			'id'  => $id,
 			'exp' => $expire,
 		);
@@ -57,21 +78,21 @@ class JWTPlugin {
 	 *
 	 * @return string $jwt The JWT.
 	 */
-	public function generateRefreshToken( $id ) {
-		$issuedAt         = time();
-		$expTokenInMinute = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
+	public function generate_refresh_token( $id ) {
+		$issued_at           = time();
+		$exp_token_in_minute = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
 
-		if ( empty( $expTokenInMinute ) || ! is_numeric( $expTokenInMinute ) ) {
-			$expTokenInMinute = 15;
+		if ( empty( $exp_token_in_minute ) || ! is_numeric( $exp_token_in_minute ) ) {
+			$exp_token_in_minute = 15;
 		}
 
-		$expire = $issuedAt + ( MINUTE_IN_SECONDS * $expTokenInMinute );
+		$expire = $issued_at + ( MINUTE_IN_SECONDS * $exp_token_in_minute );
 
-		$key = $this->getRefressTokenSecretKey();
+		$key = $this->get_refress_token_secret_key();
 
 		$payload = array(
 			'iss' => get_bloginfo( 'url' ),
-			'iat' => $issuedAt,
+			'iat' => $issued_at,
 			'id'  => $id,
 			'exp' => $expire,
 		);
@@ -85,26 +106,25 @@ class JWTPlugin {
 	 * Decodes a JWT string into a PHP object.
 	 * if sucess force user login and keep on
 	 *
-	 * @param string          $url The JWT
+	 * @param mixed           $result Can be anything a normal endpoint can return, or null to not hijack the request.
 	 * @param WP_REST_Server  $server Server instance.
 	 * @param WP_REST_Request $request The request.
 	 *
 	 * @return array $decoded The token's payload.
 	 */
-	private function validateToken( $url, $server, $request ) {
-		 $authorization = $request->get_header( 'authorization' );
-		$url            = strtok( $_SERVER['REQUEST_URI'], '?' );
+	private function validate_token( $result, $server, $request ) {
+
+		$authorization = $request->get_header( 'authorization' );
 
 		if ( ! empty( $authorization ) ) {
 
-			$key                = $this->getAccessTokenSecretKey();
-			$splitAuthorization = explode( ' ', $authorization );
+			$key                 = $this->get_access_token_secret_key();
+			$split_authorization = explode( ' ', $authorization );
 
-			if ( count( $splitAuthorization ) == 2 ) {
+			if ( 2 === count( $split_authorization ) ) {
 				try {
 
-					$jwt = $splitAuthorization[1];
-					// $decoded = JWT::decode($jwt, $key, array("HS256"));
+					$jwt     = $split_authorization[1];
 					$decoded = JWT::decode( $jwt, new Key( $key, 'HS256' ) );
 					wp_set_current_user( $decoded->id );
 					return $request;
@@ -128,6 +148,10 @@ class JWTPlugin {
 				);
 			}
 		} else {
+			$url = '';
+			if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+				$url = strtok( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), '?' );
+			}
 			return new WP_Error( 'not-logged-in', 'API Requests to ' . $url . ' are only supported for authenticated requests', array( 'status' => 401 ) );
 		}
 	}
@@ -135,14 +159,13 @@ class JWTPlugin {
 	/**
 	 * Decodes a JWT string into a PHP object.
 	 *
-	 * @param string $jwt The JWT
+	 * @param string $jwt The JWT.
 	 *
 	 * @return array $decoded The token's payload.
 	 */
-	public function validateRefreshToken( $jwt ) {
+	public function validate_refresh_token( $jwt ) {
 		try {
-			// $decoded = JWT::decode($jwt, $key, array("HS256"))
-			$key     = $this->getRefressTokenSecretKey();
+			$key     = $this->get_refress_token_secret_key();
 			$decoded = JWT::decode( $jwt, new Key( $key, 'HS256' ) );
 			return $decoded;
 		} catch ( Exception $e ) {
@@ -161,27 +184,27 @@ class JWTPlugin {
 	 * Filter to hook the rest_pre_dispatch, if there is an error in the request
 	 * send it, if there is no error just continue with the current request.
 	 *
-	 * @param mixed           $result Can be anything a normal endpoint can return, or null to not hijack the request..
+	 * @param mixed           $result Can be anything a normal endpoint can return, or null to not hijack the request.
 	 * @param WP_REST_Server  $server Server instance.
 	 * @param WP_REST_Request $request The request.
 	 *
 	 * @return array $payload The modified token's payload.
 	 */
-	public function validateTokenRestPreDispatch( $url, $server, $request ) {
+	public function validate_token_rest_pre_dispatch( $result, $server, $request ) {
 		$url = $request->get_route();
 
-		$explodeNameSpace = explode( '/', $this->nameSpace );
+		$explode_namespace = explode( '/', $this->namespace );
 
-		if ( count( $explodeNameSpace ) == 2 ) {
+		if ( 2 === count( $explode_namespace ) ) {
 
-			if ( strpos( $url, $explodeNameSpace[0] ) !== false ) {
+			if ( strpos( $url, $explode_namespace[0] ) !== false ) {
 
-				$publicRoute = new PublicRoute( $this->nameSpace );
+				$public_route = new PublicRoute( $this->namespace );
 
-				$requireToken = ! $publicRoute->is_public_route( substr( $url, 1 ) );
+				$require_token = ! $public_route->is_public_route( substr( $url, 1 ) );
 
-				if ( $requireToken ) {
-					$response = $this->validateToken( $url, $server, $request );
+				if ( $require_token ) {
+					$response = $this->validate_token( $result, $server, $request );
 					if ( is_wp_error( $response ) ) {
 						return $response;
 					}
@@ -195,7 +218,7 @@ class JWTPlugin {
 	 *
 	 * @return string $key The token key.
 	 */
-	private function getAccessTokenSecretKey() {
+	private function get_access_token_secret_key() {
 
 		if ( defined( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY' ) && ! empty( WP_AFA_ACCESS_TOKEN_SECRET_KEY ) ) {
 			return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
@@ -210,7 +233,7 @@ class JWTPlugin {
 	 *
 	 * @return string $key The token key.
 	 */
-	private function getRefressTokenSecretKey() {
+	private function get_refress_token_secret_key() {
 
 		if ( defined( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' ) && ! empty( WP_AFA_REFRESH_TOKEN_SECRET_KEY ) ) {
 			return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
