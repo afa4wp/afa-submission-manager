@@ -1,11 +1,29 @@
 <?php
+/**
+ * The User Schema Class
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Schema;
 
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+
+/**
+ * Class UserSchema
+ *
+ * Create schema for endpoints
+ *
+ * @since 1.0.0
+ */
 class UserSchema {
 
 	/**
-	 * Create login schema.
+	 * Create login schema
+	 *
+	 * @return array
 	 */
 	public function login() {
 		$schema = array(
@@ -25,7 +43,9 @@ class UserSchema {
 	}
 
 	/**
-	 * Create token schema.
+	 * Create token schema
+	 *
+	 * @return array
 	 */
 	public function token() {
 		$schema = array(
