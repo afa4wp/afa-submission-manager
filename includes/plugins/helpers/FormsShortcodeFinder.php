@@ -13,12 +13,37 @@ class FormsShortcodeFinder {
 	private $form_id;
 
 	/**
+	 * The shortcode name.
+	 *
+	 * @var string 
+	 */
+	private $shortcode_name;
+
+	/**
 	 * @param int $form_id ID of the Gravity Form to search for.
 	 */
-	public function __construct( $form_id ) {
+	public function __construct( $form_id, $shortcode_name = '') {
 		$this->form_id = (int) $form_id;
+		$this->shortcode_name = $shortcode_name;
 	}
 
+	/**
+	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
+	 */
+	public function find() {
+		return array_reduce(
+			$this->get_all_page_ids(),
+			function( $pages, $page_id ) {
+				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, $this->shortcode_name ), true ) ) {
+					$pages[ $page_id ] = get_the_title( $page_id );
+				}
+
+				return $pages;
+			},
+			array()
+		);
+	}
+	
 	/**
 	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
 	 */
@@ -133,7 +158,7 @@ class FormsShortcodeFinder {
 	/**
 	 * Extracts IDs from shortcodes.
 	 *
-	 * @param string $shortcodes The shortcodes to get the IDs from.
+	 * @param array $shortcodes The shortcodes to get the IDs from.
 	 *
 	 * @return array $ids        The shortcode IDs.
 	 */
