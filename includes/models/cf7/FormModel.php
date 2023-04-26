@@ -1,26 +1,59 @@
 <?php
+/**
+ * The Form Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models\CF7;
 
-use Includes\Plugins\Helpers\FormsShortcodeFinder;
 use Includes\Models\CF7\EntryModel;
-use Includes\Models\FormModel as MainFormModel;
+use Includes\Plugins\Helpers\FormModelHelper;
+use Includes\Models\AbstractFormModel;
 
-class FormModel extends MainFormModel {
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+/**
+ * Class AbstractFormModel
+ *
+ * Create model functions
+ *
+ * @since 1.0.0
+ */
+class FormModel extends AbstractFormModel {
 
+	/**
+	 * Const to declare shortcode.
+	 */
+	const SHORTCODE = 'contact-form-7';
+
+	/**
+	 * The FormModelHelper
+	 *
+	 * @var FormModelHelper
+	 */
+	public $form_model_helper;
+
+	/**
+	 * Form model constructor
+	 */
 	public function __construct() {
-		 parent::__construct( 'wpcf7_contact_form' );
+		$this->form_model_helper = new FormModelHelper( 'wpcf7_contact_form' );
 	}
 
 	/**
 	 * Get Forms
 	 *
+	 * @param int $offset The offset.
+	 * @param int $number_of_records_per_page The posts per page.
+	 *
 	 * @return array
 	 */
 	public function forms( $offset, $number_of_records_per_page ) {
-		 $posts = parent::forms( $offset, $number_of_records_per_page );
+		$posts = $this->form_model_helper->forms( $offset, $number_of_records_per_page );
 
-		$forms = $this->prepareData( $posts );
+		$forms = $this->prepare_data( $posts );
 
 		return $forms;
 	}
@@ -32,10 +65,10 @@ class FormModel extends MainFormModel {
 	 *
 	 * @return array
 	 */
-	public function formByID( $id ) {
-		$results = parent::formByID( $id );
+	public function form_by_id( $id ) {
+		$results = $this->form_model_helper->form_by_id( $id );
 
-		$forms = $this->prepareDataArray( $results );
+		$forms = $this->prepare_data_array( $results );
 
 		if ( count( $forms ) > 0 ) {
 			return $forms[0];
@@ -45,41 +78,18 @@ class FormModel extends MainFormModel {
 	}
 
 	/**
-	 * Get form pages links
-	 *
-	 * @param int $formID The form ID.
-	 *
-	 * @return array
-	 */
-	public function pagesLinks( $formID ) {
-		 $pages_with_form = ( new FormsShortcodeFinder( $formID ) )->cf7Find();
-
-		if ( empty( $pages_with_form ) ) {
-			return $pages_with_form;
-		}
-
-		$results = array();
-
-		foreach ( $pages_with_form as $key => $value ) {
-			$result              = array();
-			$result['page_name'] = $value;
-			$result['page_link'] = get_page_link( $key );
-			$results[]           = $result;
-		}
-
-		return $results;
-	}
-
-	/**
 	 * Get Forms
 	 *
+	 * @param string $post_name The post name.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
+	 *
 	 * @return array
 	 */
+	public function search_forms( $post_name, $offset, $number_of_records_per_page ) {
+		$posts = $this->form_model_helper->search_forms( $post_name, $offset, $number_of_records_per_page );
 
-	public function searchForms( $post_name, $offset, $number_of_records_per_page ) {
-		$posts = parent::searchForms( $post_name, $offset, $number_of_records_per_page );
-
-		$forms = $this->prepareData( $posts );
+		$forms = $this->prepare_data( $posts );
 
 		return $forms;
 	}
@@ -87,9 +97,11 @@ class FormModel extends MainFormModel {
 	/**
 	 * Format Forms
 	 *
+	 * @param object $posts The forms.
+	 *
 	 * @return array
 	 */
-	private function prepareData( $posts ) {
+	public function prepare_data( $posts ) {
 		$forms = array();
 
 		while ( $posts->have_posts() ) {
@@ -102,7 +114,7 @@ class FormModel extends MainFormModel {
 			$form['registers']    = ( new EntryModel() )->mumberItemsByChannel( $posts->post->post_name );
 
 			$form['user_created'] = $posts->post->post_author;
-			$form['perma_links']  = $this->pagesLinks( $posts->post->ID );
+			$form['perma_links']  = parent::pages_links( $posts->post->ID, self::SHORTCODE );
 			$forms[]              = $form;
 		}
 
@@ -110,12 +122,14 @@ class FormModel extends MainFormModel {
 	}
 
 	/**
-	 * Format Forms
+	 * Format Forms for array from sql
+	 *
+	 * @param array $results The forms.
 	 *
 	 * @return array
 	 */
-	private function prepareDataArray( $results ) {
-		 $forms = array();
+	private function prepare_data_array( $results ) {
+		$forms = array();
 
 		foreach ( $results as $key => $value ) {
 
@@ -128,7 +142,7 @@ class FormModel extends MainFormModel {
 			$form['registers'] = ( new EntryModel() )->mumberItemsByChannel( $value->post_name );
 
 			$form['user_created'] = $value->post_author;
-			$form['perma_links']  = $this->pagesLinks( $value->ID );
+			$form['perma_links']  = parent::pages_links( $value->ID, self::SHORTCODE );
 
 			$forms[] = $form;
 		}

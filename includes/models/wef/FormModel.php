@@ -8,9 +8,7 @@
 
 namespace Includes\Models\WEF;
 
-use Includes\Plugins\Helpers\FormsShortcodeFinder;
 use Includes\Models\WEF\EntryModel;
-use Includes\Models\FormModel as MainFormModel;
 use Includes\Plugins\Helpers\FormModelHelper;
 use Includes\Models\AbstractFormModel;
 
@@ -79,7 +77,7 @@ class FormModel extends AbstractFormModel {
 	}
 
 	/**
-	 * Get Forms
+	 * Search Forms
 	 *
 	 * @param string $post_name The post name.
 	 * @param int    $offset The offset.
