@@ -1,28 +1,64 @@
 <?php
+/**
+ * The Form Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models\GF;
 
-use WP_Query;
 use Includes\Plugins\Helpers\FormsShortcodeFinder;
-use Includes\Models\FormModel as MainFormModel;
+use Includes\Plugins\Helpers\FormModelHelper;
+use Includes\Models\AbstractFormModel;
 
-class FormModel extends MainFormModel {
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+/**
+ * Class AbstractFormModel
+ *
+ * Create model functions
+ *
+ * @since 1.0.0
+ */
+class FormModel extends AbstractFormModel {
 
-	public const TABLE_NAME = 'gf_form';
+	/**
+	 * Const to declare table name.
+	 */
+	const TABLE_NAME = 'gf_form';
 
+	/**
+	 * Const to declare shortcode.
+	 */
+	const SHORTCODE = 'gravityform';
+
+	/**
+	 * The FormModelHelper
+	 *
+	 * @var FormModelHelper
+	 */
+	public $form_model_helper;
+
+	/**
+	 * Form model constructor
+	 */
 	public function __construct() {
-		 parent::__construct( '', self::TABLE_NAME );
+		$this->form_model_helper = new FormModelHelper( SELF::TABLE_NAME );
 	}
 
 	/**
 	 * Get Forms
 	 *
+	 * @param int $offset The offset.
+	 * @param int $number_of_records_per_page The posts per page.
+	 *
 	 * @return array
 	 */
 	public function forms( $offset, $number_of_records_per_page ) {
-		 $results = parent::forms( $offset, $number_of_records_per_page );
+		$results = $this->form_model_helper->forms( $offset, $number_of_records_per_page );
 
-		$forms = $this->prepareData( $results );
+		$forms = $this->prepare_data( $results );
 
 		return $forms;
 	}
@@ -34,10 +70,10 @@ class FormModel extends MainFormModel {
 	 *
 	 * @return array
 	 */
-	public function formByID( $id ) {
-		$results = parent::formByID( $id );
+	public function form_by_id( $id ) {
+		$results = $this->form_model_helper->form_by_id( $id );
 
-		$forms = $this->prepareData( $results );
+		$forms = $this->prepare_data( $results );
 
 		if ( count( $forms ) > 0 ) {
 			return $forms[0];
@@ -62,42 +98,20 @@ class FormModel extends MainFormModel {
 	}
 
 	/**
-	 * Get form pages links
+	 * Search Forms
 	 *
-	 * @param int $formID The form ID.
-	 *
-	 * @return array
-	 */
-	public function pagesLinks( $formID ) {
-		 $pages_with_form = ( new FormsShortcodeFinder( $formID ) )->gfFind();
-
-		if ( empty( $pages_with_form ) ) {
-			return $pages_with_form;
-		}
-
-		$results = array();
-
-		foreach ( $pages_with_form as $key => $value ) {
-			$result              = array();
-			$result['page_name'] = $value;
-			$result['page_link'] = get_page_link( $key );
-			$results[]           = $result;
-		}
-
-		return $results;
-	}
-
-	/**
-	 * Get Forms
+	 * @param string $post_name The post name.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
 	 *
 	 * @return array
 	 */
-	public function searchForms( $post_name, $offset, $number_of_records_per_page ) {
+	public function search_forms( $post_name, $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
 		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . self::TABLE_NAME . " WHERE title LIKE '%$post_name%' ORDER BY id DESC LIMIT " . $offset . ',' . $number_of_records_per_page, OBJECT );
 
-		$forms = $this->prepareData( $results );
+		$forms = $this->prepare_data( $results );
 
 		return $forms;
 	}
@@ -105,9 +119,11 @@ class FormModel extends MainFormModel {
 	/**
 	 * Format Forms
 	 *
+	 * @param object $posts The forms.
+	 *
 	 * @return array
 	 */
-	private function prepareData( $results ) {
+	public function prepare_data( $results ) {
 		$forms = array();
 
 		foreach ( $results as $key => $value ) {
@@ -119,7 +135,7 @@ class FormModel extends MainFormModel {
 			$form['date_created'] = $value->date_created;
 			$form['registers']    = \GFAPI::count_entries( $value->id );
 			$form['user_created'] = null;
-			$form['perma_links']  = $this->pagesLinks( $value->id );
+			$form['perma_links']  = parent::pages_links( $value->id, self::SHORTCODE );
 
 			$forms[] = $form;
 		}

@@ -65,7 +65,7 @@ class FormController extends AbstractFormControllers {
 	public function form_by_id( $request ) {
 		$id = $request['id'];
 
-		$form = $this->form_model->formByID( $id );
+		$form = $this->form_model->form_by_id( $id );
 
 		return rest_ensure_response( $form );
 	}
@@ -80,7 +80,7 @@ class FormController extends AbstractFormControllers {
 	public function forms_pagination( $request ) {
 		$page = $request['page_number'];
 
-		$count = $this->form_model->mumberItems();
+		$count = $this->form_model->form_model_helper->mumber_of_items();
 
 		$offset = $this->pagination_helper->get_offset( $page, $count );
 
@@ -105,7 +105,7 @@ class FormController extends AbstractFormControllers {
 
 		$offset = 0;
 
-		$forms = $this->form_model->searchForms( $post_name, $offset, $this->number_of_records_per_page );
+		$forms = $this->form_model->search_forms( $post_name, $offset, $this->number_of_records_per_page );
 
 		$info          = array();
 		$info['count'] = $this->form_model->mumberItemsOnSerach( $post_name );
