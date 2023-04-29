@@ -99,11 +99,13 @@ class FormController extends AbstractFormControllers {
 	 * @return array $forms CF7 forms.
 	 */
 	public function search_forms( $request ) {
+		$page = 1;
+
 		$post_name = urldecode( $request['post_name'] );
 
 		$count = $this->form_model->form_model_helper->mumber_of_items_by_post_title( $post_name );
 
-		$offset = $this->pagination_helper->get_offset( 1, $count );
+		$offset = $this->pagination_helper->get_offset( $page, $count );
 
 		$forms = $this->form_model->search_forms( $post_name, $offset, $this->number_of_records_per_page );
 

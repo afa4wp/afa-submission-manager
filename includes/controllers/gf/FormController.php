@@ -44,7 +44,7 @@ class FormController extends AbstractFormControllers {
 	 * @return array $forms GF forms.
 	 */
 	public function forms() {
-		$count = $this->form_model->mumberItems();
+		$count = $this->form_model->form_model_helper->mumber_of_items();
 
 		$offset = 0;
 
@@ -108,7 +108,7 @@ class FormController extends AbstractFormControllers {
 		$forms = $this->form_model->search_forms( $post_name, $offset, $this->number_of_records_per_page );
 
 		$info          = array();
-		$info['count'] = $this->form_model->mumberItemsOnSerach( $post_name );
+		$info['count'] = $this->form_model->mumber_of_items_by_search( $post_name );
 		$info['pages'] = ceil( $info['count'] / $this->number_of_records_per_page );
 
 		$forms_results['info']    = $info;

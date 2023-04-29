@@ -8,7 +8,6 @@
 
 namespace Includes\Models\GF;
 
-use Includes\Plugins\Helpers\FormsShortcodeFinder;
 use Includes\Plugins\Helpers\FormModelHelper;
 use Includes\Models\AbstractFormModel;
 
@@ -34,6 +33,13 @@ class FormModel extends AbstractFormModel {
 	const SHORTCODE = 'gravityform';
 
 	/**
+	 * Table name with WP prefix
+	 *
+	 * @var string
+	 */
+	private $table_name_with_prefix;
+
+	/**
 	 * The FormModelHelper
 	 *
 	 * @var FormModelHelper
@@ -44,7 +50,9 @@ class FormModel extends AbstractFormModel {
 	 * Form model constructor
 	 */
 	public function __construct() {
-		$this->form_model_helper = new FormModelHelper( SELF::TABLE_NAME );
+		global $wpdb;
+		$this->form_model_helper      = new FormModelHelper( '', self::TABLE_NAME );
+		$this->table_name_with_prefix = $wpdb->prefix . self::TABLE_NAME;
 	}
 
 	/**
@@ -83,14 +91,23 @@ class FormModel extends AbstractFormModel {
 	}
 
 	/**
-	 * Get Forms
+	 * Get number of Forms
+	 *
+	 * @param string $post_name The post name.
 	 *
 	 * @return int
 	 */
-	public function mumberItemsOnSerach( $post_name ) {
-		 global $wpdb;
+	public function mumber_of_items_by_search( $post_name ) {
+		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT count(*)  as number_of_rows FROM ' . $wpdb->prefix . self::TABLE_NAME . "  WHERE title LIKE '%$post_name%' " );
+		$sql = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE title LIKE %s ";
+
+		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
+
+		$sql = $wpdb->prepare( $sql, array( $post_name_esc_like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( $sql, OBJECT );
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
@@ -98,35 +115,16 @@ class FormModel extends AbstractFormModel {
 	}
 
 	/**
-	 * Search Forms
-	 *
-	 * @param string $post_name The post name.
-	 * @param int    $offset The offset.
-	 * @param int    $number_of_records_per_page The posts per page.
-	 *
-	 * @return array
-	 */
-	public function search_forms( $post_name, $offset, $number_of_records_per_page ) {
-		global $wpdb;
-
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . self::TABLE_NAME . " WHERE title LIKE '%$post_name%' ORDER BY id DESC LIMIT " . $offset . ',' . $number_of_records_per_page, OBJECT );
-
-		$forms = $this->prepare_data( $results );
-
-		return $forms;
-	}
-
-	/**
 	 * Format Forms
 	 *
-	 * @param object $posts The forms.
+	 * @param array $results The forms.
 	 *
 	 * @return array
 	 */
 	public function prepare_data( $results ) {
 		$forms = array();
 
-		foreach ( $results as $key => $value ) {
+		foreach ( $results as $value ) {
 
 			$form = array();
 
@@ -142,5 +140,33 @@ class FormModel extends AbstractFormModel {
 
 		return $forms;
 	}
+
+	/**
+	 * Search Forms
+	 *
+	 * @param string $post_name The post name.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
+	 *
+	 * @return array
+	 */
+	public function search_forms( $post_name, $offset, $number_of_records_per_page ) {
+
+		global $wpdb;
+
+		$sql = "SELECT * FROM {$this->table_name_with_prefix} WHERE title LIKE %s ORDER BY id DESC LIMIT %d,%d";
+
+		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
+
+		$sql = $wpdb->prepare( $sql, array( $post_name_esc_like, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( $sql, OBJECT );
+
+		$forms = $this->prepare_data( $results );
+
+		return $forms;
+	}
+
 
 }
