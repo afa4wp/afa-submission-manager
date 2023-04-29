@@ -34,15 +34,23 @@ class FormModelHelper {
 	protected $table_name;
 
 	/**
+	 * Table name with WP prefix
+	 *
+	 * @var string
+	 */
+	private $table_name_with_prefix;
+
+	/**
 	 * Form Controllers constructor
 	 *
 	 * @param int   $post_type The post_type.
 	 * @param array $table_name The table_name.
 	 */
 	public function __construct( $post_type = '', $table_name = 'posts' ) {
-
-		$this->post_type  = $post_type;
-		$this->table_name = $table_name;
+		global $wpdb;
+		$this->post_type              = $post_type;
+		$this->table_name             = $table_name;
+		$this->table_name_with_prefix = $wpdb->prefix . $table_name;
 	}
 
 	/**
@@ -81,7 +89,9 @@ class FormModelHelper {
 	public function forms_from_custom_table( $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->table_name . ' ORDER BY id DESC LIMIT ' . $offset . ',' . $number_of_records_per_page, OBJECT );
+		$sql     = "SELECT * FROM {$this->table_name_with_prefix} ORDER BY id DESC LIMIT %d,%d";
+		$sql     = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		return $results;
 	}
@@ -95,7 +105,6 @@ class FormModelHelper {
 	 *
 	 * @return array
 	 */
-
 	public function search_forms( $post_title, $offset, $number_of_records_per_page ) {
 		$posts = new WP_Query(
 			array(
@@ -119,7 +128,10 @@ class FormModelHelper {
 	 */
 	public function form_by_channel( $channel ) {
 		global $wpdb;
-		$forms = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->table_name . " WHERE post_name = '$channel' ", OBJECT );
+
+		$sql   = "SELECT * FROM {$this->table_name_with_prefix} WHERE post_name = %s ";
+		$sql   = $wpdb->prepare( $sql, array( $channel ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$forms = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		if ( count( $forms ) > 0 ) {
 			return $forms[0];
@@ -140,8 +152,9 @@ class FormModelHelper {
 
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT count(*) as number_of_rows FROM ' . $wpdb->prefix . $this->table_name . " WHERE post_type = '$this->post_type' AND post_status = 'publish' " );
-
+		$sql            = "SELECT count(*) as number_of_rows FROM {$this->table_name_with_prefix} WHERE post_type = %s AND post_status = %s ";
+		$sql            = $wpdb->prepare( $sql, array( $this->post_type, 'publish' ) ); // phpcs:ignore
+		$results        = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
 		return $number_of_rows;
@@ -154,7 +167,8 @@ class FormModelHelper {
 	public function mumber_of_items_from_custom_table() {
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT count(*)  as number_of_rows FROM ' . $wpdb->prefix . $this->table_name . '' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->get_results( "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} " ); // phpcs:ignore
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
@@ -188,9 +202,11 @@ class FormModelHelper {
 	 * @return string
 	 */
 	public function form_chanel_by_id( $id ) {
-		 global $wpdb;
+		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->table_name . " WHERE id = $id ", OBJECT );
+		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE id = %d ";
+		$sql     = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		if ( count( $results ) > 0 ) {
 			return $results[0]->post_name;
@@ -208,7 +224,9 @@ class FormModelHelper {
 	public function form_by_id( $id ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . $this->table_name . " WHERE id = $id ", OBJECT );
+		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE id = %d ";
+		$sql     = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		return $results;
 	}
