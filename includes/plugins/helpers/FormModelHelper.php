@@ -43,8 +43,8 @@ class FormModelHelper {
 	/**
 	 * Form Controllers constructor
 	 *
-	 * @param int   $post_type The post_type.
-	 * @param array $table_name The table_name.
+	 * @param string $post_type The post_type.
+	 * @param array  $table_name The table_name.
 	 */
 	public function __construct( $post_type = '', $table_name = 'posts' ) {
 		global $wpdb;

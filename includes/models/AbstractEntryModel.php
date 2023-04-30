@@ -20,15 +20,15 @@ defined( 'ABSPATH' ) || exit;
  */
 abstract class AbstractEntryModel {
 
-	
+
 	/**
 	 * Get entry by id
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $entry_id The form id.
+	 * @param int    $entry_id The form id.
 	 * @param string $id The field.
-	 * 
+	 *
 	 * @return object|array $entry WPAFA form
 	 */
 	abstract public function entry_by_id( $entry_id, $id );
@@ -41,7 +41,7 @@ abstract class AbstractEntryModel {
 	 * @param int $id The form id.
 	 * @param int $offset The offset.
 	 * @param int $number_of_records_per_page The posts per page.
-	 * 
+	 *
 	 * @return object|array $entry WPAFA form
 	 */
 	abstract public function entries_by_form_id( $id, $offset, $number_of_records_per_page );
@@ -51,8 +51,8 @@ abstract class AbstractEntryModel {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $offset The offset.
-	 * @param int $number_of_records_per_page The posts per page.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
 	 * @param string $order_by The column name.
 	 *
 	 * @return array $forms WPAFA entries

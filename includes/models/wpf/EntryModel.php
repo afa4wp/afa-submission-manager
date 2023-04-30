@@ -22,6 +22,9 @@ use Includes\Plugins\Helpers\EntryModelHelper;
  */
 class EntryModel extends AbstractEntryModel {
 
+	/**
+	 * Const to declare table name.
+	 */
 	const TABLE_NAME = 'wpforms_entries';
 
 	/**
@@ -94,14 +97,8 @@ class EntryModel extends AbstractEntryModel {
 	 * @return array
 	 */
 	public function entries_by_form_id( $form_id, $offset, $number_of_records_per_page ) {
-		global $wpdb;
-
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE form_id = %d ORDER BY entry_id DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $form_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
-		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
-
+		$results = $this->entry_model_helper->entries_by_form_id( $form_id, $offset, $number_of_records_per_page, 'entry_id' );
 		$entries = $this->prepare_data( $results );
-
 		return $entries;
 	}
 
@@ -138,15 +135,8 @@ class EntryModel extends AbstractEntryModel {
 	 *
 	 * @return int
 	 */
-	public function mumber_of_items_By_form_id( $form_id ) {
-		global $wpdb;
-
-		$sql            = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE form_id = %d ";
-		$sql            = $wpdb->prepare( $sql, array( $form_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$results        = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
-		$number_of_rows = intval( $results[0]->number_of_rows );
-
-		return $number_of_rows;
+	public function mumber_of_items_by_form_id( $form_id ) {
+		return $this->entry_model_helper->mumber_of_items_by_form_id( $form_id );
 	}
 
 	/**
