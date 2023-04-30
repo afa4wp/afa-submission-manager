@@ -23,22 +23,6 @@ defined( 'ABSPATH' ) || exit;
 abstract class AbstractFormModel {
 
 	/**
-	 * The route name space
-	 *
-	 * @var string
-	 */
-	protected $name;
-
-	/**
-	 * Route constructor
-	 *
-	 * @param string $name The route name space.
-	 */
-	public function __construct( $name ) {
-		$this->name = $name;
-	}
-
-	/**
 	 * Get forms by id
 	 *
 	 * @since 1.0.0
