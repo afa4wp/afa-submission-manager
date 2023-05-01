@@ -111,7 +111,7 @@ class FormModel extends AbstractFormModel {
 			$form['title']        = $posts->post->post_title;
 			$form['date_created'] = $posts->post->post_date;
 
-			$form['registers'] = ( new EntryModel() )->mumberItemsByFormID( $posts->post->ID );
+			$form['registers'] = ( new EntryModel() )->mumber_of_items_by_form_id( $posts->post->ID );
 
 			$form['user_created'] = $posts->post->post_author;
 			$form['perma_links']  = parent::pages_links( $posts->post->ID, self::SHORTCODE );
@@ -132,7 +132,7 @@ class FormModel extends AbstractFormModel {
 	private function prepare_data_array( $results ) {
 		$forms = array();
 
-		foreach ( $results as $key => $value ) {
+		foreach ( $results as $value ) {
 
 			$form = array();
 
@@ -140,7 +140,7 @@ class FormModel extends AbstractFormModel {
 			$form['title']        = $value->post_title;
 			$form['date_created'] = $value->post_date;
 
-			$form['registers'] = ( new EntryModel() )->mumberItemsByFormID( $value->ID );
+			$form['registers'] = ( new EntryModel() )->mumber_of_items_by_form_id( $value->ID );
 
 			$form['user_created'] = $value->post_author;
 			$form['perma_links']  = parent::pages_links( $value->ID, self::SHORTCODE );

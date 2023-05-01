@@ -129,7 +129,7 @@ class EntryModel extends AbstractEntryModel {
 	}
 
 	/**
-	 * Get Forms
+	 * Count Forms entries
 	 *
 	 * @param int $form_id The form id.
 	 *
