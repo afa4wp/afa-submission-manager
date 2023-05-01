@@ -1,41 +1,84 @@
 <?php
+/**
+ * The Entry Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models\GF;
 
 use Includes\Models\UserModel;
 use Includes\Models\GF\FormModel;
-use Includes\Models\EntryModel as MainEntryModel;
+use Includes\Models\AbstractEntryModel;
+use Includes\Plugins\Helpers\EntryModelHelper;
 
-class EntryModel extends MainEntryModel {
+/**
+ * Class AbstractEntryModel
+ *
+ * Create model functions
+ *
+ * @since 1.0.0
+ */
+class EntryModel extends AbstractEntryModel {
 
+	/**
+	 * Const to declare table name.
+	 */
 	public const TABLE_NAME = 'gf_entry';
 
+	/**
+	 * The EntryModelHelper
+	 *
+	 * @var EntryModelHelper
+	 */
+	public $entry_model_helper;
+
+	/**
+	 * Table name with WP prefix
+	 *
+	 * @var string
+	 */
+	private $table_name_with_prefix;
+
+	/**
+	 * Entry model constructor
+	 */
 	public function __construct() {
-		 parent::__construct( self::TABLE_NAME );
+		global $wpdb;
+		$this->entry_model_helper     = new EntryModelHelper( self::TABLE_NAME );
+		$this->table_name_with_prefix = $wpdb->prefix . self::TABLE_NAME;
 	}
 
 	/**
-	 * Get Forms entries
+	 * Get form entries
+	 *
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
+	 * @param string $order_by The column name.
 	 *
 	 * @return array
 	 */
 	public function entries( $offset, $number_of_records_per_page, $order_by = 'id' ) {
-		$results = parent::entries( $offset, $number_of_records_per_page, $order_by );
+		$results = $this->entry_model_helper->entries( $offset, $number_of_records_per_page, $order_by );
 
-		$entries = $this->prepareData( $results );
+		$entries = $this->prepare_data( $results );
 
 		return $entries;
 	}
 
 	/**
-	 * Get Forms entry by id
+	 * Get form entries
 	 *
-	 * @return object
+	 * @param int    $entry_id The form id.
+	 * @param string $id The field.
+	 *
+	 * @return array
 	 */
-	public function entryByID( $entry_id, $id = 'id' ) {
-		$results = parent::entryByID( $entry_id, $id );
+	public function entry_by_id( $entry_id, $id = 'id' ) {
+		$results = $this->entry_model_helper->entry_by_id( $entry_id, $id );
 
-		$entries = $this->prepareData( $results );
+		$entries = $this->prepare_data( $results );
 
 		if ( empty( $entries ) ) {
 			return array();
@@ -45,35 +88,41 @@ class EntryModel extends MainEntryModel {
 	}
 
 	/**
-	 * Get Forms entries
+	 * Get form entries
+	 *
+	 * @param int $form_id The form id.
+	 * @param int $offset The offset.
+	 * @param int $number_of_records_per_page The posts per page.
 	 *
 	 * @return array
 	 */
-	public function entriesByFormID( $form_id, $offset, $number_of_records_per_page ) {
-		 global $wpdb;
+	public function entries_by_form_id( $form_id, $offset, $number_of_records_per_page ) {
 
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . self::TABLE_NAME . ' WHERE form_id = ' . $form_id . ' ORDER BY id DESC LIMIT ' . $offset . ',' . $number_of_records_per_page, OBJECT );
-
-		$entries = $this->prepareData( $results );
-
+		$results = $this->entry_model_helper->entries_by_form_id( $form_id, $offset, $number_of_records_per_page, 'id' );
+		$entries = $this->prepare_data( $results );
 		return $entries;
+
 	}
 
 	/**
-	 * Get Forms entries by user info
+	 * Get form entries by user info
+	 *
+	 * @param string $user_info The user info.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
 	 *
 	 * @return array
 	 */
-	public function searchEntriesByUser( $user_info, $offset, $number_of_records_per_page ) {
+	public function search_entries_by_user( $user_info, $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results(
-			'SELECT fla.* FROM ' . $wpdb->prefix . self::TABLE_NAME . ' fla INNER JOIN ' . $wpdb->prefix . "users wpu ON  
-        fla.created_by = wpu.id WHERE wpu.user_login LIKE '%$user_info%' OR wpu.user_email LIKE '%$user_info%' ORDER BY fla.id DESC LIMIT " . $offset . ',' . $number_of_records_per_page,
-			OBJECT
-		);
+		$sql       = "SELECT fla.* FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->prefix}users wpu ON  
+        fla.created_by = wpu.id WHERE wpu.user_login LIKE %s OR wpu.user_email LIKE %s ORDER BY fla.id DESC LIMIT %d,%d";
+		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
-		$entries = $this->prepareData( $results );
+		$sql     = $wpdb->prepare( $sql, array( $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
+		$entries = $this->prepare_data( $results );
 
 		return $entries;
 
@@ -82,31 +131,35 @@ class EntryModel extends MainEntryModel {
 	/**
 	 * Count Forms entries
 	 *
+	 * @param string $user_info The user info.
+	 *
 	 * @return array
 	 */
-	public function mumberItemsByUserInfo( $user_info ) {
+	public function mumber_of_items_by_user_info( $user_info ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results(
-			'SELECT count(*)  as number_of_rows FROM ' . $wpdb->prefix . self::TABLE_NAME . ' fla INNER JOIN ' . $wpdb->prefix . "users wpu ON  
-        fla.created_by = wpu.id WHERE wpu.user_login LIKE '%$user_info%' OR wpu.user_email LIKE '%$user_info%' ",
-			OBJECT
-		);
+		$sql       = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->prefix}users wpu ON  
+        fla.created_by = wpu.id WHERE wpu.user_login LIKE %s OR wpu.user_email LIKE %s ";
+		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
+		$sql            = $wpdb->prepare( $sql, array( $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results        = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
 		return $number_of_rows;
 	}
 
 	/**
-	 * Get Forms entries
+	 * Format Forms entries
+	 *
+	 * @param array|object $results The entries data.
 	 *
 	 * @return array
 	 */
-	private function prepareData( $results ) {
+	public function prepare_data( $results ) {
 		$entries = array();
 
-		foreach ( $results as $key => $value ) {
+		foreach ( $results as $value ) {
 
 			$entry = array();
 
@@ -122,7 +175,7 @@ class EntryModel extends MainEntryModel {
 			}
 
 			$form_model         = new FormModel();
-			$entry['form_info'] = $form_model->formByID( $value->form_id );
+			$entry['form_info'] = $form_model->form_by_id( $value->form_id );
 
 			$entries[] = $entry;
 		}
