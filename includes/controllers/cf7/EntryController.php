@@ -45,7 +45,7 @@ class EntryController extends AbstractEntryControllers {
 	 * @return array $forms CF7 forms.
 	 */
 	public function entries() {
-		$count = $this->entry_model->mumberItems();
+		$count = $this->entry_model->mumber_of_items();
 
 		$offset = 0;
 
@@ -66,7 +66,7 @@ class EntryController extends AbstractEntryControllers {
 	public function entry_by_id( $request ) {
 		$entry_id = $request['entry_id'];
 
-		$entry = $this->entry_model->entryByID( $entry_id );
+		$entry = $this->entry_model->entry_by_id( $entry_id );
 
 		return rest_ensure_response( $entry );
 
@@ -86,13 +86,13 @@ class EntryController extends AbstractEntryControllers {
 
 		$form_model = new FormModel();
 
-		$channel = $form_model->formChanelByID( $form_id );
+		$channel = $form_model->form_chanel_by_id( $form_id );
 
-		$count = $this->entry_model->mumberItemsByChannel( $channel );
+		$count = $this->entry_model->mumber_of_items_by_Channel( $channel );
 
 		$offset = $this->pagination_helper->get_offset( $page, $count );
 
-		$entries = $this->entry_model->entriesByFormID( $form_id, $offset, $this->number_of_records_per_page );
+		$entries = $this->entry_model->entries_by_form_id( $form_id, $offset, $this->number_of_records_per_page );
 
 		$entries_results = $this->pagination_helper->prepare_data_for_rest_with_pagination( $count, $entries );
 
@@ -111,9 +111,9 @@ class EntryController extends AbstractEntryControllers {
 
 		$offset = 0;
 
-		$entries = $this->entry_model->searchEntriesByUser( $user_info, $offset, $this->number_of_records_per_page );
+		$entries = $this->entry_model->search_entries_by_user( $user_info, $offset, $this->number_of_records_per_page );
 
-		$count = $this->entry_model->mumberItemsByUserInfo( $user_info );
+		$count = $this->entry_model->mumber_of_items_by_user_info( $user_info );
 
 		$entries_results = $this->pagination_helper->prepare_data_for_rest_with_pagination( $count, $entries );
 

@@ -1,39 +1,80 @@
 <?php
+/**
+ * The Entry Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models\CF7;
 
 use Includes\Models\UserModel;
 use Includes\Models\CF7\FormModel;
+use Includes\Models\AbstractEntryModel;
 
-class EntryModel {
+/**
+ * Class AbstractEntryModel
+ *
+ * Create model functions
+ *
+ * @since 1.0.0
+ */
+class EntryModel extends AbstractEntryModel {
 
+	/**
+	 * Const to declare table name.
+	 */
 	public const TABLE_NAME = 'posts';
 
+	/**
+	 * The post type entry
+	 *
+	 * @var string
+	 */
 	private $post_type_entry;
 
+	/**
+	 * Table name with WP prefix
+	 *
+	 * @var string
+	 */
+	private $table_name_with_prefix;
+
+	/**
+	 * Entry model constructor
+	 */
 	public function __construct() {
-		 $this->post_type_entry = 'flamingo_inbound';
+		global $wpdb;
+		$this->post_type_entry        = 'flamingo_inbound';
+		$this->table_name_with_prefix = $wpdb->prefix . self::TABLE_NAME;
 	}
 
 	/**
-	 * Get Forms entries
+	 * Get form entries
+	 *
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
+	 * @param string $order_by The column name.
 	 *
 	 * @return array
 	 */
-	public function entries( $offset, $number_of_records_per_page ) {
+	public function entries( $offset, $number_of_records_per_page, $order_by = null ) {
 		$results = \Flamingo_Inbound_Message::find( array() );
 
-		$entries = $this->prepareData( $results );
+		$entries = $this->prepare_data( $results );
 
 		return $entries;
 	}
 
 	/**
-	 * Get Forms entry by id
+	 * Get form entries
 	 *
-	 * @return object
+	 * @param int    $entry_id The form id.
+	 * @param string $id The field.
+	 *
+	 * @return array
 	 */
-	public function entryByID( $entry_id ) {
+	public function entry_by_id( $entry_id, $id = null ) {
 		$post = new \Flamingo_Inbound_Message( $entry_id );
 
 		$results = array();
@@ -44,7 +85,7 @@ class EntryModel {
 
 		$results[] = $post;
 
-		$entries = $this->prepareData( $results );
+		$entries = $this->prepare_data( $results );
 
 		if ( empty( $entries ) ) {
 			return array();
@@ -54,15 +95,18 @@ class EntryModel {
 	}
 
 	/**
-	 * Get Forms entries by form_id
+	 * Get form entries
+	 *
+	 * @param int $form_id The form id.
+	 * @param int $offset The offset.
+	 * @param int $number_of_records_per_page The posts per page.
 	 *
 	 * @return array
 	 */
-	public function entriesByFormID( $form_id, $offset, $number_of_records_per_page ) {
-		 global $wpdb;
+	public function entries_by_form_id( $form_id, $offset, $number_of_records_per_page ) {
 
 		$form_model = new FormModel();
-		$channel    = $form_model->formChanelByID( $form_id );
+		$channel    = $form_model->form_model_helper->form_by_channel( $form_id );
 
 		$results = \Flamingo_Inbound_Message::find(
 			array(
@@ -72,58 +116,70 @@ class EntryModel {
 			)
 		);
 
-		$entries = $this->prepareData( $results );
+		$entries = $this->prepare_data( $results );
 
 		return $entries;
 	}
 
 	/**
-	 * Get Forms entries by user info
+	 * Get form entries by user info
+	 *
+	 * @param string $user_info The user info.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The posts per page.
 	 *
 	 * @return array
 	 */
-	public function searchEntriesByUser( $user_info, $offset, $number_of_records_per_page ) {
+	public function search_entries_by_user( $user_info, $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results(
-			'SELECT fla.ID, fla.post_type FROM ' . $wpdb->prefix . self::TABLE_NAME . ' fla INNER JOIN ' . $wpdb->prefix . "users wpu ON  
-        fla.post_author = wpu.id WHERE fla.post_type ='$this->post_type_entry' AND ( wpu.user_login LIKE '%$user_info%' OR wpu.user_email LIKE '%$user_info%' ) ORDER BY fla.id DESC LIMIT " . $offset . ',' . $number_of_records_per_page,
-			OBJECT
-		);
+		$sql = "SELECT fla.ID, fla.post_type FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->prefix}users wpu ON  
+        fla.post_author = wpu.id WHERE fla.post_type = %s AND ( wpu.user_login LIKE %s OR wpu.user_email LIKE %s ) ORDER BY fla.id DESC LIMIT  %d,%d";
 
-		$entries = array();
+		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
+		$sql       = $wpdb->prepare( $sql, array( $this->post_type_entry, $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results   = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
+		$entries   = array();
 
-		foreach ( $results as $key => $value ) {
-			$entries[] = $this->entryByID( $value->ID );
+		foreach ( $results as $value ) {
+			$entries[] = $this->entry_by_id( $value->ID );
 		}
 
 		return $entries;
 	}
 
 	/**
-	 * Get Forms
+	 * Get number of entries
 	 *
 	 * @return int
 	 */
-	public function mumberItems() {
-		 global $wpdb;
+	public function mumber_of_items() {
+		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT count(*)  as number_of_rows FROM ' . $wpdb->prefix . self::TABLE_NAME . " WHERE post_type='$this->post_type_entry' " );
-
+		$sql            = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE post_type = %s ";
+		$sql            = $wpdb->prepare( $sql, array( $this->post_type_entry ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results        = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
 		return $number_of_rows;
 	}
 
-	public function mumberItemsByUserInfo( $user_info ) {
+	/**
+	 * Count Forms entries
+	 *
+	 * @param string $user_info The user info.
+	 *
+	 * @return array
+	 */
+	public function mumber_of_items_by_user_info( $user_info ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results(
-			'SELECT count(*)  as number_of_rows FROM ' . $wpdb->prefix . self::TABLE_NAME . ' fla INNER JOIN ' . $wpdb->prefix . "users wpu ON  
-        fla.post_author = wpu.id WHERE fla.post_type ='$this->post_type_entry' AND ( wpu.user_login LIKE '%$user_info%' OR wpu.user_email LIKE '%$user_info%' ) ",
-			OBJECT
-		);
+		$sql = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} fla INNER JOIN  {$wpdb->prefix}users wpu ON  
+        fla.post_author = wpu.id WHERE fla.post_type = %s AND ( wpu.user_login LIKE %s OR wpu.user_email LIKE %s ) ";
 
+		$user_info      = '%' . $wpdb->esc_like( $user_info ) . '%';
+		$sql            = $wpdb->prepare( $sql, array( $this->post_type_entry, $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results        = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
 		return $number_of_rows;
@@ -132,32 +188,36 @@ class EntryModel {
 	/**
 	 * Get Forms
 	 *
+	 * @param string $channel The post_name.
+	 *
 	 * @return int
 	 */
-	public function mumberItemsByChannel( $channel ) {
+	public function mumber_of_items_by_Channel( $channel ) {
 		$args        = array( 'channel' => $channel );
 		$total_items = \Flamingo_Inbound_Message::count( $args );
 		return $total_items;
 	}
 
 	/**
-	 * Get Forms entries
+	 * Format Forms entries
+	 *
+	 * @param array|object $results The entries data.
 	 *
 	 * @return array
 	 */
-	private function prepareData( $results ) {
+	public function prepare_data( $results ) {
 		$entries = array();
 
-		foreach ( $results as $key => $value ) {
+		foreach ( $results as $value ) {
 
 			$form_model    = new FormModel();
-			$post          = $form_model->formByChannel( $value->channel );
+			$post          = $form_model->form_model_helper->form_by_channel( $value->channel );
 			$flamingo_post = get_post( $value->id() );
 
 			$entry = array();
 
 			$entry['id']           = $value->id();
-			$entry['form_id']      = $value->meta['post_id']; // form_id esta diferente do form_info->form_id corrigir
+			$entry['form_id']      = $value->meta['post_id'];
 			$entry['date_created'] = '';
 			$entry['created_by']   = '';
 			$entry['author_info']  = (object) array();
@@ -176,7 +236,7 @@ class EntryModel {
 			}
 
 			if ( $post ) {
-				$entry['form_info'] = $form_model->formByID( $post->ID );
+				$entry['form_info'] = $form_model->form_by_id( $post->ID );
 			}
 
 			$entries[] = $entry;

@@ -111,7 +111,7 @@ class FormModel extends AbstractFormModel {
 			$form['id']           = $posts->post->ID;
 			$form['title']        = $posts->post->post_title;
 			$form['date_created'] = $posts->post->post_date;
-			$form['registers']    = ( new EntryModel() )->mumberItemsByChannel( $posts->post->post_name );
+			$form['registers']    = ( new EntryModel() )->mumber_of_items_by_Channel( $posts->post->post_name );
 
 			$form['user_created'] = $posts->post->post_author;
 			$form['perma_links']  = parent::pages_links( $posts->post->ID, self::SHORTCODE );
@@ -131,7 +131,7 @@ class FormModel extends AbstractFormModel {
 	private function prepare_data_array( $results ) {
 		$forms = array();
 
-		foreach ( $results as $key => $value ) {
+		foreach ( $results as $value ) {
 
 			$form = array();
 
@@ -139,7 +139,7 @@ class FormModel extends AbstractFormModel {
 			$form['title']        = $value->post_title;
 			$form['date_created'] = $value->post_date;
 
-			$form['registers'] = ( new EntryModel() )->mumberItemsByChannel( $value->post_name );
+			$form['registers'] = ( new EntryModel() )->mumber_of_items_by_Channel( $value->post_name );
 
 			$form['user_created'] = $value->post_author;
 			$form['perma_links']  = parent::pages_links( $value->ID, self::SHORTCODE );
@@ -150,4 +150,16 @@ class FormModel extends AbstractFormModel {
 		return $forms;
 
 	}
+
+	/**
+	 * Get Form chanel by id
+	 *
+	 * @param string $id The post id.
+	 *
+	 * @return string
+	 */
+	public function form_chanel_by_id( $id ) {
+		return $this->form_model_helper->form_by_channel( $id );
+	}
+
 }
