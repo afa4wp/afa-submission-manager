@@ -1,14 +1,29 @@
 <?php
+/**
+ * The User Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models;
 
-class UserModel {
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
-	public function __construct() {
-	}
+/**
+ * Class UserModel
+ *
+ * Hendler with user data
+ *
+ * @since 1.0.0
+ */
+class UserModel {
 
 	/**
 	 * Login user
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param string $username The user name.
 	 * @param string $password The user password.
@@ -39,11 +54,13 @@ class UserModel {
 		return $login;
 	}
 
-	 /**
-	  * Get user
-	  *
-	  * @return WP_User $user Some User info.
-	  */
+	/**
+	 * Get user
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return WP_User $user The user data.
+	 */
 	public function user() {
 		$user = wp_get_current_user();
 		return array(
@@ -57,31 +74,45 @@ class UserModel {
 	/**
 	 * Get user by id
 	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_id The ID of the user.
+	 *
 	 * @return WP_User $user Some User info.
 	 */
-	public function userInfoByID( $id ) {
-		if ( empty( $id ) ) {
+	public function user_info_by_id( $user_id ) {
+		if ( empty( $user_id ) ) {
 			return array();
 		}
 
-		 $user = get_user_by( 'ID', $id );
+		$user = get_user_by( 'ID', $user_id );
 
 		if ( empty( $user ) ) {
 			return array();
 		}
-		 $user_info = array();
 
-		 $user_info['user_name']  = $user->display_name;
-		 $user_info['user_email'] = $user->user_email;
-		 $user_info['avatar_url'] = get_avatar_url( $id );
+		$user_info = array();
 
-		 return $user_info;
+		$user_info['user_name']  = $user->display_name;
+		$user_info['user_email'] = $user->user_email;
+		$user_info['avatar_url'] = get_avatar_url( $user_id );
+
+		return $user_info;
 	}
 
+	/**
+	 * Check if user can manage the plugin.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_id The ID of the user.
+	 *
+	 * @return true|false
+	 */
 	public function user_can_manage_wp_afa( $user_id ) {
 		$user = new \WP_User( $user_id );
-		if($user->exists()){
-			if (user_can( $user_id, 'manage_options' )){
+		if ( $user->exists() ) {
+			if ( user_can( $user_id, 'manage_options' ) ) {
 				return true;
 			}
 			if ( in_array( 'wp_afa_staff', $user->roles, true ) ) {
@@ -97,7 +128,7 @@ class UserModel {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $user_id The ID for user.
+	 * @param int $user_id The ID of the user.
 	 *
 	 * @return void
 	 */
@@ -119,7 +150,7 @@ class UserModel {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $user_id The ID for user.
+	 * @param int $user_id The ID of the user.
 	 *
 	 * @return void
 	 */
@@ -133,5 +164,5 @@ class UserModel {
 			}
 		}
 	}
-	
+
 }

@@ -232,7 +232,7 @@ class EntryModel extends AbstractEntryModel {
 			if ( $user ) {
 				$user_model           = new UserModel();
 				$entry['created_by']  = $user->ID;
-				$entry['author_info'] = $user_model->userInfoByID( $user->ID );
+				$entry['author_info'] = $user_model->user_info_by_id( $user->ID );
 			}
 
 			if ( $post ) {

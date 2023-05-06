@@ -184,7 +184,7 @@ class EntryModel extends AbstractEntryModel {
 
 			if ( ! empty( $value->user_id ) ) {
 				$user_model           = new UserModel();
-				$entry['author_info'] = $user_model->userInfoByID( $value->user_id );
+				$entry['author_info'] = $user_model->user_info_by_id( $value->user_id );
 			}
 
 			$form_model         = new FormModel();
