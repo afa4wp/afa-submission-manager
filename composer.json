@@ -25,7 +25,7 @@
             "Includes\\Database\\": "includes/database/",
             "Includes\\Admin\\": "includes/admin/",
             "Includes\\Admin\\Pages\\": "includes/admin/pages/",
-            "Includes\\Admin\\Sreens\\": "includes/admin/screens/"
+            "Includes\\Admin\\Screens\\": "includes/admin/screens/"
             
         }
     },
