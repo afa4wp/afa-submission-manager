@@ -35,7 +35,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'forms' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
@@ -52,7 +52,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'form_by_id' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
