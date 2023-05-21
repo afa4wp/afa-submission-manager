@@ -20,7 +20,7 @@
             "Includes\\Schema\\": "includes/schema/",
             "Includes\\Schema\\GF\\": "includes/schema/gf/",
             "Includes\\Plugins\\": "includes/plugins/",
-            "Includes\\Plugins\\JWT\\": "includes/plugins/JWT/",
+            "Includes\\Plugins\\JWT\\": "includes/plugins/jwt/",
             "Includes\\Plugins\\Helpers\\": "includes/plugins/helpers/",
             "Includes\\Database\\": "includes/database/",
             "Includes\\Admin\\": "includes/admin/",
@@ -42,7 +42,6 @@
     ],
     "require": {
         "firebase/php-jwt": "^6.3",
-        "vlucas/phpdotenv": "^5.4",
         "chillerlan/php-qrcode": "^4.3"
     },
     "require-dev": {
