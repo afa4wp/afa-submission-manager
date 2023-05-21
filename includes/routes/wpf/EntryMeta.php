@@ -10,6 +10,7 @@ namespace Includes\Routes\WPF;
 
 use Includes\Controllers\WPF\EntryMetaController;
 use Includes\Routes\AbstractEntryMetaRoute;
+use Includes\Plugins\Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -34,7 +35,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryMetaController(), 'entry_meta_by_entry_id' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
@@ -51,7 +52,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryMetaController(), 'search_entry_meta_answer' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
