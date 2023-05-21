@@ -9,6 +9,7 @@
 namespace Includes\Routes;
 
 use Includes\Controllers\ConfigController;
+use Includes\Plugins\Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -49,7 +50,7 @@ class ConfigRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new ConfigController(), 'forms' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 
 			)
