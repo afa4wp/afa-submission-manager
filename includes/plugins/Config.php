@@ -61,4 +61,20 @@ class Config {
 		return $installed_plugins;
 	}
 
+	/**
+	 * Tries to validate if user can manage data
+	 *
+	 * @since 1.7.4
+	 * @param \WP_REST_Request $request WP Request Object.
+	 * @return boolean
+	 */
+	public function wp_afa_check_authorization( $request ) {
+
+		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+
+		return true;
+	} // end check_authorization;
+
 }

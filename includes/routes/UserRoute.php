@@ -10,6 +10,7 @@ namespace Includes\Routes;
 
 use Includes\Controllers\UserController;
 use Includes\Schema\UserSchema;
+use Includes\Plugins\Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -87,7 +88,7 @@ class UserRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new UserController(), 'user' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 
 			)
