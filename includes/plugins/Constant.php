@@ -21,6 +21,7 @@ class Constant {
 
 	const PLUGIN_VERSION         = '1.0';
 	const PLUGIN_LANGUAGE_DOMAIN = 'wp-all-forms-api';
+	const PLUGIN_TABLE_PREFIX    = 'afa_';
 
 	const API_NAMESPACE                   = 'wp-forms-rest-api';
 	const API_VERSION                     = 'v1';

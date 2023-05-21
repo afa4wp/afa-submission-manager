@@ -8,6 +8,8 @@
 
 namespace Includes\Database;
 
+use Includes\Plugins\Constant;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -32,9 +34,9 @@ class UserTokens {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . $_ENV['DATA_BASE_PREFIX'] . 'user_tokens';
+		$this->table_name = $wpdb->prefix . Constant::PLUGIN_TABLE_PREFIX . 'user_tokens';
 	}
-	
+
 	/**
 	 * Create fra_user_tokens table .
 	 */

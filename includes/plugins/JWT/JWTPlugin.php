@@ -12,6 +12,7 @@ use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Includes\Plugins\PublicRoute;
+use Includes\Plugins\Constant;
 use WP_Error;
 
 // Exit if accessed directly.
@@ -37,7 +38,7 @@ class JWTPlugin {
 	 * JWTPlugin constructor.
 	 */
 	public function __construct() {
-		$this->namespace = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
+		$this->namespace = Constant::API_NAMESPACE . '/' . Constant::API_VERSION;
 	}
 
 	/**
@@ -49,7 +50,7 @@ class JWTPlugin {
 	 */
 	public function generate_token( $id ) {
 		$issued_at           = time();
-		$exp_token_in_minute = $_ENV['ACCESS_EXP_TOKEN_IN_MINUTE'];
+		$exp_token_in_minute = Constant::API_ACCESS_EXP_TOKEN_IN_MINUTE;
 
 		if ( empty( $exp_token_in_minute ) || ! is_numeric( $exp_token_in_minute ) ) {
 			$exp_token_in_minute = 15;
@@ -80,7 +81,7 @@ class JWTPlugin {
 	 */
 	public function generate_refresh_token( $id ) {
 		$issued_at           = time();
-		$exp_token_in_minute = $_ENV['REFRESH_EXP_TOKEN_IN_MINUTE'];
+		$exp_token_in_minute = Constant::API_REFRESH_EXP_TOKEN_IN_MINUTE;
 
 		if ( empty( $exp_token_in_minute ) || ! is_numeric( $exp_token_in_minute ) ) {
 			$exp_token_in_minute = 15;
@@ -88,7 +89,7 @@ class JWTPlugin {
 
 		$expire = $issued_at + ( MINUTE_IN_SECONDS * $exp_token_in_minute );
 
-		$key = $this->get_refress_token_secret_key();
+		$key = $this->get_refresh_token_secret_key();
 
 		$payload = array(
 			'iss' => get_bloginfo( 'url' ),
@@ -165,7 +166,7 @@ class JWTPlugin {
 	 */
 	public function validate_refresh_token( $jwt ) {
 		try {
-			$key     = $this->get_refress_token_secret_key();
+			$key     = $this->get_refresh_token_secret_key();
 			$decoded = JWT::decode( $jwt, new Key( $key, 'HS256' ) );
 			return $decoded;
 		} catch ( Exception $e ) {
@@ -233,10 +234,10 @@ class JWTPlugin {
 	 *
 	 * @return string $key The token key.
 	 */
-	private function get_refress_token_secret_key() {
+	private function get_refresh_token_secret_key() {
 
 		if ( defined( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' ) && ! empty( WP_AFA_REFRESH_TOKEN_SECRET_KEY ) ) {
-			return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
+			return WP_AFA_REFRESH_TOKEN_SECRET_KEY;
 		}
 
 		return get_option( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' );

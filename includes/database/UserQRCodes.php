@@ -8,6 +8,8 @@
 
 namespace Includes\Database;
 
+use Includes\Plugins\Constant;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -31,7 +33,7 @@ class UserQRCodes {
 	 * UserQRCodes constructor.
 	 */
 	public function __construct() {
-		$this->data_base_name = $_ENV['DATA_BASE_PREFIX'] . 'user_qr_codes';
+		$this->data_base_name = Constant::PLUGIN_TABLE_PREFIX . 'user_qr_codes';
 	}
 
 	/**

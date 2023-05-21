@@ -25,15 +25,14 @@ use Includes\Routes\Route;
 use Includes\Database\DatabaseInstaller;
 use Includes\Plugins\QRCode;
 use Includes\Admin\AdminOptions;
-$dotenv = Dotenv\Dotenv::createImmutable( __DIR__ );
-$dotenv->load();
+use Includes\Plugins\Constant;
 
 /**
  * Init api.
  */
 function wp_all_forms_api_rest_init() {
-	$name_space = $_ENV['WP_ALL_FORMS_API_NAME_SPACE'];
-	( new Route( $name_space ) )->init();
+	$namespace = Constant::API_NAMESPACE . '/' . Constant::API_VERSION;
+	( new Route( $namespace ) )->init();
 
 	add_filter( 'rest_pre_dispatch', array( new JWTPlugin(), 'validate_token_rest_pre_dispatch' ), 10, 3 );
 }
@@ -52,8 +51,8 @@ register_activation_hook( WP_ALL_FORMS_API_PLUGIN_FILE, array( new DatabaseInsta
 ( new AdminOptions() )->init();
 
 
-function wp_all_forms_api_rest_init_load_textdomain(){
-	load_plugin_textdomain( 'wp-all-forms-api', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+function wp_all_forms_api_rest_init_load_textdomain() {
+	load_plugin_textdomain( 'wp-all-forms-api', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
 
 add_action( 'init', 'wp_all_forms_api_rest_init_load_textdomain' );
