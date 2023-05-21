@@ -10,6 +10,7 @@ namespace Includes\Routes\WEF;
 
 use Includes\Controllers\WEF\FormController;
 use Includes\Routes\AbstractFormRoute;
+use Includes\Plugins\Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -34,7 +35,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'forms' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
@@ -51,7 +52,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'form_by_id' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
@@ -68,7 +69,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'forms_pagination' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
@@ -85,7 +86,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'search_forms' ),
-					'permission_callback' => '__return_true',
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
