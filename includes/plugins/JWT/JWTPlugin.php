@@ -189,7 +189,7 @@ class JWTPlugin {
 	 * @param WP_REST_Server  $server Server instance.
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $payload The modified token's payload.
+	 * @return mixed $result
 	 */
 	public function validate_token_rest_pre_dispatch( $result, $server, $request ) {
 		$url = $request->get_route();
@@ -212,6 +212,8 @@ class JWTPlugin {
 				}
 			}
 		}
+
+		return $result;
 	}
 
 	/**

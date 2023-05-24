@@ -153,9 +153,12 @@ class UserController {
 		$this->user_tokens_model->create( $user->data->ID, $access_token, $access_refresh_token );
 
 		$data = array(
-			'access_token'  => $access_token,
-			'refresh_token' => $access_refresh_token,
-			'id'            => $user->data->ID,
+			'access_token'      => $access_token,
+			'refresh_token'     => $access_refresh_token,
+			'id'                => $user->data->ID,
+			'user_email'        => $user->data->user_email,
+			'user_nicename'     => $user->data->user_nicename,
+			'user_display_name' => $user->data->display_name,
 		);
 
 		return rest_ensure_response( $data );
