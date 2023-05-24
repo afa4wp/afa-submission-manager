@@ -152,6 +152,8 @@ class UserController {
 
 		$this->user_tokens_model->create( $user->data->ID, $access_token, $access_refresh_token );
 
+		( new UserQRCodeModel() )->delete_qr_code_by_user_id( $user->data->ID );
+
 		$data = array(
 			'access_token'      => $access_token,
 			'refresh_token'     => $access_refresh_token,
