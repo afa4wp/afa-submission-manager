@@ -168,5 +168,26 @@ class FormModel extends AbstractFormModel {
 		return $forms;
 	}
 
+	/**
+	 * Count number of forms created by logged user
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_id The user id.
+	 *
+	 * @return int
+	 */
+	public function user_form_count( $user_id ) {
+		$args = array(
+			'created_by' => $user_id,
+			'status'     => 'active',
+		);
+
+		$forms = \GFAPI::get_forms( $args );
+		$count = count( $forms );
+
+		return $count;
+	}
+
 
 }

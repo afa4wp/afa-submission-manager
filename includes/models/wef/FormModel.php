@@ -151,4 +151,17 @@ class FormModel extends AbstractFormModel {
 		return $forms;
 	}
 
+	/**
+	 * Count number of forms created by logged user
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_id The user id.
+	 *
+	 * @return int
+	 */
+	public function user_form_count( $user_id ) {
+		return $this->form_model_helper->get_user_form_count_by_id( $user_id );
+	}
+
 }
