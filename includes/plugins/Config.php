@@ -77,4 +77,14 @@ class Config {
 		return true;
 	} // end check_authorization;
 
+	/**
+	 * Check if form is supported
+	 *
+	 * @since 1.0.0
+	 * @param string $key The key of form type.
+	 * @return boolean
+	 */
+	public function is_plugin_key_exists( $key ) {
+		return array_key_exists( $key, self::PLUGINS );
+	}
 }
