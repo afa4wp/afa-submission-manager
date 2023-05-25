@@ -96,6 +96,25 @@ class UserRoute {
 	}
 
 	/**
+	 * Create user form type content endpoint.
+	 */
+	public function user_form_type_me() {
+		register_rest_route(
+			$this->name,
+			'/user/(?P<form_type>\S+)/me',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( new UserController(), 'user_form_type_me' ),
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'args'                => ( new UserSchema() )->form_type(),
+				),
+
+			)
+		);
+	}
+
+	/**
 	 * Create refresh token endpoint.
 	 */
 	public function token() {
@@ -120,7 +139,9 @@ class UserRoute {
 		$this->login();
 		$this->login_qr_code();
 		$this->user_me();
+		$this->user_form_type_me();
 		$this->token();
+
 	}
 
 }
