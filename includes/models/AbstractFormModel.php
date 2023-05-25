@@ -98,4 +98,15 @@ abstract class AbstractFormModel {
 		return $results;
 	}
 
+	/**
+	 * Count number of forms created by logged user
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_id The user id.
+	 *
+	 * @return int
+	 */
+	abstract public function user_form_count( $user_id);
+
 }
