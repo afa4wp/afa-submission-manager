@@ -62,12 +62,24 @@ class UserModel {
 	 * @return WP_User $user The user data.
 	 */
 	public function user() {
-		$user = wp_get_current_user();
+		global $wp_roles;
+		$user  = wp_get_current_user();
+		$roles = array();
+
+		foreach ( $user->roles as $key => $role ) {
+			$roles[ $role ] = $wp_roles->roles[ $role ]['name'];
+		}
+
 		return array(
-			'id'           => $user->ID,
-			'email'        => $user->data->user_email,
-			'display_name' => $user->data->display_name,
-			'user_login'   => $user->data->user_login,
+			'id'              => $user->ID,
+			'email'           => $user->data->user_email,
+			'display_name'    => $user->data->display_name,
+			'first_name'      => $user->user_firstname,
+			'last_name'       => $user->user_lastname,
+			'user_login'      => $user->data->user_login,
+			'roles'           => $roles,
+			'avatar_url'      => get_avatar_url( $user->ID ),
+			'user_registered' => $user->data->user_registered,
 		);
 	}
 
