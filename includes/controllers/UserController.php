@@ -12,6 +12,7 @@ use Includes\Models\UserModel;
 use Includes\Models\UserTokensModel;
 use Includes\Plugins\JWT\JWTPlugin;
 use Includes\Models\UserQRCodeModel;
+use Includes\Plugins\Config;
 use WP_Error;
 
 // Exit if accessed directly.
@@ -176,6 +177,31 @@ class UserController {
 	 */
 	public function user( $request ) {
 		return rest_ensure_response( $this->user_model->user() );
+	}
+
+	/**
+	 * Get user.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $user Some User info.
+	 */
+	public function user_form_type_me( $request ) {
+		$key = $request['form_type'];
+
+		$number_of_forms = 0;
+
+		$form = ( new Config() )->form_model( $key );
+
+		if ( is_object( $form ) ) {
+			$user            = wp_get_current_user();
+			$number_of_forms = $form->user_form_count( $user->ID );
+		}
+
+		$user_data = $this->user_model->user();
+
+		$user_data['muber_of_forms'] = $number_of_forms;
+		return rest_ensure_response( $user_data );
 	}
 
 	/**
