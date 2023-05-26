@@ -231,4 +231,34 @@ class FormModelHelper {
 		return $results;
 	}
 
+	/**
+	 * Count number of forms created by logged user
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $user_id The user id.
+	 *
+	 * @return int
+	 */
+	public function get_user_form_count_by_id( $user_id ) {
+
+		$form_count = 0;
+
+		$args = array(
+			'post_type'      => $this->post_type,
+			'posts_per_page' => -1,
+			'author'         => $user_id,
+		);
+
+		$query = new \WP_Query( $args );
+
+		if ( $query->have_posts() ) {
+			$form_count = $query->post_count;
+		}
+
+		wp_reset_postdata();
+
+		return $form_count;
+	}
+
 }
