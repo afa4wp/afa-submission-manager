@@ -8,6 +8,11 @@
 
 namespace Includes\Plugins;
 
+use Includes\Models\CF7\FormModel as CF7FormModel;
+use Includes\Models\GF\FormModel as GFFormModel;
+use Includes\Models\WEF\FormModel as WEFFormModel;
+use Includes\Models\WPF\FormModel as WPFFormModel;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 /**
@@ -65,7 +70,9 @@ class Config {
 	 * Tries to validate if user can manage data
 	 *
 	 * @since 1.7.4
+	 *
 	 * @param \WP_REST_Request $request WP Request Object.
+	 *
 	 * @return boolean
 	 */
 	public function wp_afa_check_authorization( $request ) {
@@ -81,10 +88,36 @@ class Config {
 	 * Check if form is supported
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param string $key The key of form type.
+	 *
 	 * @return boolean
 	 */
 	public function is_plugin_key_exists( $key ) {
 		return array_key_exists( $key, self::PLUGINS );
+	}
+
+	/**
+	 * Get form model
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key The key of form type.
+	 *
+	 * @return object|null
+	 */
+	public function form_model( $key ) {
+		$forms = array(
+			'cf7' => new CF7FormModel(),
+			'gf'  => new GFFormModel(),
+			'wef' => new WEFFormModel(),
+			'wpf' => new WPFFormModel(),
+		);
+
+		if ( array_key_exists( $key, $forms ) ) {
+			return $forms[ $key ];
+		}
+
+		return null;
 	}
 }
