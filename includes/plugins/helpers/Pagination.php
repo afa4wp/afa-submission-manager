@@ -79,7 +79,6 @@ class Pagination {
 	 * Calculate offset.
 	 *
 	 * @param int $page The page.
-	 * @param int $count The number od items.
 	 *
 	 * @return int
 	 */
@@ -91,4 +90,18 @@ class Pagination {
 
 	}
 
+	/**
+	 * Calculate page.
+	 *
+	 * @param int $offset The Offset.
+	 *
+	 * @return int
+	 */
+	public function get_page( $offset ) {
+
+		$page = ( $offset / $this->number_of_records_per_page ) + 1;
+
+		return $page;
+
+	}
 }

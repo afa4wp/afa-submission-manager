@@ -9,6 +9,7 @@
 namespace Includes\Plugins\Helpers;
 
 use WP_Query;
+use Includes\Plugins\Helpers\Pagination;
 
 /**
  * Class FormModelHelper
@@ -70,7 +71,7 @@ class FormModelHelper {
 			array(
 				'post_type'      => $this->post_type,
 				'posts_per_page' => $number_of_records_per_page,
-				'paged'          => $offset,
+				'paged'          => ( new Pagination() )->get_page( $offset ),
 				'post_status'    => array( 'publish' ),
 			)
 		);
@@ -110,7 +111,7 @@ class FormModelHelper {
 			array(
 				'post_type'      => $this->post_type,
 				'posts_per_page' => $number_of_records_per_page,
-				'paged'          => $offset,
+				'paged'          => ( new Pagination() )->get_page( $offset ),
 				'post_status'    => array( 'publish' ),
 				's'              => $post_title,
 			)
