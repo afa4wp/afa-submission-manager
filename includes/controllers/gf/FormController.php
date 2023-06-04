@@ -82,7 +82,7 @@ class FormController extends AbstractFormControllers {
 
 		$count = $this->form_model->form_model_helper->mumber_of_items();
 
-		$offset = $this->pagination_helper->get_offset( $page, $count );
+		$offset = $this->pagination_helper->get_offset( $page );
 
 		$forms = $this->form_model->forms( $offset, $this->number_of_records_per_page );
 

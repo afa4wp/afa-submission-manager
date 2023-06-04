@@ -83,7 +83,7 @@ class EntryController extends AbstractEntryControllers {
 
 		$count = $this->entry_model->mumber_of_items_by_form_id( $form_id );
 
-		$offset = $this->pagination_helper->get_offset( $page, $count );
+		$offset = $this->pagination_helper->get_offset( $page );
 
 		$entries = $this->entry_model->entries_by_form_id( $form_id, $offset, $this->number_of_records_per_page );
 

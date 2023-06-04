@@ -83,9 +83,9 @@ class Pagination {
 	 *
 	 * @return int
 	 */
-	public function get_offset( $page, $count ) {
+	public function get_offset( $page ) {
 
-		$offset = ( $page - 1 ) * $count;
+		$offset = ( $page - 1 ) * $this->number_of_records_per_page;
 
 		return $offset;
 
