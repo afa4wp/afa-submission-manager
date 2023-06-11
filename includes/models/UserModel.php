@@ -105,9 +105,10 @@ class UserModel {
 
 		$user_info = array();
 
+		$user_info['user_id']    = $user->ID;
 		$user_info['user_name']  = $user->display_name;
 		$user_info['user_email'] = $user->user_email;
-		$user_info['avatar_url'] = get_avatar_url( $user_id );
+		$user_info['avatar_url'] = get_avatar_url( $user_id, array( 'default' => 'wavatar' ) );
 
 		return $user_info;
 	}

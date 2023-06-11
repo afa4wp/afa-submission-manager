@@ -10,6 +10,7 @@ namespace Includes\Models\WPF;
 
 use Includes\Plugins\Helpers\FormModelHelper;
 use Includes\Models\AbstractFormModel;
+use Includes\Models\UserModel;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -110,7 +111,8 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	public function prepare_data( $posts ) {
-		$forms = array();
+		$forms      = array();
+		$user_model = new UserModel();
 
 		while ( $posts->have_posts() ) {
 
@@ -127,7 +129,7 @@ class FormModel extends AbstractFormModel {
 				true
 			);
 
-			$form['user_created'] = $posts->post->post_author;
+			$form['user_created'] = $user_model->user_info_by_id( $posts->post->post_author );
 			$form['perma_links']  = parent::pages_links( $posts->post->ID, self::SHORTCODE );
 
 			$forms[] = $form;
@@ -144,7 +146,8 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	private function prepare_data_array( $results ) {
-		$forms = array();
+		$forms      = array();
+		$user_model = new UserModel();
 
 		foreach ( $results as $value ) {
 
@@ -161,7 +164,7 @@ class FormModel extends AbstractFormModel {
 				true
 			);
 
-			$form['user_created'] = $value->post_author;
+			$form['user_created'] = $user_model->user_info_by_id( $value->post_author );
 			$form['perma_links']  = parent::pages_links( $value->ID, self::SHORTCODE );
 			$forms[]              = $form;
 		}

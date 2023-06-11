@@ -11,6 +11,7 @@ namespace Includes\Models\CF7;
 use Includes\Models\CF7\EntryModel;
 use Includes\Plugins\Helpers\FormModelHelper;
 use Includes\Models\AbstractFormModel;
+use Includes\Models\UserModel;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -102,7 +103,8 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	public function prepare_data( $posts ) {
-		$forms = array();
+		$forms      = array();
+		$user_model = new UserModel();
 
 		while ( $posts->have_posts() ) {
 
@@ -110,10 +112,10 @@ class FormModel extends AbstractFormModel {
 
 			$form['id']           = $posts->post->ID;
 			$form['title']        = $posts->post->post_title;
-			$form['date_created'] = $posts->post->post_date;
+			$form['date_created'] = ( new \DateTime( $posts->post->post_date_gmt ) )->format( 'Y-m-d\TH:i:s.v\Z' );
 			$form['registers']    = ( new EntryModel() )->mumber_of_items_by_Channel( $posts->post->post_name );
 
-			$form['user_created'] = $posts->post->post_author;
+			$form['user_created'] = $user_model->user_info_by_id( $posts->post->post_author );
 			$form['perma_links']  = parent::pages_links( $posts->post->ID, self::SHORTCODE );
 			$forms[]              = $form;
 		}
@@ -129,7 +131,8 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	private function prepare_data_array( $results ) {
-		$forms = array();
+		$forms      = array();
+		$user_model = new UserModel();
 
 		foreach ( $results as $value ) {
 
@@ -137,11 +140,11 @@ class FormModel extends AbstractFormModel {
 
 			$form['id']           = $value->ID;
 			$form['title']        = $value->post_title;
-			$form['date_created'] = $value->post_date;
+			$form['date_created'] = ( new \DateTime( $value->post_date_gmt ) )->format( 'Y-m-d\TH:i:s.v\Z' );
 
 			$form['registers'] = ( new EntryModel() )->mumber_of_items_by_Channel( $value->post_name );
 
-			$form['user_created'] = $value->post_author;
+			$form['user_created'] = $user_model->user_info_by_id( $value->post_author );
 			$form['perma_links']  = parent::pages_links( $value->ID, self::SHORTCODE );
 
 			$forms[] = $form;
