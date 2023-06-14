@@ -106,7 +106,7 @@ class EntryModel extends AbstractEntryModel {
 	public function entries_by_form_id( $form_id, $offset, $number_of_records_per_page ) {
 
 		$form_model = new FormModel();
-		$channel    = $form_model->form_model_helper->form_by_channel( $form_id );
+		$channel    = $form_model->form_model_helper->form_chanel_by_id( $form_id );
 
 		$results = \Flamingo_Inbound_Message::find(
 			array(
