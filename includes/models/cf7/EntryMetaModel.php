@@ -29,7 +29,7 @@ class EntryMetaModel {
 			return array();
 		}
 
-		$form = ( new FormModel() )->formByChannel( $post->channel );
+		$form = ( new FormModel() )->form_model_helper->form_by_channel( $post->channel );
 
 		$form_id = null;
 		if ( ! empty( $form ) ) {
@@ -73,8 +73,8 @@ class EntryMetaModel {
 			$form_id = null;
 
 			if ( ! empty( $post->channel ) ) {
-
-				$form = ( new FormModel() )->formByChannel( $post->channel );
+				
+				$form = ( new FormModel() )->form_model_helper->form_by_channel( $post->channel );
 
 				if ( ! empty( $form ) ) {
 					$form_id = $form->ID;
