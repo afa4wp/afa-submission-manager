@@ -34,7 +34,7 @@ class UserDevices {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::PLUGIN_TABLE_PREFIX . 'user_device';
+		$this->table_name = $wpdb->prefix . Constant::TABLE_USER_DEVICE;
 	}
 
 	/**

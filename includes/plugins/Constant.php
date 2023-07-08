@@ -28,5 +28,8 @@ class Constant {
 	const API_REFRESH_EXP_TOKEN_IN_MINUTE = 1;
 	const API_ACCESS_EXP_TOKEN_IN_MINUTE  = 1;
 
-
+	/*
+	 * Define table name.
+	 */
+	const TABLE_USER_DEVICE = self::PLUGIN_TABLE_PREFIX . 'user_device';
 }
