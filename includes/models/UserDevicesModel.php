@@ -66,4 +66,56 @@ class UserDevicesModel {
 		return $results;
 	}
 
+	/**
+	 * Delete register
+	 *
+	 * @param string $expo_token The user token for push notification.
+	 *
+	 * @return int|false
+	 */
+	public function delete_register_by_expo_token( $expo_token ) {
+		global $wpdb;
+
+		$item = array(
+			'expo_token' => $expo_token,
+		);
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->delete(
+			$this->table_name,
+			$item
+		);
+
+		return $results;
+	}
+
+	/**
+	 * Delete register
+	 *
+	 * @param int $user_id The user ID.
+	 *
+	 * @return int|false
+	 */
+	public function delete_register_by_user_id( $user_id ) {
+		global $wpdb;
+
+		$item = array(
+			'user_id' => $user_id,
+		);
+
+		$item_format = array(
+			'%d',
+		);
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->delete(
+			$this->table_name,
+			$item,
+			$item_format
+		);
+
+		return $results;
+	}
+
+
 }
