@@ -11,6 +11,7 @@ namespace Includes\Routes;
 use Includes\Routes\PingRoute;
 use Includes\Routes\UserRoute;
 use Includes\Routes\ConfigRoute;
+use Includes\Routes\UserDevicesRoute;
 use Includes\Routes\GF\Route as GFRoute;
 use Includes\Routes\WPF\Route as WPFRoute;
 use Includes\Routes\WEF\Route as WEFRoute;
@@ -51,6 +52,7 @@ class Route {
 		( new PingRoute( $this->name ) )->init_routes();
 		( new UserRoute( $this->name ) )->init_routes();
 		( new ConfigRoute( $this->name ) )->init_routes();
+		( new UserDevicesRoute( $this->name ) )->init_routes();
 
 		// Forms routes.
 		( new GFRoute( $this->name ) )->init_routes();

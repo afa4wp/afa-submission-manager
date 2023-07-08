@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Class UserDevicesModel
  *
- * Hendler with user data
+ * Hendler with user device data
  *
  * @since 1.0.0
  */
@@ -47,7 +47,7 @@ class UserDevicesModel {
 	 *
 	 * @return int|false
 	 */
-	public function create( $user_id, $device_id, $device_language, $expo_token ) {
+	public function create( $user_id, $device_id, $device_language, $expo_token = '' ) {
 		global $wpdb;
 
 		$item = array(
