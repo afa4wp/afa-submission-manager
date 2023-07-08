@@ -1,6 +1,6 @@
 <?php
 /**
- * The UserTokens Class.
+ * The UserDevices Class.
  *
  * @package  WP_All_Forms_API
  * @since 1.0.0
@@ -14,13 +14,13 @@ use Includes\Plugins\Constant;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class UserTokens
+ * Class UserDevices
  *
- * Create table user_tokens
+ * Create table user_device
  *
  * @since 1.0.0
  */
-class UserTokens {
+class UserDevices {
 
 	/**
 	 * Table name
@@ -30,15 +30,15 @@ class UserTokens {
 	private $table_name;
 
 	/**
-	 * UserTokens constructor.
+	 * UserDevices constructor.
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::PLUGIN_TABLE_PREFIX . 'user_tokens';
+		$this->table_name = $wpdb->prefix . Constant::PLUGIN_TABLE_PREFIX . 'user_device';
 	}
 
 	/**
-	 * Create user_tokens table .
+	 * Create user_device table.
 	 */
 	public function create_table() {
 
@@ -48,13 +48,14 @@ class UserTokens {
 		$sql = 'CREATE TABLE IF NOT EXISTS ' . $this->table_name . ' (
         id BIGINT(20) NOT NULL AUTO_INCREMENT,
         user_id BIGINT(20)  UNSIGNED NOT NULL,
-        access_token VARCHAR(255) NOT NULL,
-        refresh_token VARCHAR(255) NOT NULL,
+        device_id VARCHAR(100) NOT NULL,
+		device_language VARCHAR(2) NOT NULL,
+        expo_token VARCHAR(100),
 		created_at DATETIME NOT NULL,
         PRIMARY KEY(id),
         FOREIGN KEY(user_id) REFERENCES ' . $wpdb->prefix . 'users(ID),
-        UNIQUE(access_token),
-        UNIQUE(refresh_token)
+        UNIQUE(device_id),
+        UNIQUE(expo_token)
       )' . $wpdb->get_charset_collate();
 
 		dbDelta( $sql );

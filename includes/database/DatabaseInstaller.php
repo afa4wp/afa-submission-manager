@@ -10,6 +10,7 @@ namespace Includes\Database;
 
 use Includes\Database\UserTokens;
 use Includes\Database\UserQRCodes;
+use Includes\Database\UserDevices;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -29,6 +30,7 @@ class DatabaseInstaller {
 	public function install() {
 		( new UserTokens() )->create_table();
 		( new UserQRCodes() )->create_table();
+		( new UserDevices() )->create_table();
 
 		$this->create_secret_key_if_is_not_defined();
 	}
