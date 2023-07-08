@@ -11,6 +11,7 @@ namespace Includes\Database;
 use Includes\Database\UserTokens;
 use Includes\Database\UserQRCodes;
 use Includes\Database\UserDevices;
+use Includes\Database\SupportedPlugins;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -31,6 +32,7 @@ class DatabaseInstaller {
 		( new UserTokens() )->create_table();
 		( new UserQRCodes() )->create_table();
 		( new UserDevices() )->create_table();
+		( new SupportedPlugins() )->create_table();
 
 		$this->create_secret_key_if_is_not_defined();
 	}
@@ -41,11 +43,11 @@ class DatabaseInstaller {
 	public function create_secret_key_if_is_not_defined() {
 
 		if ( ! defined( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY' ) || empty( WP_AFA_ACCESS_TOKEN_SECRET_KEY ) ) {
-			add_option( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY', base64_encode( openssl_random_pseudo_bytes( 30 ) ), '', false );
+			add_option( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY', base64_encode( openssl_random_pseudo_bytes( 30 ) ), '', false ); // phpcs:ignore
 		}
 
 		if ( ! defined( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' ) || empty( WP_AFA_REFRESH_TOKEN_SECRET_KEY ) ) {
-			add_option( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY', base64_encode( openssl_random_pseudo_bytes( 30 ) ), '', false );
+			add_option( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY', base64_encode( openssl_random_pseudo_bytes( 30 ) ), '', false ); // phpcs:ignore
 		}
 
 	}

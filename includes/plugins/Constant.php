@@ -31,5 +31,6 @@ class Constant {
 	/*
 	 * Define table name.
 	 */
-	const TABLE_USER_DEVICE = self::PLUGIN_TABLE_PREFIX . 'user_device';
+	const TABLE_USER_DEVICE       = self::PLUGIN_TABLE_PREFIX . 'user_devices';
+	const TABLE_SUPPORTED_PLUGINS = self::PLUGIN_TABLE_PREFIX . 'supported_plugins';
 }

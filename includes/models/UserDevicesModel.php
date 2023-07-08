@@ -55,6 +55,7 @@ class UserDevicesModel {
 			'device_id'       => $device_id,
 			'device_language' => $device_language,
 			'expo_token'      => $expo_token,
+			'created_at'      => gmdate( 'Y-m-d H:i:s' ),
 		);
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
