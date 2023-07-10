@@ -13,7 +13,7 @@ use Includes\Database\UserQRCodes;
 use Includes\Database\UserDevices;
 use Includes\Database\SupportedPlugins;
 use Includes\Database\NotificationType;
-
+use Includes\Database\NotificationSubscription;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -36,6 +36,7 @@ class DatabaseInstaller {
 		( new UserDevices() )->create_table();
 		( new SupportedPlugins() )->create_table();
 		( new NotificationType() )->create_table();
+		( new NotificationSubscription() )->create_table();
 
 		$this->create_secret_key_if_is_not_defined();
 	}

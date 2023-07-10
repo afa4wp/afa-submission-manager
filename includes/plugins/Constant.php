@@ -31,7 +31,8 @@ class Constant {
 	/*
 	 * Define table name.
 	 */
-	const TABLE_USER_DEVICE       = self::PLUGIN_TABLE_PREFIX . 'user_devices';
-	const TABLE_SUPPORTED_PLUGINS = self::PLUGIN_TABLE_PREFIX . 'supported_plugins';
-	const TABLE_NOTIFICATION_TYPE = self::PLUGIN_TABLE_PREFIX . 'notification_type';
+	const TABLE_USER_DEVICE               = self::PLUGIN_TABLE_PREFIX . 'user_devices';
+	const TABLE_SUPPORTED_PLUGINS         = self::PLUGIN_TABLE_PREFIX . 'supported_plugins';
+	const TABLE_NOTIFICATION_TYPE         = self::PLUGIN_TABLE_PREFIX . 'notification_type';
+	const TABLE_NOTIFICATION_SUBSCRIPTION = self::PLUGIN_TABLE_PREFIX . 'notification_subscription';
 }
