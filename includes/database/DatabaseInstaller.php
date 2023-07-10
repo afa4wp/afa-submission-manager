@@ -12,6 +12,8 @@ use Includes\Database\UserTokens;
 use Includes\Database\UserQRCodes;
 use Includes\Database\UserDevices;
 use Includes\Database\SupportedPlugins;
+use Includes\Database\NotificationType;
+
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -33,6 +35,7 @@ class DatabaseInstaller {
 		( new UserQRCodes() )->create_table();
 		( new UserDevices() )->create_table();
 		( new SupportedPlugins() )->create_table();
+		( new NotificationType() )->create_table();
 
 		$this->create_secret_key_if_is_not_defined();
 	}
