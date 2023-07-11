@@ -68,7 +68,7 @@ class NotificationSubscriptionRoute {
 			'/notification/subscription',
 			array(
 				array(
-					'methods'             => 'POST',
+					'methods'             => 'GET',
 					'callback'            => array( new NotificationSubscriptionController(), 'fetch_subscriptions' ),
 					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),

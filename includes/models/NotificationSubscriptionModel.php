@@ -82,4 +82,35 @@ class NotificationSubscriptionModel {
 
 	}
 
+	/**
+	 * Get user notification subscription
+	 *
+	 * @param string $expo_token The user token for push notification.
+	 *
+	 * @return array
+	 */
+	public function fetch_subscriptions_by_expo_token( $expo_token ) {
+
+		global $wpdb;
+
+		$device = ( new UserDevicesModel() )->get_register_by_user_expo_token( $expo_token );
+
+		if ( empty( $device ) ) {
+			return array();
+		}
+
+		$id = $device->id;
+
+		$table_notification_type = $wpdb->prefix . Constant::TABLE_NOTIFICATION_TYPE;
+		$sql                     = "SELECT afa_tns.id, afa_tns.user_devices_id, afa_tns.notification_type_id, afa_tns.enabled, afa_tnt.type, afa_tnt.title FROM {$this->table_name} afa_tns INNER JOIN {$table_notification_type} afa_tnt ON afa_tns.notification_type_id = afa_tnt.id WHERE afa_tns.user_devices_id=%d ";
+
+		$sql = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results = $wpdb->get_results( $sql, OBJECT );
+
+		return $results;
+
+	}
+
 }

@@ -61,6 +61,10 @@ class NotificationSubscriptionController {
 	 */
 	public function fetch_subscriptions( $request ) {
 
+		$expo_token = $request['expo_token'];
+
+		$result = $this->notification_subscription_model->fetch_subscriptions_by_expo_token( $expo_token );
+		return rest_ensure_response( $result );
 	}
 
 }
