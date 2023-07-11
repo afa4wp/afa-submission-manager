@@ -118,5 +118,29 @@ class UserDevicesModel {
 		return $results;
 	}
 
+	/**
+	 * Get device register by expo_token
+	 *
+	 * @param string $expo_token The user token for push notification.
+	 *
+	 * @return object
+	 */
+	public function get_register_by_user_expo_token( $expo_token ) {
+		global $wpdb;
+
+		$sql = "SELECT * FROM {$this->table_name} WHERE expo_token=%s";
+
+		$sql = $wpdb->prepare( $sql, array( $expo_token ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results = $wpdb->get_results( $sql, OBJECT );
+
+		if ( count( $results ) > 0 ) {
+			return $results[0];
+		}
+
+		return null;
+	}
+
 
 }
