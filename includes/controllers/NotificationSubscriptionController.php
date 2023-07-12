@@ -67,4 +67,19 @@ class NotificationSubscriptionController {
 		return rest_ensure_response( $result );
 	}
 
+	/**
+	 * Unsubscribe to all notification.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array
+	 */
+	public function unsubscribe( $request ) {
+
+		$expo_token = $request['expo_token'];
+
+		$result = $this->notification_subscription_model->unsubscribe( $expo_token );
+		return rest_ensure_response( $result );
+	}
+
 }

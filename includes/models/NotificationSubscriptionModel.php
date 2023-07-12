@@ -113,4 +113,32 @@ class NotificationSubscriptionModel {
 
 	}
 
+	/**
+	 * Unsubscribe to all notification.
+	 *
+	 * @param string $expo_token The user token for push notification.
+	 *
+	 * @return int|false
+	 */
+	public function unsubscribe( $expo_token ) {
+		global $wpdb;
+
+		$device = ( new UserDevicesModel() )->get_register_by_user_expo_token( $expo_token );
+
+		if ( empty( $device ) ) {
+			return false;
+		}
+
+		$item = array(
+			'user_devices_id' => $device->id,
+		);
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->delete(
+			$this->table_name,
+			$item
+		);
+
+		return $results;
+	}
 }

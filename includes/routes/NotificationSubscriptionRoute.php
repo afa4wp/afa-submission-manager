@@ -71,6 +71,26 @@ class NotificationSubscriptionRoute {
 					'methods'             => 'GET',
 					'callback'            => array( new NotificationSubscriptionController(), 'fetch_subscriptions' ),
 					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
+				),
+
+			)
+		);
+	}
+
+	/**
+	 * Unsubscribe to all notification.
+	 */
+	public function unsubscribe() {
+		register_rest_route(
+			$this->name,
+			'/notification/subscription',
+			array(
+				array(
+					'methods'             => 'DELETE',
+					'callback'            => array( new NotificationSubscriptionController(), 'unsubscribe' ),
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
 				),
 
 			)
@@ -83,6 +103,7 @@ class NotificationSubscriptionRoute {
 	public function init_routes() {
 		$this->subscribe_user();
 		$this->fetch_subscriptions();
+		$this->unsubscribe();
 	}
 
 }
