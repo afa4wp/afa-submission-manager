@@ -39,4 +39,21 @@ class NotificationSubscriptionSchema {
 		);
 		return $schema;
 	}
+
+	/**
+	 * Update subscription.
+	 *
+	 * @return array
+	 */
+	public function update_subscription_state() {
+		$schema = array(
+			'enabled' => array(
+				'required' => true,
+				'type'     => 'integer',
+				'minimum'  => 0,
+				'maximum'  => 1,
+			),
+		);
+		return $schema;
+	}
 }
