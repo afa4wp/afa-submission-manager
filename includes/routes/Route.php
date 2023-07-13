@@ -13,6 +13,7 @@ use Includes\Routes\UserRoute;
 use Includes\Routes\ConfigRoute;
 use Includes\Routes\UserDevicesRoute;
 use Includes\Routes\NotificationSubscriptionRoute;
+use Includes\Routes\NotificationRoute;
 use Includes\Routes\GF\Route as GFRoute;
 use Includes\Routes\WPF\Route as WPFRoute;
 use Includes\Routes\WEF\Route as WEFRoute;
@@ -55,6 +56,7 @@ class Route {
 		( new ConfigRoute( $this->name ) )->init_routes();
 		( new UserDevicesRoute( $this->name ) )->init_routes();
 		( new NotificationSubscriptionRoute( $this->name ) )->init_routes();
+		( new NotificationRoute( $this->name ) )->init_routes();
 
 		// Forms routes.
 		( new GFRoute( $this->name ) )->init_routes();

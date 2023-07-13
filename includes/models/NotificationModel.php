@@ -30,7 +30,7 @@ class NotificationModel {
 	private $table_name;
 
 	/**
-	 * NotificationTypeModel constructor.
+	 * NotificationModel constructor.
 	 */
 	public function __construct() {
 		global $wpdb;
@@ -66,6 +66,47 @@ class NotificationModel {
 		return $results;
 	}
 
+	/**
+	 * Get notifications
+	 *
+	 * @param int $offset The offset.
+	 * @param int $number_of_records_per_page The notifications per page.
+	 *
+	 * @return object
+	 */
+	public function notifications( $offset, $number_of_records_per_page = 20 ) {
 
+		global $wpdb;
+
+		$table_notification_type = $wpdb->prefix . Constant::TABLE_NOTIFICATION_TYPE;
+
+		$sql = "SELECT afa_tn.id, afa_tn.user_id, afa_tn.notification_type_id, afa_tn.meta_value, afa_tn.created_at, afa_tnt.type, afa_tnt.title FROM {$this->table_name} afa_tn INNER JOIN  {$table_notification_type} afa_tnt ON afa_tn.notification_type_id = afa_tnt.id ORDER BY id DESC LIMIT %d,%d";
+
+		$sql = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore 
+		$results = $wpdb->get_results( $sql, OBJECT );
+
+		return $results;
+	}
+
+	/**
+	 * Get number of notifications
+	 *
+	 * @return int
+	 */
+	public function mumber_of_items() {
+
+		global $wpdb;
+
+		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} ";
+
+		// phpcs:ignore 
+		$results = $wpdb->get_results( $sql );
+
+		$number_of_rows = intval( $results[0]->number_of_rows );
+
+		return $number_of_rows;
+	}
 
 }
