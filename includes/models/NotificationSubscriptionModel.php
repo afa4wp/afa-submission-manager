@@ -141,4 +141,29 @@ class NotificationSubscriptionModel {
 
 		return $results;
 	}
+
+	/**
+	 * Update subscription..
+	 *
+	 * @param string $notification_subscription_id The id of notification subscription.
+	 * @param string $enabled The value of enabled field.
+	 *
+	 * @return int|false
+	 */
+	public function update_subscription_state( $notification_subscription_id, $enabled ) {
+		global $wpdb;
+
+		$item = array(
+			'enabled' => 1 === $enabled ? true : false,
+		);
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->update(
+			$this->table_name,
+			$item,
+			array( 'id' => $notification_subscription_id )
+		);
+
+		return $results;
+	}
 }

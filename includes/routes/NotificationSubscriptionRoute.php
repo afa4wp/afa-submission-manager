@@ -98,12 +98,32 @@ class NotificationSubscriptionRoute {
 	}
 
 	/**
+	 * Update subscription.
+	 */
+	public function update_subscription_state() {
+		register_rest_route(
+			$this->name,
+			'/notification/subscription/(?P<notification_subscription_id>[0-9]+)/enabled',
+			array(
+				array(
+					'methods'             => 'PUT',
+					'callback'            => array( new NotificationSubscriptionController(), 'update_subscription_state' ),
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'args'                => ( new NotificationSubscriptionSchema() )->update_subscription_state(),
+				),
+
+			)
+		);
+	}
+
+	/**
 	 * Call all endpoints
 	 */
 	public function init_routes() {
 		$this->subscribe_user();
 		$this->fetch_subscriptions();
 		$this->unsubscribe();
+		$this->update_subscription_state();
 	}
 
 }

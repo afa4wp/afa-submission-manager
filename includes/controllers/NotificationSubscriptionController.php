@@ -82,4 +82,20 @@ class NotificationSubscriptionController {
 		return rest_ensure_response( $result );
 	}
 
+	/**
+	 * Update subscription.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return boolean
+	 */
+	public function update_subscription_state( $request ) {
+
+		$notification_subscription_id = intval( $request['notification_subscription_id'] );
+		$enabled                      = $request['enabled'];
+
+		$result = $this->notification_subscription_model->update_subscription_state( $notification_subscription_id, $enabled );
+		return rest_ensure_response( $result );
+	}
+
 }
