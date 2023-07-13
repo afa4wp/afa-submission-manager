@@ -145,8 +145,8 @@ class NotificationSubscriptionModel {
 	/**
 	 * Update subscription..
 	 *
-	 * @param string $notification_subscription_id The id of notification subscription.
-	 * @param string $enabled The value of enabled field.
+	 * @param int $notification_subscription_id The id of notification subscription.
+	 * @param int $enabled The value of enabled field.
 	 *
 	 * @return int|false
 	 */
