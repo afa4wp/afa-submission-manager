@@ -39,7 +39,7 @@ Expo::addDevicesNotRegisteredHandler(
 class PushNotificationPlugin {
 
 	/**
-	 * Generate new QRCode
+	 * Send push notification
 	 *
 	 * @param string $title The title to display in the notification.
 	 * @param string $body The message to display in the notification.
@@ -69,4 +69,18 @@ class PushNotificationPlugin {
 		return $response->getData()[0]['status'];
 	}
 
+	/**
+	 * Send push notification in bulk
+	 *
+	 * @param array $item The list data to send push notification.
+	 *
+	 * @return void
+	 */
+	public function push_notification_bulk( $item ) {
+		foreach ( $item as $value ) {
+			if ( ! empty( $value['title'] ) && ! empty( $value['body'] ) && ! empty( $value['exponent_token'] ) ) {
+				$this->generate_push_notification_for_single_exponent_token( $value['title'], $value['body'], $value['exponent_token'] );
+			}
+		}
+	}
 }
