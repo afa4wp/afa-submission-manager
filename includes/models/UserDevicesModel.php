@@ -142,5 +142,25 @@ class UserDevicesModel {
 		return null;
 	}
 
+	/**
+	 * Get enabled device register for push notification by notification type
+	 *
+	 * @param int $notification_type_id The notification type id.
+	 *
+	 * @return array
+	 */
+	public function get_enabled_register_by_notification_type( $notification_type_id ) {
+		global $wpdb;
 
+		$table_notification_subscription = $wpdb->prefix . Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
+
+		$sql = "SELECT afa_tud.id, afa_tud.user_id, afa_tud.expo_token, afa_tud.device_language FROM {$this->table_name} afa_tud INNER JOIN {$table_notification_subscription} afa_tns ON afa_tud.id = afa_tns.user_devices_id AND afa_tns.enabled = 1 WHERE afa_tns.notification_type_id = %d";
+
+		$sql = $wpdb->prepare( $sql, array( $notification_type_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results = $wpdb->get_results( $sql, OBJECT );
+
+		return $results;
+	}
 }
