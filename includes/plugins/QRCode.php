@@ -1,6 +1,6 @@
 <?php
 /**
- * The QRCOde Plugigin Class.
+ * The QRCOde Plugin Class.
  *
  * @package  WP_All_Forms_API
  * @since 1.0.0
@@ -56,7 +56,7 @@ class QRCode {
 
 		$user_qrcode_model = new UserQRCodeModel();
 
-		$url = get_site_url();
+		$url = get_rest_url();
 
 		$secret  = base64_encode( openssl_random_pseudo_bytes( 30 ) );
 		$user_id = get_current_user_id();

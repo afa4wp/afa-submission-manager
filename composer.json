@@ -25,8 +25,8 @@
             "Includes\\Database\\": "includes/database/",
             "Includes\\Admin\\": "includes/admin/",
             "Includes\\Admin\\Pages\\": "includes/admin/pages/",
-            "Includes\\Admin\\Screens\\": "includes/admin/screens/"
-            
+            "Includes\\Admin\\Screens\\": "includes/admin/screens/",
+            "Includes\\Plugins\\Notification\\": "includes/plugins/notification/" 
         }
     },
     "scripts": {

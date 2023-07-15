@@ -27,7 +27,7 @@ class NotificationController {
 	 *
 	 * @var NotificationModel
 	 */
-	private $notification__model;
+	private $notification_model;
 
 	/**
 	 * The pagination helper
@@ -40,7 +40,7 @@ class NotificationController {
 	 * NotificationController constructor.
 	 */
 	public function __construct() {
-		$this->notification__model = new NotificationModel();
+		$this->notification_model = new NotificationModel();
 		$this->pagination_helper   = new Pagination();
 	}
 
@@ -55,11 +55,11 @@ class NotificationController {
 
 		$page = $request['page_number'];
 
-		$count = $this->notification__model->mumber_of_items();
+		$count = $this->notification_model->mumber_of_items();
 
 		$offset = $this->pagination_helper->get_offset( $page );
 
-		$notifications = $this->notification__model->notifications( $offset, $this->pagination_helper->get_number_of_records_per_page() );
+		$notifications = $this->notification_model->notifications( $offset, $this->pagination_helper->get_number_of_records_per_page() );
 
 		$notifications_results = $this->pagination_helper->prepare_data_for_rest_with_pagination( $count, $notifications );
 
