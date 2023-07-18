@@ -80,7 +80,7 @@ class NotificationTypeModel {
 	 *
 	 * @param string $type The notification type.
 	 *
-	 * @return array
+	 * @return object
 	 */
 	public function get_notification_type_by_type( $type ) {
 
