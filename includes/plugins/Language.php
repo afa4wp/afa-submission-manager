@@ -76,4 +76,37 @@ class Language {
 		return $result;
 	}
 
+	/**
+	 * Filters a plugin’s locale.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $locale The plugin's current locale.
+	 * @param string $domain Text domain, Unique identifier for retrieving translated strings.
+	 *
+	 * @return string
+	 */
+	public function enforce_locale( $locale, $domain ) {
+
+		if ( Constant::PLUGIN_LANGUAGE_DOMAIN === $domain ) {
+
+			$language_code = substr( $locale, 0, 2 );
+
+			$supported_languages = array(
+				'pt' => 'pt',
+				'en' => 'en',
+				'es' => 'es',
+				'fr' => 'fr',
+				'de' => 'de',
+				'it' => 'it',
+			);
+
+			if ( array_key_exists( $language_code, $supported_languages ) ) {
+				$locale = $supported_languages[ $language_code ];
+			}
+		}
+
+		return $locale;
+	}
+
 }
