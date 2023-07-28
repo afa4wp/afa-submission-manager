@@ -109,4 +109,12 @@ class Language {
 		return $locale;
 	}
 
+	/**
+	 * Load the plugin text domain.
+	 *
+	 * @since 1.0.0
+	 */
+	public function wp_all_forms_load_textdomain() {
+		load_plugin_textdomain( 'wp-all-forms-api', false, WP_ALL_FORMS_API_PLUGIN_LANGUAGE_FOLDER );
+	}
 }
