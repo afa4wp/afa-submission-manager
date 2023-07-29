@@ -55,7 +55,7 @@ class NotificationTypeModel {
 	 *
 	 * @param int $id The notification type id.
 	 *
-	 * @return array
+	 * @return object
 	 */
 	public function get_notification_type_by_id( $id ) {
 
