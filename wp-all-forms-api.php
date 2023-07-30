@@ -29,6 +29,7 @@ use Includes\Database\DatabaseInstaller;
 use Includes\Admin\AdminOptions;
 use Includes\Plugins\Constant;
 use Includes\Plugins\Language;
+use Includes\Plugins\Notification\NotificationHooksPlugin;
 
 /**
  * Init api.
@@ -56,3 +57,5 @@ register_activation_hook( WP_ALL_FORMS_API_PLUGIN_FILE, array( new DatabaseInsta
 add_action( 'plugins_loaded', array( new Language(), 'wp_all_forms_load_textdomain' ) );
 
 add_filter( 'plugin_locale', array( new Language(), 'enforce_locale' ), 10, 2 );
+
+( new NotificationHooksPlugin() )->loads_hooks();

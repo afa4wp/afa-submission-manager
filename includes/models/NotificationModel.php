@@ -46,7 +46,7 @@ class NotificationModel {
 	 *
 	 * @return int|false
 	 */
-	public function create( $notification_type_id, $meta_value, $user_id = null ) {
+	public function create( $notification_type_id, $meta_value, $supported_plugin_id = 0, $user_id = 0 ) {
 
 		global $wpdb;
 
@@ -54,6 +54,7 @@ class NotificationModel {
 			'notification_type_id' => $notification_type_id,
 			'meta_value'           => maybe_serialize( $meta_value ), // phpcs:ignore
 			'user_id'              => $user_id,
+			'supported_plugin_id'  => $supported_plugin_id,
 			'created_at'           => gmdate( 'Y-m-d H:i:s' ),
 		);
 
