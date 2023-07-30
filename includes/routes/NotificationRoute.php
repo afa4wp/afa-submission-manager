@@ -10,6 +10,7 @@ namespace Includes\Routes;
 
 use Includes\Controllers\NotificationController;
 use Includes\Plugins\Config;
+use Includes\Schema\NotificationSchema;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -51,6 +52,7 @@ class NotificationRoute {
 					'methods'             => 'GET',
 					'callback'            => array( new NotificationController(), 'notifications' ),
 					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'args'                => ( new NotificationSchema() )->get(),
 				),
 
 			)

@@ -51,7 +51,7 @@ class NotificationTypeModel {
 	}
 
 	/**
-	 * Get notification typeby id
+	 * Get notification type by id
 	 *
 	 * @param int $id The notification type id.
 	 *

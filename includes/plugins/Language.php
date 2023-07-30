@@ -117,4 +117,14 @@ class Language {
 	public function wp_all_forms_load_textdomain() {
 		load_plugin_textdomain( 'wp-all-forms-api', false, WP_ALL_FORMS_API_PLUGIN_LANGUAGE_FOLDER );
 	}
+
+	/**
+	 * Check if a specific language key exists in the LANGUAGES array.
+	 *
+	 * @param string $language_key The language key to check (e.g., 'en', 'es', 'pt', etc.).
+	 * @return bool True if the language key exists, false otherwise.
+	 */
+	public function is_supported_language( $language_key ) {
+		return array_key_exists( $language_key, self::LANGUAGES );
+	}
 }

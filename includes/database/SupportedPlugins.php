@@ -113,4 +113,17 @@ class SupportedPlugins {
 		}
 
 	}
+
+	/**
+	 * Check if a specific slug exists in the default values array.
+	 *
+	 * @param string $slug The slug to check.
+	 *
+	 * @return bool True if the slug exists, false otherwise.
+	 */
+	public function is_default_slug_exist( $slug ) {
+		$default_values = $this->get_default_values();
+		$slugs          = array_column( $default_values, 'slug' );
+		return in_array( $slug, $slugs, true );
+	}
 }
