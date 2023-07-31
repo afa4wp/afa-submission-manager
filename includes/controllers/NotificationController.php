@@ -10,6 +10,7 @@ namespace Includes\Controllers;
 
 use Includes\Models\NotificationModel;
 use Includes\Plugins\Helpers\Pagination;
+use Includes\Models\SupportedPluginsModel;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -41,7 +42,7 @@ class NotificationController {
 	 */
 	public function __construct() {
 		$this->notification_model = new NotificationModel();
-		$this->pagination_helper   = new Pagination();
+		$this->pagination_helper  = new Pagination();
 	}
 
 	/**
@@ -53,13 +54,21 @@ class NotificationController {
 	 */
 	public function notifications( $request ) {
 
-		$page = $request['page_number'];
+		$page             = $request['page_number'];
+		$device_language  = $request['device_language'];
+		$supported_plugin = $request['supported_plugin'];
 
-		$count = $this->notification_model->mumber_of_items();
+		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( $supported_plugin );
+		$supported_plugin_id              = 0;
+		if ( ! empty( $supported_plugins_model_register ) ) {
+			$supported_plugin_id = $supported_plugins_model_register->id;
+		}
+
+		$count = $this->notification_model->mumber_of_items( $supported_plugin_id );
 
 		$offset = $this->pagination_helper->get_offset( $page );
 
-		$notifications = $this->notification_model->notifications( $offset, $this->pagination_helper->get_number_of_records_per_page() );
+		$notifications = $this->notification_model->notifications( $supported_plugin_id, $offset, $this->pagination_helper->get_number_of_records_per_page() );
 
 		$notifications_results = $this->pagination_helper->prepare_data_for_rest_with_pagination( $count, $notifications );
 

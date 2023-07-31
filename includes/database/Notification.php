@@ -47,8 +47,9 @@ class Notification {
 
 		$sql = 'CREATE TABLE IF NOT EXISTS ' . $this->table_name . ' (
 		id BIGINT(20) NOT NULL AUTO_INCREMENT,
-		user_id BIGINT(20),
-		notification_type_id BIGINT(20)  NOT NULL,
+		user_id BIGINT(20) unsigned,
+		notification_type_id BIGINT(20) NOT NULL,
+		supported_plugin_id BIGINT(20) unsigned,
 		meta_value LONGTEXT NOT NULL,
 		created_at DATETIME NOT NULL,
 		PRIMARY KEY(id),
