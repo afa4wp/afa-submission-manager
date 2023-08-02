@@ -9,6 +9,8 @@
 namespace Includes\Models;
 
 use Includes\Plugins\Constant;
+use Includes\Models\UserModel;
+use Includes\Plugins\Language;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -71,13 +73,14 @@ class NotificationModel {
 	/**
 	 * Get notifications
 	 *
-	 * @param int $supported_plugin_id The supported plugin ID to filter the notifications.
-	 * @param int $offset The offset.
-	 * @param int $number_of_records_per_page The notifications per page.
+	 * @param int    $supported_plugin_id The supported plugin ID to filter the notifications.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The notifications per page.
+	 * @param string $device_language  The language code for the user's device to localize the notification message.
 	 *
 	 * @return object
 	 */
-	public function notifications( $supported_plugin_id, $offset, $number_of_records_per_page = 20 ) {
+	public function notifications( $supported_plugin_id, $offset, $number_of_records_per_page = 20, $device_language = 'en' ) {
 
 		global $wpdb;
 
@@ -92,9 +95,14 @@ class NotificationModel {
 
 		$modified_results = array();
 
+		$user_model = new UserModel();
+
 		foreach ( $results as $result ) {
-			$result->meta_value = maybe_unserialize( $result->meta_value );
-			$modified_results[] = $result;
+			$result->meta_value   = maybe_unserialize( $result->meta_value );
+			$result->user_created = $user_model->user_info_by_id( $result->user_id );
+			$user_name            = $this->get_username_or_email( $result->user_created );
+			$result->message      = $this->message_for_submission( $result->meta_value['entry_id'], $device_language, $user_name );
+			$modified_results[]   = $result;
 		}
 
 		return $modified_results;
@@ -123,4 +131,60 @@ class NotificationModel {
 		return $number_of_rows;
 	}
 
+	/**
+	 * Generates a notification message for a new form submission.
+	 *
+	 * This function creates a notification message to inform users about a new form submission.
+	 *
+	 * @param int    $entry_id         The ID of the form submission entry.
+	 * @param string $device_language  The language code for the user's device to localize the notification message.
+	 * @param string $user_name        The name of the user who filled out the form.
+	 *
+	 * @return string  The notification message with placeholders for React Native styling.
+	 */
+	private function message_for_submission( $entry_id, $device_language, $user_name = '' ) {
+
+		$plugin_language = new Language();
+
+		$switched_locale = switch_to_locale( $device_language );
+
+		$plugin_language->load_textdomain_by_language_key( $device_language );
+
+		if ( empty( $user_name ) ) {
+			// translators: %1$s is replaced with the entry_id.
+			$notification_message = sprintf( __( 'Someone filled out a new form: {bold}%1$s{/bold}', 'wp-all-forms-api' ), $entry_id );
+		} else {
+			// translators: %1$s is replaced with the user_name and %1$s entry_id.
+			$notification_message = sprintf( __( '{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}', 'wp-all-forms-api' ), $user_name, $entry_id );
+		}
+
+		if ( $switched_locale ) {
+			restore_previous_locale();
+		}
+
+		return $notification_message;
+	}
+
+	/**
+	 * Get the user_name or user_email from the provided object.
+	 *
+	 * This function takes an object or an empty array as input and returns the user_name or user_email
+	 * if they are available in the input object.
+	 *
+	 * @param array|object $user_object The object or array containing user information.
+	 *
+	 * @return string The user_name or user_email from the input object. Returns an empty string if the input is empty or not an array.
+	 */
+	private function get_username_or_email( $user_object ) {
+
+		if ( empty( $user_object ) || ! is_array( $user_object ) ) {
+			return '';
+		}
+
+		$user_name = isset( $user_object['user_name'] ) ? $user_object['user_name'] : '';
+
+		$user_email = isset( $user_object['user_email'] ) ? $user_object['user_email'] : '';
+
+		return ! empty( $user_name ) ? $user_name : $user_email;
+	}
 }
