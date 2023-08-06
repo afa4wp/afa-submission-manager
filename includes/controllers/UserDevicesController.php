@@ -9,6 +9,7 @@
 namespace Includes\Controllers;
 
 use Includes\Models\UserDevicesModel;
+use Includes\Models\NotificationSubscriptionModel;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -50,7 +51,12 @@ class UserDevicesController {
 		$device_language = $request['device_language'];
 
 		$user   = wp_get_current_user();
-		$result = $this->user_devices_model->create( $user->ID, $device_id, $device_language, $expo_token );
+		$result = $this->user_devices_model->create_device_register_if_not_exist( $user->ID, $device_id, $device_language, $expo_token );
+
+		if ( ! empty( $result ) ) {
+			$notification_subscription_model = new NotificationSubscriptionModel();
+			$notification_subscription_model->subscribe_user_all_notificions_by_expo_token( $expo_token );
+		}
 		return rest_ensure_response( $result );
 
 	}

@@ -143,6 +143,30 @@ class UserDevicesModel {
 	}
 
 	/**
+	 * Get device register by expo_token
+	 *
+	 * @param string $device_id The device virtual ID.
+	 *
+	 * @return object
+	 */
+	public function get_register_by_user_device_id( $device_id ) {
+		global $wpdb;
+
+		$sql = "SELECT * FROM {$this->table_name} WHERE device_id=%s";
+
+		$sql = $wpdb->prepare( $sql, array( $device_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results = $wpdb->get_results( $sql, OBJECT );
+
+		if ( count( $results ) > 0 ) {
+			return $results[0];
+		}
+
+		return null;
+	}
+
+	/**
 	 * Get enabled device register for push notification by notification type
 	 *
 	 * @param int $notification_type_id The notification type id.
@@ -162,5 +186,57 @@ class UserDevicesModel {
 		$results = $wpdb->get_results( $sql, OBJECT );
 
 		return $results;
+	}
+
+	/**
+	 * Update device register
+	 *
+	 * @param int    $user_id The user ID.
+	 * @param string $device_id The device virtual ID.
+	 * @param string $device_language The device language.
+	 * @param string $expo_token The user token for push notification.
+	 *
+	 * @return int|false
+	 */
+	public function update( $user_id, $device_id, $device_language, $expo_token = '' ) {
+		global $wpdb;
+
+		$item = array(
+			'device_language' => $device_language,
+			'expo_token'      => $expo_token,
+			'created_at'      => gmdate( 'Y-m-d H:i:s' ),
+		);
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->update(
+			$this->table_name,
+			$item,
+			array(
+				'user_id'   => $user_id,
+				'device_id' => $device_id,
+			)
+		);
+
+		return $results;
+	}
+
+	/**
+	 * Create new device register if not exist or update
+	 *
+	 * @param int    $user_id The user ID.
+	 * @param string $device_id The device virtual ID.
+	 * @param string $device_language The device language.
+	 * @param string $expo_token The user token for push notification.
+	 *
+	 * @return int|false
+	 */
+	public function create_device_register_if_not_exist( $user_id, $device_id, $device_language, $expo_token = '' ) {
+		$device_register = $this->get_register_by_user_device_id( $device_id );
+
+		if ( empty( $device_register ) ) {
+			return $this->create( $user_id, $device_id, $device_language, $expo_token );
+		}
+
+		return $this->update( $user_id, $device_id, $device_language, $expo_token );
 	}
 }
