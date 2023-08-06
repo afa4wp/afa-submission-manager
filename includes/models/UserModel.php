@@ -8,6 +8,9 @@
 
 namespace Includes\Models;
 
+use Includes\Models\UserTokensModel;
+use Includes\Models\UserDevicesModel;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -178,4 +181,29 @@ class UserModel {
 		}
 	}
 
+	/**
+	 * Logout user.
+	 *
+	 * @param int    $user_id The user ID.
+	 * @param string $device_id The device virtual ID.
+	 *
+	 * @return int|false
+	 */
+	public function logout( $user_id, $device_id = '' ) {
+		$user_tokens_model = new UserTokensModel();
+
+		$result = $user_tokens_model->delete_user_token_by_id( $user_id );
+
+		if ( ( false !== $result ) && ! empty( $device_id ) ) {
+
+			$user_devices_model = new UserDevicesModel();
+			$device             = $user_devices_model->get_register_by_user_device_id( $device_id );
+
+			if ( ! empty( $device ) ) {
+				$user_devices_model->delete_register_by_expo_token( $device->expo_token );
+			}
+		}
+
+		return $result;
+	}
 }

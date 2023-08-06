@@ -259,4 +259,19 @@ class UserController {
 
 		return rest_ensure_response( $data );
 	}
+
+	/**
+	 * Logout user.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return boolean|WP_Error $user WP User with tokens info
+	 */
+	public function logout( $request ) {
+		$device_id = $request['device_id'];
+		$user      = wp_get_current_user();
+		$result    = $this->user_model->logout( $user->ID, $device_id );
+		return rest_ensure_response( $result );
+	}
+
 }

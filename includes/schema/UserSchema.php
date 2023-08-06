@@ -80,4 +80,22 @@ class UserSchema {
 		);
 		return $schema;
 	}
+
+	/**
+	 * Logout schema
+	 *
+	 * @return array
+	 */
+	public function logout() {
+		$schema = array(
+			'device_id' => array(
+				'required'          => false,
+				'type'              => 'string',
+				'validate_callback' => function ( $value, $request, $key ) {
+					return true;
+				},
+			),
+		);
+		return $schema;
+	}
 }

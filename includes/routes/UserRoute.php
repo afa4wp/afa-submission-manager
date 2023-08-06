@@ -133,6 +133,24 @@ class UserRoute {
 	}
 
 	/**
+	 * Logout user.
+	 */
+	public function logout() {
+		register_rest_route(
+			$this->name,
+			'/user/logout',
+			array(
+				array(
+					'methods'             => 'POST',
+					'callback'            => array( new UserController(), 'logout' ),
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'args'                => ( new UserSchema() )->logout(),
+				),
+			)
+		);
+	}
+
+	/**
 	 * Call all endpoints
 	 */
 	public function init_routes() {
@@ -141,7 +159,7 @@ class UserRoute {
 		$this->user_me();
 		$this->user_form_type_me();
 		$this->token();
-
+		$this->logout();
 	}
 
 }
