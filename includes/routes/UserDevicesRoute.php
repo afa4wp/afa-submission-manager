@@ -60,10 +60,30 @@ class UserDevicesRoute {
 	}
 
 	/**
+	 * Update device language.
+	 */
+	public function language() {
+		register_rest_route(
+			$this->name,
+			'/user/device/language',
+			array(
+				array(
+					'methods'             => 'PUT',
+					'callback'            => array( new UserDevicesController(), 'language' ),
+					'permission_callback' => '__return_true',
+					'args'                => ( new UserDevicesSchema() )->language(),
+				),
+
+			)
+		);
+	}
+
+	/**
 	 * Call all endpoints
 	 */
 	public function init_routes() {
 		$this->create();
+		$this->language();
 	}
 
 }

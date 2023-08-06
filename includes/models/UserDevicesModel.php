@@ -204,7 +204,6 @@ class UserDevicesModel {
 		$item = array(
 			'device_language' => $device_language,
 			'expo_token'      => $expo_token,
-			'created_at'      => gmdate( 'Y-m-d H:i:s' ),
 		);
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
@@ -238,5 +237,34 @@ class UserDevicesModel {
 		}
 
 		return $this->update( $user_id, $device_id, $device_language, $expo_token );
+	}
+
+	/**
+	 * Update language device register
+	 *
+	 * @param int    $user_id The user ID.
+	 * @param string $device_id The device virtual ID.
+	 * @param string $device_language The device language.
+	 *
+	 * @return int|false
+	 */
+	public function language( $user_id, $device_id, $device_language ) {
+		global $wpdb;
+
+		$item = array(
+			'device_language' => $device_language,
+		);
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$results = $wpdb->update(
+			$this->table_name,
+			$item,
+			array(
+				'user_id'   => $user_id,
+				'device_id' => $device_id,
+			)
+		);
+
+		return $results;
 	}
 }

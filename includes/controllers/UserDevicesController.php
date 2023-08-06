@@ -61,6 +61,23 @@ class UserDevicesController {
 
 	}
 
+	/**
+	 * Update language for user device register.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return int|false
+	 */
+	public function language( $request ) {
+
+		$device_id       = $request['device_id'];
+		$device_language = $request['device_language'];
+
+		$user   = wp_get_current_user();
+		$result = $this->user_devices_model->language( $user->ID, $device_id, $device_language );
+		return rest_ensure_response( $result );
+
+	}
 
 
 }

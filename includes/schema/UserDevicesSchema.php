@@ -53,4 +53,29 @@ class UserDevicesSchema {
 		);
 		return $schema;
 	}
+
+	/**
+	 * Create language device schema
+	 *
+	 * @return array
+	 */
+	public function language() {
+		$scheme = array(
+			'device_id'       => array(
+				'required'          => true,
+				'type'              => 'string',
+				'validate_callback' => function ( $value, $request, $key ) {
+					return true;
+				},
+			),
+			'device_language' => array(
+				'required'          => true,
+				'type'              => 'string',
+				'validate_callback' => function ( $value, $request, $key ) {
+					return ctype_alpha( $value ) && strlen( $value ) === 2;
+				},
+			),
+		);
+		return $schema;
+	}
 }
