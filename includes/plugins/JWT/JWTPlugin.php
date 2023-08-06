@@ -84,7 +84,7 @@ class JWTPlugin {
 		$exp_token_in_minute = Constant::API_REFRESH_EXP_TOKEN_IN_MINUTE;
 
 		if ( empty( $exp_token_in_minute ) || ! is_numeric( $exp_token_in_minute ) ) {
-			$exp_token_in_minute = 15;
+			$exp_token_in_minute = 43200;
 		}
 
 		$expire = $issued_at + ( MINUTE_IN_SECONDS * $exp_token_in_minute );

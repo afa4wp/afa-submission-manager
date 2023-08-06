@@ -66,7 +66,7 @@ class NotificationType {
 	public function get_default_values() {
 		$values = array(
 			array(
-				'type'  => 'form_submition',
+				'type'  => 'form_submission',
 				'title' => 'New Form Submission',
 			),
 			array(
