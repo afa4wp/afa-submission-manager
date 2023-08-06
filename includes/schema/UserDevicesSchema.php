@@ -76,6 +76,6 @@ class UserDevicesSchema {
 				},
 			),
 		);
-		return $schema;
+		return $scheme;
 	}
 }
