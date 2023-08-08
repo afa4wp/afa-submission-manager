@@ -1,23 +1,40 @@
 <?php
+/**
+ * The Entry Meta Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models\GF;
 
-use Includes\Models\UserModel;
-use Includes\Models\GF\FormModel;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
+/**
+ * Class EntryMetaModel
+ *
+ * Hendler with gf_entry_meta table
+ *
+ * @since 1.0.0
+ */
 class EntryMetaModel {
 
+	/**
+	 * Table name witn entry
+	 *
+	 * @var string
+	 */
 	public const TABLE_NAME = 'gf_entry_meta';
-
-	public function __construct() {
-	}
 
 	/**
 	 * Get entry_meta by entry ID
 	 *
+	 * @param int $entry_id The ID of the form submission entry.
+	 *
 	 * @return array
 	 */
-	public function entryMetaByEntryID( $entry_id ) {
+	public function entry_meta_by_entry_id( $entry_id ) {
 		$entry = \GFAPI::get_entry( $entry_id );
 
 		$form_id = $entry['form_id'];
@@ -33,8 +50,8 @@ class EntryMetaModel {
 			$item['id']         = null;
 			$item['form_id']    = $form_id;
 			$item['entry_id']   = $entry_id;
-			$item['meta_key']   = $value->id;
-			$item['meta_value'] = $entry[ $value->id ];
+			$item['meta_key']   = $value->id; // phpcs:ignore
+			$item['meta_value'] = $entry[ $value->id ]; // phpcs:ignore
 			$item['type']       = $value->type;
 			$item['label']      = $value->label;
 
@@ -45,14 +62,31 @@ class EntryMetaModel {
 	}
 
 	/**
-	 * Get entry_meta by entry ID
+	 * Get entry_meta by answer
+	 *
+	 * @param string $answer The meta value.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The notifications per page.
 	 *
 	 * @return array
 	 */
-	public function searchEntryMetaAnswer( $answer, $offset, $number_of_records_per_page ) {
+	public function search_entry_meta_answer( $answer, $offset, $number_of_records_per_page = 20 ) {
 		global $wpdb;
 
-		$results = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . self::TABLE_NAME . " WHERE meta_value LIKE '%$answer%' ORDER BY id DESC LIMIT " . $offset . ',' . $number_of_records_per_page );
+		$table_name = $wpdb->prefix . self::TABLE_NAME;
+		$meta_value = '%' . $wpdb->esc_like( $answer ) . '%';
+
+		$query = "
+			SELECT *
+			FROM $table_name
+			WHERE meta_value LIKE %s
+			ORDER BY id DESC
+			LIMIT %d, %d
+		";
+
+		$sql = $wpdb->prepare( $query, array( $meta_value, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore
+		$results = $wpdb->get_results( $sql, OBJECT );
 
 		$items = array();
 
@@ -63,8 +97,8 @@ class EntryMetaModel {
 			$item['id']         = $value->id;
 			$item['form_id']    = $value->form_id;
 			$item['entry_id']   = $value->entry_id;
-			$item['meta_key']   = $value->meta_key;
-			$item['meta_value'] = $value->meta_value;
+			$item['meta_key']   = $value->meta_key; // phpcs:ignore
+			$item['meta_value'] = $value->meta_value; // phpcs:ignore
 
 			$item['type']  = '';
 			$item['label'] = '';

@@ -47,7 +47,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	public function entry_meta_by_entry_id( $request ) {
 		$entry_id = $request['entry_id'];
 
-		$items = $this->entry_meta_model->entryMetaByEntryID( $entry_id );
+		$items = $this->entry_meta_model->entry_meta_by_entry_id( $entry_id );
 
 		return rest_ensure_response( $items );
 	}
@@ -62,7 +62,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	public function search_entry_meta_answer( $request ) {
 		$answer = urldecode( $request['answer'] );
 
-		$items = $this->entry_meta_model->searchEntryMetaAnswer( $answer, 0, 20 );
+		$items = $this->entry_meta_model->search_entry_meta_answer( $answer, 0, 20 );
 
 		return rest_ensure_response( $items );
 	}

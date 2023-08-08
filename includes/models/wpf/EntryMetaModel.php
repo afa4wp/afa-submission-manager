@@ -1,23 +1,35 @@
 <?php
+/**
+ * The Entry Meta Model Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
 
 namespace Includes\Models\WPF;
 
-use Includes\Models\UserModel;
-use Includes\Models\WPF\FormModel;
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
+/**
+ * Class EntryMetaModel
+ *
+ * Hendler with gf_entry_meta table
+ *
+ * @since 1.0.0
+ */
 class EntryMetaModel {
 
 	public const TABLE_NAME = 'wpforms_entries';
 
-	public function __construct() {
-	}
-
 	/**
 	 * Get entry_meta by entry ID
 	 *
+	 * @param int $entry_id The ID of the form submission entry.
+	 *
 	 * @return array
 	 */
-	public function entryMetaByEntryID( $entry_id ) {
+	public function entry_meta_by_entry_id( $entry_id ) {
 		$entry   = wpforms()->entry->get( $entry_id, array( 'cap' => false ) );
 		$results = wpforms_decode( $entry->fields );
 
@@ -30,8 +42,8 @@ class EntryMetaModel {
 			$item['id']         = $key;
 			$item['form_id']    = $entry->form_id;
 			$item['entry_id']   = $entry->entry_id;
-			$item['meta_key']   = $value['id'];
-			$item['meta_value'] = $value['value'];
+			$item['meta_key']   = $value['id']; // phpcs:ignore
+			$item['meta_value'] = $value['value']; // phpcs:ignore
 
 			$item['type']  = $value['type'];
 			$item['label'] = $value['name'];
@@ -44,11 +56,15 @@ class EntryMetaModel {
 	}
 
 	/**
-	 * Get entry_meta by entry ID
+	 * Get entry_meta by answer
+	 *
+	 * @param string $answer The meta value.
+	 * @param int    $offset The offset.
+	 * @param int    $number_of_records_per_page The notifications per page.
 	 *
 	 * @return array
 	 */
-	public function searchEntryMetaAnswer( $answer, $offset, $number_of_records_per_page ) {
+	public function search_entry_meta_answer( $answer, $offset, $number_of_records_per_page = 20 ) {
 		$args = array(
 			'select'        => 'all',
 			'value'         => $answer,
@@ -61,15 +77,15 @@ class EntryMetaModel {
 
 		foreach ( $results as $key => $value ) {
 
-			$meta = $this->getTypeAndLabel( $value->entry_id, $value->field_id );
+			$meta = $this->get_type_and_label( $value->entry_id, $value->field_id );
 
 			$item = array();
 
 			$item['id']         = $value->id;
 			$item['form_id']    = $value->form_id;
 			$item['entry_id']   = $value->entry_id;
-			$item['meta_key']   = $value->field_id;
-			$item['meta_value'] = $value->value;
+			$item['meta_key']   = $value->field_id; // phpcs:ignore
+			$item['meta_value'] = $value->value; // phpcs:ignore
 			$item['type']       = $meta['type'];
 			$item['label']      = $meta['label'];
 
@@ -84,10 +100,12 @@ class EntryMetaModel {
 	/**
 	 * Get label and type
 	 *
+	 * @param int $entry_id The ID of the form submission entry.
+	 * @param int $meta_key The meta_key.
+	 *
 	 * @return array
 	 */
-
-	private function getTypeAndLabel( $entry_id, $meta_key ) {
+	private function get_type_and_label( $entry_id, $meta_key ) {
 
 		$entry = wpforms()->entry->get( $entry_id, array( 'cap' => false ) );
 
@@ -99,7 +117,7 @@ class EntryMetaModel {
 
 		foreach ( $results as $key => $value ) {
 
-			if ( $value['id'] == $meta_key ) {
+			if ( $value['id'] === $meta_key ) {
 				$item['type']  = $value['type'];
 				$item['label'] = $value['name'];
 			}

@@ -100,13 +100,13 @@ class FormModel extends AbstractFormModel {
 	public function mumber_of_items_by_search( $post_name ) {
 		global $wpdb;
 
-		$sql = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE title LIKE %s ";
+		$query = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE title LIKE %s ";
 
 		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
 
-		$sql = $wpdb->prepare( $sql, array( $post_name_esc_like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $query, array( $post_name_esc_like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
@@ -154,13 +154,13 @@ class FormModel extends AbstractFormModel {
 
 		global $wpdb;
 
-		$sql = "SELECT * FROM {$this->table_name_with_prefix} WHERE title LIKE %s ORDER BY id DESC LIMIT %d,%d";
+		$query = "SELECT * FROM {$this->table_name_with_prefix} WHERE title LIKE %s ORDER BY id DESC LIMIT %d,%d";
 
 		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
 
-		$sql = $wpdb->prepare( $sql, array( $post_name_esc_like, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql = $wpdb->prepare( $query, array( $post_name_esc_like, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore 
 		$results = $wpdb->get_results( $sql, OBJECT );
 
 		$forms = $this->prepare_data( $results );
