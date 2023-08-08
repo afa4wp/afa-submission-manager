@@ -194,7 +194,7 @@ class UserModel {
 
 		$result = $user_tokens_model->delete_user_token_by_id( $user_id );
 
-		if ( ( false !== $result ) && ! empty( $device_id ) ) {
+		if ( ! empty( $result ) && ! empty( $device_id ) ) {
 
 			$user_devices_model = new UserDevicesModel();
 			$device             = $user_devices_model->get_register_by_user_device_id( $device_id );

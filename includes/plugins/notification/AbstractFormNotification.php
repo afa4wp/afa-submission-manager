@@ -63,11 +63,11 @@ abstract class AbstractFormNotification {
 	 *
 	 * @return int | null
 	 */
-	public function get_form_submition_notification_type_id() {
+	public function get_form_submission_notification_type_id() {
 
 		$notification_type_model = new NotificationTypeModel();
 
-		$notification_type = $notification_type_model->get_notification_type_by_type( 'form_submition' );
+		$notification_type = $notification_type_model->get_notification_type_by_type( 'form_submission' );
 
 		if ( empty( $notification_type ) ) {
 			return null;

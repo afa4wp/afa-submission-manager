@@ -42,7 +42,7 @@ class CF7Notification extends AbstractFormNotification {
 			$supported_plugin_id = $supported_plugins_model_register->id;
 		}
 
-		$notification_type_id = $this->get_form_submition_notification_type_id();
+		$notification_type_id = $this->get_form_submission_notification_type_id();
 		$this->notifiacation->create( $notification_type_id, $meta_value, $supported_plugin_id, $user_id );
 
 		$items = $this->prepare_push_notification( $notification_type_id, $meta_value, $user_id );
