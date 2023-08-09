@@ -58,13 +58,13 @@ class QRCode {
 
 		$url = get_rest_url();
 
-		$secret  = base64_encode( openssl_random_pseudo_bytes( 30 ) );
+		$secret  = base64_encode( openssl_random_pseudo_bytes( 30 ) ); // phpcs:ignore
 		$user_id = get_current_user_id();
 		$user_qrcode_model->generate_new_qr_code( $user_id, $secret );
-		
+
 		$data = array(
 			'url'    => $url,
-			'secret' => $user_id.'|'.$secret,
+			'secret' => $user_id . '|' . $secret,
 		);
 
 		return wp_json_encode( $data );

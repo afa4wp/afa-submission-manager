@@ -1,8 +1,19 @@
 <?php
+/**
+ * The  FormsShortcodeFinder Class.
+ *
+ * @package  WP_All_Forms_API
+ * @since 1.0.0
+ */
+
 namespace Includes\Plugins\Helpers;
 
 /**
+ * Class Pagination
+ *
  * Finds pages that contain a particular Gravity Form.
+ *
+ * @since 1.0.0
  */
 class FormsShortcodeFinder {
 	/**
@@ -15,19 +26,24 @@ class FormsShortcodeFinder {
 	/**
 	 * The shortcode name.
 	 *
-	 * @var string 
+	 * @var string
 	 */
 	private $shortcode_name;
 
 	/**
-	 * @param int $form_id ID of the Gravity Form to search for.
+	 * Represents a Form entry searcher.
+	 *
+	 * @param int    $form_id ID of the Form to search for.
+	 * @param string $shortcode_name Optional name of the shortcode associated with the form.
 	 */
-	public function __construct( $form_id, $shortcode_name = '') {
-		$this->form_id = (int) $form_id;
+	public function __construct( $form_id, $shortcode_name = '' ) {
+		$this->form_id        = (int) $form_id;
 		$this->shortcode_name = $shortcode_name;
 	}
 
 	/**
+	 * Find shortcode.
+	 *
 	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
 	 */
 	public function find() {
@@ -43,83 +59,17 @@ class FormsShortcodeFinder {
 			array()
 		);
 	}
-	
-	/**
-	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
-	 */
-	public function cf7Find() {
-		return array_reduce(
-			$this->get_all_page_ids(),
-			function( $pages, $page_id ) {
-				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'contact-form-7' ), true ) ) {
-					$pages[ $page_id ] = get_the_title( $page_id );
-				}
-
-				return $pages;
-			},
-			array()
-		);
-	}
 
 	/**
-	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
-	 */
-	public function wefFind() {
-		return array_reduce(
-			$this->get_all_page_ids(),
-			function( $pages, $page_id ) {
-				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'weforms' ), true ) ) {
-					$pages[ $page_id ] = get_the_title( $page_id );
-				}
-
-				return $pages;
-			},
-			array()
-		);
-	}
-
-	/**
-	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
-	 */
-	public function gfFind() {
-		return array_reduce(
-			$this->get_all_page_ids(),
-			function( $pages, $page_id ) {
-				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'gravityform' ), true ) ) {
-					$pages[ $page_id ] = get_the_title( $page_id );
-				}
-
-				return $pages;
-			},
-			array()
-		);
-	}
-
-	/**
-	 * @return array Pages that contain the form. Array is in this format: $post_id => $post_title
-	 */
-	public function wpfFind() {
-		return array_reduce(
-			$this->get_all_page_ids(),
-			function( $pages, $page_id ) {
-				if ( in_array( $this->form_id, $this->get_form_ids_in_post_content( $page_id, 'wpforms' ), true ) ) {
-					$pages[ $page_id ] = get_the_title( $page_id );
-				}
-
-				return $pages;
-			},
-			array()
-		);
-	}
-
-	/**
-	 * @return array Post IDs for all pages.
+	 * Retrieves an array of Post IDs for all pages.
+	 *
+	 * @return array An array of Post IDs for all pages.
 	 */
 	private function get_all_page_ids() {
 		return ( new \WP_Query(
 			array(
 				'post_type'              => 'page',
-				'posts_per_page'         => 1000,
+				'posts_per_page'         => 10,
 				'no_found_rows'          => true,
 				'fields'                 => 'ids',
 				'update_post_meta_cache' => false,
@@ -129,9 +79,12 @@ class FormsShortcodeFinder {
 	}
 
 	/**
-	 * @param  int $page_id Page ID.
+	 * Retrieves an array of Form IDs from the content of a specific page.
 	 *
-	 * @return array Gravity Form IDs.
+	 * @param int    $page_id        Page ID.
+	 * @param string $shortcode_name The name of the shortcode to search for in the content.
+	 *
+	 * @return array An array of  Form IDs found in the page content.
 	 */
 	private function get_form_ids_in_post_content( $page_id, $shortcode_name ) {
 		$content = get_post_field( 'post_content', $page_id );
@@ -140,6 +93,8 @@ class FormsShortcodeFinder {
 	}
 
 	/**
+	 * Retrieves an array of shortcodes of a specific type from the given post content.
+	 *
 	 * @param  string $content   Post content.
 	 * @param  string $shortcode The shortcode to search for.
 	 *

@@ -30,3 +30,6 @@ docs/
 
 # ignore .env file
 .env
+
+# ignore languages file
+languages/
