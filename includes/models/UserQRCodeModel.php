@@ -42,7 +42,7 @@ class UserQRCodeModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::PLUGIN_TABLE_PREFIX . 'user_qr_codes';
+		$this->table_name = $wpdb->prefix . Constant::TABLE_USER_QR_CODES;
 	}
 
 	/**
@@ -82,14 +82,18 @@ class UserQRCodeModel {
 
 		global $wpdb;
 
-		$results = $wpdb->get_results(
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-			$wpdb->prepare(
-				"SELECT * FROM {$this->table_name} WHERE user_id=%d ",
-				$user_id
-			),
-			OBJECT
-		);
+		$table_name = $this->table_name;
+		$user_id    = (int) $user_id;
+
+		$query = "
+				SELECT *
+				FROM $table_name
+				WHERE user_id = %d
+			";
+		$sql   = $wpdb->prepare( $query, array( $user_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results    = $wpdb->get_results( $sql, OBJECT );
 
 		if ( count( $results ) > 0 ) {
 			return $results[0];
@@ -114,6 +118,7 @@ class UserQRCodeModel {
 			'user_id' => $user_id,
 		);
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->delete(
 			$this->table_name,
 			$item
@@ -134,13 +139,19 @@ class UserQRCodeModel {
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
-		$results = $wpdb->get_var(
-			$wpdb->prepare(
-				"SELECT id FROM {$this->table_name} WHERE user_id=%d ", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				(int) $user_id
-			)
-		);
+		$table_name = $this->table_name;
+		$user_id    = (int) $user_id;
+
+		$query = "
+			SELECT id
+			FROM $table_name
+			WHERE user_id = %d
+		";
+
+		$sql = $wpdb->prepare( $query, array( $user_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results = $wpdb->get_var($sql);
 
 		if ( ! $results ) {
 			return false;
@@ -181,14 +192,19 @@ class UserQRCodeModel {
 
 		global $wpdb;
 
-		$results = $wpdb->get_results(
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-			$wpdb->prepare(
-				"SELECT * FROM {$this->table_name} WHERE user_id=%d ",
-				$user_id
-			),
-			OBJECT
-		);
+		$table_name = $this->table_name;
+		$user_id    = (int) $user_id;
+
+		$query = "
+			SELECT *
+			FROM $table_name
+			WHERE user_id = %d
+		";
+
+		$sql = $wpdb->prepare( $query, array( $user_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results = $wpdb->get_results($sql, OBJECT);
 
 		if ( ! ( count( $results ) > 0 ) ) {
 			return new WP_Error(

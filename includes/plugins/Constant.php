@@ -36,5 +36,6 @@ class Constant {
 	const TABLE_NOTIFICATION_TYPE         = self::PLUGIN_TABLE_PREFIX . 'notification_type';
 	const TABLE_NOTIFICATION_SUBSCRIPTION = self::PLUGIN_TABLE_PREFIX . 'notification_subscription';
 	const TABLE_NOTIFICATION              = self::PLUGIN_TABLE_PREFIX . 'notification';
+	const TABLE_USER_QR_CODES             = self::PLUGIN_TABLE_PREFIX . 'user_qr_codes';
 
 }

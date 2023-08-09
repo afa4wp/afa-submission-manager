@@ -133,7 +133,7 @@ class UserTokensModel {
 
 		$sql = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, ARRAY_A );
 
 		return $results;
@@ -157,7 +157,8 @@ class UserTokensModel {
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
 		$sql = $wpdb->prepare( $sql, array( $user_info, $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+		// phpcs:ignore 
 		$results = $wpdb->get_results( $sql, ARRAY_A );
 
 		return $results;
@@ -172,7 +173,7 @@ class UserTokensModel {
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore 
 		$results = $wpdb->get_results( "SELECT count(*) as number_of_rows FROM {$this->table_name}" );
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
@@ -197,7 +198,7 @@ class UserTokensModel {
 
 		$sql = $wpdb->prepare( $sql, array( $user_info, $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
