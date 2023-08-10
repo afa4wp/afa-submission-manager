@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The Admin Options class
  *

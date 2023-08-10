@@ -85,7 +85,7 @@ class Settings {
 			$current_tab = sanitize_text_field( wp_unslash( $_GET['tab'] ) );
 		}
 
-		$screen = $this->screens[$current_tab];
+		$screen = $this->screens[ $current_tab ];
 
 		?>
 			<div class="wrap">
@@ -96,7 +96,7 @@ class Settings {
 					<?php endforeach; ?>
 				</h3>
 				<div class="metabox-holder has-right-sidebar">
-					<?php 
+					<?php
 						$screen->render();
 					?>
 				</div>

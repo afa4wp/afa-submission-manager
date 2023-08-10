@@ -69,7 +69,7 @@ class FormsShortcodeFinder {
 		return ( new \WP_Query(
 			array(
 				'post_type'              => 'page',
-				'posts_per_page'         => 10,
+				'posts_per_page'         => -1,
 				'no_found_rows'          => true,
 				'fields'                 => 'ids',
 				'update_post_meta_cache' => false,
