@@ -150,7 +150,7 @@ class UserModel {
 	 */
 	public function add_staff( $user_id ) {
 
-		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
+		$user_can_manage_wp_afa = $this->user_can_manage_wp_afa( $user_id );
 
 		if ( ! $user_can_manage_wp_afa ) {
 			$user = new \WP_User( $user_id );
@@ -171,7 +171,7 @@ class UserModel {
 	 * @return void
 	 */
 	public function remove_staff( $user_id ) {
-		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
+		$user_can_manage_wp_afa = $this->user_can_manage_wp_afa( $user_id );
 
 		if ( $user_can_manage_wp_afa ) {
 			$user = new \WP_User( $user_id );

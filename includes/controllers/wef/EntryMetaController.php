@@ -63,10 +63,13 @@ class EntryMetaController  extends AbstractEntryMetaControllers {
 	public function search_entry_meta_answer( $request ) {
 		$answer = urldecode( $request['answer'] );
 
-		$items = $this->entry_meta_model->search_entry_meta_answer( $answer, 0, 20 );
+		$offset = 0;
+
+		$number_of_records_per_page = 20;
+
+		$items = $this->entry_meta_model->search_entry_meta_answer( $answer, $offset, $number_of_records_per_page );
 
 		return rest_ensure_response( $items );
 	}
-
 
 }

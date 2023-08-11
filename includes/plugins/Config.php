@@ -12,6 +12,7 @@ use Includes\Models\CF7\FormModel as CF7FormModel;
 use Includes\Models\GF\FormModel as GFFormModel;
 use Includes\Models\WEF\FormModel as WEFFormModel;
 use Includes\Models\WPF\FormModel as WPFFormModel;
+use Includes\Models\UserModel;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -78,6 +79,14 @@ class Config {
 	public function wp_afa_check_authorization( $request ) {
 
 		if ( ! is_user_logged_in() ) {
+			return false;
+		}
+
+		$user = wp_get_current_user();
+
+		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user->ID );
+
+		if ( ! $user_can_manage_wp_afa ) {
 			return false;
 		}
 
