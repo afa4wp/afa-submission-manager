@@ -62,9 +62,9 @@ class EntryModelHelper {
 	 */
 	public function entry_by_id( $entry_id, $id = 'id' ) {
 		global $wpdb;
-
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE {$id} = %d ";
-		$sql     = $wpdb->prepare( $sql, array( $entry_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$entry_id = (int) $entry_id;
+		$sql      = "SELECT * FROM {$this->table_name_with_prefix} WHERE {$id} = %d ";
+		$sql      = $wpdb->prepare( $sql, array( $entry_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 
 		return $results;

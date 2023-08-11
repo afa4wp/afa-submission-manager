@@ -101,12 +101,13 @@ class GFNotification extends AbstractFormNotification {
 	/**
 	 * Load hooks for notifications
 	 *
-	 * @param array $entry The GF entry.
+	 * @param array $entry_gf The GF entry.
+	 * @param array $form The GF $form.
 	 *
 	 * @return void
 	 */
-	public function submission_notification( $entry ) {
-		$post_id = $entry['post_id'];
+	public function submission_notification( $entry_gf, $form ) {
+		$post_id = $entry_gf['id'];
 
 		$entry_model = new EntryModel();
 		$entry       = $entry_model->entry_by_id( $post_id );
@@ -132,7 +133,7 @@ class GFNotification extends AbstractFormNotification {
 	 * @return void
 	 */
 	public function loads_hooks() {
-		add_action( 'gform_after_submission', array( $this, 'submission_notification' ), 10, 1 );
+		add_action( 'gform_after_submission', array( $this, 'submission_notification' ), 10, 2 );
 	}
 
 }
