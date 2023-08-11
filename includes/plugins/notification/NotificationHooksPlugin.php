@@ -10,7 +10,8 @@ namespace Includes\Plugins\Notification;
 
 use Includes\Plugins\Notification\CF7Notification;
 use Includes\Plugins\Notification\GFNotification;
-use Includes\Plugins\Notification\WPFNotification;
+use Includes\Plugins\Notification\WPFNotification; 
+use Includes\Plugins\Notification\WEFNotification;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -32,6 +33,7 @@ class NotificationHooksPlugin {
 	public function loads_hooks() {
 		( new CF7Notification() )->loads_hooks();
 		( new WPFNotification() )->loads_hooks();
+		( new WEFNotification() )->loads_hooks();
 		( new GFNotification() )->loads_hooks();
 	}
 
