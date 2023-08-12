@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
 class Config {
 
 	/**
-	 * Add public route.
+	 * Plugins.
 	 *
 	 * @var array
 	 */
@@ -38,11 +38,29 @@ class Config {
 	);
 
 	/**
+	 * Lite Plugins.
+	 *
+	 * @var array
+	 */
+	const PLUGINS_LITE = array(
+		'wpf' => 'wpforms-lite/wpforms.php',
+	);
+
+	/**
 	 * Get all installed supported forms from plugin.
 	 */
 	public function installed_forms() {
+		$plugins = $this->get_installed_plugins_from_array( self::PLUGINS );
+		$lite    = $this->get_installed_plugins_from_array( self::PLUGINS_LITE );
 
-		return $this->get_installed_plugins_from_array( self::PLUGINS );
+		// Combine plugins and lite plugins, excluding duplicates.
+		foreach ( $lite as $plugin_key => $plugin_name ) {
+			if ( ! array_key_exists( $plugin_key, $plugins ) ) {
+				$plugins[ $plugin_key ] = $plugin_name;
+			}
+		}
+
+		return $plugins;
 	}
 
 	/**

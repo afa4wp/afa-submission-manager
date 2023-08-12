@@ -35,7 +35,6 @@ class PublicRoute {
 		'/user/login',
 		'/user/login/qrcode',
 		'/user/tokens/refresh',
-		'/config/forms',
 		'/ping',
 	);
 
