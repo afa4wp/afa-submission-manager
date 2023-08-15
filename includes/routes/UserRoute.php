@@ -151,6 +151,25 @@ class UserRoute {
 	}
 
 	/**
+	 * Create user form type home endpoint.
+	 */
+	public function user_form_type_home() {
+		register_rest_route(
+			$this->name,
+			'/user/(?P<form_type>\S+)/home',
+			array(
+				array(
+					'methods'             => 'GET',
+					'callback'            => array( new UserController(), 'user_form_type_home' ),
+					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'args'                => ( new UserSchema() )->form_type(),
+				),
+
+			)
+		);
+	}
+
+	/**
 	 * Call all endpoints
 	 */
 	public function init_routes() {
@@ -160,6 +179,7 @@ class UserRoute {
 		$this->user_form_type_me();
 		$this->token();
 		$this->logout();
+		$this->user_form_type_home();
 	}
 
 }

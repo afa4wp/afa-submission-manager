@@ -12,6 +12,10 @@ use Includes\Models\CF7\FormModel as CF7FormModel;
 use Includes\Models\GF\FormModel as GFFormModel;
 use Includes\Models\WEF\FormModel as WEFFormModel;
 use Includes\Models\WPF\FormModel as WPFFormModel;
+use Includes\Models\CF7\EntryModel as CF7EntryModel;
+use Includes\Models\GF\EntryModel as GFEntryModel;
+use Includes\Models\WEF\EntryModel as WEFEntryModel;
+use Includes\Models\WPF\EntryModel as WPFEntryModel;
 use Includes\Models\UserModel;
 
 // Exit if accessed directly.
@@ -139,6 +143,30 @@ class Config {
 			'gf'  => new GFFormModel(),
 			'wef' => new WEFFormModel(),
 			'wpf' => new WPFFormModel(),
+		);
+
+		if ( array_key_exists( $key, $forms ) ) {
+			return $forms[ $key ];
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get entry model
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key The key of form type.
+	 *
+	 * @return object|null
+	 */
+	public function entry_model( $key ) {
+		$forms = array(
+			'cf7' => new CF7EntryModel(),
+			'gf'  => new GFEntryModel(),
+			'wef' => new WEFEntryModel(),
+			'wpf' => new WPFEntryModel(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {

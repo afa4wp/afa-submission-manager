@@ -13,6 +13,7 @@ use Includes\Models\UserTokensModel;
 use Includes\Plugins\JWT\JWTPlugin;
 use Includes\Models\UserQRCodeModel;
 use Includes\Plugins\Config;
+use Includes\Database\SupportedPlugins;
 use WP_Error;
 
 // Exit if accessed directly.
@@ -202,6 +203,49 @@ class UserController {
 
 		$user_data['muber_of_forms'] = $number_of_forms;
 		return rest_ensure_response( $user_data );
+	}
+
+	/**
+	 * Get user.
+	 *
+	 * @param WP_REST_Request $request The request.
+	 *
+	 * @return array $user Some User info.
+	 */
+	public function user_form_type_home( $request ) {
+		$key = $request['form_type'];
+
+		$number_of_forms = 0;
+
+		$form = ( new Config() )->form_model( $key );
+
+		if ( is_object( $form ) ) {
+			$user            = wp_get_current_user();
+			$number_of_forms = $form->user_form_count( $user->ID );
+		}
+
+		$user_data = $this->user_model->user();
+
+		$user_data['muber_of_forms'] = $number_of_forms;
+
+		$plugin_name = ( new SupportedPlugins() )->get_plugin_name_by_slug( $key );
+
+		$result = array();
+
+		$result['plugin_name'] = $plugin_name;
+		$result['user_data']   = $user_data;
+
+		$entry = ( new Config() )->entry_model( $key );
+
+		$entry_id = $entry->last_entry_id();
+
+		if ( empty( $entry_id ) ) {
+			$result['last_entry'] = array();
+		}
+
+		$result['last_entry'] = $entry->entry_by_id( $entry_id );
+
+		return rest_ensure_response( $result );
 	}
 
 	/**

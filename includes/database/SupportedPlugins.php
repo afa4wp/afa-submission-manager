@@ -145,4 +145,20 @@ class SupportedPlugins {
 
 		return '';
 	}
+
+	/**
+	 * Get supported plugins in the desired format.
+	 *
+	 * @return array Supported plugins with keys as slugs and values as plugin paths.
+	 */
+	public function get_supported_plugins() {
+		$default_values    = $this->get_default_values();
+		$supported_plugins = array();
+
+		foreach ( $default_values as $value ) {
+			$supported_plugins[ $value['slug'] ] = $value['plugin_path'];
+		}
+
+		return $supported_plugins;
+	}
 }
