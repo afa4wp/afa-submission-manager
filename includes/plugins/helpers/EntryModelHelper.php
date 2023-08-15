@@ -122,4 +122,23 @@ class EntryModelHelper {
 
 		return $number_of_rows;
 	}
+
+	/**
+	 * Get the last  entry id
+	 *
+	 * @param string $id The field.
+	 *
+	 * @return int
+	 */
+	public function last_entry_id( $id = 'id' ) {
+		global $wpdb;
+		$sql     = "SELECT MAX({$id}) FROM {$this->table_name_with_prefix} ";
+		$results = $wpdb->get_results( $sql,  OBJECT);// phpcs:ignore
+
+		if ( empty( $results ) ) {
+			return 0;
+		}
+		$last_inserted_id = intval( reset( $results )->{"MAX({$id})"} );
+		return $last_inserted_id;
+	}
 }

@@ -245,4 +245,22 @@ class EntryModel extends AbstractEntryModel {
 		return $entries;
 	}
 
+	/**
+	 * Get the last  entry id
+	 *
+	 * @return int
+	 */
+	public function last_entry_id() {
+		global $wpdb;
+		$sql     = "SELECT MAX(ID) FROM {$this->table_name_with_prefix} WHERE post_type = %s ";
+		$sql     = $wpdb->prepare( $sql, array( $this->post_type_entry ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$results = $wpdb->get_results( $sql,  OBJECT);// phpcs:ignore
+
+		if ( empty( $results ) ) {
+			return 0;
+		}
+		$last_inserted_id = intval( reset( $results )->{'MAX(ID)'} );
+		return $last_inserted_id;
+	}
+
 }

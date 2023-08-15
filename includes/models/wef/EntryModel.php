@@ -198,4 +198,14 @@ class EntryModel extends AbstractEntryModel {
 
 		return $entries;
 	}
+
+	/**
+	 * Get the last  entry id
+	 *
+	 * @return int
+	 */
+	public function last_entry_id() {
+		$result = $this->entry_model_helper->last_entry_id( 'id' );
+		return $result;
+	}
 }
