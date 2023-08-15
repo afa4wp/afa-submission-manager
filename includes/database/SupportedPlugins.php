@@ -126,4 +126,23 @@ class SupportedPlugins {
 		$slugs          = array_column( $default_values, 'slug' );
 		return in_array( $slug, $slugs, true );
 	}
+
+	/**
+	 * Get the name from default values based on the provided slug.
+	 *
+	 * @param string $slug The slug of the form builder.
+	 *
+	 * @return string The corresponding name or an empty string if not found.
+	 */
+	public function get_plugin_name_by_slug( $slug ) {
+		$default_values = $this->get_default_values();
+
+		foreach ( $default_values as $value ) {
+			if ( $value['slug'] === $slug ) {
+				return $value['name'];
+			}
+		}
+
+		return '';
+	}
 }
