@@ -58,8 +58,14 @@ class EntryModel extends AbstractEntryModel {
 	 *
 	 * @return array
 	 */
-	public function entries( $offset, $number_of_records_per_page, $order_by = null ) {
-		$results = \Flamingo_Inbound_Message::find( array() );
+	public function entries( $offset, $number_of_records_per_page, $order_by = 'DESC' ) {
+		$results = \Flamingo_Inbound_Message::find(
+			array(
+				'posts_per_page' => $number_of_records_per_page,
+				'offset'         => $offset,
+				'order'          => $order_by,
+			)
+		);
 
 		$entries = $this->prepare_data( $results );
 
@@ -113,6 +119,7 @@ class EntryModel extends AbstractEntryModel {
 				'channel'        => $channel,
 				'posts_per_page' => $number_of_records_per_page,
 				'offset'         => $offset,
+				'order'          => 'DESC',
 			)
 		);
 

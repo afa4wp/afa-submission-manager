@@ -237,13 +237,9 @@ class UserController {
 
 		$entry = ( new Config() )->entry_model( $key );
 
-		$entry_id = $entry->last_entry_id();
-
-		if ( empty( $entry_id ) ) {
-			$result['last_entry'] = array();
-		}
-
-		$result['last_entry'] = $entry->entry_by_id( $entry_id );
+		$offset                     = 0;
+		$number_of_records_per_page = 3;
+		$result['last_entries']     = $entry->entries( $offset, $number_of_records_per_page );
 
 		return rest_ensure_response( $result );
 	}
