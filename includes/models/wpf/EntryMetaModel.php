@@ -30,6 +30,10 @@ class EntryMetaModel {
 	 * @return array
 	 */
 	public function entry_meta_by_entry_id( $entry_id ) {
+		if ( ! function_exists( 'wpforms' ) || ! function_exists( 'wpforms_decode' ) ) {
+			return array();
+		}
+
 		$entry   = wpforms()->entry->get( $entry_id, array( 'cap' => false ) );
 		$results = wpforms_decode( $entry->fields );
 
@@ -65,6 +69,10 @@ class EntryMetaModel {
 	 * @return array
 	 */
 	public function search_entry_meta_answer( $answer, $offset, $number_of_records_per_page = 20 ) {
+		if ( ! function_exists( 'wpforms' ) ) {
+			return array();
+		}
+
 		$args = array(
 			'select'        => 'all',
 			'value'         => $answer,
@@ -106,6 +114,9 @@ class EntryMetaModel {
 	 * @return array
 	 */
 	private function get_type_and_label( $entry_id, $meta_key ) {
+		if ( ! function_exists( 'wpforms' ) || ! function_exists( 'wpforms_decode' ) ) {
+			return array();
+		}
 
 		$entry = wpforms()->entry->get( $entry_id, array( 'cap' => false ) );
 

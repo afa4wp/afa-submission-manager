@@ -111,6 +111,10 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	public function prepare_data( $posts ) {
+		if ( ! function_exists( 'wpforms' ) ) {
+			return array();
+		}
+
 		$forms      = array();
 		$user_model = new UserModel();
 
@@ -146,6 +150,10 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	private function prepare_data_array( $results ) {
+		if ( ! function_exists( 'wpforms' ) ) {
+			return array();
+		}
+
 		$forms      = array();
 		$user_model = new UserModel();
 

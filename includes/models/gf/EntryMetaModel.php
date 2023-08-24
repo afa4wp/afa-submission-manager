@@ -35,6 +35,10 @@ class EntryMetaModel {
 	 * @return array
 	 */
 	public function entry_meta_by_entry_id( $entry_id ) {
+		if ( ! class_exists( '\GFAPI' ) ) {
+			return array();
+		}
+
 		$entry = \GFAPI::get_entry( $entry_id );
 
 		$form_id = $entry['form_id'];
@@ -72,6 +76,10 @@ class EntryMetaModel {
 	 */
 	public function search_entry_meta_answer( $answer, $offset, $number_of_records_per_page = 20 ) {
 		global $wpdb;
+
+		if ( ! class_exists( '\GFAPI' ) ) {
+			return array();
+		}
 
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
 		$meta_value = '%' . $wpdb->esc_like( $answer ) . '%';

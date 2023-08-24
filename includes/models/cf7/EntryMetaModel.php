@@ -51,6 +51,11 @@ class EntryMetaModel {
 	 * @return array
 	 */
 	public function entry_meta_by_entry_id( $entry_id ) {
+
+		if ( ! class_exists( '\Flamingo_Inbound_Message' ) ) {
+			return array();
+		}
+
 		$post = new \Flamingo_Inbound_Message( $entry_id );
 
 		if ( empty( $post->channel ) ) {
@@ -91,6 +96,10 @@ class EntryMetaModel {
 	 */
 	public function search_entry_meta_answer( $answer ) {
 		global $wpdb;
+
+		if ( ! class_exists( '\Flamingo_Inbound_Message' ) ) {
+			return array();
+		}
 
 		$table_postmeta = $wpdb->prefix . $this->post_meta_table;
 		$table_posts    = $wpdb->prefix . 'posts';

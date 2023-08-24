@@ -37,6 +37,10 @@ class EntryMetaModel {
 	public function entry_meta_by_entry_id( $entry_id ) {
 		global $wpdb;
 
+		if ( ! function_exists( 'weforms_get_entry_data' ) || ! function_exists( 'weforms_get_entry' ) ) {
+			return array();
+		}
+
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
 		$query      = "
 			SELECT *
@@ -85,6 +89,10 @@ class EntryMetaModel {
 	 */
 	public function search_entry_meta_answer( $answer, $offset, $number_of_records_per_page = 20 ) {
 		global $wpdb;
+
+		if ( ! function_exists( 'weforms_get_entry_data' ) || ! function_exists( 'weforms_get_entry' ) ) {
+			return array();
+		}
 
 		$table_name = $wpdb->prefix . self::TABLE_NAME;
 		$meta_value = '%' . $wpdb->esc_like( $answer ) . '%';

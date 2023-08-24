@@ -59,6 +59,11 @@ class EntryModel extends AbstractEntryModel {
 	 * @return array
 	 */
 	public function entries( $offset, $number_of_records_per_page, $order_by = 'DESC' ) {
+
+		if ( ! class_exists( '\Flamingo_Inbound_Message' ) ) {
+			return array();
+		}
+
 		$results = \Flamingo_Inbound_Message::find(
 			array(
 				'posts_per_page' => $number_of_records_per_page,
@@ -81,6 +86,11 @@ class EntryModel extends AbstractEntryModel {
 	 * @return array
 	 */
 	public function entry_by_id( $entry_id, $id = null ) {
+
+		if ( ! class_exists( '\Flamingo_Inbound_Message' ) ) {
+			return array();
+		}
+
 		$post = new \Flamingo_Inbound_Message( $entry_id );
 
 		$results = array();
@@ -110,6 +120,10 @@ class EntryModel extends AbstractEntryModel {
 	 * @return array
 	 */
 	public function entries_by_form_id( $form_id, $offset, $number_of_records_per_page ) {
+
+		if ( ! class_exists( '\Flamingo_Inbound_Message' ) ) {
+			return array();
+		}
 
 		$form_model = new FormModel();
 		$channel    = $form_model->form_model_helper->form_chanel_by_id( $form_id );
@@ -200,6 +214,11 @@ class EntryModel extends AbstractEntryModel {
 	 * @return int
 	 */
 	public function mumber_of_items_by_Channel( $channel ) {
+
+		if ( ! class_exists( '\Flamingo_Inbound_Message' ) ) {
+			return 0;
+		}
+
 		$args        = array( 'channel' => $channel );
 		$total_items = \Flamingo_Inbound_Message::count( $args );
 		return $total_items;

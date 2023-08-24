@@ -122,6 +122,10 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	public function prepare_data( $results ) {
+		if ( ! class_exists( '\GFAPI' ) ) {
+			return array();
+		}
+
 		$forms = array();
 
 		foreach ( $results as $value ) {
@@ -178,6 +182,10 @@ class FormModel extends AbstractFormModel {
 	 * @return int
 	 */
 	public function user_form_count( $user_id ) {
+		if ( ! class_exists( '\GFAPI' ) ) {
+			return 0;
+		}
+
 		$args = array(
 			'created_by' => $user_id,
 			'status'     => 'active',
