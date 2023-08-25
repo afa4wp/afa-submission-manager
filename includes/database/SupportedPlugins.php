@@ -161,4 +161,20 @@ class SupportedPlugins {
 
 		return $supported_plugins;
 	}
+
+	/**
+	 * Get a list of plugin names from the default values.
+	 *
+	 * @return array List of plugin names.
+	 */
+	public function get_supported_plugins_name_list() {
+		$default_values = $this->get_default_values();
+		$names_list     = array();
+
+		foreach ( $default_values as $value ) {
+			$names_list[] = $value['name'];
+		}
+
+		return $names_list;
+	}
 }
