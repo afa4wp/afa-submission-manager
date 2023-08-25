@@ -30,7 +30,7 @@ class ScreenAbout extends Screen {
 	 */
 	public function __construct() {
 		$this->id    = self::ID;
-		$this->label = 'About plugin';
+		$this->label = __( 'About plugin', 'wp-all-forms-api' );
 	}
 
 	/**

@@ -35,7 +35,7 @@ class ScreenMobileLogin extends Screen {
 	 */
 	public function __construct() {
 		$this->id    = self::ID;
-		$this->label = 'Generate QRCode';
+		$this->label = __( 'Login', 'wp-all-forms-api' );
 	}
 
 	/**
@@ -52,7 +52,9 @@ class ScreenMobileLogin extends Screen {
 
 		?>
 			<div>
-				Scan the following QR Code using the WP AFA app.
+				<p>
+				<?php esc_html_e( 'Scan the following QR Code using the WP AFA app.', 'wp-all-forms-api' ); ?>
+				</p>
 			</div>
 			<div>
 				<img src="<?php echo esc_html( $generated_qr_code ); ?>"  alt="QR Code"/>

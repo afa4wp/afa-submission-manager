@@ -78,9 +78,9 @@ class UserListTable extends \WP_List_Table {
 	public function get_columns() {
 		$table_columns = array(
 			'cb'           => '<input type="checkbox" />', // to display the checkbox.
-			'user_login'   => 'User Login',
-			'display_name' => 'Display Name',
-			'user_id'      => 'User Id',
+			'user_login'   => esc_html__( 'User Login', 'wp-all-forms-api' ),
+			'display_name' => esc_html__( 'Display Name', 'wp-all-forms-api' ),
+			'user_id'      => esc_html__( 'User Id', 'wp-all-forms-api' ),
 		);
 		return $table_columns;
 	}
@@ -91,7 +91,7 @@ class UserListTable extends \WP_List_Table {
 	 * @return void
 	 */
 	public function no_items() {
-		esc_html_e( 'No users logged.', 'wp-all-forms-api' );
+		esc_html_e( 'No users Connected.', 'wp-all-forms-api' );
 	}
 
 	/**
@@ -306,13 +306,13 @@ class UserListTable extends \WP_List_Table {
 	public function view() {
 		?>
 		<div class="wrap">    
-			<h2>WP All Forms API - Logged Users</h2>
+		<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 				<div id="wp-forms-api-list-table">			
 					<div id="nds-post-body">
 						<form id="wp-forms-api-user-search" method="get">
 							<input type="hidden" value="<?php echo esc_html( self::PAGE ); ?>" name="page">
 							<?php
-								$this->search_box( 'Search User', 'search_user_logged' );
+								$this->search_box( esc_html__( 'Search User', 'wp-all-forms-api' ), 'search_user_logged' );
 							?>
 						</form>		
 						<form id="wp-forms-api-user-list-form" method="post">

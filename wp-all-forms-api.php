@@ -19,7 +19,6 @@ require __DIR__ . '/vendor/autoload.php';
  */
 
 define( 'WP_ALL_FORMS_API_PLUGIN_FILE', __FILE__ );
-define( 'WP_ALL_FORMS_API_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WP_ALL_FORMS_API_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_ALL_FORMS_API_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 

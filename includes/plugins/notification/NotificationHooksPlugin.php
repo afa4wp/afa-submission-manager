@@ -10,7 +10,7 @@ namespace Includes\Plugins\Notification;
 
 use Includes\Plugins\Notification\CF7Notification;
 use Includes\Plugins\Notification\GFNotification;
-use Includes\Plugins\Notification\WPFNotification; 
+use Includes\Plugins\Notification\WPFNotification;
 use Includes\Plugins\Notification\WEFNotification;
 
 // Exit if accessed directly.
