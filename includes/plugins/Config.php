@@ -65,6 +65,10 @@ class Config {
 			}
 		}
 
+		if ( isset( $plugins[ Constant::FORM_SLUG_CF7 ] ) && ! is_plugin_active( 'flamingo/flamingo.php' ) ) {
+			unset( $plugins[ Constant::FORM_SLUG_CF7 ] );
+		}
+
 		return $plugins;
 	}
 
@@ -175,5 +179,18 @@ class Config {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Check if form is installed
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key The key of form type.
+	 *
+	 * @return boolean
+	 */
+	public function chek_plugin_form_is_installed_by_slug( $key ) {
+		return array_key_exists( $key, $this->installed_forms() );
 	}
 }

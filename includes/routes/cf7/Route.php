@@ -11,6 +11,8 @@ namespace Includes\Routes\CF7;
 use Includes\Routes\CF7\Form;
 use Includes\Routes\CF7\Entry;
 use Includes\Routes\CF7\EntryMeta;
+use Includes\Plugins\Constant;
+use Includes\Plugins\Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -44,9 +46,13 @@ class Route {
 	 * Init all routes.
 	 */
 	public function init_routes() {
-		( new Form( $this->name ) )->init_routes();
-		( new Entry( $this->name ) )->init_routes();
-		( new EntryMeta( $this->name ) )->init_routes();
+		$result = ( new Config() )->chek_plugin_form_is_installed_by_slug( Constant::FORM_SLUG_CF7 );
+		if ( $result ) {
+			( new Form( $this->name ) )->init_routes();
+			( new Entry( $this->name ) )->init_routes();
+			( new EntryMeta( $this->name ) )->init_routes();
+		}
+
 	}
 
 }
