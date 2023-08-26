@@ -17,6 +17,7 @@ use Includes\Models\GF\EntryModel as GFEntryModel;
 use Includes\Models\WEF\EntryModel as WEFEntryModel;
 use Includes\Models\WPF\EntryModel as WPFEntryModel;
 use Includes\Models\UserModel;
+use Includes\Plugins\Constant;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -35,10 +36,10 @@ class Config {
 	 * @var array
 	 */
 	const PLUGINS = array(
-		'cf7' => 'contact-form-7/wp-contact-form-7.php',
-		'gf'  => 'gravityforms/gravityforms.php',
-		'wef' => 'weforms/weforms.php',
-		'wpf' => 'wpforms/wpforms.php',
+		Constant::FORM_SLUG_CF7 => 'contact-form-7/wp-contact-form-7.php',
+		Constant::FORM_SLUG_GF  => 'gravityforms/gravityforms.php',
+		Constant::FORM_SLUG_WEF => 'weforms/weforms.php',
+		Constant::FORM_SLUG_WPF => 'wpforms/wpforms.php',
 	);
 
 	/**
@@ -47,7 +48,7 @@ class Config {
 	 * @var array
 	 */
 	const PLUGINS_LITE = array(
-		'wpf' => 'wpforms-lite/wpforms.php',
+		Constant::FORM_SLUG_WPF => 'wpforms-lite/wpforms.php',
 	);
 
 	/**
@@ -139,10 +140,10 @@ class Config {
 	 */
 	public function form_model( $key ) {
 		$forms = array(
-			'cf7' => new CF7FormModel(),
-			'gf'  => new GFFormModel(),
-			'wef' => new WEFFormModel(),
-			'wpf' => new WPFFormModel(),
+			Constant::FORM_SLUG_CF7 => new CF7FormModel(),
+			Constant::FORM_SLUG_GF  => new GFFormModel(),
+			Constant::FORM_SLUG_WEF => new WEFFormModel(),
+			Constant::FORM_SLUG_WPF => new WPFFormModel(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {
@@ -163,10 +164,10 @@ class Config {
 	 */
 	public function entry_model( $key ) {
 		$forms = array(
-			'cf7' => new CF7EntryModel(),
-			'gf'  => new GFEntryModel(),
-			'wef' => new WEFEntryModel(),
-			'wpf' => new WPFEntryModel(),
+			Constant::FORM_SLUG_CF7 => new CF7EntryModel(),
+			Constant::FORM_SLUG_GF  => new GFEntryModel(),
+			Constant::FORM_SLUG_WEF => new WEFEntryModel(),
+			Constant::FORM_SLUG_WPF => new WPFEntryModel(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {

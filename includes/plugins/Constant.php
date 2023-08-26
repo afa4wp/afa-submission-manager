@@ -38,4 +38,11 @@ class Constant {
 	const TABLE_NOTIFICATION              = self::PLUGIN_TABLE_PREFIX . 'notification';
 	const TABLE_USER_QR_CODES             = self::PLUGIN_TABLE_PREFIX . 'user_qr_codes';
 
+	/*
+	 * Define form slug.
+	 */
+	const FORM_SLUG_CF7 = 'cf7';
+	const FORM_SLUG_GF  = 'gf';
+	const FORM_SLUG_WEF = 'wef';
+	const FORM_SLUG_WPF = 'wpf';
 }
