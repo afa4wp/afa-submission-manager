@@ -1,9 +1,9 @@
 # wp-all-forms-api
 This is a plugin for querying data from various forms within the WordPress ecosystem.
-# Pré-requisito
-- [x] WordPress Instance - you can learn more <a href="https://wordpress.org/support/article/how-to-install-wordpress/">aqui</a>
-- [x] Composer - you can learn more <a href="https://getcomposer.org/doc/00-intro.md">aqui</a>
-# Instalação
+# Prerequisites
+- [x] WordPress Instance - you can learn more <a href="https://wordpress.org/support/article/how-to-install-wordpress/">here</a>
+- [x] Composer - you can learn more <a href="https://getcomposer.org/doc/00-intro.md">here</a>
+# Installation
 1. Clone the plugin directory into the `/wp-content/plugins/` directory.
 ```
 git clone https://github.com/claudionhangapc/wp-all-forms-api.git && cd wp-all-forms-api
