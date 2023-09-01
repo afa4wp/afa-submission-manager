@@ -3,13 +3,13 @@
 require __DIR__ . '/vendor/autoload.php';
 
 /**
- * Plugin Name:       WP All Forms API
- * Plugin URI:        https://example.com/plugins/the-basics/
- * Description:       Este é um plugin que gera as rotas para obter os dados do site WordPress, permitindo requisições autencticadas usando jwt
+ * Plugin Name:       WP AFA - Mobile-Ready Submission Manager
+ * Plugin URI:        https://github.com/claudionhangapc/wp-all-forms-api
+ * Description:       Simplify form management and gain insights with our robust WordPress plugin.
  * Version:           1.0.0
- * Requires at least: 5.2
- * Requires PHP:      7.2
- * Author:            claudionhangapc
+ * Requires at least: 5.0
+ * Requires PHP:      7.0
+ * Author:            claudionhangapc, marciogoes
  * Author URI:        https://claudionhangapc.com/
  * License:           GPL v2 or later
  * License URI:       https://claudionhangapc/gpl-2.0.html
@@ -17,6 +17,9 @@ require __DIR__ . '/vendor/autoload.php';
  * Text Domain:       wp-all-forms-api
  * Domain Path:       /languages
  */
+
+// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 define( 'WP_ALL_FORMS_API_PLUGIN_FILE', __FILE__ );
 define( 'WP_ALL_FORMS_API_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );

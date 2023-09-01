@@ -1,0 +1,157 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP AFA - Mobile-Ready Submission Manager 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-all-forms-api\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-09-01T01:14:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wp-all-forms-api\n"
+
+#. Plugin Name of the plugin
+msgid "WP AFA - Mobile-Ready Submission Manager"
+msgstr "WP AFA - Gerenciador de Envio Pronto para Dispositivos Móveis"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/claudionhangapc/wp-all-forms-api"
+msgstr ""
+
+#. Description of the plugin
+msgid "Simplify form management and gain insights with our robust WordPress plugin."
+msgstr "Simplifique a gestão de formulários e obtenha insights com nosso robusto plugin para WordPress."
+
+#. Author of the plugin
+msgid "claudionhangapc, marciogoes"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://claudionhangapc.com/"
+msgstr ""
+
+#: includes/admin/AdminOptions.php:49
+msgid "WP AFA - Connected Users"
+msgstr "WP AFA - Usuários Conectados"
+
+#: includes/admin/AdminOptions.php:49
+msgid "Connected Users"
+msgstr "Usuários Conectados"
+
+#: includes/admin/AdminOptions.php:50
+msgid "WP AFA - Settings"
+msgstr "WP AFA - Configurações"
+
+#: includes/admin/AdminOptions.php:50
+msgid "Settings"
+msgstr "Configurações"
+
+#: includes/admin/pages/UserListTable.php:81
+msgid "User Login"
+msgstr "Login do Usuário"
+
+#: includes/admin/pages/UserListTable.php:82
+msgid "Display Name"
+msgstr "Nome de Exibição"
+
+#: includes/admin/pages/UserListTable.php:83
+msgid "User Id"
+msgstr "ID do Usuário"
+
+#: includes/admin/pages/UserListTable.php:94
+msgid "No users Connected."
+msgstr "Nenhum usuário conectado."
+
+#: includes/admin/pages/UserListTable.php:168
+msgid "Select"
+msgstr "Selecionar"
+
+#: includes/admin/pages/UserListTable.php:270
+#: includes/admin/pages/UserListTable.php:295
+msgid "Security check"
+msgstr "Verificação de Segurança"
+
+#: includes/admin/pages/UserListTable.php:315
+msgid "Search User"
+msgstr "Buscar Usuário"
+
+#: includes/admin/screens/ScreenAbout.php:34
+msgid "About plugin"
+msgstr "Sobre o plugin"
+
+#: includes/admin/screens/ScreenAbout.php:50
+msgid "About Our Plugin"
+msgstr "Sobre Nosso Plugin"
+
+#: includes/admin/screens/ScreenAbout.php:54
+msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
+msgstr "Bem-vindo ao nosso poderoso plugin projetado para aprimorar sua experiência de gerenciamento de formulários. Nosso plugin foi criado para simplificar a gestão de entradas de formulários, fornecendo as ferramentas necessárias para agilizar o processo e economizar tempo."
+
+#: includes/admin/screens/ScreenAbout.php:57
+msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
+msgstr "Nosso plugin vai além do desktop, fornecendo uma API robusta que capacita os usuários do seu aplicativo móvel a visualizar as submissões de formulários de maneira simples enquanto estão em trânsito. Integre nosso plugin de forma perfeita com construtores de formulários populares para WordPress e dê aos seus usuários a capacidade de supervisionar as submissões de qualquer lugar."
+
+#: includes/admin/screens/ScreenAbout.php:60
+msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
+msgstr "Mantenha-se organizado, obtenha insights e aprimore as interações dos usuários, tudo dentro do seu painel do WordPress e por meio de nossa API dedicada. Com nosso plugin de fácil utilização, você pode se manter no controle e transformar a maneira como gerencia as submissões de formulários. Explore as possibilidades hoje mesmo e revolucione sua abordagem ao gerenciamento de formulários."
+
+#: includes/admin/screens/ScreenAbout.php:65
+msgid "Supported plugins:"
+msgstr "Plugins suportados:"
+
+#: includes/admin/screens/ScreenMobileLogin.php:38
+msgid "Login"
+msgstr "Login"
+
+#: includes/admin/screens/ScreenMobileLogin.php:56
+msgid "Scan the following QR Code using the WP AFA app."
+msgstr "Escanee o QR Code a seguir usando o aplicativo WP AFA."
+
+#: includes/admin/screens/ScreenStaff.php:37
+msgid "Staff"
+msgstr "Equipe"
+
+#: includes/admin/screens/ScreenStaff.php:55
+msgid "Manage User Permissions"
+msgstr "Gerenciar Permissões de Usuário"
+
+#: includes/admin/screens/ScreenStaff.php:64
+msgid "Save Changes"
+msgstr "Salvar Alterações"
+
+#: includes/admin/screens/ScreenStaff.php:88
+#: includes/admin/screens/ScreenStaff.php:119
+msgid "Add Users"
+msgstr "Adicionar Usuários"
+
+#: includes/admin/screens/ScreenStaff.php:121
+msgid "To allow non-admin users to access this app, grant them the required permission"
+msgstr "Para permitir que usuários não administradores acessem este aplicativo, conceda a eles a permissão necessária"
+
+#. translators: %1$s is replaced with the entry_id.
+#: includes/models/NotificationModel.php:155
+msgid "Someone filled out a new form: {bold}%1$s{/bold}"
+msgstr "Alguém preencheu um novo formulário: {bold}%1$s{/bold}"
+
+#. translators: %1$s is replaced with the user_name and %1$s entry_id.
+#: includes/models/NotificationModel.php:158
+msgid "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
+msgstr "{bold}%1$s{/bold} preencheu um novo formulário: {bold}%2$s{/bold}"
+
+#. translators: %1$s is replaced with the site name.
+#: includes/plugins/notification/CF7Notification.php:78
+#: includes/plugins/notification/GFNotification.php:80
+#: includes/plugins/notification/WEFNotification.php:79
+#: includes/plugins/notification/WPFNotification.php:79
+msgid "New Form Submission Received from %1$s. Open app to view"
+msgstr "Nova submissão de formulário recebida de %1$s. Abra o aplicativo para visualizar"
+
+#: includes/plugins/notification/CF7Notification.php:80
+#: includes/plugins/notification/GFNotification.php:82
+#: includes/plugins/notification/WEFNotification.php:81
+#: includes/plugins/notification/WPFNotification.php:81
+msgid "New Form Submission"
+msgstr "Nova Submissão de Formulário"

@@ -21,7 +21,7 @@ node_modules/
 vendor/
 
 # ignore docs files
-docs/
+# docs/
 
 # ignore log files and databases
 *.log
@@ -32,4 +32,4 @@ docs/
 .env
 
 # ignore languages file
-languages/
+# languages/

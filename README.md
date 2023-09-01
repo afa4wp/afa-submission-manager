@@ -1,20 +1,20 @@
 # wp-all-forms-api
-Este é um plugin para consulta de dados de diversos formulários do ecossistema wordpress.
+This is a plugin for querying data from various forms within the WordPress ecosystem.
 # Pré-requisito
-- [x] Instancia do WordPress - você pode saber mais <a href="https://wordpress.org/support/article/how-to-install-wordpress/">aqui</a>
-- [x] Composer - você pode saber mais <a href="https://getcomposer.org/doc/00-intro.md">aqui</a>
+- [x] WordPress Instance - you can learn more <a href="https://wordpress.org/support/article/how-to-install-wordpress/">aqui</a>
+- [x] Composer - you can learn more <a href="https://getcomposer.org/doc/00-intro.md">aqui</a>
 # Instalação
-1. Clone o diretório do plug-in no `/wp-content/plugins/` diretório.
+1. Clone the plugin directory into the `/wp-content/plugins/` directory.
 ```
 git clone https://github.com/claudionhangapc/wp-all-forms-api.git && cd wp-all-forms-api
 ```
-2. Instala as dependências do projeto `composer install`
-3. Ative o plugin `WP All Forms API` através da página de administração do plugin WordPress
-4. Depois de ativado o plugin em sua maquina, a rota de acesso será formada pela base do site, ```https://meusite.com.br``` pela base api ```/wp-json/wp-all-forms-api/v1``` e endpoint, ex:. ```/ping```. Deste modo, a rota ```https://meusite.com.br/wp-json/wp-all-forms-api/v1/ping``` permite saber se a api esta funcionando corretamente retornando um ```{"ping": "pong"}``` como resposta.
+2. Install project dependencies using `composer install`
+3. Activate the `WP All Forms API` plugin through the WordPress plugin administration page.
+4. After activating the plugin on your machine, the access route will be formed by the site's base, `https://mysite.com`, for the API base `/wp-json/wp-all-forms-api/v1`, and the endpoint, e.g.: `/ping`. Therefore, the route `https://mysite.com/wp-json/wp-all-forms-api/v1/ping` allows you to check if the API is functioning correctly, returning a `{"ping": "pong"}` response.
 
 # Plugins
 
-A ideia é implemantar endpoints para os mais diversos plugins, contendo eles mínimo 50 000 instalações ativas. Os marcados com ```ok```  significa que ja foram implementados.
+The idea is to implement endpoints for various plugins, each with at least 50,000 active installations. Those marked with `ok` have already been implemented.
 - [x] Contact Form 7
 - [x] WPForms
 - [x] Gravity Forms
@@ -27,7 +27,3 @@ A ideia é implemantar endpoints para os mais diversos plugins, contendo eles m�
 - [ ] Forminator
 - [ ] Contact Form Plugin – Fastest Contact Form Builder Plugin for WordPress by Fluent Forms
 - [ ] The Divi Contact Form Module
-
-# Documentação
-
-1. Introdução
