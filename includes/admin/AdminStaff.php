@@ -9,6 +9,7 @@
 namespace Includes\Admin;
 
 use Includes\Models\UserModel;
+use WP_User;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -135,7 +136,7 @@ class AdminStaff {
 		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
 
 		if ( ! $user_can_manage_wp_afa ) {
-			$user = new \WP_User( $user_id );
+			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
 				$user->add_role( 'wp_afa_staff' );
 			}
@@ -157,7 +158,7 @@ class AdminStaff {
 		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
 
 		if ( $user_can_manage_wp_afa ) {
-			$user = new \WP_User( $user_id );
+			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
 				$user->remove_role( 'wp_afa_staff' );
 			}

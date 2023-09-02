@@ -45,6 +45,38 @@ class UserSchema {
 	}
 
 	/**
+	 * Create login with qr_code schema
+	 *
+	 * @return array
+	 */
+	public function login_qr_code() {
+		$schema = array(
+			'secret' => array(
+				'required'          => true,
+				'type'              => 'string',
+				'validate_callback' => function ( $value, $request, $key ) {
+					$result = explode( '|', $value, 2 );
+
+					if ( count( $result ) !== 2 ) {
+						return false;
+					}
+
+					if ( ! is_numeric( $result[0] ) ) {
+						return false;
+					}
+
+					if ( empty( $result[1] ) ) {
+						return false;
+					}
+
+					return true;
+				},
+			),
+		);
+		return $schema;
+	}
+
+	/**
 	 * Create token schema
 	 *
 	 * @return array

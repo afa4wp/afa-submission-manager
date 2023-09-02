@@ -251,7 +251,7 @@ class FormModelHelper {
 			'author'         => $user_id,
 		);
 
-		$query = new \WP_Query( $args );
+		$query = new WP_Query( $args );
 
 		if ( $query->have_posts() ) {
 			$form_count = $query->post_count;

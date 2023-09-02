@@ -10,6 +10,8 @@ namespace Includes\Models;
 
 use Includes\Models\UserTokensModel;
 use Includes\Models\UserDevicesModel;
+use WP_Error;
+use WP_User;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -44,7 +46,7 @@ class UserModel {
 
 		if ( ! is_wp_error( $login ) ) {
 			if ( ! $this->user_can_manage_wp_afa( $login->ID ) ) {
-				return new \WP_Error(
+				return new WP_Error(
 					'invalid_role',
 					'Sorry, you are not allowed to login',
 					array(
@@ -126,7 +128,7 @@ class UserModel {
 	 * @return true|false
 	 */
 	public function user_can_manage_wp_afa( $user_id ) {
-		$user = new \WP_User( $user_id );
+		$user = new WP_User( $user_id );
 		if ( $user->exists() ) {
 			if ( user_can( $user_id, 'manage_options' ) ) {
 				return true;
@@ -153,7 +155,7 @@ class UserModel {
 		$user_can_manage_wp_afa = $this->user_can_manage_wp_afa( $user_id );
 
 		if ( ! $user_can_manage_wp_afa ) {
-			$user = new \WP_User( $user_id );
+			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
 				$user->add_role( 'wp_afa_staff' );
 			}
@@ -174,7 +176,7 @@ class UserModel {
 		$user_can_manage_wp_afa = $this->user_can_manage_wp_afa( $user_id );
 
 		if ( $user_can_manage_wp_afa ) {
-			$user = new \WP_User( $user_id );
+			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
 				$user->remove_role( 'wp_afa_staff' );
 			}

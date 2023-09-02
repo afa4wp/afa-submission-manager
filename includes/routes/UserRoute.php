@@ -71,6 +71,7 @@ class UserRoute {
 					'methods'             => 'POST',
 					'callback'            => array( new UserController(), 'login_qr_code' ),
 					'permission_callback' => '__return_true',
+					'args'                => ( new UserSchema() )->login_qr_code(),
 				),
 
 			)
