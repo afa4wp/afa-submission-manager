@@ -9,6 +9,7 @@
 namespace Includes\Schema;
 
 use ExpoSDK\Expo;
+use Includes\Plugins\Language;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -47,7 +48,7 @@ class UserDevicesSchema {
 				'required'          => true,
 				'type'              => 'string',
 				'validate_callback' => function ( $value, $request, $key ) {
-					return ctype_alpha( $value ) && strlen( $value ) === 2;
+					return ( new Language() )->is_supported_language( $value );
 				},
 			),
 		);
@@ -72,7 +73,7 @@ class UserDevicesSchema {
 				'required'          => true,
 				'type'              => 'string',
 				'validate_callback' => function ( $value, $request, $key ) {
-					return ctype_alpha( $value ) && strlen( $value ) === 2;
+					return ( new Language() )->is_supported_language( $value );
 				},
 			),
 		);
