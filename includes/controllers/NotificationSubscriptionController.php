@@ -45,7 +45,7 @@ class NotificationSubscriptionController {
 	 */
 	public function subscribe_user( $request ) {
 
-		$expo_token = $request['expo_token'];
+		$expo_token = sanitize_text_field( $request['expo_token'] );
 
 		$result = $this->notification_subscription_model->subscribe_user_all_notificions_by_expo_token( $expo_token );
 		return rest_ensure_response( $result );
@@ -61,7 +61,7 @@ class NotificationSubscriptionController {
 	 */
 	public function fetch_subscriptions( $request ) {
 
-		$expo_token = $request['expo_token'];
+		$expo_token = sanitize_text_field( $request['expo_token'] );
 
 		$result = $this->notification_subscription_model->fetch_subscriptions_by_expo_token( $expo_token );
 		return rest_ensure_response( $result );
@@ -76,7 +76,7 @@ class NotificationSubscriptionController {
 	 */
 	public function unsubscribe( $request ) {
 
-		$expo_token = $request['expo_token'];
+		$expo_token = sanitize_text_field( $request['expo_token'] );
 
 		$result = $this->notification_subscription_model->unsubscribe( $expo_token );
 		return rest_ensure_response( $result );
@@ -91,8 +91,8 @@ class NotificationSubscriptionController {
 	 */
 	public function update_subscription_state( $request ) {
 
-		$notification_subscription_id = intval( $request['notification_subscription_id'] );
-		$enabled                      = $request['enabled'];
+		$notification_subscription_id = absint( $request['notification_subscription_id'] );
+		$enabled                      = absint( $request['enabled'] );
 
 		$result = $this->notification_subscription_model->update_subscription_state( $notification_subscription_id, $enabled );
 		return rest_ensure_response( $result );

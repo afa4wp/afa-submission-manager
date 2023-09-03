@@ -63,7 +63,7 @@ class FormController extends AbstractFormControllers {
 	 * @return object $form WEF form.
 	 */
 	public function form_by_id( $request ) {
-		$id = $request['id'];
+		$id = absint( $request['id'] );
 
 		$form = $this->form_model->form_by_id( $id );
 
@@ -78,7 +78,7 @@ class FormController extends AbstractFormControllers {
 	 * @return array $forms WEF forms.
 	 */
 	public function forms_pagination( $request ) {
-		$page = $request['page_number'];
+		$page = absint( $request['page_number'] );
 
 		$count = $this->form_model->form_model_helper->mumber_of_items();
 
@@ -101,7 +101,7 @@ class FormController extends AbstractFormControllers {
 	public function search_forms( $request ) {
 		$page = 1;
 
-		$post_name = urldecode( $request['post_name'] );
+		$post_name = sanitize_text_field( urldecode( $request['post_name'] ) );
 
 		$count = $this->form_model->form_model_helper->mumber_of_items_by_post_title( $post_name );
 

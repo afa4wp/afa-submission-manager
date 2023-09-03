@@ -66,7 +66,7 @@ class UserController {
 	 * @return WP_User|WP_Error $user WP User with tokens info
 	 */
 	public function login( $request ) {
-		$username = $request['username'];
+		$username = sanitize_user( $request['username'] );
 		$password = $request['password'];
 
 		$user = $this->user_model->login( $username, $password );
@@ -102,7 +102,7 @@ class UserController {
 	 */
 	public function login_qr_code( $request ) {
 
-		$secret = $request['secret'];
+		$secret = sanitize_text_field( $request['secret'] );
 
 		$result = explode( '|', $secret, 2 );
 
@@ -188,7 +188,7 @@ class UserController {
 	 * @return array $user Some User info.
 	 */
 	public function user_form_type_me( $request ) {
-		$key = $request['form_type'];
+		$key = sanitize_text_field( $request['form_type'] );
 
 		$number_of_forms = 0;
 
@@ -213,7 +213,7 @@ class UserController {
 	 * @return array $user Some User info.
 	 */
 	public function user_form_type_home( $request ) {
-		$key = $request['form_type'];
+		$key = sanitize_text_field( $request['form_type'] );
 
 		$number_of_forms = 0;
 
@@ -254,7 +254,7 @@ class UserController {
 	 */
 	public function token( $request ) {
 
-		$refresh_token = $request['refresh_token'];
+		$refresh_token = sanitize_text_field( $request['refresh_token'] );
 		$validate      = $this->jwt_plugin->validate_refresh_token( $refresh_token );
 
 		if ( is_wp_error( $validate ) ) {
@@ -308,7 +308,7 @@ class UserController {
 	 * @return boolean|WP_Error $user WP User with tokens info
 	 */
 	public function logout( $request ) {
-		$device_id = $request['device_id'];
+		$device_id = sanitize_text_field( $request['device_id'] );
 		$user      = wp_get_current_user();
 		$result    = $this->user_model->logout( $user->ID, $device_id );
 		return rest_ensure_response( $result );

@@ -54,9 +54,9 @@ class NotificationController {
 	 */
 	public function notifications( $request ) {
 
-		$page             = $request['page_number'];
-		$device_language  = $request['device_language'];
-		$supported_plugin = $request['supported_plugin'];
+		$page             = absint( $request['page_number'] );
+		$device_language  = sanitize_text_field( $request['device_language'] );
+		$supported_plugin = sanitize_text_field( $request['supported_plugin'] );
 
 		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( $supported_plugin );
 		$supported_plugin_id              = 0;

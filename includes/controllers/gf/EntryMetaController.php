@@ -46,7 +46,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	 * @return array $entryMeta WPF entries meta
 	 */
 	public function entry_meta_by_entry_id( $request ) {
-		$entry_id = $request['entry_id'];
+		$entry_id = absint( $request['entry_id'] );
 
 		$items = $this->entry_meta_model->entry_meta_by_entry_id( $entry_id );
 
@@ -62,7 +62,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	 */
 	public function search_entry_meta_answer( $request ) {
 		$number_of_records_per_page = 20;
-		$answer                     = urldecode( $request['answer'] );
+		$answer                     = sanitize_text_field( urldecode( $request['answer'] ) );
 
 		$offset = 0;
 

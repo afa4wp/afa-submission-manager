@@ -63,7 +63,7 @@ class EntryController extends AbstractEntryControllers {
 	 * @return array $forms GF forms.
 	 */
 	public function entry_by_id( $request ) {
-		$entry_id = $request['entry_id'];
+		$entry_id = absint( $request['entry_id'] );
 
 		$entry = $this->entry_model->entry_by_id( $entry_id );
 
@@ -79,9 +79,9 @@ class EntryController extends AbstractEntryControllers {
 	 * @return array $forms GF forms.
 	 */
 	public function entries_by_form_id( $request ) {
-		$form_id = $request['form_id'];
+		$form_id = absint( $request['form_id'] );
 
-		$page = $request['page_number'];
+		$page = absint( $request['page_number'] );
 
 		$count = $this->entry_model->entry_model_helper->mumber_of_items_by_form_id( $form_id );
 
@@ -102,7 +102,7 @@ class EntryController extends AbstractEntryControllers {
 	 * @return array $forms GF forms.
 	 */
 	public function search_entries_by_user( $request ) {
-		$user_info = $request['user_info'];
+		$user_info = sanitize_text_field( $request['user_info'] );
 
 		$offset = 0;
 

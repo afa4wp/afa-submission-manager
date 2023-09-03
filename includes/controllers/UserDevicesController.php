@@ -46,9 +46,9 @@ class UserDevicesController {
 	 */
 	public function create( $request ) {
 
-		$expo_token      = $request['expo_token'];
-		$device_id       = $request['device_id'];
-		$device_language = $request['device_language'];
+		$expo_token      = sanitize_text_field( $request['expo_token'] );
+		$device_id       = sanitize_text_field( $request['device_id'] );
+		$device_language = sanitize_text_field( $request['device_language'] );
 
 		$user   = wp_get_current_user();
 		$result = $this->user_devices_model->create_device_register_if_not_exist( $user->ID, $device_id, $device_language, $expo_token );
@@ -70,8 +70,8 @@ class UserDevicesController {
 	 */
 	public function language( $request ) {
 
-		$device_id       = $request['device_id'];
-		$device_language = $request['device_language'];
+		$device_id       = sanitize_text_field( $request['device_id'] );
+		$device_language = sanitize_text_field( $request['device_language'] );
 
 		$user   = wp_get_current_user();
 		$result = $this->user_devices_model->language( $user->ID, $device_id, $device_language );

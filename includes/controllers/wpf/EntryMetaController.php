@@ -45,7 +45,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	 * @return array $entryMeta GF entries meta
 	 */
 	public function entry_meta_by_entry_id( $request ) {
-		$entry_id = $request['entry_id'];
+		$entry_id = absint( $request['entry_id'] );
 
 		$items = $this->entry_meta_model->entry_meta_by_entry_id( $entry_id );
 
@@ -60,7 +60,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	 * @return array $entryMeta GF entries meta
 	 */
 	public function search_entry_meta_answer( $request ) {
-		$answer = urldecode( $request['answer'] );
+		$answer = sanitize_text_field( urldecode( $request['answer'] ) );
 
 		$items = $this->entry_meta_model->search_entry_meta_answer( $answer, 0, 20 );
 
