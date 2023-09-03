@@ -45,9 +45,9 @@ class AdminOptions {
 	 * Add page for plugin
 	 */
 	public function add_page() {
-		add_menu_page( 'WP AFA', 'WP AFA', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
-		add_submenu_page( 'wp_all_forms_api', __( 'WP AFA - Connected Users', 'wp-all-forms-api' ), __( 'Connected Users', 'wp-all-forms-api' ), 'manage_options', 'wp_all_forms_api' );
-		add_submenu_page( 'wp_all_forms_api', __( 'WP AFA - Settings', 'wp-all-forms-api' ), __( 'Settings', 'wp-all-forms-api' ), 'manage_options', 'wp_all_forms_api_settings', array( new Settings(), 'render' ) );
+		add_menu_page( 'WPAFA', 'WPAFA', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
+		add_submenu_page( 'wp_all_forms_api', __( 'WPAFA - Connected Users', 'wp-all-forms-api' ), __( 'Connected Users', 'wp-all-forms-api' ), 'manage_options', 'wp_all_forms_api' );
+		add_submenu_page( 'wp_all_forms_api', __( 'WPAFA - Settings', 'wp-all-forms-api' ), __( 'Settings', 'wp-all-forms-api' ), 'manage_options', 'wp_all_forms_api_settings', array( new Settings(), 'render' ) );
 	}
 
 	/**

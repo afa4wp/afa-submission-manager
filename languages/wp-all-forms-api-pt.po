@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WP AFA - Mobile-Ready Submission Manager 1.0.0\n"
+"Project-Id-Version: WPAFA - Mobile-Ready Submission Manager 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-all-forms-api\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Domain: wp-all-forms-api\n"
 
 #. Plugin Name of the plugin
-msgid "WP AFA - Mobile-Ready Submission Manager"
-msgstr "WP AFA - Gerenciador de Envio Pronto para Dispositivos Móveis"
+msgid "WPAFA - Mobile-Ready Submission Manager"
+msgstr "WPAFA - Gerenciador de Envio Pronto para Dispositivos Móveis"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/claudionhangapc/wp-all-forms-api"
@@ -34,16 +34,16 @@ msgid "https://claudionhangapc.com/"
 msgstr ""
 
 #: includes/admin/AdminOptions.php:49
-msgid "WP AFA - Connected Users"
-msgstr "WP AFA - Usuários Conectados"
+msgid "WPAFA - Connected Users"
+msgstr "WPAFA - Usuários Conectados"
 
 #: includes/admin/AdminOptions.php:49
 msgid "Connected Users"
 msgstr "Usuários Conectados"
 
 #: includes/admin/AdminOptions.php:50
-msgid "WP AFA - Settings"
-msgstr "WP AFA - Configurações"
+msgid "WPAFA - Settings"
+msgstr "WPAFA - Configurações"
 
 #: includes/admin/AdminOptions.php:50
 msgid "Settings"
@@ -107,8 +107,8 @@ msgid "Login"
 msgstr "Login"
 
 #: includes/admin/screens/ScreenMobileLogin.php:56
-msgid "Scan the following QR Code using the WP AFA app."
-msgstr "Escanee o QR Code a seguir usando o aplicativo WP AFA."
+msgid "Scan the following QR Code using the WPAFA app."
+msgstr "Escanee o QR Code a seguir usando o aplicativo WPAFA."
 
 #: includes/admin/screens/ScreenStaff.php:37
 msgid "Staff"
