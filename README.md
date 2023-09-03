@@ -1,6 +1,6 @@
 # wp-all-forms-api
 This is a plugin for querying data from various forms within the WordPress ecosystem.
-# Prerequisites
+# Setup Requirements
 - [x] WordPress Instance - you can learn more <a href="https://wordpress.org/support/article/how-to-install-wordpress/">here</a>
 - [x] Composer - you can learn more <a href="https://getcomposer.org/doc/00-intro.md">here</a>
 # Installation
@@ -27,3 +27,6 @@ The idea is to implement endpoints for various plugins, each with at least 50,00
 - [ ] Forminator
 - [ ] Contact Form Plugin – Fastest Contact Form Builder Plugin for WordPress by Fluent Forms
 - [ ] The Divi Contact Form Module
+
+## Donate
+If you find this plugin useful, consider making a donation to support its development. [Donate here](https://www.paypal.com/donate/?hosted_button_id=PN2UZZWDZ4Y36).

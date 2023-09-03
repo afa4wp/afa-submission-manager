@@ -1,5 +1,6 @@
 === WP AFA - Mobile-Ready Submission Manager ===
 Contributors: claudionhangapc, marciogoes
+Donate link: https://www.paypal.com/donate/?hosted_button_id=PN2UZZWDZ4Y36
 Tags: forms, contact form plugin, contact form 7, Flamingo, GravityForms, WPForms, weForms
 Requires at least: 5.0
 Tested up to: 6.3
