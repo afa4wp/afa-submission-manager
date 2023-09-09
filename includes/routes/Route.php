@@ -18,6 +18,7 @@ use Includes\Routes\GF\Route as GFRoute;
 use Includes\Routes\WPF\Route as WPFRoute;
 use Includes\Routes\WEF\Route as WEFRoute;
 use Includes\Routes\CF7\Route as CF7Route;
+use Includes\Routes\EFB\Route as EFBRoute;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -63,6 +64,7 @@ class Route {
 		( new WPFRoute( $this->name ) )->init_routes();
 		( new WEFRoute( $this->name ) )->init_routes();
 		( new CF7Route( $this->name ) )->init_routes();
+		( new EFBRoute( $this->name ) )->init_routes();
 
 	}
 
