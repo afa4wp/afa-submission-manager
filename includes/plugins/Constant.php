@@ -45,4 +45,5 @@ class Constant {
 	const FORM_SLUG_GF  = 'gf';
 	const FORM_SLUG_WEF = 'wef';
 	const FORM_SLUG_WPF = 'wpf';
+	const FORM_SLUG_EFB = 'efb';
 }

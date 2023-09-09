@@ -10,6 +10,7 @@ namespace Includes\Models\EFB;
 
 use Includes\Plugins\Helpers\FormModelHelper;
 use Includes\Models\AbstractFormModel;
+use Includes\Models\UserModel;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -138,22 +139,26 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	public function prepare_data( $results ) {
-		if ( ! class_exists( '\GFAPI' ) ) {
-			return array();
-		}
-
-		$forms = array();
+		$forms      = array();
+		$user_model = new UserModel();
 
 		foreach ( $results as $value ) {
 
 			$form = array();
 
-			$form['id']           = $value->id;
-			$form['title']        = $value->title;
-			$form['date_created'] = $value->date_created;
-			$form['registers']    = \GFAPI::count_entries( $value->id );
-			$form['user_created'] = null;
-			$form['perma_links']  = parent::pages_links( $value->id, self::SHORTCODE );
+			$form['id']    = $value->ID;
+			$form['title'] = $value->post_title;
+
+			$form['date_created'] = $value->post_date;
+			$form['registers']    = 0;
+			$form['user_created'] = $user_model->user_info_by_id( $value->post_author );
+
+			$form['perma_links'] = array(
+				array(
+					'page_name' => $value->post_title,
+					'page_link' => get_permalink( $value->ID ),
+				),
+			);
 
 			$forms[] = $form;
 		}
@@ -213,5 +218,25 @@ class FormModel extends AbstractFormModel {
 		return $count;
 	}
 
+	/**
+	 * Get number of Forms
+	 *
+	 * @return int
+	 */
+	public function mumber_of_items() {
+		global $wpdb;
 
+		$query = "
+			SELECT COUNT(p.ID)
+			FROM $wpdb->posts AS p
+			INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id
+			WHERE p.post_type = 'page'
+			AND pm.meta_key = '_elementor_data'
+			AND (pm.meta_value LIKE '%\"elType\":\"widget\"%' AND pm.meta_value LIKE '%\"form_name\"%')
+		";
+
+		$count = $wpdb->get_var( $query ); // phpcs:ignore
+
+		return $count;
+	}
 }

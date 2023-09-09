@@ -44,7 +44,7 @@ class FormController extends AbstractFormControllers {
 	 * @return array $forms GF forms.
 	 */
 	public function forms() {
-		$count = $this->form_model->form_model_helper->mumber_of_items();
+		$count = $this->form_model->mumber_of_items();
 
 		$offset = 0;
 
