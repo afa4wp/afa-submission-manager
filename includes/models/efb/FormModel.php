@@ -26,19 +26,12 @@ class FormModel extends AbstractFormModel {
 	/**
 	 * Const to declare table name.
 	 */
-	const TABLE_NAME = 'gf_form';
+	const TABLE_NAME = '';
 
 	/**
 	 * Const to declare shortcode.
 	 */
-	const SHORTCODE = 'gravityform';
-
-	/**
-	 * Table name with WP prefix
-	 *
-	 * @var string
-	 */
-	private $table_name_with_prefix;
+	const SHORTCODE = '';
 
 	/**
 	 * The FormModelHelper
@@ -52,8 +45,7 @@ class FormModel extends AbstractFormModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->form_model_helper      = new FormModelHelper( '', self::TABLE_NAME );
-		$this->table_name_with_prefix = $wpdb->prefix . self::TABLE_NAME;
+		$this->form_model_helper = new FormModelHelper( '' );
 	}
 
 	/**
@@ -68,22 +60,34 @@ class FormModel extends AbstractFormModel {
 		global $wpdb;
 
 		$query = "
-		SELECT p.*, pm.meta_value
-		FROM $wpdb->posts AS p
-		INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id
-		WHERE p.post_type = 'page'
-		AND pm.meta_key = '_elementor_data'
-		AND (pm.meta_value LIKE '%\"elType\":\"widget\"%' AND pm.meta_value LIKE '%\"form_name\"%')
-		ORDER BY p.ID DESC
-		LIMIT %d, %d
+			SELECT p.*, pm.meta_value AS form_data
+			FROM $wpdb->posts AS p
+			INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id
+			WHERE p.post_type = 'page'
+			AND pm.meta_key = '_elementor_data'
+			AND (pm.meta_value LIKE '%\"elType\":\"widget\"%' AND pm.meta_value LIKE '%\"form_name\"%')
+			ORDER BY p.ID DESC
+			LIMIT %d, %d
 		";
 
 		$sql = $wpdb->prepare( $query, array( $offset, $number_of_records_per_page ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
+		$modified_results = array();
+		foreach ( $results as $result ) {
+			$form_data         = $result->form_data;
+			$pattern           = '/"form_name":"([^"]+)"/';
+			$result->form_name = $result->post_title;
+			if ( preg_match( $pattern, $form_data, $matches ) ) {
+				$form_name         = $matches[1];
+				$result->form_name = $form_name;
+			}
 
-		$forms = $this->prepare_data( $results );
+			$modified_results[] = $result;
+		}
+
+		$forms = $this->prepare_data( $modified_results );
 
 		return $forms;
 	}
@@ -110,25 +114,30 @@ class FormModel extends AbstractFormModel {
 	/**
 	 * Get number of Forms
 	 *
-	 * @param string $post_name The post name.
+	 * @param string $form_name The form name.
 	 *
 	 * @return int
 	 */
-	public function mumber_of_items_by_search( $post_name ) {
+	public function mumber_of_items_by_search( $form_name ) {
 		global $wpdb;
 
-		$query = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE title LIKE %s ";
+		$form_name = '%' . $wpdb->esc_like( $form_name ) . '%';
 
-		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
+		$query = "
+			SELECT COUNT(p.ID)
+			FROM $wpdb->posts AS p
+			INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id
+			WHERE p.post_type = 'page'
+			AND pm.meta_key = '_elementor_data'
+			AND (pm.meta_value LIKE %s OR pm.meta_value LIKE %s)
+    	";
 
-		$sql = $wpdb->prepare( $query, array( $post_name_esc_like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $query, array( '%"form_name":"' . $form_name . '"%', '%"form_name":"' . $form_name . '"%' ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
-		$results = $wpdb->get_results( $sql, OBJECT );
+		$count = $wpdb->get_var($sql);
 
-		$number_of_rows = intval( $results[0]->number_of_rows );
-
-		return $number_of_rows;
+		return $count;
 	}
 
 	/**
@@ -147,7 +156,7 @@ class FormModel extends AbstractFormModel {
 			$form = array();
 
 			$form['id']    = $value->ID;
-			$form['title'] = $value->post_title;
+			$form['title'] = $value->form_name;
 
 			$form['date_created'] = $value->post_date;
 			$form['registers']    = 0;
@@ -169,28 +178,52 @@ class FormModel extends AbstractFormModel {
 	/**
 	 * Search Forms
 	 *
-	 * @param string $post_name The post name.
+	 * @param string $form_name The post name of the form.
 	 * @param int    $offset The offset.
 	 * @param int    $number_of_records_per_page The posts per page.
 	 *
 	 * @return array
 	 */
-	public function search_forms( $post_name, $offset, $number_of_records_per_page ) {
+	public function search_forms( $form_name, $offset, $number_of_records_per_page ) {
 
 		global $wpdb;
 
-		$query = "SELECT * FROM {$this->table_name_with_prefix} WHERE title LIKE %s ORDER BY id DESC LIMIT %d,%d";
+		$form_name = '%' . $wpdb->esc_like( $form_name ) . '%';
 
-		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
+		$query = "
+			SELECT p.*, pm.meta_value AS form_data
+			FROM $wpdb->posts AS p
+			INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id
+			WHERE p.post_type = 'page'
+			AND pm.meta_key = '_elementor_data'
+			AND pm.meta_value LIKE %s
+			ORDER BY p.ID DESC
+			LIMIT %d, %d
+    	";
 
-		$sql = $wpdb->prepare( $query, array( $post_name_esc_like, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql = $wpdb->prepare( $query, array( '%"form_name":"' . $form_name . '"%', $offset, $number_of_records_per_page ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
-		// phpcs:ignore 
-		$results = $wpdb->get_results( $sql, OBJECT );
+    	// phpcs:ignore
+    	$results = $wpdb->get_results($sql, OBJECT);
+		$modified_results = array();
 
-		$forms = $this->prepare_data( $results );
+		foreach ( $results as $result ) {
+			$form_data         = $result->form_data;
+			$pattern           = '/"form_name":"([^"]+)"/';
+			$result->form_name = $result->post_title;
+
+			if ( preg_match( $pattern, $form_data, $matches ) ) {
+				$form_name         = $matches[1];
+				$result->form_name = $form_name;
+			}
+
+			$modified_results[] = $result;
+		}
+
+		$forms = $this->prepare_data( $modified_results );
 
 		return $forms;
+
 	}
 
 	/**
@@ -203,17 +236,18 @@ class FormModel extends AbstractFormModel {
 	 * @return int
 	 */
 	public function user_form_count( $user_id ) {
-		if ( ! class_exists( '\GFAPI' ) ) {
-			return 0;
-		}
+		global $wpdb;
 
-		$args = array(
-			'created_by' => $user_id,
-			'status'     => 'active',
-		);
-
-		$forms = \GFAPI::get_forms( $args );
-		$count = count( $forms );
+		$query = "
+			SELECT COUNT(p.ID)
+			FROM $wpdb->posts AS p
+			INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id
+			WHERE p.post_type = 'page'
+			AND p.post_author = %d
+			AND pm.meta_key = '_elementor_data'
+			AND (pm.meta_value LIKE '%\"elType\":\"widget\"%' AND pm.meta_value LIKE '%\"form_name\"%')
+    	";
+		$count = $wpdb->get_var($wpdb->prepare($query, array($user_id))); // phpcs:ignore
 
 		return $count;
 	}

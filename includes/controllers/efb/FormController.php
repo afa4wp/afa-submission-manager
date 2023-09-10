@@ -80,7 +80,7 @@ class FormController extends AbstractFormControllers {
 	public function forms_pagination( $request ) {
 		$page = absint( $request['page_number'] );
 
-		$count = $this->form_model->form_model_helper->mumber_of_items();
+		$count = $this->form_model->mumber_of_items();
 
 		$offset = $this->pagination_helper->get_offset( $page );
 
