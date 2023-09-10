@@ -74,20 +74,8 @@ class FormModel extends AbstractFormModel {
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
-		$modified_results = array();
-		foreach ( $results as $result ) {
-			$form_data         = $result->form_data;
-			$pattern           = '/"form_name":"([^"]+)"/';
-			$result->form_name = $result->post_title;
-			if ( preg_match( $pattern, $form_data, $matches ) ) {
-				$form_name         = $matches[1];
-				$result->form_name = $form_name;
-			}
 
-			$modified_results[] = $result;
-		}
-
-		$forms = $this->prepare_data( $modified_results );
+		$forms = $this->prepare_data( $results );
 
 		return $forms;
 	}
@@ -100,13 +88,24 @@ class FormModel extends AbstractFormModel {
 	 * @return array
 	 */
 	public function form_by_id( $id ) {
-		$results = $this->form_model_helper->form_by_id( $id );
+		global $wpdb;
+
+		$query = "
+			SELECT p.*, pm.meta_value AS form_data
+			FROM $wpdb->posts AS p
+			INNER JOIN $wpdb->postmeta AS pm ON p.ID = pm.post_id
+			WHERE p.post_type = 'page'
+			AND pm.meta_key = '_elementor_data'
+			AND (pm.meta_value LIKE '%\"elType\":\"widget\"%' AND pm.meta_value LIKE '%\"form_name\"%')
+			AND p.ID = %d
+		";
+
+		$sql = $wpdb->prepare( $query, array( $id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
+		// phpcs:ignore
+		$results = $wpdb->get_results($sql, OBJECT);
 
 		$forms = $this->prepare_data( $results );
-
-		if ( count( $forms ) > 0 ) {
-			return $forms[0];
-		}
 
 		return $forms;
 	}
@@ -151,7 +150,21 @@ class FormModel extends AbstractFormModel {
 		$forms      = array();
 		$user_model = new UserModel();
 
-		foreach ( $results as $value ) {
+		$modified_results = array();
+
+		foreach ( $results as $result ) {
+			$form_data         = $result->form_data;
+			$pattern           = '/"form_name":"([^"]+)"/';
+			$result->form_name = $result->post_title;
+			if ( preg_match( $pattern, $form_data, $matches ) ) {
+				$form_name         = $matches[1];
+				$result->form_name = $form_name;
+			}
+
+			$modified_results[] = $result;
+		}
+
+		foreach ( $modified_results as $value ) {
 
 			$form = array();
 
@@ -205,22 +218,8 @@ class FormModel extends AbstractFormModel {
 
     	// phpcs:ignore
     	$results = $wpdb->get_results($sql, OBJECT);
-		$modified_results = array();
 
-		foreach ( $results as $result ) {
-			$form_data         = $result->form_data;
-			$pattern           = '/"form_name":"([^"]+)"/';
-			$result->form_name = $result->post_title;
-
-			if ( preg_match( $pattern, $form_data, $matches ) ) {
-				$form_name         = $matches[1];
-				$result->form_name = $form_name;
-			}
-
-			$modified_results[] = $result;
-		}
-
-		$forms = $this->prepare_data( $modified_results );
+		$forms = $this->prepare_data( $results );
 
 		return $forms;
 
