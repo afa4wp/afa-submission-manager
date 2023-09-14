@@ -11,6 +11,7 @@ namespace Includes\Models\EFB;
 use Includes\Plugins\Helpers\FormModelHelper;
 use Includes\Models\AbstractFormModel;
 use Includes\Models\UserModel;
+use Includes\Models\EFB\EntryModel;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -172,7 +173,7 @@ class FormModel extends AbstractFormModel {
 			$form['title'] = $value->form_name;
 
 			$form['date_created'] = $value->post_date;
-			$form['registers']    = 0;
+			$form['registers']    = ( new EntryModel() )->mumber_of_items_by_form_id( $value->ID );
 			$form['user_created'] = $user_model->user_info_by_id( $value->post_author );
 
 			$form['perma_links'] = array(

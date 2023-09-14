@@ -9,6 +9,7 @@
 namespace Includes\Routes\EFB;
 
 use Includes\Routes\EFB\Form;
+use Includes\Routes\EFB\Entry;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -43,7 +44,7 @@ class Route {
 	 */
 	public function init_routes() {
 		( new Form( $this->name ) )->init_routes();
-
+		( new Entry( $this->name ) )->init_routes();
 	}
 
 }
