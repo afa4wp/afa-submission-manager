@@ -1,6 +1,6 @@
 <?php
 /**
- * The Form Route Class.
+ * The Entry Route Class.
  *
  * @package  WP_All_Forms_API
  * @since 1.0.0
@@ -8,33 +8,33 @@
 
 namespace Includes\Routes\EFB;
 
-use Includes\Controllers\EFB\FormController;
-use Includes\Routes\AbstractFormRoute;
+use Includes\Controllers\EFB\EntryController;
+use Includes\Routes\AbstractEntryRoute;
 use Includes\Plugins\Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class Form
+ * Class Entry
  *
  * Init all routes
  *
  * @since 1.0.0
  */
-class Form extends AbstractFormRoute {
+class Entry extends AbstractEntryRoute {
 
 	/**
-	 * Get all forms
+	 * Get all entries
 	 */
-	public function forms() {
+	public function entries() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms',
+			'/efb/entries',
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'forms' ),
+					'callback'            => array( new EntryController(), 'entries' ),
 					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
@@ -42,16 +42,16 @@ class Form extends AbstractFormRoute {
 	}
 
 	/**
-	 * Get forms by id
+	 * Get entry by id
 	 */
-	public function form_by_id() {
+	public function entry_by_id() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms/(?P<id>[0-9]+)',
+			'/efb/entries/(?P<entry_id>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'form_by_id' ),
+					'callback'            => array( new EntryController(), 'entry_by_id' ),
 					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
@@ -59,16 +59,16 @@ class Form extends AbstractFormRoute {
 	}
 
 	/**
-	 * Get forms by pagination
+	 * Get entries by form id
 	 */
-	public function forms_pagination() {
+	public function entries_by_form_id() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms/page/(?P<page_number>[0-9]+)',
+			'/efb/entries/form_id/(?P<form_id>[0-9]+)/page/(?P<page_number>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'forms_pagination' ),
+					'callback'            => array( new EntryController(), 'entries_by_form_id' ),
 					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
@@ -76,19 +76,20 @@ class Form extends AbstractFormRoute {
 	}
 
 	/**
-	 * Search forms by name.
+	 * Search entries by user info
 	 */
-	public function search_forms() {
+	public function search_entries_by_user() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms/search/(?P<post_name>\S+)',
+			'/efb/entries/user/search/(?P<user_info>\S+)',
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'search_forms' ),
+					'callback'            => array( new EntryController(), 'search_entries_by_user' ),
 					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
 				),
 			)
 		);
 	}
+
 }
