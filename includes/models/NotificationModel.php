@@ -119,7 +119,7 @@ class NotificationModel {
 
 		global $wpdb;
 
-		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} WHERE supported_plugin_id IN (0, %d)";
+		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} WHERE supported_plugin_id = %d ";
 
 		$sql = $wpdb->prepare( $sql, array( $supported_plugin_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 

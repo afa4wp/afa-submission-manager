@@ -87,6 +87,11 @@ class SupportedPlugins {
 				'name'        => 'WPForms',
 				'plugin_path' => 'wpforms/wpforms.php',
 			),
+			array(
+				'slug'        => 'efb',
+				'name'        => 'Elementor Form Builder',
+				'plugin_path' => 'elementor-pro/elementor-pro.php',
+			),
 		);
 
 		return $values;

@@ -12,10 +12,12 @@ use Includes\Models\CF7\FormModel as CF7FormModel;
 use Includes\Models\GF\FormModel as GFFormModel;
 use Includes\Models\WEF\FormModel as WEFFormModel;
 use Includes\Models\WPF\FormModel as WPFFormModel;
+use Includes\Models\EFB\FormModel as EFBFormModel;
 use Includes\Models\CF7\EntryModel as CF7EntryModel;
 use Includes\Models\GF\EntryModel as GFEntryModel;
 use Includes\Models\WEF\EntryModel as WEFEntryModel;
 use Includes\Models\WPF\EntryModel as WPFEntryModel;
+use Includes\Models\EFB\EntryModel as EFBEntryModel;
 use Includes\Models\UserModel;
 use Includes\Plugins\Constant;
 
@@ -40,6 +42,7 @@ class Config {
 		Constant::FORM_SLUG_GF  => 'gravityforms/gravityforms.php',
 		Constant::FORM_SLUG_WEF => 'weforms/weforms.php',
 		Constant::FORM_SLUG_WPF => 'wpforms/wpforms.php',
+		Constant::FORM_SLUG_EFB => 'elementor-pro/elementor-pro.php',
 	);
 
 	/**
@@ -49,6 +52,7 @@ class Config {
 	 */
 	const PLUGINS_LITE = array(
 		Constant::FORM_SLUG_WPF => 'wpforms-lite/wpforms.php',
+		Constant::FORM_SLUG_EFB => 'elementor/elementor.php',
 	);
 
 	/**
@@ -65,8 +69,14 @@ class Config {
 			}
 		}
 
+		if ( ! isset( $lite[ Constant::FORM_SLUG_CF7 ] ) && ! isset( $plugins[ Constant::FORM_SLUG_CF7 ] ) ) {
+			unset( $plugins[ Constant::FORM_SLUG_CF7 ] );
+		}
 		if ( isset( $plugins[ Constant::FORM_SLUG_CF7 ] ) && ! is_plugin_active( 'flamingo/flamingo.php' ) ) {
 			unset( $plugins[ Constant::FORM_SLUG_CF7 ] );
+		}
+		if ( ! isset( $lite[ Constant::FORM_SLUG_EFB ] ) && ! isset( $plugins[ Constant::FORM_SLUG_EFB ] ) ) {
+			unset( $plugins[ Constant::FORM_SLUG_EFB ] );
 		}
 
 		return $plugins;
@@ -148,6 +158,7 @@ class Config {
 			Constant::FORM_SLUG_GF  => new GFFormModel(),
 			Constant::FORM_SLUG_WEF => new WEFFormModel(),
 			Constant::FORM_SLUG_WPF => new WPFFormModel(),
+			Constant::FORM_SLUG_EFB => new EFBFormModel(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {
@@ -172,6 +183,7 @@ class Config {
 			Constant::FORM_SLUG_GF  => new GFEntryModel(),
 			Constant::FORM_SLUG_WEF => new WEFEntryModel(),
 			Constant::FORM_SLUG_WPF => new WPFEntryModel(),
+			Constant::FORM_SLUG_EFB => new EFBEntryModel(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {

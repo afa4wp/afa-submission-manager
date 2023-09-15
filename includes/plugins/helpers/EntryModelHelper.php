@@ -108,14 +108,15 @@ class EntryModelHelper {
 	/**
 	 * Get Forms
 	 *
-	 * @param int $form_id The form id.
+	 * @param int    $form_id The form id.
+	 * @param string $field   The field to filter by (default: 'form_id').
 	 *
 	 * @return int
 	 */
-	public function mumber_of_items_by_form_id( $form_id ) {
+	public function mumber_of_items_by_form_id( $form_id, $field = 'form_id' ) {
 		global $wpdb;
 
-		$sql            = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE form_id = %d ";
+		$sql            = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE {$field} = %d ";
 		$sql            = $wpdb->prepare( $sql, array( $form_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results        = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
