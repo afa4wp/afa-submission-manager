@@ -8,6 +8,7 @@
 
 namespace Includes\Routes;
 
+use Includes\Models\EFB\EntryModel;
 /**
  * Class PingRoute
  *
@@ -55,9 +56,10 @@ class PingRoute {
 	 * Create ping callback.
 	 */
 	public function ping_callback() {
+		$entry_model = new EntryModel();
 		return rest_ensure_response(
 			array(
-				'ping' => 'pong',
+				'ping' => $entry_model->last_entry_id(),
 			)
 		);
 	}

@@ -12,6 +12,7 @@ use Includes\Plugins\Notification\CF7Notification;
 use Includes\Plugins\Notification\GFNotification;
 use Includes\Plugins\Notification\WPFNotification;
 use Includes\Plugins\Notification\WEFNotification;
+use Includes\Plugins\Notification\EFBNotification;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -35,6 +36,7 @@ class NotificationHooksPlugin {
 		( new WPFNotification() )->loads_hooks();
 		( new WEFNotification() )->loads_hooks();
 		( new GFNotification() )->loads_hooks();
+		( new EFBNotification() )->loads_hooks();
 	}
 
 
