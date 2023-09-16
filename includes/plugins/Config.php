@@ -62,20 +62,13 @@ class Config {
 		$plugins = $this->get_installed_plugins_from_array( self::PLUGINS );
 		$lite    = $this->get_installed_plugins_from_array( self::PLUGINS_LITE );
 
-		// Combine plugins and lite plugins, excluding duplicates.
-		foreach ( $lite as $plugin_key => $plugin_name ) {
-			if ( ! array_key_exists( $plugin_key, $plugins ) ) {
-				$plugins[ $plugin_key ] = $plugin_name;
-			}
-		}
-
-		if ( ! isset( $lite[ Constant::FORM_SLUG_CF7 ] ) && ! isset( $plugins[ Constant::FORM_SLUG_CF7 ] ) ) {
-			unset( $plugins[ Constant::FORM_SLUG_CF7 ] );
+		if ( ! isset( $plugins[ Constant::FORM_SLUG_WPF ] ) && ! isset( $lite[ Constant::FORM_SLUG_WPF ] ) ) {
+			unset( $plugins[ Constant::FORM_SLUG_WPF ] );
 		}
 		if ( isset( $plugins[ Constant::FORM_SLUG_CF7 ] ) && ! is_plugin_active( 'flamingo/flamingo.php' ) ) {
 			unset( $plugins[ Constant::FORM_SLUG_CF7 ] );
 		}
-		if ( ! isset( $lite[ Constant::FORM_SLUG_EFB ] ) && ! isset( $plugins[ Constant::FORM_SLUG_EFB ] ) ) {
+		if ( isset( $plugins[ Constant::FORM_SLUG_EFB ] ) && ! isset( $lite[ Constant::FORM_SLUG_EFB ] ) ) {
 			unset( $plugins[ Constant::FORM_SLUG_EFB ] );
 		}
 
