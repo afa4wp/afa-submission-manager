@@ -19,6 +19,9 @@ use Includes\Routes\WPF\Route as WPFRoute;
 use Includes\Routes\WEF\Route as WEFRoute;
 use Includes\Routes\CF7\Route as CF7Route;
 use Includes\Routes\EFB\Route as EFBRoute;
+use Includes\Plugins\Constant;
+use Includes\Plugins\Config;
+use phpDocumentor\Reflection\Types\This;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -60,13 +63,50 @@ class Route {
 		( new NotificationRoute( $this->name ) )->init_routes();
 
 		// Forms routes.
-		( new GFRoute( $this->name ) )->init_routes();
-		( new WPFRoute( $this->name ) )->init_routes();
-		( new WEFRoute( $this->name ) )->init_routes();
-		( new CF7Route( $this->name ) )->init_routes();
-		( new EFBRoute( $this->name ) )->init_routes();
+		$this->init_all_forms_routes();
 
 	}
 
+	/**
+	 * Get form route
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key The key of form type.
+	 *
+	 * @return object|null
+	 */
+	public function get_form_route( $key ) {
+		$forms = array(
+			Constant::FORM_SLUG_CF7 => new CF7Route( $this->name ),
+			Constant::FORM_SLUG_GF  => new GFRoute( $this->name ),
+			Constant::FORM_SLUG_WEF => new WEFRoute( $this->name ),
+			Constant::FORM_SLUG_WPF => new WPFRoute( $this->name ),
+			Constant::FORM_SLUG_EFB => new EFBRoute( $this->name ),
+		);
+
+		if ( array_key_exists( $key, $forms ) ) {
+			return $forms[ $key ];
+		}
+
+		return null;
+	}
+
+	/**
+	 * Init forms routes
+	 *
+	 * @since 1.0.0
+	 */
+	public function init_all_forms_routes() {
+		$forms = ( new Config() )->installed_forms();
+
+		foreach ( $forms as $key => $value ) {
+			$form_route = $this->get_form_route( $key );
+
+			if ( ! empty( $form_route ) ) {
+				$form_route->init_routes();
+			}
+		}
+	}
 
 }
