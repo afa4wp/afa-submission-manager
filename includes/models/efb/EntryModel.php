@@ -192,11 +192,12 @@ class EntryModel extends AbstractEntryModel {
 
 			$entry = array();
 
-			$entry['id']           = $value->id;
-			$entry['form_id']      = $value->post_id;
-			$entry['date_created'] = $value->created_at;
-			$entry['created_by']   = $value->user_id;
-			$entry['author_info']  = array();
+			$entry['id']                = $value->id;
+			$entry['form_id']           = $value->post_id;
+			$entry['elementor_form_id'] = $value->element_id;
+			$entry['date_created']      = $value->created_at;
+			$entry['created_by']        = $value->user_id;
+			$entry['author_info']       = array();
 
 			if ( ! empty( $value->user_id ) ) {
 				$user_model           = new UserModel();
