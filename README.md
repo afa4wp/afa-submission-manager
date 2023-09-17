@@ -19,7 +19,7 @@ The idea is to implement endpoints for various plugins, each with at least 50,00
 - [x] WPForms
 - [x] Gravity Forms
 - [x] weForms
-- [ ] Elementor Form 
+- [x] Elementor Form 
 - [ ] Ninja Forms
 - [ ] Formidable Forms
 - [ ] Everest Forms

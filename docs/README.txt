@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=PN2UZZWDZ4Y36
 Tags: forms, contact form plugin, contact form 7, Flamingo, GravityForms, WPForms, weForms
 Requires at least: 5.0
 Tested up to: 6.3
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -50,6 +50,9 @@ Yes, we regularly update our plugin to ensure compatibility with the latest vers
 1. Scan the QR code to log in using the mobile app. Go to WordPress Admin >WPAFA > Settings
 
 == Changelog ==
+
+= 1.1.0 =
+* Added support for Elementor's Form Builder.
 
 = 1.0.0 =
 * First Release.

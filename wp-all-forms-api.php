@@ -6,7 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name:       WPAFA - Mobile-Ready Submission Manager
  * Plugin URI:        https://github.com/claudionhangapc/wp-all-forms-api
  * Description:       Simplify form management and gain insights with our robust WordPress plugin.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 5.0
  * Requires PHP:      7.0
  * Author:            claudionhangapc, marciogoes
