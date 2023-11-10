@@ -1,5 +1,13 @@
 # wp-all-forms-api
 This is a plugin for querying data from various forms within the WordPress ecosystem.
+
+Plugin Settings
+
+![Config](assets/img/screenshot-1.PNG)
+
+Mobile App
+
+![Config](assets/img/screenshot-2.PNG)
 # Setup Requirements
 - [x] WordPress Instance - you can learn more <a href="https://wordpress.org/support/article/how-to-install-wordpress/">here</a>
 - [x] Composer - you can learn more <a href="https://getcomposer.org/doc/00-intro.md">here</a>
