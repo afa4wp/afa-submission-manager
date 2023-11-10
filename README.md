@@ -7,7 +7,7 @@ Plugin Settings
 
 Mobile App
 
-![Config](assets/img/screenshot-2.PNG)
+![Config](assets/img/screenshot-2.png)
 # Setup Requirements
 - [x] WordPress Instance - you can learn more <a href="https://wordpress.org/support/article/how-to-install-wordpress/">here</a>
 - [x] Composer - you can learn more <a href="https://getcomposer.org/doc/00-intro.md">here</a>
