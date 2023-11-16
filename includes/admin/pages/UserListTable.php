@@ -78,9 +78,9 @@ class UserListTable extends \WP_List_Table {
 	public function get_columns() {
 		$table_columns = array(
 			'cb'           => '<input type="checkbox" />', // to display the checkbox.
-			'user_login'   => esc_html__( 'User Login', 'wp-all-forms-api' ),
-			'display_name' => esc_html__( 'Display Name', 'wp-all-forms-api' ),
-			'user_id'      => esc_html__( 'User Id', 'wp-all-forms-api' ),
+			'user_login'   => esc_html__( 'User Login', 'afa-submission-manager' ),
+			'display_name' => esc_html__( 'Display Name', 'afa-submission-manager' ),
+			'user_id'      => esc_html__( 'User Id', 'afa-submission-manager' ),
 		);
 		return $table_columns;
 	}
@@ -91,7 +91,7 @@ class UserListTable extends \WP_List_Table {
 	 * @return void
 	 */
 	public function no_items() {
-		esc_html_e( 'No users Connected.', 'wp-all-forms-api' );
+		esc_html_e( 'No users Connected.', 'afa-submission-manager' );
 	}
 
 	/**
@@ -165,7 +165,7 @@ class UserListTable extends \WP_List_Table {
 	 */
 	protected function column_cb( $item ) {
 		return sprintf(
-			'<label class="screen-reader-text" for="user_token_' . $item['id'] . '">' . sprintf( esc_html__( 'Select', 'wp-all-forms-api' ) . ' %s', esc_attr( $item['user_login'] ) ) . '</label>'
+			'<label class="screen-reader-text" for="user_token_' . $item['id'] . '">' . sprintf( esc_html__( 'Select', 'afa-submission-manager' ) . ' %s', esc_attr( $item['user_login'] ) ) . '</label>'
 			. "<input type='checkbox' name='users_tokens[]' id='user_token_{$item['id']}' value='{$item['id']}' />"
 		);
 	}
@@ -267,7 +267,7 @@ class UserListTable extends \WP_List_Table {
 				}
 			} else {
 
-				die( esc_html_e( 'Security check', 'wp-all-forms-api' ) );
+				die( esc_html_e( 'Security check', 'afa-submission-manager' ) );
 
 			}
 		}
@@ -292,7 +292,7 @@ class UserListTable extends \WP_List_Table {
 
 			} else {
 
-				die( esc_html_e( 'Security check', 'wp-all-forms-api' ) );
+				die( esc_html_e( 'Security check', 'afa-submission-manager' ) );
 
 			}
 		}
@@ -312,7 +312,7 @@ class UserListTable extends \WP_List_Table {
 						<form id="wp-forms-api-user-search" method="get">
 							<input type="hidden" value="<?php echo esc_html( self::PAGE ); ?>" name="page">
 							<?php
-								$this->search_box( esc_html__( 'Search User', 'wp-all-forms-api' ), 'search_user_logged' );
+								$this->search_box( esc_html__( 'Search User', 'afa-submission-manager' ), 'search_user_logged' );
 							?>
 						</form>		
 						<form id="wp-forms-api-user-list-form" method="post">

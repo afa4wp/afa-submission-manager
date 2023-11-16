@@ -1,5 +1,5 @@
 {
-    "name": "claud/wp-all-forms-api",
+    "name": "claud/afa-submission-manager",
     "autoload": {
         "psr-4": {
             "Includes\\Routes\\": "includes/routes/",

@@ -1,4 +1,4 @@
-# wp-all-forms-api
+# afa-submission-manager
 This is a plugin for querying data from various forms within the WordPress ecosystem.
 
 Plugin Settings
@@ -14,11 +14,11 @@ Mobile App
 # Installation
 1. Clone the plugin directory into the `/wp-content/plugins/` directory.
 ```
-git clone https://github.com/claudionhangapc/wp-all-forms-api.git && cd wp-all-forms-api
+git clone https://github.com/claudionhangapc/afa-submission-manager.git && cd afa-submission-manager
 ```
 2. Install project dependencies using `composer install`
 3. Activate the `WP All Forms API` plugin through the WordPress plugin administration page.
-4. After activating the plugin on your machine, the access route will be formed by the site's base, `https://mysite.com`, for the API base `/wp-json/wp-all-forms-api/v1`, and the endpoint, e.g.: `/ping`. Therefore, the route `https://mysite.com/wp-json/wp-all-forms-api/v1/ping` allows you to check if the API is functioning correctly, returning a `{"ping": "pong"}` response.
+4. After activating the plugin on your machine, the access route will be formed by the site's base, `https://mysite.com`, for the API base `/wp-json/afa-submission-manager/v1`, and the endpoint, e.g.: `/ping`. Therefore, the route `https://mysite.com/wp-json/afa-submission-manager/v1/ping` allows you to check if the API is functioning correctly, returning a `{"ping": "pong"}` response.
 
 # Plugins
 

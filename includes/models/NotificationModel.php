@@ -152,10 +152,10 @@ class NotificationModel {
 
 		if ( empty( $user_name ) ) {
 			// translators: %1$s is replaced with the entry_id.
-			$notification_message = sprintf( __( 'Someone filled out a new form: {bold}%1$s{/bold}', 'wp-all-forms-api' ), $entry_id );
+			$notification_message = sprintf( __( 'Someone filled out a new form: {bold}%1$s{/bold}', 'afa-submission-manager' ), $entry_id );
 		} else {
 			// translators: %1$s is replaced with the user_name and %1$s entry_id.
-			$notification_message = sprintf( __( '{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}', 'wp-all-forms-api' ), $user_name, $entry_id );
+			$notification_message = sprintf( __( '{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}', 'afa-submission-manager' ), $user_name, $entry_id );
 		}
 
 		if ( $switched_locale ) {

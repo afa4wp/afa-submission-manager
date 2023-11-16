@@ -35,7 +35,7 @@ class ScreenMobileLogin extends Screen {
 	 */
 	public function __construct() {
 		$this->id    = self::ID;
-		$this->label = __( 'Login', 'wp-all-forms-api' );
+		$this->label = __( 'Login', 'afa-submission-manager' );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class ScreenMobileLogin extends Screen {
 		?>
 			<div>
 				<p>
-				<?php esc_html_e( 'Scan the following QR Code using the WPAFA app.', 'wp-all-forms-api' ); ?>
+				<?php esc_html_e( 'Scan the following QR Code using the WPAFA app.', 'afa-submission-manager' ); ?>
 				</p>
 			</div>
 			<div>

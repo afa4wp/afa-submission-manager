@@ -34,7 +34,7 @@ class ScreenStaff extends Screen {
 	 */
 	public function __construct() {
 		$this->id    = self::ID;
-		$this->label = __( 'Staff', 'wp-all-forms-api' );
+		$this->label = __( 'Staff', 'afa-submission-manager' );
 		add_action( 'admin_init', array( $this, 'settings' ) );
 	}
 
@@ -52,7 +52,7 @@ class ScreenStaff extends Screen {
 		?>	
 			<div>
 				<p>
-					<?php esc_html_e( 'Manage User Permissions', 'wp-all-forms-api' ); ?>
+					<?php esc_html_e( 'Manage User Permissions', 'afa-submission-manager' ); ?>
 				</p>
 			</div>
 			<form action="<?php echo esc_html( admin_url( 'admin.php?page=wp_all_forms_api_settings&tab=staff' ) ); ?>" method="POST">
@@ -61,7 +61,7 @@ class ScreenStaff extends Screen {
 				</table>
 				<div >
 					<p>
-						<button name="save" class="button-primary" type="submit" value="Salvar alterações"> <?php esc_html_e( 'Save Changes', 'wp-all-forms-api' ); ?></button>
+						<button name="save" class="button-primary" type="submit" value="Salvar alterações"> <?php esc_html_e( 'Save Changes', 'afa-submission-manager' ); ?></button>
 						<input type="hidden" id="_wpnonce" name="_wpnonce" value="<?php echo esc_html( $nonce ); ?>">
 					</p>
 				</div>
@@ -85,7 +85,7 @@ class ScreenStaff extends Screen {
 
 		add_settings_field(
 			'wp_all_forms_api_add_user',
-			__( 'Add Users', 'wp-all-forms-api' ),
+			__( 'Add Users', 'afa-submission-manager' ),
 			array( $this, 'input_add_user_render' ),
 			'wp_all_forms_api_settings',
 			'wp_all_forms_api_settings_staff_section',
@@ -116,9 +116,9 @@ class ScreenStaff extends Screen {
 			<fieldset>
 				<label for="wp_all_forms_api_add_user">
 					<input name="wp_all_forms_api_add_user" id="wp_all_forms_api_add_user" type="checkbox" class="" value="on" <?php echo esc_html( $checked ); ?>> 
-					<?php esc_html_e( 'Add Users', 'wp-all-forms-api' ); ?>
+					<?php esc_html_e( 'Add Users', 'afa-submission-manager' ); ?>
 				</label> 
-				<p class="description"><?php esc_html_e( 'To allow non-admin users to access this app, grant them the required permission', 'wp-all-forms-api' ); ?></p>
+				<p class="description"><?php esc_html_e( 'To allow non-admin users to access this app, grant them the required permission', 'afa-submission-manager' ); ?></p>
 			</fieldset>
 		<?php
 	}

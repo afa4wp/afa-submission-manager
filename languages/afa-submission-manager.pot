@@ -1,7 +1,9 @@
+# Copyright (C) 2023 claudionhangapc, marciogoes
+# This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: WPAFA - Mobile-Ready Submission Manager 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-all-forms-api\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -9,21 +11,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2023-09-01T01:14:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Language: \n"
 "X-Generator: WP-CLI 2.7.1\n"
-"X-Domain: wp-all-forms-api\n"
+"X-Domain: afa-submission-manager\n"
 
 #. Plugin Name of the plugin
 msgid "WPAFA - Mobile-Ready Submission Manager"
-msgstr "WPAFA - Mobiel-gereed indieningbeheerder"
+msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://github.com/claudionhangapc/wp-all-forms-api"
+msgid "https://github.com/claudionhangapc/afa-submission-manager"
 msgstr ""
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Vereenvoudig formulierbeheer en krijg inzichten met onze krachtige WordPress-plug-in."
+msgstr ""
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
@@ -35,111 +36,111 @@ msgstr ""
 
 #: includes/admin/AdminOptions.php:49
 msgid "WPAFA - Connected Users"
-msgstr "WPAFA - Verbonden gebruikers"
+msgstr ""
 
 #: includes/admin/AdminOptions.php:49
 msgid "Connected Users"
-msgstr "Verbonden gebruikers"
+msgstr ""
 
 #: includes/admin/AdminOptions.php:50
 msgid "WPAFA - Settings"
-msgstr "WPAFA - Instellingen"
+msgstr ""
 
 #: includes/admin/AdminOptions.php:50
 msgid "Settings"
-msgstr "Instellingen"
+msgstr ""
 
 #: includes/admin/pages/UserListTable.php:81
 msgid "User Login"
-msgstr "Gebruikerslogin"
+msgstr ""
 
 #: includes/admin/pages/UserListTable.php:82
 msgid "Display Name"
-msgstr "Weergavenaam"
+msgstr ""
 
 #: includes/admin/pages/UserListTable.php:83
 msgid "User Id"
-msgstr "Gebruikers-ID"
+msgstr ""
 
 #: includes/admin/pages/UserListTable.php:94
 msgid "No users Connected."
-msgstr "Geen gebruikers verbonden."
+msgstr ""
 
 #: includes/admin/pages/UserListTable.php:168
 msgid "Select"
-msgstr "Selecteren"
+msgstr ""
 
 #: includes/admin/pages/UserListTable.php:270
 #: includes/admin/pages/UserListTable.php:295
 msgid "Security check"
-msgstr "Beveiligingscontrole"
+msgstr ""
 
 #: includes/admin/pages/UserListTable.php:315
 msgid "Search User"
-msgstr "Zoek gebruiker"
+msgstr ""
 
 #: includes/admin/screens/ScreenAbout.php:34
 msgid "About plugin"
-msgstr "Over plug-in"
+msgstr ""
 
 #: includes/admin/screens/ScreenAbout.php:50
 msgid "About Our Plugin"
-msgstr "Over onze plug-in"
+msgstr ""
 
 #: includes/admin/screens/ScreenAbout.php:54
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
-msgstr "Welkom bij onze krachtige plug-in die is ontworpen om uw formulierbeheerervaring te verbeteren. Onze plug-in is gebouwd om het beheer van formulierinzendingen te vereenvoudigen, met de tools die u nodig heeft om het proces te stroomlijnen en tijd te besparen."
+msgstr ""
 
 #: includes/admin/screens/ScreenAbout.php:57
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Onze plug-in gaat verder dan het bureaublad door een krachtige API te bieden waarmee uw mobiele app-gebruikers moeiteloos formulierinzendingen onderweg kunnen bekijken. Integreer onze plug-in naadloos met populaire WordPress-formulierbouwers en geef uw gebruikers de mogelijkheid om inzendingen vanaf elke locatie te bekijken."
+msgstr ""
 
 #: includes/admin/screens/ScreenAbout.php:60
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Blijf georganiseerd, krijg inzichten en verbeter gebruikersinteracties, allemaal binnen uw WordPress-dashboard en via onze toegewijde API. Met onze gebruiksvriendelijke plug-in kunt u de controle houden en de manier waarop u formulierinzendingen beheert transformeren. Duik vandaag nog in de mogelijkheden en revolutioneer uw aanpak van formulierbeheer!"
+msgstr ""
 
 #: includes/admin/screens/ScreenAbout.php:65
 msgid "Supported plugins:"
-msgstr "Ondersteunde plug-ins:"
+msgstr ""
 
 #: includes/admin/screens/ScreenMobileLogin.php:38
 msgid "Login"
-msgstr "Inloggen"
+msgstr ""
 
 #: includes/admin/screens/ScreenMobileLogin.php:56
 msgid "Scan the following QR Code using the WPAFA app."
-msgstr "Scan de volgende QR-code met behulp van de WPAFA-app."
+msgstr ""
 
 #: includes/admin/screens/ScreenStaff.php:37
 msgid "Staff"
-msgstr "Personeel"
+msgstr ""
 
 #: includes/admin/screens/ScreenStaff.php:55
 msgid "Manage User Permissions"
-msgstr "Beheer gebruikersrechten"
+msgstr ""
 
 #: includes/admin/screens/ScreenStaff.php:64
 msgid "Save Changes"
-msgstr "Wijzigingen opslaan"
+msgstr ""
 
 #: includes/admin/screens/ScreenStaff.php:88
 #: includes/admin/screens/ScreenStaff.php:119
 msgid "Add Users"
-msgstr "Gebruikers toevoegen"
+msgstr ""
 
 #: includes/admin/screens/ScreenStaff.php:121
 msgid "To allow non-admin users to access this app, grant them the required permission"
-msgstr "Om niet-beheerdersgebruikers toegang te geven tot deze app, verleent u hen de vereiste toestemming."
+msgstr ""
 
 #. translators: %1$s is replaced with the entry_id.
 #: includes/models/NotificationModel.php:155
 msgid "Someone filled out a new form: {bold}%1$s{/bold}"
-msgstr "Iemand heeft een nieuw formulier ingevuld: {bold}%1$s{/bold}"
+msgstr ""
 
 #. translators: %1$s is replaced with the user_name and %1$s entry_id.
 #: includes/models/NotificationModel.php:158
 msgid "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
-msgstr "{bold}%1$s{/bold} heeft een nieuw formulier ingevuld: {bold}%2$s{/bold}"
+msgstr ""
 
 #. translators: %1$s is replaced with the site name.
 #: includes/plugins/notification/CF7Notification.php:78
@@ -147,11 +148,11 @@ msgstr "{bold}%1$s{/bold} heeft een nieuw formulier ingevuld: {bold}%2$s{/bold}"
 #: includes/plugins/notification/WEFNotification.php:79
 #: includes/plugins/notification/WPFNotification.php:79
 msgid "New Form Submission Received from %1$s. Open app to view"
-msgstr "Nieuwe formulierinzending ontvangen van %1$s. Open de app om te bekijken"
+msgstr ""
 
 #: includes/plugins/notification/CF7Notification.php:80
 #: includes/plugins/notification/GFNotification.php:82
 #: includes/plugins/notification/WEFNotification.php:81
 #: includes/plugins/notification/WPFNotification.php:81
 msgid "New Form Submission"
-msgstr "Nieuwe formulierinzending"
+msgstr ""

@@ -75,9 +75,9 @@ class CF7Notification extends AbstractFormNotification {
 			$plugin_language->load_textdomain_by_language_key( $device_language );
 
 			// translators: %1$s is replaced with the site name.
-			$push_notification_body = sprintf( __( 'New Form Submission Received from %1$s. Open app to view', 'wp-all-forms-api' ), get_bloginfo( 'name' ) );
+			$push_notification_body = sprintf( __( 'New Form Submission Received from %1$s. Open app to view', 'afa-submission-manager' ), get_bloginfo( 'name' ) );
 
-			$title = __( 'New Form Submission', 'wp-all-forms-api' );
+			$title = __( 'New Form Submission', 'afa-submission-manager' );
 
 			$formatted_tiitle = sprintf( '📩 %s', $title );
 

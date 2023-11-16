@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPAFA - Mobile-Ready Submission Manager 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-all-forms-api\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -11,19 +11,19 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language: \n"
 "X-Generator: WP-CLI 2.7.1\n"
-"X-Domain: wp-all-forms-api\n"
+"X-Domain: afa-submission-manager\n"
 
 #. Plugin Name of the plugin
 msgid "WPAFA - Mobile-Ready Submission Manager"
-msgstr "WPAFA - Mobile-Ready Submission Manager"
+msgstr "Administrador de Envíos Listo para Móviles WPAFA"
 
 #. Plugin URI of the plugin
-msgid "https://github.com/claudionhangapc/wp-all-forms-api"
+msgid "https://github.com/claudionhangapc/afa-submission-manager"
 msgstr ""
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Simplify form management and gain insights with our robust WordPress plugin."
+msgstr "Simplifica la gestión de formularios y obtén información con nuestra robusta extensión para WordPress."
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
@@ -35,111 +35,111 @@ msgstr ""
 
 #: includes/admin/AdminOptions.php:49
 msgid "WPAFA - Connected Users"
-msgstr "WPAFA - Connected Users"
+msgstr "WPAFA - Usuarios Conectados"
 
 #: includes/admin/AdminOptions.php:49
 msgid "Connected Users"
-msgstr "Connected Users"
+msgstr "Usuarios Conectados"
 
 #: includes/admin/AdminOptions.php:50
 msgid "WPAFA - Settings"
-msgstr "WPAFA - Settings"
+msgstr "WPAFA - Configuración"
 
 #: includes/admin/AdminOptions.php:50
 msgid "Settings"
-msgstr "Settings"
+msgstr "Configuración"
 
 #: includes/admin/pages/UserListTable.php:81
 msgid "User Login"
-msgstr "User Login"
+msgstr "Inicio de Sesión del Usuario"
 
 #: includes/admin/pages/UserListTable.php:82
 msgid "Display Name"
-msgstr "Display Name"
+msgstr "Nombre para Mostrar"
 
 #: includes/admin/pages/UserListTable.php:83
 msgid "User Id"
-msgstr "User Id"
+msgstr "ID de Usuario"
 
 #: includes/admin/pages/UserListTable.php:94
 msgid "No users Connected."
-msgstr "No users Connected."
+msgstr "No hay usuarios conectados."
 
 #: includes/admin/pages/UserListTable.php:168
 msgid "Select"
-msgstr "Select"
+msgstr "Seleccionar"
 
 #: includes/admin/pages/UserListTable.php:270
 #: includes/admin/pages/UserListTable.php:295
 msgid "Security check"
-msgstr "Security check"
+msgstr "Verificación de Seguridad"
 
 #: includes/admin/pages/UserListTable.php:315
 msgid "Search User"
-msgstr "Search User"
+msgstr "Buscar Usuario"
 
 #: includes/admin/screens/ScreenAbout.php:34
 msgid "About plugin"
-msgstr "About plugin"
+msgstr "cerca de la extensión"
 
 #: includes/admin/screens/ScreenAbout.php:50
 msgid "About Our Plugin"
-msgstr "About Our Plugin"
+msgstr "Acerca de Nuestra Extensión"
 
 #: includes/admin/screens/ScreenAbout.php:54
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
-msgstr "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
+msgstr "Bienvenido a nuestra potente extensión diseñada para mejorar tu experiencia en la gestión de formularios. Nuestra extensión está creada para simplificar la gestión de entradas de formularios, brindándote las herramientas que necesitas para optimizar el proceso y ahorrar tiempo."
 
 #: includes/admin/screens/ScreenAbout.php:57
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
+msgstr "Nuestra extensión va más allá del escritorio al proporcionar una API robusta que permite a los usuarios de tu aplicación móvil ver fácilmente las presentaciones de formularios sobre la marcha. Integra sin problemas nuestra extensión con los populares constructores de formularios de WordPress y brinda a tus usuarios la capacidad de supervisar las presentaciones desde cualquier lugar."
 
 #: includes/admin/screens/ScreenAbout.php:60
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
+msgstr "Mantén la organización, obtén información y mejora las interacciones con los usuarios, todo dentro de tu panel de WordPress y a través de nuestra API dedicada. Con nuestra extensión amigable para el usuario, puedes mantenerte en control y transformar la manera en que gestionas las presentaciones de formularios. ¡Sumérgete en las posibilidades hoy mismo y revoluciona tu enfoque en la gestión de formularios!"
 
 #: includes/admin/screens/ScreenAbout.php:65
 msgid "Supported plugins:"
-msgstr "Supported plugins:"
+msgstr "Extensiones compatibles:"
 
 #: includes/admin/screens/ScreenMobileLogin.php:38
 msgid "Login"
-msgstr "Login"
+msgstr "Iniciar Sesión"
 
 #: includes/admin/screens/ScreenMobileLogin.php:56
 msgid "Scan the following QR Code using the WPAFA app."
-msgstr "Scan the following QR Code using the WPAFA app."
+msgstr "Escanee el siguiente código QR usando la aplicación WPAFA."
 
 #: includes/admin/screens/ScreenStaff.php:37
 msgid "Staff"
-msgstr "Staff"
+msgstr "Personal"
 
 #: includes/admin/screens/ScreenStaff.php:55
 msgid "Manage User Permissions"
-msgstr "Manage User Permissions"
+msgstr "Administrar Permisos de Usuario"
 
 #: includes/admin/screens/ScreenStaff.php:64
 msgid "Save Changes"
-msgstr "Save Changes"
+msgstr "Guardar Cambios"
 
 #: includes/admin/screens/ScreenStaff.php:88
 #: includes/admin/screens/ScreenStaff.php:119
 msgid "Add Users"
-msgstr "Add Users"
+msgstr "Agregar Usuarios"
 
 #: includes/admin/screens/ScreenStaff.php:121
 msgid "To allow non-admin users to access this app, grant them the required permission"
-msgstr "To allow non-admin users to access this app, grant them the required permission"
+msgstr "Para permitir que los usuarios no administradores accedan a esta aplicación, concédeles los permisos requeridos"
 
 #. translators: %1$s is replaced with the entry_id.
 #: includes/models/NotificationModel.php:155
 msgid "Someone filled out a new form: {bold}%1$s{/bold}"
-msgstr "Someone filled out a new form: {bold}%1$s{/bold}"
+msgstr "Alguien ha completado un nuevo formulario: {bold}%1$s{/bold}"
 
 #. translators: %1$s is replaced with the user_name and %1$s entry_id.
 #: includes/models/NotificationModel.php:158
 msgid "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
-msgstr "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
+msgstr "{bold}%1$s{/bold} ha completado un nuevo formulario: {bold}%2$s{/bold}"
 
 #. translators: %1$s is replaced with the site name.
 #: includes/plugins/notification/CF7Notification.php:78
@@ -147,11 +147,11 @@ msgstr "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
 #: includes/plugins/notification/WEFNotification.php:79
 #: includes/plugins/notification/WPFNotification.php:79
 msgid "New Form Submission Received from %1$s. Open app to view"
-msgstr "New Form Submission Received from %1$s. Open app to view"
+msgstr "Nueva presentación de formulario recibida de %1$s. Abre la aplicación para ver"
 
 #: includes/plugins/notification/CF7Notification.php:80
 #: includes/plugins/notification/GFNotification.php:82
 #: includes/plugins/notification/WEFNotification.php:81
 #: includes/plugins/notification/WPFNotification.php:81
 msgid "New Form Submission"
-msgstr "New Form Submission"
+msgstr "Nueva presentación de formulario"
