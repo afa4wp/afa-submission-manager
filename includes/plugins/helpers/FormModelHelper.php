@@ -60,7 +60,7 @@ class FormModelHelper {
 	 * @param int $offset The offset.
 	 * @param int $number_of_records_per_page The posts per page.
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	public function forms( $offset, $number_of_records_per_page ) {
 		if ( 'posts' !== $this->table_name ) {

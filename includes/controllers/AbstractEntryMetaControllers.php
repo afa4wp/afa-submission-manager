@@ -27,7 +27,7 @@ abstract class AbstractEntryMetaControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return array $entryMeta WPAFA entries meta
+	 * @return array $entryMeta AFA entries meta
 	 */
 	abstract public function entry_meta_by_entry_id( \WP_REST_Request $request);
 
@@ -38,7 +38,7 @@ abstract class AbstractEntryMetaControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return array $entryMeta WPAFA entries meta
+	 * @return array $entryMeta AFA entries meta
 	 */
 	abstract public function search_entry_meta_answer( \WP_REST_Request $request);
 

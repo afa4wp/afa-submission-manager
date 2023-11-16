@@ -29,7 +29,7 @@ abstract class AbstractFormModel {
 	 *
 	 * @param int $id The form id.
 	 *
-	 * @return object|array $form WPAFA form
+	 * @return object|array $form AFA form
 	 */
 	abstract public function form_by_id( $id );
 
@@ -41,7 +41,7 @@ abstract class AbstractFormModel {
 	 * @param int $offset The offset.
 	 * @param int $number_of_records_per_page The posts per page.
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	abstract public function forms( $offset, $number_of_records_per_page );
 
@@ -54,7 +54,7 @@ abstract class AbstractFormModel {
 	 * @param int    $offset The offset.
 	 * @param int    $number_of_records_per_page The posts per page.
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	abstract public function search_forms( $post_name, $offset, $number_of_records_per_page );
 
@@ -65,7 +65,7 @@ abstract class AbstractFormModel {
 	 *
 	 * @param array|object $data The forms data.
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	abstract public function prepare_data( $data );
 
@@ -77,7 +77,7 @@ abstract class AbstractFormModel {
 	 * @param int    $form_id ID of the form to search for.
 	 * @param string $shortcode_name The shortcode to search for.
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	public function pages_links( $form_id, $shortcode_name ) {
 		$pages_with_form = ( new FormsShortcodeFinder( $form_id, $shortcode_name ) )->find();

@@ -45,9 +45,9 @@ class AdminOptions {
 	 * Add page for plugin
 	 */
 	public function add_page() {
-		add_menu_page( 'WPAFA', 'WPAFA', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
-		add_submenu_page( 'wp_all_forms_api', __( 'WPAFA - Connected Users', 'afa-submission-manager' ), __( 'Connected Users', 'afa-submission-manager' ), 'manage_options', 'wp_all_forms_api' );
-		add_submenu_page( 'wp_all_forms_api', __( 'WPAFA - Settings', 'afa-submission-manager' ), __( 'Settings', 'afa-submission-manager' ), 'manage_options', 'wp_all_forms_api_settings', array( new Settings(), 'render' ) );
+		add_menu_page( 'AFA', 'AFA', 'manage_options', 'wp_all_forms_api', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
+		add_submenu_page( 'wp_all_forms_api', __( 'AFA - Connected Users', 'afa-submission-manager' ), __( 'Connected Users', 'afa-submission-manager' ), 'manage_options', 'wp_all_forms_api' );
+		add_submenu_page( 'wp_all_forms_api', __( 'AFA - Settings', 'afa-submission-manager' ), __( 'Settings', 'afa-submission-manager' ), 'manage_options', 'wp_all_forms_api_settings', array( new Settings(), 'render' ) );
 	}
 
 	/**

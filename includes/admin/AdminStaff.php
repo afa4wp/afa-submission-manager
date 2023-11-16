@@ -42,7 +42,7 @@ class AdminStaff {
 	}
 
 	/**
-	 * Add WPAFA Staff column to users table
+	 * Add AFA Staff column to users table
 	 *
 	 * @since 1.0.0
 	 *
@@ -54,7 +54,7 @@ class AdminStaff {
 		$all_options = get_option( 'wp_all_forms_api_settings_staff_options', false );
 		if ( ! empty( $all_options ) && array_key_exists( 'add_user', $all_options ) ) {
 			if ( 'on' === $all_options['add_user'] ) {
-				$columns['wp_all_forms_api_user_staff_column'] = __( 'WPAFA Staff' );
+				$columns['wp_all_forms_api_user_staff_column'] = __( 'AFA Staff' );
 			}
 		}
 		return $columns;
@@ -81,12 +81,12 @@ class AdminStaff {
 					$output = sprintf( '<span>' . __( 'Administrador' ) . '</span>' );
 				} else {
 					$nonce   = wp_create_nonce( self::NONCE );
-					$output  = sprintf( '<span>' . __( 'WPAFA Staff' ) . '</span>' );
+					$output  = sprintf( '<span>' . __( 'AFA Staff' ) . '</span>' );
 					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Remover' ) . '</a>', admin_url( 'users.php?action=wp_afa_remove_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
 				}
 			} else {
 					$nonce   = wp_create_nonce( self::NONCE );
-					$output  = sprintf( '<span>' . __( 'WPAFA Staff' ) . '</span>' );
+					$output  = sprintf( '<span>' . __( 'AFA Staff' ) . '</span>' );
 					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Adicionar' ) . '</a>', admin_url( 'users.php?action=wp_afa_add_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
 			}
 		}

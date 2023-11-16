@@ -1,4 +1,4 @@
-=== WPAFA - Mobile-Ready Submission Manager ===
+=== AFA - Mobile-Ready Submission Manager ===
 Contributors: claudionhangapc, marciogoes
 Donate link: https://www.paypal.com/donate/?hosted_button_id=PN2UZZWDZ4Y36
 Tags: forms, contact form plugin, contact form 7, Flamingo, GravityForms, WPForms, weForms
@@ -21,7 +21,7 @@ Stay organized, gain insights, and enhance user interactions, all within your Wo
 
 - Mobile APP
 - Real-time notifications
-- Work with contact form 7 + contact form 7 db, GravityForms, WPForms and weForms
+- Work with contact form 7 + contact form 7 db, Elementor's Form Builder, GravityForms, WPForms and weForms
 - Add none admin user ability to oversee submissions from anywhere
 
 == Installation ==
@@ -29,7 +29,7 @@ Stay organized, gain insights, and enhance user interactions, all within your Wo
 You can install the plugin by following these steps:
 1. Navigate to the "Plugins" section in your WordPress admin dashboard.
 2. Click on the "Add New" button.
-3. Search for "WPAFA - Mobile-Ready Submission Manager" and click "Install Now".
+3. Search for "AFA - Mobile-Ready Submission Manager" and click "Install Now".
 4. Once the installation is complete, click "Activate" to enable the plugin.
 
 == Frequently Asked Questions ==
@@ -47,12 +47,9 @@ Yes, we regularly update our plugin to ensure compatibility with the latest vers
 
 == Screenshots ==
 
-1. Scan the QR code to log in using the mobile app. Go to WordPress Admin >WPAFA > Settings
+1. Scan the QR code to log in using the mobile app. Go to WordPress Admin >AFA > Settings
 
 == Changelog ==
-
-= 1.1.0 =
-* Added support for Elementor's Form Builder.
 
 = 1.0.0 =
 * First Release.

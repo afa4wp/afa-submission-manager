@@ -53,7 +53,7 @@ class ScreenMobileLogin extends Screen {
 		?>
 			<div>
 				<p>
-				<?php esc_html_e( 'Scan the following QR Code using the WPAFA app.', 'afa-submission-manager' ); ?>
+				<?php esc_html_e( 'Scan the following QR Code using the AFA app.', 'afa-submission-manager' ); ?>
 				</p>
 			</div>
 			<div>

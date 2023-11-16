@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPAFA - Mobile-Ready Submission Manager 1.0.0\n"
+"Project-Id-Version: AFA - Mobile-Ready Submission Manager 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Domain: afa-submission-manager\n"
 
 #. Plugin Name of the plugin
-msgid "WPAFA - Mobile-Ready Submission Manager"
+msgid "AFA - Mobile-Ready Submission Manager"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -35,7 +35,7 @@ msgid "https://claudionhangapc.com/"
 msgstr ""
 
 #: includes/admin/AdminOptions.php:49
-msgid "WPAFA - Connected Users"
+msgid "AFA - Connected Users"
 msgstr ""
 
 #: includes/admin/AdminOptions.php:49
@@ -43,7 +43,7 @@ msgid "Connected Users"
 msgstr ""
 
 #: includes/admin/AdminOptions.php:50
-msgid "WPAFA - Settings"
+msgid "AFA - Settings"
 msgstr ""
 
 #: includes/admin/AdminOptions.php:50
@@ -108,7 +108,7 @@ msgid "Login"
 msgstr ""
 
 #: includes/admin/screens/ScreenMobileLogin.php:56
-msgid "Scan the following QR Code using the WPAFA app."
+msgid "Scan the following QR Code using the AFA app."
 msgstr ""
 
 #: includes/admin/screens/ScreenStaff.php:37

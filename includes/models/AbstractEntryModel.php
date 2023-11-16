@@ -29,7 +29,7 @@ abstract class AbstractEntryModel {
 	 * @param int    $entry_id The form id.
 	 * @param string $id The field.
 	 *
-	 * @return object|array $entry WPAFA form
+	 * @return object|array $entry AFA form
 	 */
 	abstract public function entry_by_id( $entry_id, $id );
 
@@ -42,7 +42,7 @@ abstract class AbstractEntryModel {
 	 * @param int $offset The offset.
 	 * @param int $number_of_records_per_page The posts per page.
 	 *
-	 * @return object|array $entry WPAFA form
+	 * @return object|array $entry AFA form
 	 */
 	abstract public function entries_by_form_id( $id, $offset, $number_of_records_per_page );
 
@@ -55,7 +55,7 @@ abstract class AbstractEntryModel {
 	 * @param int    $number_of_records_per_page The posts per page.
 	 * @param string $order_by The column name.
 	 *
-	 * @return array $forms WPAFA entries
+	 * @return array $forms AFA entries
 	 */
 	abstract public function entries( $offset, $number_of_records_per_page, $order_by);
 
@@ -68,7 +68,7 @@ abstract class AbstractEntryModel {
 	 * @param int    $offset The offset.
 	 * @param int    $number_of_records_per_page The posts per page.
 	 *
-	 * @return array $forms WPAFA entries
+	 * @return array $forms AFA entries
 	 */
 	abstract public function search_entries_by_user( $user_info, $offset, $number_of_records_per_page );
 
@@ -79,7 +79,7 @@ abstract class AbstractEntryModel {
 	 *
 	 * @param array|object $data The entries data.
 	 *
-	 * @return array $forms WPAFA entries
+	 * @return array $forms AFA entries
 	 */
 	abstract public function prepare_data( $data );
 

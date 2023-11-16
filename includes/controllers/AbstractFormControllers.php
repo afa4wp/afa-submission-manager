@@ -49,7 +49,7 @@ abstract class AbstractFormControllers {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	abstract public function forms();
 
@@ -60,7 +60,7 @@ abstract class AbstractFormControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return object $form WPAFA form
+	 * @return object $form AFA form
 	 */
 	abstract public function form_by_id( \WP_REST_Request $request );
 
@@ -71,7 +71,7 @@ abstract class AbstractFormControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	abstract public function forms_pagination( \WP_REST_Request $request );
 
@@ -83,7 +83,7 @@ abstract class AbstractFormControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WPAFA forms
+	 * @return array $forms AFA forms
 	 */
 	abstract public function search_forms( \WP_REST_Request $request);
 

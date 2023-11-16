@@ -49,7 +49,7 @@ abstract class AbstractEntryControllers {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array $entries WPAFA entries
+	 * @return array $entries AFA entries
 	 */
 	abstract public function entries();
 
@@ -60,7 +60,7 @@ abstract class AbstractEntryControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return object $form WPAFA entry
+	 * @return object $form AFA entry
 	 */
 	abstract public function entry_by_id( \WP_REST_Request $request );
 
@@ -71,7 +71,7 @@ abstract class AbstractEntryControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WPAFA entries
+	 * @return array $forms AFA entries
 	 */
 	abstract public function entries_by_form_id( \WP_REST_Request $request );
 
@@ -83,7 +83,7 @@ abstract class AbstractEntryControllers {
 	 *
 	 * @param \WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WPAFA entries
+	 * @return array $forms AFA entries
 	 */
 	abstract public function search_entries_by_user( \WP_REST_Request $request);
 
