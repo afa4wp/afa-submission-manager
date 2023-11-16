@@ -2,7 +2,7 @@
 /**
  * The Main Route Class.
  *
- * @package  WP_All_Forms_API
+ * @package  AFA_SUBMISSION_MANAGER
  * @since 1.0.0
  */
 

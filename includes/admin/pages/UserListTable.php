@@ -2,7 +2,7 @@
 /**
  * The UserListTable Class.
  *
- * @package  WP_All_Forms_API
+ * @package  AFA_SUBMISSION_MANAGER
  * @since 1.0.0
  */
 
@@ -32,7 +32,7 @@ class UserListTable extends \WP_List_Table {
 	/**
 	 * Const to declare page.
 	 */
-	const PAGE = 'wp_all_forms_api';
+	const PAGE = 'afa_submission_manager';
 
 	/**
 	 * Const to declare number of posts to show per page in the table.
@@ -60,8 +60,8 @@ class UserListTable extends \WP_List_Table {
 
 		parent::__construct(
 			array(
-				'singular' => 'wp_all_forms_api_logged_user', // Singular label.
-				'plural'   => 'wp_all_forms_api_logged_users', // plural label, also this well be one of the table css class.
+				'singular' => 'afa_submission_manager_logged_user', // Singular label.
+				'plural'   => 'afa_submission_manager_logged_users', // plural label, also this well be one of the table css class.
 				'ajax'     => false, // We won't support Ajax for this table.
 			)
 		);
@@ -253,7 +253,7 @@ class UserListTable extends \WP_List_Table {
 	 */
 	public function handle_table_actions() {
 
-		if ( ! isset( $_REQUEST['page'] ) || 'wp_all_forms_api' !== $_REQUEST['page'] ) {
+		if ( ! isset( $_REQUEST['page'] ) || 'afa_submission_manager' !== $_REQUEST['page'] ) {
 			return;
 		}
 

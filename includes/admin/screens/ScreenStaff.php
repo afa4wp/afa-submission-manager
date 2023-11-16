@@ -2,7 +2,7 @@
 /**
  * The staff tab item for configuration screen
  *
- * @package  WP_All_Forms_API
+ * @package  AFA_SUBMISSION_MANAGER
  * @since 1.0.0
  */
 
@@ -55,9 +55,9 @@ class ScreenStaff extends Screen {
 					<?php esc_html_e( 'Manage User Permissions', 'afa-submission-manager' ); ?>
 				</p>
 			</div>
-			<form action="<?php echo esc_html( admin_url( 'admin.php?page=wp_all_forms_api_settings&tab=staff' ) ); ?>" method="POST">
+			<form action="<?php echo esc_html( admin_url( 'admin.php?page=afa_submission_manager_settings&tab=staff' ) ); ?>" method="POST">
 				<table class="form-table">
-					<?php do_settings_fields( 'wp_all_forms_api_settings', 'wp_all_forms_api_settings_staff_section' ); ?>
+					<?php do_settings_fields( 'afa_submission_manager_settings', 'afa_submission_manager_settings_staff_section' ); ?>
 				</table>
 				<div >
 					<p>
@@ -77,18 +77,18 @@ class ScreenStaff extends Screen {
 	 * @return void
 	 */
 	public function settings() {
-		$all_options = get_option( 'wp_all_forms_api_settings_staff_options', false );
+		$all_options = get_option( 'afa_submission_manager_settings_staff_options', false );
 
 		if ( empty( $all_options ) ) {
 			$all_options = array();
 		}
 
 		add_settings_field(
-			'wp_all_forms_api_add_user',
+			'afa_submission_manager_add_user',
 			__( 'Add Users', 'afa-submission-manager' ),
 			array( $this, 'input_add_user_render' ),
-			'wp_all_forms_api_settings',
-			'wp_all_forms_api_settings_staff_section',
+			'afa_submission_manager_settings',
+			'afa_submission_manager_settings_staff_section',
 			$all_options
 		);
 	}
@@ -114,8 +114,8 @@ class ScreenStaff extends Screen {
 
 		?>
 			<fieldset>
-				<label for="wp_all_forms_api_add_user">
-					<input name="wp_all_forms_api_add_user" id="wp_all_forms_api_add_user" type="checkbox" class="" value="on" <?php echo esc_html( $checked ); ?>> 
+				<label for="afa_submission_manager_add_user">
+					<input name="afa_submission_manager_add_user" id="afa_submission_manager_add_user" type="checkbox" class="" value="on" <?php echo esc_html( $checked ); ?>> 
 					<?php esc_html_e( 'Add Users', 'afa-submission-manager' ); ?>
 				</label> 
 				<p class="description"><?php esc_html_e( 'To allow non-admin users to access this app, grant them the required permission', 'afa-submission-manager' ); ?></p>
@@ -134,14 +134,14 @@ class ScreenStaff extends Screen {
 		$all_options = array();
 		if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'sreen-staff' ) ) {
 
-			if ( ! empty( $_POST['wp_all_forms_api_add_user'] ) ) {
-				$add_user                = sanitize_text_field( wp_unslash( $_POST['wp_all_forms_api_add_user'] ) );
+			if ( ! empty( $_POST['afa_submission_manager_add_user'] ) ) {
+				$add_user                = sanitize_text_field( wp_unslash( $_POST['afa_submission_manager_add_user'] ) );
 				$all_options['add_user'] = $add_user;
 			}
 
-			update_option( 'wp_all_forms_api_settings_staff_options', $all_options );
+			update_option( 'afa_submission_manager_settings_staff_options', $all_options );
 
-			if ( wp_safe_redirect( admin_url( 'admin.php?page=wp_all_forms_api_settings&tab=staff' ) ) ) {
+			if ( wp_safe_redirect( admin_url( 'admin.php?page=afa_submission_manager_settings&tab=staff' ) ) ) {
 				exit;
 			}
 		}

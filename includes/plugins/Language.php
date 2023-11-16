@@ -2,7 +2,7 @@
 /**
  * The Language Class.
  *
- * @package  WP_All_Forms_API
+ * @package  AFA_SUBMISSION_MANAGER
  * @since 1.0.0
  */
 
@@ -71,7 +71,7 @@ class Language {
 			return false;
 		}
 
-		$result = load_textdomain( 'afa-submission-manager', WP_ALL_FORMS_API_PLUGIN_PATH . 'languages/' . $textdomanin . '.mo' );
+		$result = load_textdomain( 'afa-submission-manager', AFA_SUBMISSION_MANAGER_PLUGIN_PATH . 'languages/' . $textdomanin . '.mo' );
 
 		return $result;
 	}
@@ -115,7 +115,7 @@ class Language {
 	 * @since 1.0.0
 	 */
 	public function wp_all_forms_load_textdomain() {
-		load_plugin_textdomain( 'afa-submission-manager', false, WP_ALL_FORMS_API_PLUGIN_LANGUAGE_FOLDER );
+		load_plugin_textdomain( 'afa-submission-manager', false, AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER );
 	}
 
 	/**

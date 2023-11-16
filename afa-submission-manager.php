@@ -21,9 +21,9 @@ require __DIR__ . '/vendor/autoload.php';
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-define( 'WP_ALL_FORMS_API_PLUGIN_FILE', __FILE__ );
-define( 'WP_ALL_FORMS_API_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'WP_ALL_FORMS_API_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+define( 'AFA_SUBMISSION_MANAGER_PLUGIN_FILE', __FILE__ );
+define( 'AFA_SUBMISSION_MANAGER_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
 use Includes\Plugins\JWT\JWTPlugin;
 use Includes\Routes\Route;
@@ -36,7 +36,7 @@ use Includes\Plugins\Notification\NotificationHooksPlugin;
 /**
  * Init api.
  */
-function wp_all_forms_api_rest_init() {
+function afa_submission_manager_rest_init() {
 	$namespace = Constant::API_NAMESPACE . '/' . Constant::API_VERSION;
 	( new Route( $namespace ) )->init();
 
@@ -46,12 +46,12 @@ function wp_all_forms_api_rest_init() {
 /**
 * Add actions
 */
-add_action( 'rest_api_init', 'wp_all_forms_api_rest_init' );
+add_action( 'rest_api_init', 'afa_submission_manager_rest_init' );
 
 /**
 * Register hooks.
 */
-register_activation_hook( WP_ALL_FORMS_API_PLUGIN_FILE, array( new DatabaseInstaller(), 'install' ) );
+register_activation_hook( AFA_SUBMISSION_MANAGER_PLUGIN_FILE, array( new DatabaseInstaller(), 'install' ) );
 
 
 ( new AdminOptions() )->init();

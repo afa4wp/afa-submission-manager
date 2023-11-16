@@ -2,7 +2,7 @@
 /**
  * The Setting Page.
  *
- * @package  WP_All_Forms_API
+ * @package  AFA_SUBMISSION_MANAGER
  * @since 1.0.0
  */
 
@@ -31,7 +31,7 @@ class Settings {
 	 *
 	 * @var string
 	 */
-	const PAGE_ID = 'wp_all_forms_api_settings';
+	const PAGE_ID = 'afa_submission_manager_settings';
 
 	/**
 	 * Settings screens

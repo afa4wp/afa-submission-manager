@@ -2,7 +2,7 @@
 /**
  * The Admin staff class for users table
  *
- * @package  WP_All_Forms_API
+ * @package  AFA_SUBMISSION_MANAGER
  * @since 1.0.0
  */
 
@@ -51,10 +51,10 @@ class AdminStaff {
 	 * @return array
 	 */
 	public function add_user_staff_column( $columns ) {
-		$all_options = get_option( 'wp_all_forms_api_settings_staff_options', false );
+		$all_options = get_option( 'afa_submission_manager_settings_staff_options', false );
 		if ( ! empty( $all_options ) && array_key_exists( 'add_user', $all_options ) ) {
 			if ( 'on' === $all_options['add_user'] ) {
-				$columns['wp_all_forms_api_user_staff_column'] = __( 'AFA Staff' );
+				$columns['afa_submission_manager_user_staff_column'] = __( 'AFA Staff' );
 			}
 		}
 		return $columns;
@@ -72,7 +72,7 @@ class AdminStaff {
 	 * @return array
 	 */
 	public function add_user_staff_column_content( $output, $column_name, $user_id ) {
-		if ( 'wp_all_forms_api_user_staff_column' === $column_name ) {
+		if ( 'afa_submission_manager_user_staff_column' === $column_name ) {
 
 			$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
 
