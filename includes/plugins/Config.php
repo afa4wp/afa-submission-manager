@@ -106,7 +106,7 @@ class Config {
 	 *
 	 * @return boolean
 	 */
-	public function wp_afa_check_authorization( $request ) {
+	public function afa_check_authorization( $request ) {
 
 		if ( ! is_user_logged_in() ) {
 			return false;
@@ -114,9 +114,9 @@ class Config {
 
 		$user = wp_get_current_user();
 
-		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user->ID );
+		$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user->ID );
 
-		if ( ! $user_can_manage_wp_afa ) {
+		if ( ! $user_can_manage_afa ) {
 			return false;
 		}
 

@@ -53,7 +53,7 @@ class UserDevices {
         expo_token VARCHAR(100),
 		created_at DATETIME NOT NULL,
         PRIMARY KEY(id),
-        FOREIGN KEY(user_id) REFERENCES ' . $wpdb->prefix . 'users(ID),
+        FOREIGN KEY(user_id) REFERENCES ' . $wpdb->users . '(ID),
         UNIQUE(device_id),
         UNIQUE(expo_token)
       )' . $wpdb->get_charset_collate();

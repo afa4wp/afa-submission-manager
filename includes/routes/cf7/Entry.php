@@ -34,7 +34,7 @@ class Entry extends AbstractEntryRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryController(), 'entries' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
@@ -51,7 +51,7 @@ class Entry extends AbstractEntryRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryController(), 'entry_by_id' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
@@ -68,7 +68,7 @@ class Entry extends AbstractEntryRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryController(), 'entries_by_form_id' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
@@ -85,7 +85,7 @@ class Entry extends AbstractEntryRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryController(), 'search_entries_by_user' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);

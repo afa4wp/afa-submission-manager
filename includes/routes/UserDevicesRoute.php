@@ -51,7 +51,7 @@ class UserDevicesRoute {
 				array(
 					'methods'             => 'POST',
 					'callback'            => array( new UserDevicesController(), 'create' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 					'args'                => ( new UserDevicesSchema() )->create(),
 				),
 			)
@@ -69,7 +69,7 @@ class UserDevicesRoute {
 				array(
 					'methods'             => 'PUT',
 					'callback'            => array( new UserDevicesController(), 'language' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 					'args'                => ( new UserDevicesSchema() )->language(),
 				),
 			)

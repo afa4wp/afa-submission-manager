@@ -52,7 +52,7 @@ class UserTokens {
         refresh_token VARCHAR(255) NOT NULL,
 		created_at DATETIME NOT NULL,
         PRIMARY KEY(id),
-        FOREIGN KEY(user_id) REFERENCES ' . $wpdb->prefix . 'users(ID),
+        FOREIGN KEY(user_id) REFERENCES ' . $wpdb->users . '(ID),
         UNIQUE(access_token),
         UNIQUE(refresh_token)
       )' . $wpdb->get_charset_collate();

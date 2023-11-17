@@ -45,7 +45,7 @@ class UserModel {
 		);
 
 		if ( ! is_wp_error( $login ) ) {
-			if ( ! $this->user_can_manage_wp_afa( $login->ID ) ) {
+			if ( ! $this->user_can_manage_afa( $login->ID ) ) {
 				return new WP_Error(
 					'invalid_role',
 					'Sorry, you are not allowed to login',
@@ -127,13 +127,13 @@ class UserModel {
 	 *
 	 * @return true|false
 	 */
-	public function user_can_manage_wp_afa( $user_id ) {
+	public function user_can_manage_afa( $user_id ) {
 		$user = new WP_User( $user_id );
 		if ( $user->exists() ) {
 			if ( user_can( $user_id, 'manage_options' ) ) {
 				return true;
 			}
-			if ( in_array( 'wp_afa_staff', $user->roles, true ) ) {
+			if ( in_array( 'afa_staff', $user->roles, true ) ) {
 				return true;
 			}
 			return false;
@@ -152,12 +152,12 @@ class UserModel {
 	 */
 	public function add_staff( $user_id ) {
 
-		$user_can_manage_wp_afa = $this->user_can_manage_wp_afa( $user_id );
+		$user_can_manage_afa = $this->user_can_manage_afa( $user_id );
 
-		if ( ! $user_can_manage_wp_afa ) {
+		if ( ! $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->add_role( 'wp_afa_staff' );
+				$user->add_role( 'afa_staff' );
 			}
 		}
 
@@ -173,12 +173,12 @@ class UserModel {
 	 * @return void
 	 */
 	public function remove_staff( $user_id ) {
-		$user_can_manage_wp_afa = $this->user_can_manage_wp_afa( $user_id );
+		$user_can_manage_afa = $this->user_can_manage_afa( $user_id );
 
-		if ( $user_can_manage_wp_afa ) {
+		if ( $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->remove_role( 'wp_afa_staff' );
+				$user->remove_role( 'afa_staff' );
 			}
 		}
 	}

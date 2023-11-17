@@ -35,7 +35,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'forms' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
@@ -52,7 +52,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'form_by_id' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
@@ -69,7 +69,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'forms_pagination' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
@@ -86,7 +86,7 @@ class Form extends AbstractFormRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new FormController(), 'search_forms' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);

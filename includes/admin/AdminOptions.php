@@ -55,9 +55,9 @@ class AdminOptions {
 	 */
 	private function add_role() {
 		add_role(
-			'wp_afa_staff',
-			'WP All Forms API Staff',
-			array( 'manage_wp_afa' => true )
+			'afa_staff',
+			'AFA SUBMISSION MANAGER Staff',
+			array( 'manage_afa' => true )
 		);
 
 	}

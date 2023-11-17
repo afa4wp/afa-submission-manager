@@ -51,7 +51,7 @@ class NotificationSubscriptionRoute {
 				array(
 					'methods'             => 'POST',
 					'callback'            => array( new NotificationSubscriptionController(), 'subscribe_user' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
 				),
 
@@ -70,7 +70,7 @@ class NotificationSubscriptionRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new NotificationSubscriptionController(), 'fetch_subscriptions' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
 				),
 
@@ -89,7 +89,7 @@ class NotificationSubscriptionRoute {
 				array(
 					'methods'             => 'DELETE',
 					'callback'            => array( new NotificationSubscriptionController(), 'unsubscribe' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
 				),
 
@@ -108,7 +108,7 @@ class NotificationSubscriptionRoute {
 				array(
 					'methods'             => 'PUT',
 					'callback'            => array( new NotificationSubscriptionController(), 'update_subscription_state' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 					'args'                => ( new NotificationSubscriptionSchema() )->update_subscription_state(),
 				),
 

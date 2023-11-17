@@ -50,7 +50,7 @@ class ConfigRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new ConfigController(), 'forms' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 
 			)

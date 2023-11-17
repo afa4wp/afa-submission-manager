@@ -129,7 +129,7 @@ class UserTokensModel {
 
 		global $wpdb;
 
-		$sql = "SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afa_ut INNER JOIN  {$wpdb->prefix}users wp_u ON afa_ut.user_id = wp_u.ID ORDER BY id DESC LIMIT %d,%d";
+		$sql = "SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afa_ut INNER JOIN  {$wpdb->users} wp_u ON afa_ut.user_id = wp_u.ID ORDER BY id DESC LIMIT %d,%d";
 
 		$sql = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
@@ -152,7 +152,7 @@ class UserTokensModel {
 
 		global $wpdb;
 
-		$sql = "SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afa_ut INNER JOIN  {$wpdb->prefix}users wp_u ON afa_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s ORDER BY id DESC LIMIT %d,%d";
+		$sql = "SELECT afa_ut.id, afa_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afa_ut INNER JOIN  {$wpdb->users} wp_u ON afa_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s ORDER BY id DESC LIMIT %d,%d";
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
@@ -192,7 +192,7 @@ class UserTokensModel {
 
 		global $wpdb;
 
-		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} afa_ut INNER JOIN {$wpdb->prefix}users wp_u ON afa_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s";
+		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} afa_ut INNER JOIN {$wpdb->users} wp_u ON afa_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s";
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 

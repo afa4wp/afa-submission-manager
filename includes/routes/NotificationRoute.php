@@ -51,7 +51,7 @@ class NotificationRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new NotificationController(), 'notifications' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 					'args'                => ( new NotificationSchema() )->get(),
 				),
 

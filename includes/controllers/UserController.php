@@ -129,7 +129,7 @@ class UserController {
 			);
 		}
 
-		if ( ! $this->user_model->user_can_manage_wp_afa( $user_id ) ) {
+		if ( ! $this->user_model->user_can_manage_afa( $user_id ) ) {
 			return new WP_Error(
 				'invalid_role',
 				'Sorry, you are not allowed to login',
@@ -274,7 +274,7 @@ class UserController {
 			);
 		}
 
-		if ( ! $this->user_model->user_can_manage_wp_afa( $user_id ) ) {
+		if ( ! $this->user_model->user_can_manage_afa( $user_id ) ) {
 			return new WP_Error(
 				'invalid_role',
 				'Sorry, you are not allowed to login',

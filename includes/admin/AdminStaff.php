@@ -28,7 +28,7 @@ class AdminStaff {
 	 *
 	 * @var string
 	 */
-	const NONCE = 'wp_afa_remove_staff';
+	const NONCE = 'afa_remove_staff';
 
 	/**
 	 * AdminStaff constructor.
@@ -74,20 +74,20 @@ class AdminStaff {
 	public function add_user_staff_column_content( $output, $column_name, $user_id ) {
 		if ( 'afa_submission_manager_user_staff_column' === $column_name ) {
 
-			$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
+			$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user_id );
 
-			if ( $user_can_manage_wp_afa ) {
+			if ( $user_can_manage_afa ) {
 				if ( user_can( $user_id, 'manage_options' ) ) {
 					$output = sprintf( '<span>' . __( 'Administrador' ) . '</span>' );
 				} else {
 					$nonce   = wp_create_nonce( self::NONCE );
 					$output  = sprintf( '<span>' . __( 'AFA Staff' ) . '</span>' );
-					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Remover' ) . '</a>', admin_url( 'users.php?action=wp_afa_remove_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
+					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Remover' ) . '</a>', admin_url( 'users.php?action=afa_remove_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
 				}
 			} else {
 					$nonce   = wp_create_nonce( self::NONCE );
 					$output  = sprintf( '<span>' . __( 'AFA Staff' ) . '</span>' );
-					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Adicionar' ) . '</a>', admin_url( 'users.php?action=wp_afa_add_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
+					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Adicionar' ) . '</a>', admin_url( 'users.php?action=afa_add_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
 			}
 		}
 		return $output;
@@ -109,11 +109,11 @@ class AdminStaff {
 				$user_id = sanitize_text_field( wp_unslash( $_GET['user'] ) );
 
 				if ( is_numeric( $user_id ) ) {
-					if ( 'wp_afa_add_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
+					if ( 'afa_add_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
 						$this->add_staff( $user_id );
 					}
 
-					if ( 'wp_afa_remove_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
+					if ( 'afa_remove_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
 						$this->remove_staff( $user_id );
 					}
 				}
@@ -133,12 +133,12 @@ class AdminStaff {
 	 */
 	public function add_staff( $user_id ) {
 
-		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
+		$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user_id );
 
-		if ( ! $user_can_manage_wp_afa ) {
+		if ( ! $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->add_role( 'wp_afa_staff' );
+				$user->add_role( 'afa_staff' );
 			}
 		}
 
@@ -155,12 +155,12 @@ class AdminStaff {
 	 * @return void
 	 */
 	public function remove_staff( $user_id ) {
-		$user_can_manage_wp_afa = ( new UserModel() )->user_can_manage_wp_afa( $user_id );
+		$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user_id );
 
-		if ( $user_can_manage_wp_afa ) {
+		if ( $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->remove_role( 'wp_afa_staff' );
+				$user->remove_role( 'afa_staff' );
 			}
 		}
 

@@ -51,7 +51,7 @@ class UserQRCodes {
 			expire_secret DATETIME NOT NULL,
 			created_at DATETIME NOT NULL,
 			PRIMARY KEY(id),
-			FOREIGN KEY(user_id) REFERENCES ' . $wpdb->prefix . 'users(ID),
+			FOREIGN KEY(user_id) REFERENCES ' . $wpdb->users . '(ID),
 			UNIQUE(secret)
 		  )' . $wpdb->get_charset_collate();
 

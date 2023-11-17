@@ -154,7 +154,7 @@ class EntryModel extends AbstractEntryModel {
 	public function search_entries_by_user( $user_info, $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$sql = "SELECT fla.ID, fla.post_type FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->prefix}users wpu ON  
+		$sql = "SELECT fla.ID, fla.post_type FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->users} wpu ON  
         fla.post_author = wpu.id WHERE fla.post_type = %s AND ( wpu.user_login LIKE %s OR wpu.user_email LIKE %s ) ORDER BY fla.id DESC LIMIT  %d,%d";
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
@@ -195,7 +195,7 @@ class EntryModel extends AbstractEntryModel {
 	public function mumber_of_items_by_user_info( $user_info ) {
 		global $wpdb;
 
-		$sql = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} fla INNER JOIN  {$wpdb->prefix}users wpu ON  
+		$sql = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} fla INNER JOIN  {$wpdb->users} wpu ON  
         fla.post_author = wpu.id WHERE fla.post_type = %s AND ( wpu.user_login LIKE %s OR wpu.user_email LIKE %s ) ";
 
 		$user_info      = '%' . $wpdb->esc_like( $user_info ) . '%';

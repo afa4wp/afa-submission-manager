@@ -35,7 +35,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryMetaController(), 'entry_meta_by_entry_id' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
@@ -52,7 +52,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new EntryMetaController(), 'search_entry_meta_answer' ),
-					'permission_callback' => array( new Config(), 'wp_afa_check_authorization' ),
+					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
 				),
 			)
 		);
