@@ -114,7 +114,7 @@ class Language {
 	 *
 	 * @since 1.0.0
 	 */
-	public function wp_all_forms_load_textdomain() {
+	public function all_forms_load_textdomain() {
 		load_plugin_textdomain( 'afa-submission-manager', false, AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER );
 	}
 

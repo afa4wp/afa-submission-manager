@@ -166,7 +166,7 @@ class UserListTable extends \WP_List_Table {
 	protected function column_cb( $item ) {
 		return sprintf(
 			'<label class="screen-reader-text" for="user_token_' . $item['id'] . '">' . sprintf( esc_html__( 'Select', 'afa-submission-manager' ) . ' %s', esc_attr( $item['user_login'] ) ) . '</label>'
-			. "<input type='checkbox' name='users_tokens[]' id='user_token_{$item['id']}' value='{$item['id']}' />"
+			. "<input type='checkbox' name='users_tokens[]' id='user_token_{$item['id']}' value='{$item['user_id']}' />"
 		);
 	}
 
@@ -181,7 +181,7 @@ class UserListTable extends \WP_List_Table {
 		$query_args_delete_user_token = array(
 			'page'       => self::PAGE,
 			'action'     => 'delete',
-			'user_token' => absint( $item['id'] ),
+			'user_token' => absint( $item['user_id'] ),
 			'_wpnonce'   => wp_create_nonce( 'delete_user_token_nonce' ),
 		);
 
@@ -208,7 +208,7 @@ class UserListTable extends \WP_List_Table {
 	 */
 	public function get_bulk_actions() {
 		$actions = array(
-			'delete' => __( 'Remove Users', 'wp-ultimo' ),
+			'delete' => __( 'Remove Users', 'afa-submission-manager' ),
 		);
 		return $actions;
 	}
@@ -307,15 +307,15 @@ class UserListTable extends \WP_List_Table {
 		?>
 		<div class="wrap">    
 		<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-				<div id="wp-forms-api-list-table">			
+				<div id="forms-api-list-table">			
 					<div id="nds-post-body">
-						<form id="wp-forms-api-user-search" method="get">
+						<form id="forms-api-user-search" method="get">
 							<input type="hidden" value="<?php echo esc_html( self::PAGE ); ?>" name="page">
 							<?php
 								$this->search_box( esc_html__( 'Search User', 'afa-submission-manager' ), 'search_user_logged' );
 							?>
 						</form>		
-						<form id="wp-forms-api-user-list-form" method="post">
+						<form id="forms-api-user-list-form" method="post">
 							<input type="hidden" name="page" value="<?php echo esc_html( self::PAGE ); ?>" />
 							<?php
 								$this->display();

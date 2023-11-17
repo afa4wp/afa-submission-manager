@@ -56,7 +56,7 @@ register_activation_hook( AFA_SUBMISSION_MANAGER_PLUGIN_FILE, array( new Databas
 
 ( new AdminOptions() )->init();
 
-add_action( 'plugins_loaded', array( new Language(), 'wp_all_forms_load_textdomain' ) );
+add_action( 'plugins_loaded', array( new Language(), 'all_forms_load_textdomain' ) );
 
 add_filter( 'plugin_locale', array( new Language(), 'enforce_locale' ), 10, 2 );
 
