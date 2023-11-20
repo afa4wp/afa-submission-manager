@@ -23,6 +23,10 @@ use Includes\Plugins\Constant;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
+
+if ( ! function_exists( 'is_plugin_active' ) ) {
+	include_once ABSPATH . 'wp-admin/includes/plugin.php';
+}
 /**
  * Class Route
  *
