@@ -62,7 +62,7 @@ class ScreenAbout extends Screen {
 </div>
 
 			<div >
-				<p ><span style="font-weight: bold;"><?php esc_html_e( 'Supported plugins:', 'afa-submission-manager' ); ?></span> <span style="text-transform: uppercase;"><?php echo $plugins_names; ?></span>.</p>
+				<p ><span style="font-weight: bold;"><?php esc_html_e( 'Supported plugins:', 'afa-submission-manager' ); ?></span> <span style="text-transform: uppercase;"><?php echo esc_html( $plugins_names ); ?></span>.</p>
 			</div>
 		</div>	
 		<?php

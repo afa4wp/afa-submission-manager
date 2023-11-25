@@ -13,7 +13,6 @@ require __DIR__ . '/vendor/autoload.php';
  * Author URI:        https://claudionhangapc.com/
  * License:           GPL v2 or later
  * License URI:       https://claudionhangapc/gpl-2.0.html
- * Update URI:        https://claudionhangapc.com
  * Text Domain:       afa-submission-manager
  * Domain Path:       /languages
  */
