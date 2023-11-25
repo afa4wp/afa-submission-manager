@@ -68,7 +68,7 @@ class NotificationController {
 
 		$offset = $this->pagination_helper->get_offset( $page );
 
-		$notifications = $this->notification_model->notifications( $supported_plugin_id, $offset, $this->pagination_helper->get_number_of_records_per_page(), $device_language );
+		$notifications = $this->notification_model->notifications( $supported_plugin_id, $offset, $this->pagination_helper->get_number_of_records_per_page() );
 
 		$notifications_results = $this->pagination_helper->prepare_data_for_rest_with_pagination( $count, $notifications );
 

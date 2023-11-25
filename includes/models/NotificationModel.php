@@ -73,14 +73,13 @@ class NotificationModel {
 	/**
 	 * Get notifications
 	 *
-	 * @param int    $supported_plugin_id The supported plugin ID to filter the notifications.
-	 * @param int    $offset The offset.
-	 * @param int    $number_of_records_per_page The notifications per page.
-	 * @param string $device_language  The language code for the user's device to localize the notification message.
+	 * @param int $supported_plugin_id The supported plugin ID to filter the notifications.
+	 * @param int $offset The offset.
+	 * @param int $number_of_records_per_page The notifications per page.
 	 *
 	 * @return object
 	 */
-	public function notifications( $supported_plugin_id, $offset, $number_of_records_per_page = 20, $device_language = 'en' ) {
+	public function notifications( $supported_plugin_id, $offset, $number_of_records_per_page = 20 ) {
 
 		global $wpdb;
 
@@ -101,7 +100,7 @@ class NotificationModel {
 			$result->meta_value   = maybe_unserialize( $result->meta_value );
 			$result->user_created = $user_model->user_info_by_id( $result->user_id );
 			$user_name            = $this->get_username_or_email( $result->user_created );
-			$result->message      = $this->message_for_submission( $result->meta_value['entry_id'], $device_language, $user_name );
+			$result->message      = $this->message_for_submission( $result->meta_value['entry_id'], $user_name );
 			$modified_results[]   = $result;
 		}
 
@@ -137,18 +136,11 @@ class NotificationModel {
 	 * This function creates a notification message to inform users about a new form submission.
 	 *
 	 * @param int    $entry_id         The ID of the form submission entry.
-	 * @param string $device_language  The language code for the user's device to localize the notification message.
 	 * @param string $user_name        The name of the user who filled out the form.
 	 *
 	 * @return string  The notification message with placeholders for React Native styling.
 	 */
-	private function message_for_submission( $entry_id, $device_language, $user_name = '' ) {
-
-		$plugin_language = new Language();
-
-		$switched_locale = switch_to_locale( $device_language );
-
-		$plugin_language->load_textdomain_by_language_key( $device_language );
+	private function message_for_submission( $entry_id, $user_name = '' ) {
 
 		if ( empty( $user_name ) ) {
 			// translators: %1$s is replaced with the entry_id.
@@ -156,10 +148,6 @@ class NotificationModel {
 		} else {
 			// translators: %1$s is replaced with the user_name and %1$s entry_id.
 			$notification_message = sprintf( __( '{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}', 'afa-submission-manager' ), $user_name, $entry_id );
-		}
-
-		if ( $switched_locale ) {
-			restore_previous_locale();
 		}
 
 		return $notification_message;

@@ -9,7 +9,6 @@
 namespace Includes\Plugins\Notification;
 
 use Includes\Models\UserDevicesModel;
-use Includes\Plugins\Language;
 use Includes\Plugins\Notification\AbstractFormNotification;
 use Includes\Models\SupportedPluginsModel;
 
@@ -65,14 +64,7 @@ class CF7Notification extends AbstractFormNotification {
 
 		foreach ( $divices as $key => $divice ) {
 
-			$plugin_language = new Language();
-
-			$device_language = $divice->device_language;
-			$item            = array();
-
-			$switched_locale = switch_to_locale( $device_language );
-
-			$plugin_language->load_textdomain_by_language_key( $device_language );
+			$item = array();
 
 			// translators: %1$s is replaced with the site name.
 			$push_notification_body = sprintf( __( 'New Form Submission Received from %1$s. Open app to view', 'afa-submission-manager' ), get_bloginfo( 'name' ) );
@@ -84,10 +76,6 @@ class CF7Notification extends AbstractFormNotification {
 			$item['title']          = $formatted_tiitle;
 			$item['body']           = $push_notification_body;
 			$item['exponent_token'] = $divice->expo_token;
-
-			if ( $switched_locale ) {
-				restore_previous_locale();
-			}
 
 			$push_notifications_data[] = $item;
 
