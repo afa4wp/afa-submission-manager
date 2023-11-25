@@ -9,11 +9,11 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Simplify form management and gain insights with our robust WordPress plugin.
+AFA - Mobile-Ready Submission Manager is an easy way to simplify form management and gain insights with our robust WordPress plugin.
 
 == Description ==
 
-Welcome to our powerful WordPress plugin designed to enhance your form management experience. Our plugin simplifies form entry management, providing you with the tools to streamline the process and save time.
+AFA - Mobile-Ready Submission Manager is powerful WordPress plugin designed to enhance your form management experience. Our plugin simplifies form entry management, providing you with the tools to streamline the process and save time.
 Our plugin goes beyond the desktop, offering a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders, granting your users the ability to oversee submissions from anywhere.
 Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can maintain control and transform how you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management.
 
