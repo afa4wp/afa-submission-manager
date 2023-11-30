@@ -4,19 +4,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AFA - Mobile-Ready Submission Manager 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: NOMBRE COMPLETO <EMAIL@DIRECCION>\n"
+"Language-Team: IDIOMA <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-25T18:58:44+00:00\n"
+"POT-Creation-Date: 2023-11-29T14:12:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: afa-submission-manager\n"
 
 #. Plugin Name of the plugin
 msgid "AFA - Mobile-Ready Submission Manager"
-msgstr "AFA - Gestor de Envío Preparado para Móviles"
+msgstr "AFA - Gestor de Envíos Preparado para Móviles"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/afa-submission-manager/afa-submission-manager"
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Simplifica la gestión de formularios y obtén información con nuestro robusto plugin para WordPress."
+msgstr "Simplifica la gestión de formularios y obtén información con nuestro robusto plugin de WordPress."
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
@@ -36,35 +36,35 @@ msgstr ""
 
 #: includes/admin/AdminOptions.php:49
 msgid "AFA - Connected Users"
-msgstr ""
+msgstr "AFA - Usuarios Conectados"
 
 #: includes/admin/AdminOptions.php:49
 msgid "Connected Users"
-msgstr ""
+msgstr "Usuarios Conectados"
 
 #: includes/admin/AdminOptions.php:50
 msgid "AFA - Settings"
-msgstr ""
+msgstr "AFA - Configuración"
 
 #: includes/admin/AdminOptions.php:50
 msgid "Settings"
-msgstr ""
+msgstr "Configuración"
 
 #: includes/admin/pages/UserListTable.php:81
 msgid "User Login"
-msgstr "Inicio de sesión del usuario"
+msgstr "Inicio de Sesión del Usuario"
 
 #: includes/admin/pages/UserListTable.php:82
 msgid "Display Name"
-msgstr "Nombre para mostrar"
+msgstr "Nombre de Visualización"
 
 #: includes/admin/pages/UserListTable.php:83
 msgid "User Id"
-msgstr "ID de usuario"
+msgstr "ID de Usuario"
 
 #: includes/admin/pages/UserListTable.php:94
 msgid "No users Connected."
-msgstr "Ningún usuario conectado."
+msgstr "No hay usuarios conectados."
 
 #: includes/admin/pages/UserListTable.php:168
 msgid "Select"
@@ -72,16 +72,16 @@ msgstr "Seleccionar"
 
 #: includes/admin/pages/UserListTable.php:211
 msgid "Remove Users"
-msgstr "Eliminar usuarios"
+msgstr "Eliminar Usuarios"
 
 #: includes/admin/pages/UserListTable.php:270
 #: includes/admin/pages/UserListTable.php:295
 msgid "Security check"
-msgstr "Verificación de seguridad"
+msgstr "Verificación de Seguridad"
 
 #: includes/admin/pages/UserListTable.php:315
 msgid "Search User"
-msgstr "Buscar usuario"
+msgstr "Buscar Usuario"
 
 #: includes/admin/screens/ScreenAbout.php:34
 msgid "About plugin"
@@ -89,19 +89,19 @@ msgstr "Acerca del plugin"
 
 #: includes/admin/screens/ScreenAbout.php:50
 msgid "About Our Plugin"
-msgstr "Acerca de nuestro plugin"
+msgstr "Acerca de Nuestro Plugin"
 
 #: includes/admin/screens/ScreenAbout.php:54
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
-msgstr "Bienvenido a nuestro potente plugin diseñado para mejorar tu experiencia en la gestión de formularios. Nuestro plugin está diseñado para simplificar la gestión de entradas de formularios, brindándote las herramientas necesarias para optimizar el proceso y ahorrar tiempo."
+msgstr "Bienvenido a nuestro potente plugin diseñado para mejorar tu experiencia en la gestión de formularios. Nuestro plugin está diseñado para simplificar la gestión de entradas de formularios, brindándote las herramientas que necesitas para optimizar el proceso y ahorrar tiempo."
 
 #: includes/admin/screens/ScreenAbout.php:57
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Nuestro plugin va más allá del escritorio al proporcionar una API robusta que permite a los usuarios de tu aplicación móvil ver fácilmente las presentaciones de formularios sobre la marcha. Integra nuestro plugin de forma fluida con los populares constructores de formularios para WordPress y otorga a tus usuarios la capacidad de supervisar las presentaciones desde cualquier lugar."
+msgstr "Nuestro plugin va más allá del escritorio al proporcionar una API robusta que permite a los usuarios de tu aplicación móvil ver las presentaciones de formularios de manera sencilla mientras están en movimiento. Integra nuestro plugin de forma transparente con populares constructores de formularios de WordPress y brinda a tus usuarios la capacidad de supervisar las presentaciones desde cualquier lugar."
 
 #: includes/admin/screens/ScreenAbout.php:60
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Mantente organizado, obtén información y mejora las interacciones con los usuarios, todo desde tu panel de WordPress y a través de nuestra API dedicada. Con nuestro plugin fácil de usar, puedes mantener el control y transformar la forma en que gestionas las presentaciones de formularios. ¡Sumérgete en las posibilidades hoy y revoluciona tu enfoque de la gestión de formularios!"
+msgstr "Mantente organizado, obtén información y mejora las interacciones con los usuarios, todo dentro de tu panel de WordPress y a través de nuestra API dedicada. Con nuestro plugin fácil de usar, puedes mantenerte en control y transformar la forma en que gestionas las presentaciones de formularios. ¡Sumérgete en las posibilidades hoy y revoluciona tu enfoque de la gestión de formularios!"
 
 #: includes/admin/screens/ScreenAbout.php:65
 msgid "Supported plugins:"
@@ -109,7 +109,7 @@ msgstr "Plugins compatibles:"
 
 #: includes/admin/screens/ScreenMobileLogin.php:38
 msgid "Login"
-msgstr "Iniciar sesión"
+msgstr "Iniciar Sesión"
 
 #: includes/admin/screens/ScreenMobileLogin.php:56
 msgid "Scan the following QR Code using the AFA app."
@@ -121,30 +121,30 @@ msgstr "Personal"
 
 #: includes/admin/screens/ScreenStaff.php:55
 msgid "Manage User Permissions"
-msgstr "Gestionar permisos de usuario"
+msgstr "Gestionar Permisos de Usuario"
 
 #: includes/admin/screens/ScreenStaff.php:64
 msgid "Save Changes"
-msgstr "Guardar cambios"
+msgstr "Guardar Cambios"
 
 #: includes/admin/screens/ScreenStaff.php:88
 #: includes/admin/screens/ScreenStaff.php:119
 msgid "Add Users"
-msgstr "Agregar usuarios"
+msgstr "Agregar Usuarios"
 
 #: includes/admin/screens/ScreenStaff.php:121
 msgid "To allow non-admin users to access this app, grant them the required permission"
-msgstr "Para permitir que los usuarios que no son administradores accedan a esta aplicación, concédeles los permisos necesarios"
+msgstr "Para permitir que los usuarios no administradores accedan a esta aplicación, otórgales el permiso necesario"
 
 #. translators: %1$s is replaced with the entry_id.
 #: includes/models/NotificationModel.php:155
 msgid "Someone filled out a new form: {bold}%1$s{/bold}"
-msgstr "Alguien llenó un nuevo formulario: {bold}%1$s{/bold}"
+msgstr "Alguien completó un nuevo formulario: {bold}%1$s{/bold}"
 
 #. translators: %1$s is replaced with the user_name and %1$s entry_id.
 #: includes/models/NotificationModel.php:158
 msgid "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
-msgstr "{bold}%1$s{/bold} llenó un nuevo formulario: {bold}%2$s{/bold}"
+msgstr "{bold}%1$s{/bold} completó un nuevo formulario: {bold}%2$s{/bold}"
 
 #. translators: %1$s is replaced with the site name.
 #: includes/plugins/notification/CF7Notification.php:78

@@ -4,19 +4,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AFA - Mobile-Ready Submission Manager 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: NOME COMPLETO <EMAIL@INDIRIZZO>\n"
+"Language-Team: LINGUA <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-25T18:58:44+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2023-11-29T14:12:53+00:00\n"
+"PO-Revision-Date: ANNO-MESE-GIORNO ORA:MINUTI+FUSO\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: afa-submission-manager\n"
 
 #. Plugin Name of the plugin
 msgid "AFA - Mobile-Ready Submission Manager"
-msgstr "AFA - Gestore di invii pronto per dispositivi mobili"
+msgstr "AFA - Gestore di Invii Pronto per Dispositivi Mobili"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/afa-submission-manager/afa-submission-manager"
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Semplifica la gestione dei moduli e ottieni approfondimenti con il nostro robusto plugin per WordPress."
+msgstr "Semplifica la gestione dei moduli e ottieni informazioni con il nostro robusto plugin WordPress."
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
@@ -36,11 +36,11 @@ msgstr ""
 
 #: includes/admin/AdminOptions.php:49
 msgid "AFA - Connected Users"
-msgstr "AFA - Utenti connessi"
+msgstr "AFA - Utenti Collegati"
 
 #: includes/admin/AdminOptions.php:49
 msgid "Connected Users"
-msgstr "Utenti connessi"
+msgstr "Utenti Collegati"
 
 #: includes/admin/AdminOptions.php:50
 msgid "AFA - Settings"
@@ -52,19 +52,19 @@ msgstr "Impostazioni"
 
 #: includes/admin/pages/UserListTable.php:81
 msgid "User Login"
-msgstr "Accesso utente"
+msgstr "Accesso Utente"
 
 #: includes/admin/pages/UserListTable.php:82
 msgid "Display Name"
-msgstr "Nome visualizzato"
+msgstr "Nome Visualizzato"
 
 #: includes/admin/pages/UserListTable.php:83
 msgid "User Id"
-msgstr "ID utente"
+msgstr "ID Utente"
 
 #: includes/admin/pages/UserListTable.php:94
 msgid "No users Connected."
-msgstr "Nessun utente connesso."
+msgstr "Nessun utente collegato."
 
 #: includes/admin/pages/UserListTable.php:168
 msgid "Select"
@@ -72,7 +72,7 @@ msgstr "Seleziona"
 
 #: includes/admin/pages/UserListTable.php:211
 msgid "Remove Users"
-msgstr "Rimuovi utenti"
+msgstr "Rimuovi Utenti"
 
 #: includes/admin/pages/UserListTable.php:270
 #: includes/admin/pages/UserListTable.php:295
@@ -81,27 +81,27 @@ msgstr "Controllo di sicurezza"
 
 #: includes/admin/pages/UserListTable.php:315
 msgid "Search User"
-msgstr "Cerca utente"
+msgstr "Cerca Utente"
 
 #: includes/admin/screens/ScreenAbout.php:34
 msgid "About plugin"
-msgstr "Informazioni sul plugin"
+msgstr "Informazioni sul Plugin"
 
 #: includes/admin/screens/ScreenAbout.php:50
 msgid "About Our Plugin"
-msgstr "Informazioni sul nostro plugin"
+msgstr "Informazioni sul Nostro Plugin"
 
 #: includes/admin/screens/ScreenAbout.php:54
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
-msgstr "Benvenuto nel nostro potente plugin progettato per migliorare la tua esperienza di gestione dei moduli. Il nostro plugin è progettato per semplificare la gestione delle voci dei moduli, fornendoti gli strumenti necessari per ottimizzare il processo e risparmiare tempo."
+msgstr "Benvenuto nel nostro potente plugin progettato per migliorare la tua esperienza nella gestione dei moduli. Il nostro plugin è progettato per semplificare la gestione delle voci dei moduli, fornendoti gli strumenti necessari per ottimizzare il processo e risparmiare tempo."
 
 #: includes/admin/screens/ScreenAbout.php:57
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Il nostro plugin va oltre il desktop fornendo una robusta API che permette agli utenti dell'app mobile di visualizzare facilmente le voci dei moduli in movimento. Integra senza problemi il nostro plugin con i popolari creatori di moduli WordPress e concede ai tuoi utenti la possibilità di supervisionare le voci da qualsiasi luogo."
+msgstr "Il nostro plugin va oltre il desktop fornendo una robusta API che permette agli utenti della tua app mobile di visualizzare facilmente le presentazioni dei moduli in movimento. Integra senza soluzione di continuità il nostro plugin con i popolari creatori di moduli WordPress e concedi ai tuoi utenti la possibilità di supervisionare le presentazioni da qualsiasi luogo."
 
 #: includes/admin/screens/ScreenAbout.php:60
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Rimani organizzato, ottieni approfondimenti e migliora le interazioni degli utenti, tutto dal tuo cruscotto WordPress e attraverso la nostra API dedicata. Con il nostro plugin user-friendly, puoi rimanere al controllo e trasformare il modo in cui gestisci le voci dei moduli. Tuffati nelle possibilità oggi e rivoluziona il tuo approccio alla gestione dei moduli!"
+msgstr "Rimani organizzato, ottieni informazioni e migliora le interazioni con gli utenti, tutto all'interno del tuo cruscotto WordPress e tramite la nostra API dedicata. Con il nostro plugin user-friendly, puoi rimanere sotto controllo e trasformare il modo in cui gestisci le presentazioni dei moduli. Tuffati nelle possibilità oggi e rivoluziona il tuo approccio alla gestione dei moduli!"
 
 #: includes/admin/screens/ScreenAbout.php:65
 msgid "Supported plugins:"
@@ -121,16 +121,16 @@ msgstr "Personale"
 
 #: includes/admin/screens/ScreenStaff.php:55
 msgid "Manage User Permissions"
-msgstr "Gestisci le autorizzazioni dell'utente"
+msgstr "Gestisci le autorizzazioni degli utenti"
 
 #: includes/admin/screens/ScreenStaff.php:64
 msgid "Save Changes"
-msgstr "Salva modifiche"
+msgstr "Salva Modifiche"
 
 #: includes/admin/screens/ScreenStaff.php:88
 #: includes/admin/screens/ScreenStaff.php:119
 msgid "Add Users"
-msgstr "Aggiungi utenti"
+msgstr "Aggiungi Utenti"
 
 #: includes/admin/screens/ScreenStaff.php:121
 msgid "To allow non-admin users to access this app, grant them the required permission"
@@ -153,7 +153,7 @@ msgstr "{bold}%1$s{/bold} ha compilato un nuovo modulo: {bold}%2$s{/bold}"
 #: includes/plugins/notification/WEFNotification.php:79
 #: includes/plugins/notification/WPFNotification.php:79
 msgid "New Form Submission Received from %1$s. Open app to view"
-msgstr "Nuova presentazione del modulo ricevuta da %1$s. Apri l'app per visualizzare"
+msgstr "Nuova presentazione modulo ricevuta da %1$s. Apri l'app per visualizzarla"
 
 #: includes/plugins/notification/CF7Notification.php:80
 #: includes/plugins/notification/EFBNotification.php:81
@@ -161,4 +161,4 @@ msgstr "Nuova presentazione del modulo ricevuta da %1$s. Apri l'app per visualiz
 #: includes/plugins/notification/WEFNotification.php:81
 #: includes/plugins/notification/WPFNotification.php:81
 msgid "New Form Submission"
-msgstr "Nuova presentazione del modulo"
+msgstr "Nuova presentazione modulo"

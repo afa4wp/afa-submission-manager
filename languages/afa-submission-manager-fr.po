@@ -4,19 +4,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AFA - Mobile-Ready Submission Manager 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: NOM COMPLET <EMAIL@ADRESSE>\n"
+"Language-Team: LANGUE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-25T18:58:44+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2023-11-29T14:12:53+00:00\n"
+"PO-Revision-Date: AN-MO-JO HE:MI+FUSEAU\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: afa-submission-manager\n"
 
 #. Plugin Name of the plugin
 msgid "AFA - Mobile-Ready Submission Manager"
-msgstr "AFA - Gestionnaire d'envoi prêt pour mobile"
+msgstr "AFA - Gestionnaire de Soumissions Prêt pour Mobile"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/afa-submission-manager/afa-submission-manager"
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Simplifiez la gestion des formulaires et obtenez des informations avec notre robuste plugin WordPress."
+msgstr "Simplifiez la gestion des formulaires et obtenez des informations avec notre plugin WordPress robuste."
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
@@ -36,11 +36,11 @@ msgstr ""
 
 #: includes/admin/AdminOptions.php:49
 msgid "AFA - Connected Users"
-msgstr "AFA - Utilisateurs connectés"
+msgstr "AFA - Utilisateurs Connectés"
 
 #: includes/admin/AdminOptions.php:49
 msgid "Connected Users"
-msgstr "Utilisateurs connectés"
+msgstr "Utilisateurs Connectés"
 
 #: includes/admin/AdminOptions.php:50
 msgid "AFA - Settings"
@@ -52,15 +52,15 @@ msgstr "Paramètres"
 
 #: includes/admin/pages/UserListTable.php:81
 msgid "User Login"
-msgstr "Connexion de l'utilisateur"
+msgstr "Connexion de l'Utilisateur"
 
 #: includes/admin/pages/UserListTable.php:82
 msgid "Display Name"
-msgstr "Nom d'affichage"
+msgstr "Nom d'Affichage"
 
 #: includes/admin/pages/UserListTable.php:83
 msgid "User Id"
-msgstr "Identifiant utilisateur"
+msgstr "Identifiant de l'Utilisateur"
 
 #: includes/admin/pages/UserListTable.php:94
 msgid "No users Connected."
@@ -72,16 +72,16 @@ msgstr "Sélectionner"
 
 #: includes/admin/pages/UserListTable.php:211
 msgid "Remove Users"
-msgstr "Supprimer les utilisateurs"
+msgstr "Supprimer les Utilisateurs"
 
 #: includes/admin/pages/UserListTable.php:270
 #: includes/admin/pages/UserListTable.php:295
 msgid "Security check"
-msgstr "Vérification de sécurité"
+msgstr "Vérification de Sécurité"
 
 #: includes/admin/pages/UserListTable.php:315
 msgid "Search User"
-msgstr "Rechercher un utilisateur"
+msgstr "Rechercher un Utilisateur"
 
 #: includes/admin/screens/ScreenAbout.php:34
 msgid "About plugin"
@@ -89,7 +89,7 @@ msgstr "À propos du plugin"
 
 #: includes/admin/screens/ScreenAbout.php:50
 msgid "About Our Plugin"
-msgstr "À propos de notre plugin"
+msgstr "À Propos de Notre Plugin"
 
 #: includes/admin/screens/ScreenAbout.php:54
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
@@ -97,11 +97,11 @@ msgstr "Bienvenue sur notre puissant plugin conçu pour améliorer votre expéri
 
 #: includes/admin/screens/ScreenAbout.php:57
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Notre plugin va au-delà du bureau en fournissant une API robuste qui permet à vos utilisateurs d'application mobile de visualiser facilement les soumissions de formulaires en déplacement. Intégrez notre plugin de manière transparente avec des constructeurs de formulaires populaires pour WordPress et accordez à vos utilisateurs la possibilité de superviser les soumissions de n'importe où."
+msgstr "Notre plugin va au-delà du bureau en fournissant une API robuste qui permet à vos utilisateurs d'application mobile de visualiser facilement les soumissions de formulaires en déplacement. Intégrez notre plugin de manière transparente avec les constructeurs de formulaires WordPress populaires et donnez à vos utilisateurs la possibilité de superviser les soumissions de n'importe où."
 
 #: includes/admin/screens/ScreenAbout.php:60
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Restez organisé, obtenez des informations et améliorez les interactions avec les utilisateurs, le tout depuis votre tableau de bord WordPress et grâce à notre API dédiée. Avec notre plugin convivial, vous pouvez rester en contrôle et transformer la manière dont vous gérez les soumissions de formulaires. Plongez dans les possibilités dès aujourd'hui et révolutionnez votre approche de la gestion des formulaires."
+msgstr "Restez organisé, obtenez des informations et améliorez les interactions avec les utilisateurs, le tout dans votre tableau de bord WordPress et grâce à notre API dédiée. Avec notre plugin convivial, restez en contrôle et transformez la manière dont vous gérez les soumissions de formulaires. Plongez dans les possibilités dès aujourd'hui et révolutionnez votre approche de la gestion des formulaires !"
 
 #: includes/admin/screens/ScreenAbout.php:65
 msgid "Supported plugins:"
@@ -113,7 +113,7 @@ msgstr "Connexion"
 
 #: includes/admin/screens/ScreenMobileLogin.php:56
 msgid "Scan the following QR Code using the AFA app."
-msgstr "Numérisez le code QR suivant à l'aide de l'application AFA."
+msgstr "Scannez le code QR suivant à l'aide de l'application AFA."
 
 #: includes/admin/screens/ScreenStaff.php:37
 msgid "Staff"
@@ -121,20 +121,20 @@ msgstr "Personnel"
 
 #: includes/admin/screens/ScreenStaff.php:55
 msgid "Manage User Permissions"
-msgstr "Gérer les autorisations d'utilisateur"
+msgstr "Gérer les Permissions de l'Utilisateur"
 
 #: includes/admin/screens/ScreenStaff.php:64
 msgid "Save Changes"
-msgstr "Enregistrer les modifications"
+msgstr "Enregistrer les Modifications"
 
 #: includes/admin/screens/ScreenStaff.php:88
 #: includes/admin/screens/ScreenStaff.php:119
 msgid "Add Users"
-msgstr "Ajouter des utilisateurs"
+msgstr "Ajouter des Utilisateurs"
 
 #: includes/admin/screens/ScreenStaff.php:121
 msgid "To allow non-admin users to access this app, grant them the required permission"
-msgstr "Pour permettre aux utilisateurs non administrateurs d'accéder à cette application, accordez-leur les autorisations nécessaires"
+msgstr "Pour permettre aux utilisateurs non-administrateurs d'accéder à cette application, accordez-leur la permission nécessaire"
 
 #. translators: %1$s is replaced with the entry_id.
 #: includes/models/NotificationModel.php:155
@@ -153,7 +153,7 @@ msgstr "{bold}%1$s{/bold} a rempli un nouveau formulaire : {bold}%2$s{/bold}"
 #: includes/plugins/notification/WEFNotification.php:79
 #: includes/plugins/notification/WPFNotification.php:79
 msgid "New Form Submission Received from %1$s. Open app to view"
-msgstr "Nouvelle soumission de formulaire reçue de %1$s. Ouvrez l'application pour afficher"
+msgstr "Nouvelle soumission de formulaire reçue de %1$s. Ouvrez l'application pour voir"
 
 #: includes/plugins/notification/CF7Notification.php:80
 #: includes/plugins/notification/EFBNotification.php:81
@@ -161,4 +161,4 @@ msgstr "Nouvelle soumission de formulaire reçue de %1$s. Ouvrez l'application p
 #: includes/plugins/notification/WEFNotification.php:81
 #: includes/plugins/notification/WPFNotification.php:81
 msgid "New Form Submission"
-msgstr "Nouvelle soumission de formulaire"
+msgstr "Nouvelle Soumission de Formulaire"

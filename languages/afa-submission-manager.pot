@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-25T18:58:44+00:00\n"
+"POT-Creation-Date: 2023-11-29T14:12:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: afa-submission-manager\n"
@@ -137,28 +137,28 @@ msgid "To allow non-admin users to access this app, grant them the required perm
 msgstr ""
 
 #. translators: %1$s is replaced with the entry_id.
-#: includes/models/NotificationModel.php:155
+#: includes/models/NotificationModel.php:147
 msgid "Someone filled out a new form: {bold}%1$s{/bold}"
 msgstr ""
 
 #. translators: %1$s is replaced with the user_name and %1$s entry_id.
-#: includes/models/NotificationModel.php:158
+#: includes/models/NotificationModel.php:150
 msgid "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
 msgstr ""
 
 #. translators: %1$s is replaced with the site name.
-#: includes/plugins/notification/CF7Notification.php:78
-#: includes/plugins/notification/EFBNotification.php:79
-#: includes/plugins/notification/GFNotification.php:80
-#: includes/plugins/notification/WEFNotification.php:79
-#: includes/plugins/notification/WPFNotification.php:79
+#: includes/plugins/notification/CF7Notification.php:70
+#: includes/plugins/notification/EFBNotification.php:71
+#: includes/plugins/notification/GFNotification.php:72
+#: includes/plugins/notification/WEFNotification.php:72
+#: includes/plugins/notification/WPFNotification.php:71
 msgid "New Form Submission Received from %1$s. Open app to view"
 msgstr ""
 
-#: includes/plugins/notification/CF7Notification.php:80
-#: includes/plugins/notification/EFBNotification.php:81
-#: includes/plugins/notification/GFNotification.php:82
-#: includes/plugins/notification/WEFNotification.php:81
-#: includes/plugins/notification/WPFNotification.php:81
+#: includes/plugins/notification/CF7Notification.php:72
+#: includes/plugins/notification/EFBNotification.php:73
+#: includes/plugins/notification/GFNotification.php:74
+#: includes/plugins/notification/WEFNotification.php:74
+#: includes/plugins/notification/WPFNotification.php:73
 msgid "New Form Submission"
 msgstr ""

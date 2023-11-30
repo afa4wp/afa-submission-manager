@@ -4,13 +4,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AFA - Mobile-Ready Submission Manager 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: VOLLER NAME <EMAIL@ADRESSE>\n"
+"Language-Team: SPRACHE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-25T18:58:44+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2023-11-29T14:12:53+00:00\n"
+"PO-Revision-Date: JAHR-MO-TAG STU:MI+FUSEAU\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: afa-submission-manager\n"
 
@@ -24,7 +24,7 @@ msgstr ""
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Vereinfachen Sie das Formularmanagement und gewinnen Sie Einblicke mit unserem leistungsstarken WordPress-Plugin."
+msgstr "Vereinfachen Sie das Formularmanagement und gewinnen Sie Einblicke mit unserem robusten WordPress-Plugin."
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
@@ -77,7 +77,7 @@ msgstr "Benutzer entfernen"
 #: includes/admin/pages/UserListTable.php:270
 #: includes/admin/pages/UserListTable.php:295
 msgid "Security check"
-msgstr "Sicherheitsprüfung"
+msgstr "Sicherheitsüberprüfung"
 
 #: includes/admin/pages/UserListTable.php:315
 msgid "Search User"
@@ -93,15 +93,15 @@ msgstr "Über unser Plugin"
 
 #: includes/admin/screens/ScreenAbout.php:54
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
-msgstr "Willkommen bei unserem leistungsstarken Plugin, das entwickelt wurde, um Ihre Erfahrung im Formularmanagement zu verbessern. Unser Plugin wurde entwickelt, um das Management von Formulareinträgen zu vereinfachen und Ihnen die Werkzeuge zur Verfügung zu stellen, die Sie benötigen, um den Prozess zu optimieren und Zeit zu sparen."
+msgstr "Willkommen bei unserem leistungsstarken Plugin, das entwickelt wurde, um Ihre Erfahrung im Formularmanagement zu verbessern. Unser Plugin ist darauf ausgelegt, die Verwaltung von Formulareingaben zu vereinfachen und Ihnen die Werkzeuge zur Verfügung zu stellen, die Sie benötigen, um den Prozess zu optimieren und Zeit zu sparen."
 
 #: includes/admin/screens/ScreenAbout.php:57
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Unser Plugin geht über den Desktop hinaus, indem es eine leistungsstarke API bereitstellt, die es Ihren mobilen App-Benutzern ermöglicht, Formularübermittlungen mühelos unterwegs zu sehen. Integrieren Sie unser Plugin nahtlos mit beliebten WordPress-Formularentwicklern und gewähren Sie Ihren Benutzern die Möglichkeit, Übermittlungen von überall aus zu überwachen."
+msgstr "Unser Plugin geht über den Desktop hinaus, indem es eine robuste API bereitstellt, die es Ihren mobilen App-Benutzern ermöglicht, Formulareinreichungen mühelos unterwegs anzusehen. Integrieren Sie unser Plugin nahtlos mit beliebten WordPress-Formularerstellern und gewähren Sie Ihren Benutzern die Möglichkeit, Einreichungen von überall aus zu überwachen."
 
 #: includes/admin/screens/ScreenAbout.php:60
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Bleiben Sie organisiert, gewinnen Sie Einblicke und verbessern Sie die Benutzerinteraktionen, alles innerhalb Ihres WordPress-Dashboards und durch unsere dedizierte API. Mit unserem benutzerfreundlichen Plugin können Sie die Kontrolle behalten und die Art und Weise, wie Sie Formularübermittlungen verwalten, transformieren. Tauchen Sie noch heute in die Möglichkeiten ein und revolutionieren Sie Ihre Herangehensweise an das Formularmanagement!"
+msgstr "Bleiben Sie organisiert, gewinnen Sie Einblicke und verbessern Sie die Benutzerinteraktionen, alles innerhalb Ihres WordPress-Dashboards und durch unsere dedizierte API. Mit unserem benutzerfreundlichen Plugin können Sie die Kontrolle behalten und die Art und Weise, wie Sie Formulareinreichungen verwalten, transformieren. Tauchen Sie noch heute in die Möglichkeiten ein und revolutionieren Sie Ihre Herangehensweise an das Formularmanagement!"
 
 #: includes/admin/screens/ScreenAbout.php:65
 msgid "Supported plugins:"
@@ -153,7 +153,7 @@ msgstr "{bold}%1$s{/bold} hat ein neues Formular ausgefüllt: {bold}%2$s{/bold}"
 #: includes/plugins/notification/WEFNotification.php:79
 #: includes/plugins/notification/WPFNotification.php:79
 msgid "New Form Submission Received from %1$s. Open app to view"
-msgstr "Neue Formularübermittlung von %1$s erhalten. App öffnen, um anzuzeigen"
+msgstr "Neue Formularübermittlung von %1$s erhalten. Öffnen Sie die App, um anzuzeigen"
 
 #: includes/plugins/notification/CF7Notification.php:80
 #: includes/plugins/notification/EFBNotification.php:81
