@@ -8,7 +8,7 @@
 
 namespace Includes\Models\WPF;
 
-use Includes\Plugins\Helpers\FormModelHelper;
+use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
 use Includes\Models\AbstractFormModel;
 use Includes\Models\UserModel;
 
@@ -29,9 +29,9 @@ class FormModel extends AbstractFormModel {
 	const SHORTCODE = 'wpforms';
 
 	/**
-	 * The FormModelHelper
+	 * The AFASM_Form_Model_Helper
 	 *
-	 * @var FormModelHelper
+	 * @var AFASM_Form_Model_Helper
 	 */
 	public $form_model_helper;
 
@@ -39,7 +39,7 @@ class FormModel extends AbstractFormModel {
 	 * Form model constructor
 	 */
 	public function __construct() {
-		$this->form_model_helper = new FormModelHelper( self::SHORTCODE );
+		$this->form_model_helper = new AFASM_Form_Model_Helper( self::SHORTCODE );
 	}
 
 	/**

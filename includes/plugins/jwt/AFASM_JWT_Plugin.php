@@ -2,30 +2,31 @@
 /**
  * The JWTPlugin handler
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\JWT;
+namespace AFASM\Includes\Plugins\JWT;
 
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Includes\Plugins\PublicRoute;
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Public_Route;
+use AFASM\Includes\Plugins\AFASM_Constant;
 use WP_Error;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
- * Class JWTPlugin
+ * Class AFASM_JWT_Plugin
  *
  * Handler with token
  *
  * @since 1.0.0
  */
-class JWTPlugin {
+class AFASM_JWT_Plugin {
 
 	/**
 	 * The route name space
@@ -35,10 +36,10 @@ class JWTPlugin {
 	private $namespace;
 
 	/**
-	 * JWTPlugin constructor.
+	 * AFASM_JWT_Plugin constructor.
 	 */
 	public function __construct() {
-		$this->namespace = Constant::API_NAMESPACE . '/' . Constant::API_VERSION;
+		$this->namespace = AFASM_Constant::API_NAMESPACE . '/' . AFASM_Constant::API_VERSION;
 	}
 
 	/**
@@ -50,7 +51,7 @@ class JWTPlugin {
 	 */
 	public function generate_token( $id ) {
 		$issued_at           = time();
-		$exp_token_in_minute = Constant::API_ACCESS_EXP_TOKEN_IN_MINUTE;
+		$exp_token_in_minute = AFASM_Constant::API_ACCESS_EXP_TOKEN_IN_MINUTE;
 
 		if ( empty( $exp_token_in_minute ) || ! is_numeric( $exp_token_in_minute ) ) {
 			$exp_token_in_minute = 15;
@@ -81,7 +82,7 @@ class JWTPlugin {
 	 */
 	public function generate_refresh_token( $id ) {
 		$issued_at           = time();
-		$exp_token_in_minute = Constant::API_REFRESH_EXP_TOKEN_IN_MINUTE;
+		$exp_token_in_minute = AFASM_Constant::API_REFRESH_EXP_TOKEN_IN_MINUTE;
 
 		if ( empty( $exp_token_in_minute ) || ! is_numeric( $exp_token_in_minute ) ) {
 			$exp_token_in_minute = 43200;
@@ -200,7 +201,7 @@ class JWTPlugin {
 
 			if ( strpos( $url, $explode_namespace[0] ) !== false ) {
 
-				$public_route = new PublicRoute( $this->namespace );
+				$public_route = new AFASM_Public_Route( $this->namespace );
 
 				$require_token = ! $public_route->is_public_route( substr( $url, 1 ) );
 

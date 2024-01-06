@@ -2,22 +2,24 @@
 /**
  * The Pulbic Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins;
+namespace AFASM\Includes\Plugins;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
- * Class Route
+ * Class Public Route
  *
  * Init all public routes
  *
  * @since 1.0.0
  */
-class PublicRoute {
+class AFASM_Public_Route {
 
 	/**
 	 * The slugs in the URL before the endpoint.

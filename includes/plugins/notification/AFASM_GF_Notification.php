@@ -1,30 +1,30 @@
 <?php
 /**
- * The WEF Notification Class.
+ * The GF Notification Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Notification;
+namespace AFASM\Includes\Plugins\Notification;
 
 use Includes\Models\UserDevicesModel;
-use Includes\Plugins\Language;
-use Includes\Plugins\Notification\AbstractFormNotification;
+use AFASM\Includes\Plugins\Notification\AFASM_Abstract_Form_Notification;
 use Includes\Models\SupportedPluginsModel;
-use Includes\Models\WEF\EntryModel;
+use Includes\Models\GF\EntryModel;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
- * Class WEFNotification
+ * Class GFNotification
  *
- * Manipulate WEF Notification
+ * Manipulate GF Notification
  *
  * @since 1.0.0
  */
-class WEFNotification extends AbstractFormNotification {
+class AFASM_GF_Notification extends AFASM_Abstract_Form_Notification {
 
 	/**
 	 * Send push notification in bulk
@@ -36,7 +36,7 @@ class WEFNotification extends AbstractFormNotification {
 	 */
 	public function create( $meta_value, $user_id = null ) {
 
-		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'wef' );
+		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'gf' );
 		$supported_plugin_id              = 0;
 
 		if ( ! empty( $supported_plugins_model_register ) ) {
@@ -44,6 +44,7 @@ class WEFNotification extends AbstractFormNotification {
 		}
 
 		$notification_type_id = $this->get_form_submission_notification_type_id();
+
 		$this->notifiacation->create( $notification_type_id, $meta_value, $supported_plugin_id, $user_id );
 
 		$items = $this->prepare_push_notification( $notification_type_id, $meta_value, $user_id );
@@ -89,16 +90,16 @@ class WEFNotification extends AbstractFormNotification {
 	/**
 	 * Load hooks for notifications
 	 *
-	 * @param int   $entry_id      The ID of the submitted entry.
-	 * @param int   $form_id       The ID of the form that the submission belongs to.
-	 * @param int   $page_id       The ID of the page where the form is embedded (if applicable).
-	 * @param array $form_settings The settings of the form.
+	 * @param array $entry_gf The GF entry.
+	 * @param array $form The GF $form.
 	 *
 	 * @return void
 	 */
-	public function submission_notification( $entry_id, $form_id, $page_id, $form_settings ) {
+	public function submission_notification( $entry_gf, $form ) {
+		$post_id = $entry_gf['id'];
+
 		$entry_model = new EntryModel();
-		$entry       = $entry_model->entry_by_id( $entry_id );
+		$entry       = $entry_model->entry_by_id( $post_id );
 
 		if ( ! empty( $entry ) ) {
 
@@ -121,7 +122,7 @@ class WEFNotification extends AbstractFormNotification {
 	 * @return void
 	 */
 	public function loads_hooks() {
-		add_action( 'weforms_entry_submission', array( $this, 'submission_notification' ), 10, 4 );
+		add_action( 'gform_after_submission', array( $this, 'submission_notification' ), 10, 2 );
 	}
 
 }

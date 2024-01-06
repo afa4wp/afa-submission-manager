@@ -8,7 +8,7 @@
 
 namespace Includes\Controllers;
 
-use Includes\Plugins\Helpers\Pagination;
+use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -32,7 +32,7 @@ abstract class AbstractEntryControllers {
 	/**
 	 * The route name space
 	 *
-	 * @var Pagination
+	 * @var AFASM_Pagination
 	 */
 	protected $pagination_helper;
 
@@ -40,7 +40,7 @@ abstract class AbstractEntryControllers {
 	 * Form Controllers constructor
 	 */
 	public function __construct() {
-		$this->pagination_helper          = new Pagination();
+		$this->pagination_helper          = new AFASM_Pagination();
 		$this->number_of_records_per_page = $this->pagination_helper->get_number_of_records_per_page();
 	}
 

@@ -9,7 +9,7 @@
 namespace Includes\Admin\Screens;
 
 use Includes\Admin\Screens\Screen;
-use Includes\Plugins\QRCode;
+use AFASM\Includes\Plugins\AFASM_QR_Code;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -47,7 +47,7 @@ class ScreenMobileLogin extends Screen {
 	 */
 	public function render() {
 
-		$qr_code           = new QRCode();
+		$qr_code           = new AFASM_QR_Code();
 		$generated_qr_code = $qr_code->generate_qr_code();
 
 		?>

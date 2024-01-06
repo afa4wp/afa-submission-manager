@@ -19,9 +19,8 @@ use Includes\Routes\WPF\Route as WPFRoute;
 use Includes\Routes\WEF\Route as WEFRoute;
 use Includes\Routes\CF7\Route as CF7Route;
 use Includes\Routes\EFB\Route as EFBRoute;
-use Includes\Plugins\Constant;
-use Includes\Plugins\Config;
-use phpDocumentor\Reflection\Types\This;
+use AFASM\Includes\Plugins\AFASM_Constant;
+use AFASM\Includes\Plugins\AFASM_Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -78,11 +77,11 @@ class Route {
 	 */
 	public function get_form_route( $key ) {
 		$forms = array(
-			Constant::FORM_SLUG_CF7 => new CF7Route( $this->name ),
-			Constant::FORM_SLUG_GF  => new GFRoute( $this->name ),
-			Constant::FORM_SLUG_WEF => new WEFRoute( $this->name ),
-			Constant::FORM_SLUG_WPF => new WPFRoute( $this->name ),
-			Constant::FORM_SLUG_EFB => new EFBRoute( $this->name ),
+			AFASM_Constant::FORM_SLUG_CF7 => new CF7Route( $this->name ),
+			AFASM_Constant::FORM_SLUG_GF  => new GFRoute( $this->name ),
+			AFASM_Constant::FORM_SLUG_WEF => new WEFRoute( $this->name ),
+			AFASM_Constant::FORM_SLUG_WPF => new WPFRoute( $this->name ),
+			AFASM_Constant::FORM_SLUG_EFB => new EFBRoute( $this->name ),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {
@@ -98,7 +97,7 @@ class Route {
 	 * @since 1.0.0
 	 */
 	public function init_all_forms_routes() {
-		$forms = ( new Config() )->installed_forms();
+		$forms = ( new AFASM_Config() )->installed_forms();
 
 		foreach ( $forms as $key => $value ) {
 			$form_route = $this->get_form_route( $key );

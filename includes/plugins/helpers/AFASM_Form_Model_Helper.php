@@ -2,14 +2,18 @@
 /**
  * The Form Model Helper Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Helpers;
+namespace AFASM\Includes\Plugins\Helpers;
 
 use WP_Query;
-use Includes\Plugins\Helpers\Pagination;
+use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * Class FormModelHelper
@@ -18,7 +22,7 @@ use Includes\Plugins\Helpers\Pagination;
  *
  * @since 1.0.0
  */
-class FormModelHelper {
+class AFASM_Form_Model_Helper {
 
 	/**
 	 * The post_type
@@ -71,7 +75,7 @@ class FormModelHelper {
 			array(
 				'post_type'      => $this->post_type,
 				'posts_per_page' => $number_of_records_per_page,
-				'paged'          => ( new Pagination() )->get_page( $offset ),
+				'paged'          => ( new AFASM_Pagination() )->get_page( $offset ),
 				'post_status'    => array( 'publish' ),
 			)
 		);
@@ -111,7 +115,7 @@ class FormModelHelper {
 			array(
 				'post_type'      => $this->post_type,
 				'posts_per_page' => $number_of_records_per_page,
-				'paged'          => ( new Pagination() )->get_page( $offset ),
+				'paged'          => ( new AFASM_Pagination() )->get_page( $offset ),
 				'post_status'    => array( 'publish' ),
 				's'              => $post_title,
 			)

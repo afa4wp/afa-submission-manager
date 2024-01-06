@@ -2,19 +2,19 @@
 /**
  * The Push Notification Plugin Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Notification;
+namespace AFASM\Includes\Plugins\Notification;
 
 use ExpoSDK\Expo;
 use ExpoSDK\ExpoMessage;
 use Includes\Models\UserDevicesModel;
-use Exception;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 Expo::addDevicesNotRegisteredHandler(
 	function ( $tokens ) {
@@ -36,7 +36,7 @@ Expo::addDevicesNotRegisteredHandler(
  *
  * @since 1.0.0
  */
-class PushNotificationPlugin {
+class AFASM_Push_Notification_Plugin {
 
 	/**
 	 * Send push notification

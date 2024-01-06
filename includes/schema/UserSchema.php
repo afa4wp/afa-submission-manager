@@ -8,7 +8,7 @@
 
 namespace Includes\Schema;
 
-use Includes\Plugins\Config;
+use AFASM\Includes\Plugins\AFASM_Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -106,7 +106,7 @@ class UserSchema {
 				'required'          => true,
 				'type'              => 'string',
 				'validate_callback' => function ( $value, $request, $key ) {
-					return ( new Config() )->is_plugin_key_exists( $value );
+					return ( new AFASM_Config() )->is_plugin_key_exists( $value );
 				},
 			),
 		);

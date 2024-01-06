@@ -2,11 +2,11 @@
 /**
  * The Config Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins;
+namespace AFASM\Includes\Plugins;
 
 use Includes\Models\CF7\FormModel as CF7FormModel;
 use Includes\Models\GF\FormModel as GFFormModel;
@@ -19,22 +19,23 @@ use Includes\Models\WEF\EntryModel as WEFEntryModel;
 use Includes\Models\WPF\EntryModel as WPFEntryModel;
 use Includes\Models\EFB\EntryModel as EFBEntryModel;
 use Includes\Models\UserModel;
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 /**
- * Class Route
+ * Class AFASM_Config
  *
  * Create config info
  *
  * @since 1.0.0
  */
-class Config {
+class AFASM_Config {
 
 	/**
 	 * Plugins.
@@ -42,11 +43,11 @@ class Config {
 	 * @var array
 	 */
 	const PLUGINS = array(
-		Constant::FORM_SLUG_CF7 => 'contact-form-7/wp-contact-form-7.php',
-		Constant::FORM_SLUG_GF  => 'gravityforms/gravityforms.php',
-		Constant::FORM_SLUG_WEF => 'weforms/weforms.php',
-		Constant::FORM_SLUG_WPF => 'wpforms/wpforms.php',
-		Constant::FORM_SLUG_EFB => 'elementor-pro/elementor-pro.php',
+		AFASM_Constant::FORM_SLUG_CF7 => 'contact-form-7/wp-contact-form-7.php',
+		AFASM_Constant::FORM_SLUG_GF  => 'gravityforms/gravityforms.php',
+		AFASM_Constant::FORM_SLUG_WEF => 'weforms/weforms.php',
+		AFASM_Constant::FORM_SLUG_WPF => 'wpforms/wpforms.php',
+		AFASM_Constant::FORM_SLUG_EFB => 'elementor-pro/elementor-pro.php',
 	);
 
 	/**
@@ -55,8 +56,8 @@ class Config {
 	 * @var array
 	 */
 	const PLUGINS_LITE = array(
-		Constant::FORM_SLUG_WPF => 'wpforms-lite/wpforms.php',
-		Constant::FORM_SLUG_EFB => 'elementor/elementor.php',
+		AFASM_Constant::FORM_SLUG_WPF => 'wpforms-lite/wpforms.php',
+		AFASM_Constant::FORM_SLUG_EFB => 'elementor/elementor.php',
 	);
 
 	/**
@@ -66,14 +67,14 @@ class Config {
 		$plugins = $this->get_installed_plugins_from_array( self::PLUGINS );
 		$lite    = $this->get_installed_plugins_from_array( self::PLUGINS_LITE );
 
-		if ( ! isset( $plugins[ Constant::FORM_SLUG_WPF ] ) && ! isset( $lite[ Constant::FORM_SLUG_WPF ] ) ) {
-			unset( $plugins[ Constant::FORM_SLUG_WPF ] );
+		if ( ! isset( $plugins[ AFASM_Constant::FORM_SLUG_WPF ] ) && ! isset( $lite[ AFASM_Constant::FORM_SLUG_WPF ] ) ) {
+			unset( $plugins[ AFASM_Constant::FORM_SLUG_WPF ] );
 		}
-		if ( isset( $plugins[ Constant::FORM_SLUG_CF7 ] ) && ! is_plugin_active( 'flamingo/flamingo.php' ) ) {
-			unset( $plugins[ Constant::FORM_SLUG_CF7 ] );
+		if ( isset( $plugins[ AFASM_Constant::FORM_SLUG_CF7 ] ) && ! is_plugin_active( 'flamingo/flamingo.php' ) ) {
+			unset( $plugins[ AFASM_Constant::FORM_SLUG_CF7 ] );
 		}
-		if ( isset( $plugins[ Constant::FORM_SLUG_EFB ] ) && ! isset( $lite[ Constant::FORM_SLUG_EFB ] ) ) {
-			unset( $plugins[ Constant::FORM_SLUG_EFB ] );
+		if ( isset( $plugins[ AFASM_Constant::FORM_SLUG_EFB ] ) && ! isset( $lite[ AFASM_Constant::FORM_SLUG_EFB ] ) ) {
+			unset( $plugins[ AFASM_Constant::FORM_SLUG_EFB ] );
 		}
 
 		return $plugins;
@@ -151,11 +152,11 @@ class Config {
 	 */
 	public function form_model( $key ) {
 		$forms = array(
-			Constant::FORM_SLUG_CF7 => new CF7FormModel(),
-			Constant::FORM_SLUG_GF  => new GFFormModel(),
-			Constant::FORM_SLUG_WEF => new WEFFormModel(),
-			Constant::FORM_SLUG_WPF => new WPFFormModel(),
-			Constant::FORM_SLUG_EFB => new EFBFormModel(),
+			AFASM_Constant::FORM_SLUG_CF7 => new CF7FormModel(),
+			AFASM_Constant::FORM_SLUG_GF  => new GFFormModel(),
+			AFASM_Constant::FORM_SLUG_WEF => new WEFFormModel(),
+			AFASM_Constant::FORM_SLUG_WPF => new WPFFormModel(),
+			AFASM_Constant::FORM_SLUG_EFB => new EFBFormModel(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {
@@ -176,11 +177,11 @@ class Config {
 	 */
 	public function entry_model( $key ) {
 		$forms = array(
-			Constant::FORM_SLUG_CF7 => new CF7EntryModel(),
-			Constant::FORM_SLUG_GF  => new GFEntryModel(),
-			Constant::FORM_SLUG_WEF => new WEFEntryModel(),
-			Constant::FORM_SLUG_WPF => new WPFEntryModel(),
-			Constant::FORM_SLUG_EFB => new EFBEntryModel(),
+			AFASM_Constant::FORM_SLUG_CF7 => new CF7EntryModel(),
+			AFASM_Constant::FORM_SLUG_GF  => new GFEntryModel(),
+			AFASM_Constant::FORM_SLUG_WEF => new WEFEntryModel(),
+			AFASM_Constant::FORM_SLUG_WPF => new WPFEntryModel(),
+			AFASM_Constant::FORM_SLUG_EFB => new EFBEntryModel(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {

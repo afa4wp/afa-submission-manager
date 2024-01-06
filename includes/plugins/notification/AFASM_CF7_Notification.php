@@ -1,29 +1,29 @@
 <?php
 /**
- * The GF Notification Class.
+ * The CF7 Notification Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Notification;
+namespace AFASM\Includes\Plugins\Notification;
 
 use Includes\Models\UserDevicesModel;
-use Includes\Plugins\Notification\AbstractFormNotification;
+use AFASM\Includes\Plugins\Notification\AFASM_Abstract_Form_Notification;
 use Includes\Models\SupportedPluginsModel;
-use Includes\Models\GF\EntryModel;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
- * Class GFNotification
+ * Class CF7Notification
  *
- * Manipulate GF Notification
+ * Manipulate CF7 Notification
  *
  * @since 1.0.0
  */
-class GFNotification extends AbstractFormNotification {
+class AFASM_CF7_Notification extends AFASM_Abstract_Form_Notification {
 
 	/**
 	 * Send push notification in bulk
@@ -35,7 +35,7 @@ class GFNotification extends AbstractFormNotification {
 	 */
 	public function create( $meta_value, $user_id = null ) {
 
-		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'gf' );
+		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'cf7' );
 		$supported_plugin_id              = 0;
 
 		if ( ! empty( $supported_plugins_model_register ) ) {
@@ -43,7 +43,6 @@ class GFNotification extends AbstractFormNotification {
 		}
 
 		$notification_type_id = $this->get_form_submission_notification_type_id();
-
 		$this->notifiacation->create( $notification_type_id, $meta_value, $supported_plugin_id, $user_id );
 
 		$items = $this->prepare_push_notification( $notification_type_id, $meta_value, $user_id );
@@ -89,27 +88,22 @@ class GFNotification extends AbstractFormNotification {
 	/**
 	 * Load hooks for notifications
 	 *
-	 * @param array $entry_gf The GF entry.
-	 * @param array $form The GF $form.
+	 * @param int $post_id The post id.
 	 *
 	 * @return void
 	 */
-	public function submission_notification( $entry_gf, $form ) {
-		$post_id = $entry_gf['id'];
+	public function submission_notification( $post_id ) {
+		$post_type = get_post_type( $post_id );
 
-		$entry_model = new EntryModel();
-		$entry       = $entry_model->entry_by_id( $post_id );
+		if ( 'flamingo_inbound' === $post_type ) {
+			$notification_data = array();
 
-		if ( ! empty( $entry ) ) {
+			$flamingo_post = get_post( $post_id );
 
-			$notification_data['entry_id']    = (int) $entry['id'];
-			$notification_data['post_type']   = '';
-			$notification_data['post_tiltle'] = '';
-
-			$notification_data['user_id'] = null;
-			if ( ! empty( $entry['created_by'] ) ) {
-				$notification_data['user_id'] = (int) $entry['created_by'];
-			}
+			$notification_data['entry_id']    = $post_id;
+			$notification_data['post_type']   = 'flamingo_inbound';
+			$notification_data['post_tiltle'] = $flamingo_post->post_title;
+			$notification_data['user_id']     = $flamingo_post->post_author;
 
 			$this->create( $notification_data, $notification_data['user_id'] );
 		}
@@ -121,7 +115,7 @@ class GFNotification extends AbstractFormNotification {
 	 * @return void
 	 */
 	public function loads_hooks() {
-		add_action( 'gform_after_submission', array( $this, 'submission_notification' ), 10, 2 );
+		add_action( 'wp_insert_post', array( $this, 'submission_notification' ), 10, 1 );
 	}
 
 }

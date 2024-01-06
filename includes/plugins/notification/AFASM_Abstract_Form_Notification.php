@@ -2,20 +2,19 @@
 /**
  * The Abstract Form Notification Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Notification;
+namespace AFASM\Includes\Plugins\Notification;
 
 use Includes\Models\NotificationModel;
 use Includes\Models\NotificationTypeModel;
-use Includes\Models\UserDevicesModel;
-use Includes\Plugins\Notification\PushNotificationPlugin;
-use Includes\Plugins\Language;
+use AFASM\Includes\Plugins\Notification\AFASM_Push_Notification_Plugin;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * Class AbstractFormNotification
@@ -24,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class AbstractFormNotification {
+abstract class AFASM_Abstract_Form_Notification {
 
 	/**
 	 * Table name
@@ -36,7 +35,7 @@ abstract class AbstractFormNotification {
 	/**
 	 * Table name
 	 *
-	 * @var PushNotificationPlugin
+	 * @var AFASM_Push_Notification_Plugin
 	 */
 	public $push_notification;
 
@@ -45,7 +44,7 @@ abstract class AbstractFormNotification {
 	 */
 	public function __construct() {
 		$this->notifiacation     = new NotificationModel();
-		$this->push_notification = new PushNotificationPlugin();
+		$this->push_notification = new AFASM_Push_Notification_Plugin();
 	}
 
 	/**

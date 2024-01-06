@@ -2,11 +2,15 @@
 /**
  * The  FormsShortcodeFinder Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Helpers;
+namespace AFASM\Includes\Plugins\Helpers;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * Class Pagination
@@ -15,7 +19,7 @@ namespace Includes\Plugins\Helpers;
  *
  * @since 1.0.0
  */
-class FormsShortcodeFinder {
+class AFASM_Forms_Shortcode_Finder {
 	/**
 	 * ID of the Gravity Form to search for.
 	 *

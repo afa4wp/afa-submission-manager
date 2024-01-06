@@ -8,7 +8,7 @@
 
 namespace Includes\Database;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -34,7 +34,7 @@ class SupportedPlugins {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::TABLE_SUPPORTED_PLUGINS;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_SUPPORTED_PLUGINS;
 	}
 
 	/**

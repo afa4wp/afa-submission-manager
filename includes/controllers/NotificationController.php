@@ -9,7 +9,7 @@
 namespace Includes\Controllers;
 
 use Includes\Models\NotificationModel;
-use Includes\Plugins\Helpers\Pagination;
+use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
 use Includes\Models\SupportedPluginsModel;
 
 // Exit if accessed directly.
@@ -33,7 +33,7 @@ class NotificationController {
 	/**
 	 * The pagination helper
 	 *
-	 * @var Pagination
+	 * @var AFASM_Pagination
 	 */
 	protected $pagination_helper;
 
@@ -42,7 +42,7 @@ class NotificationController {
 	 */
 	public function __construct() {
 		$this->notification_model = new NotificationModel();
-		$this->pagination_helper  = new Pagination();
+		$this->pagination_helper  = new AFASM_Pagination();
 	}
 
 	/**

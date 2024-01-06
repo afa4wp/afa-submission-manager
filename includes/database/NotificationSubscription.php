@@ -8,7 +8,7 @@
 
 namespace Includes\Database;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -34,7 +34,7 @@ class NotificationSubscription {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
 	}
 
 	/**
@@ -51,8 +51,8 @@ class NotificationSubscription {
 		notification_type_id BIGINT(20) NOT NULL,
 		enabled BOOLEAN,
         PRIMARY KEY(id),
-        FOREIGN KEY(user_devices_id) REFERENCES ' . $wpdb->prefix . Constant::TABLE_USER_DEVICE . '(id) ON DELETE CASCADE,
-		FOREIGN KEY(notification_type_id) REFERENCES ' . $wpdb->prefix . Constant::TABLE_NOTIFICATION_TYPE . '(id),
+        FOREIGN KEY(user_devices_id) REFERENCES ' . $wpdb->prefix . AFASM_Constant::TABLE_USER_DEVICE . '(id) ON DELETE CASCADE,
+		FOREIGN KEY(notification_type_id) REFERENCES ' . $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE . '(id),
         UNIQUE(user_devices_id, notification_type_id)
       )' . $wpdb->get_charset_collate();
 

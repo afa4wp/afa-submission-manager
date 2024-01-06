@@ -8,7 +8,7 @@
 
 namespace Includes\Models\EFB;
 
-use Includes\Plugins\Helpers\FormModelHelper;
+use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
 use Includes\Models\AbstractFormModel;
 use Includes\Models\UserModel;
 use Includes\Models\EFB\EntryModel;
@@ -35,9 +35,9 @@ class FormModel extends AbstractFormModel {
 	const SHORTCODE = '';
 
 	/**
-	 * The FormModelHelper
+	 * The AFASM_Form_Model_Helper
 	 *
-	 * @var FormModelHelper
+	 * @var AFASM_Form_Model_Helper
 	 */
 	public $form_model_helper;
 
@@ -46,7 +46,7 @@ class FormModel extends AbstractFormModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->form_model_helper = new FormModelHelper( '' );
+		$this->form_model_helper = new AFASM_Form_Model_Helper( '' );
 	}
 
 	/**

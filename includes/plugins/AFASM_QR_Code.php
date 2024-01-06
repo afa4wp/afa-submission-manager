@@ -2,36 +2,37 @@
 /**
  * The QRCOde Plugin Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins;
+namespace AFASM\Includes\Plugins;
 
 use chillerlan\QRCode\QRCode as ChillerlanQRCode;
 use Includes\Models\UserQRCodeModel;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
- * Class QRCode
+ * Class AFASM_QR_Code
  *
- * Manipulate QRCode view
+ * Manipulate AFASM_QR_Code view
  *
  * @since 1.0.0
  */
-class QRCode {
+class AFASM_QR_Code {
 
 	/**
-	 * Class to generate QRCode
+	 * Class to generate AFASM_QR_Code
 	 *
 	 * @var ChillerlanQRCode
 	 */
 	private $chillerlan_qr_code;
 
 	/**
-	 * QRCode constructor.
+	 * AFASM_QR_Code constructor.
 	 */
 	public function __construct() {
 		$this->chillerlan_qr_code = new ChillerlanQRCode();

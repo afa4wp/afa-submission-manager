@@ -8,7 +8,7 @@
 
 namespace Includes\Controllers;
 
-use Includes\Plugins\Config;
+use AFASM\Includes\Plugins\AFASM_Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -33,7 +33,7 @@ class ConfigController {
 	 * ConfigController constructor.
 	 */
 	public function __construct() {
-		$this->config = new Config();
+		$this->config = new AFASM_Config();
 	}
 
 	/**

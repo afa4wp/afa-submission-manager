@@ -8,7 +8,7 @@
 
 namespace Includes\Models;
 
-use Includes\Plugins\Helpers\FormsShortcodeFinder;
+use AFASM\Includes\Plugins\Helpers\AFASM_Forms_Shortcode_Finder;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -80,7 +80,7 @@ abstract class AbstractFormModel {
 	 * @return array $forms AFA forms
 	 */
 	public function pages_links( $form_id, $shortcode_name ) {
-		$pages_with_form = ( new FormsShortcodeFinder( $form_id, $shortcode_name ) )->find();
+		$pages_with_form = ( new AFASM_Forms_Shortcode_Finder( $form_id, $shortcode_name ) )->find();
 
 		if ( empty( $pages_with_form ) ) {
 			return $pages_with_form;

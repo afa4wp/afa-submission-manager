@@ -9,7 +9,7 @@
 namespace Includes\Models\WEF;
 
 use Includes\Models\WEF\EntryModel;
-use Includes\Plugins\Helpers\FormModelHelper;
+use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
 use Includes\Models\AbstractFormModel;
 use Includes\Models\UserModel;
 
@@ -29,9 +29,9 @@ class FormModel extends AbstractFormModel {
 	const SHORTCODE = 'weforms';
 
 	/**
-	 * The FormModelHelper
+	 * The AFASM_Form_Model_Helper
 	 *
-	 * @var FormModelHelper
+	 * @var AFASM_Form_Model_Helper
 	 */
 	public $form_model_helper;
 
@@ -39,7 +39,7 @@ class FormModel extends AbstractFormModel {
 	 * Form model constructor
 	 */
 	public function __construct() {
-		$this->form_model_helper = new FormModelHelper( 'wpuf_contact_form' );
+		$this->form_model_helper = new AFASM_Form_Model_Helper( 'wpuf_contact_form' );
 	}
 
 	/**

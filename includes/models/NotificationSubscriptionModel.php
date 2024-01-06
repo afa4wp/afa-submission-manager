@@ -8,7 +8,7 @@
 
 namespace Includes\Models;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 use Includes\Models\UserDevicesModel;
 use Includes\Models\NotificationTypeModel;
 
@@ -36,7 +36,7 @@ class NotificationSubscriptionModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
 	}
 
 	/**
@@ -101,7 +101,7 @@ class NotificationSubscriptionModel {
 
 		$id = $device->id;
 
-		$table_notification_type = $wpdb->prefix . Constant::TABLE_NOTIFICATION_TYPE;
+		$table_notification_type = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE;
 		$sql                     = "SELECT afa_tns.id, afa_tns.user_devices_id, afa_tns.notification_type_id, afa_tns.enabled, afa_tnt.type, afa_tnt.title FROM {$this->table_name} afa_tns INNER JOIN {$table_notification_type} afa_tnt ON afa_tns.notification_type_id = afa_tnt.id WHERE afa_tns.user_devices_id=%d ";
 
 		$sql = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared

@@ -10,7 +10,7 @@ namespace Includes\Routes;
 
 use Includes\Controllers\UserController;
 use Includes\Schema\UserSchema;
-use Includes\Plugins\Config;
+use AFASM\Includes\Plugins\AFASM_Config;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -89,7 +89,7 @@ class UserRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new UserController(), 'user' ),
-					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 
 			)
@@ -107,7 +107,7 @@ class UserRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new UserController(), 'user_form_type_me' ),
-					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new UserSchema() )->form_type(),
 				),
 
@@ -144,7 +144,7 @@ class UserRoute {
 				array(
 					'methods'             => 'POST',
 					'callback'            => array( new UserController(), 'logout' ),
-					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new UserSchema() )->logout(),
 				),
 			)
@@ -162,7 +162,7 @@ class UserRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new UserController(), 'user_form_type_home' ),
-					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new UserSchema() )->form_type(),
 				),
 

@@ -11,7 +11,7 @@ namespace Includes\Models\GF;
 use Includes\Models\UserModel;
 use Includes\Models\GF\FormModel;
 use Includes\Models\AbstractEntryModel;
-use Includes\Plugins\Helpers\EntryModelHelper;
+use AFASM\Includes\Plugins\Helpers\AFASM_Entry_Model_Helper;
 
 /**
  * Class AbstractEntryModel
@@ -28,9 +28,9 @@ class EntryModel extends AbstractEntryModel {
 	public const TABLE_NAME = 'gf_entry';
 
 	/**
-	 * The EntryModelHelper
+	 * The AFASM_Entry_Model_Helper
 	 *
-	 * @var EntryModelHelper
+	 * @var AFASM_Entry_Model_Helper
 	 */
 	public $entry_model_helper;
 
@@ -46,7 +46,7 @@ class EntryModel extends AbstractEntryModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->entry_model_helper     = new EntryModelHelper( self::TABLE_NAME );
+		$this->entry_model_helper     = new AFASM_Entry_Model_Helper( self::TABLE_NAME );
 		$this->table_name_with_prefix = $wpdb->prefix . self::TABLE_NAME;
 	}
 

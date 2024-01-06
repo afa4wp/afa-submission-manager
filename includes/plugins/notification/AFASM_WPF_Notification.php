@@ -1,28 +1,30 @@
 <?php
 /**
- * The CF7 Notification Class.
+ * The WPF Notification Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Notification;
+namespace AFASM\Includes\Plugins\Notification;
 
 use Includes\Models\UserDevicesModel;
-use Includes\Plugins\Notification\AbstractFormNotification;
+use AFASM\Includes\Plugins\Notification\AFASM_Abstract_Form_Notification;
 use Includes\Models\SupportedPluginsModel;
+use Includes\Models\WPF\EntryModel;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
- * Class CF7Notification
+ * Class WPFNotification
  *
- * Manipulate CF7 Notification
+ * Manipulate WPF Notification
  *
  * @since 1.0.0
  */
-class CF7Notification extends AbstractFormNotification {
+class AFASM_WPF_Notification extends AFASM_Abstract_Form_Notification {
 
 	/**
 	 * Send push notification in bulk
@@ -34,7 +36,7 @@ class CF7Notification extends AbstractFormNotification {
 	 */
 	public function create( $meta_value, $user_id = null ) {
 
-		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'cf7' );
+		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'wpf' );
 		$supported_plugin_id              = 0;
 
 		if ( ! empty( $supported_plugins_model_register ) ) {
@@ -87,22 +89,27 @@ class CF7Notification extends AbstractFormNotification {
 	/**
 	 * Load hooks for notifications
 	 *
-	 * @param int $post_id The post id.
+	 * @param array $fields    Sanitized entry field values/properties.
+	 * @param array $entry     Original $_POST global.
+	 * @param array $form_data Form data and settings.
+	 * @param int   $entry_id  Entry ID. Will return 0 if entry storage is disabled or using WPForms Lite.
 	 *
 	 * @return void
 	 */
-	public function submission_notification( $post_id ) {
-		$post_type = get_post_type( $post_id );
+	public function submission_notification( $fields, $entry, $form_data, $entry_id ) {
+		$entry_model = new EntryModel();
+		$entry       = $entry_model->entry_by_id( $entry_id );
 
-		if ( 'flamingo_inbound' === $post_type ) {
-			$notification_data = array();
+		if ( ! empty( $entry ) ) {
 
-			$flamingo_post = get_post( $post_id );
+			$notification_data['entry_id']    = (int) $entry['id'];
+			$notification_data['post_type']   = '';
+			$notification_data['post_tiltle'] = '';
 
-			$notification_data['entry_id']    = $post_id;
-			$notification_data['post_type']   = 'flamingo_inbound';
-			$notification_data['post_tiltle'] = $flamingo_post->post_title;
-			$notification_data['user_id']     = $flamingo_post->post_author;
+			$notification_data['user_id'] = null;
+			if ( ! empty( $entry['created_by'] ) ) {
+				$notification_data['user_id'] = (int) $entry['created_by'];
+			}
 
 			$this->create( $notification_data, $notification_data['user_id'] );
 		}
@@ -114,7 +121,7 @@ class CF7Notification extends AbstractFormNotification {
 	 * @return void
 	 */
 	public function loads_hooks() {
-		add_action( 'wp_insert_post', array( $this, 'submission_notification' ), 10, 1 );
+		add_action( 'wpforms_process_complete', array( $this, 'submission_notification' ), 10, 4 );
 	}
 
 }

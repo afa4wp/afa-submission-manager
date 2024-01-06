@@ -8,9 +8,8 @@
 
 namespace Includes\Models;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 use Includes\Models\UserModel;
-use Includes\Plugins\Language;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -36,7 +35,7 @@ class NotificationModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::TABLE_NOTIFICATION;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION;
 	}
 
 	/**
@@ -83,7 +82,7 @@ class NotificationModel {
 
 		global $wpdb;
 
-		$table_notification_type = $wpdb->prefix . Constant::TABLE_NOTIFICATION_TYPE;
+		$table_notification_type = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE;
 
 		$sql = "SELECT afa_tn.id, afa_tn.user_id, afa_tn.notification_type_id, afa_tn.meta_value, afa_tn.created_at, afa_tnt.type, afa_tnt.title FROM {$this->table_name} afa_tn INNER JOIN  {$table_notification_type} afa_tnt ON afa_tn.notification_type_id = afa_tnt.id WHERE afa_tn.supported_plugin_id IN (0, %d) ORDER BY id DESC LIMIT %d,%d";
 

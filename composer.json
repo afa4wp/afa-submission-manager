@@ -22,14 +22,14 @@
             "Includes\\Models\\EFB\\": "includes/models/efb/",
             "Includes\\Schema\\": "includes/schema/",
             "Includes\\Schema\\GF\\": "includes/schema/gf/",
-            "Includes\\Plugins\\": "includes/plugins/",
-            "Includes\\Plugins\\JWT\\": "includes/plugins/jwt/",
-            "Includes\\Plugins\\Helpers\\": "includes/plugins/helpers/",
+            "AFASM\\Includes\\Plugins\\": "includes/plugins/",
+            "AFASM\\Includes\\Plugins\\JWT\\": "includes/plugins/jwt/",
+            "AFASM\\Includes\\Plugins\\Helpers\\": "includes/plugins/helpers/",
             "Includes\\Database\\": "includes/database/",
             "Includes\\Admin\\": "includes/admin/",
             "Includes\\Admin\\Pages\\": "includes/admin/pages/",
             "Includes\\Admin\\Screens\\": "includes/admin/screens/",
-            "Includes\\Plugins\\Notification\\": "includes/plugins/notification/" 
+            "AFASM\\Includes\\Plugins\\Notification\\": "includes/plugins/notification/" 
         }
     },
     "scripts": {

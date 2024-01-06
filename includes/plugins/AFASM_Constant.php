@@ -2,14 +2,16 @@
 /**
  * The Constants.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins;
+namespace AFASM\Includes\Plugins;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
  * Class Constant
  *
@@ -17,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class Constant {
+class AFASM_Constant {
 
 	const PLUGIN_VERSION         = '1.0';
 	const PLUGIN_LANGUAGE_DOMAIN = 'afa-submission-manager';

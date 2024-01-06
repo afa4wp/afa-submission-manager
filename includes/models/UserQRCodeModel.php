@@ -8,7 +8,7 @@
 
 namespace Includes\Models;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 use WP_Error;
 
 // Exit if accessed directly.
@@ -42,7 +42,7 @@ class UserQRCodeModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::TABLE_USER_QR_CODES;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_USER_QR_CODES;
 	}
 
 	/**

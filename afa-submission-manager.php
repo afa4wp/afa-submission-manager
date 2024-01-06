@@ -1,7 +1,4 @@
 <?php
-
-require __DIR__ . '/vendor/autoload.php';
-
 /**
  * Plugin Name:       AFA - Mobile-Ready Submission Manager
  * Plugin URI:        https://github.com/afa-submission-manager/afa-submission-manager
@@ -17,29 +14,32 @@ require __DIR__ . '/vendor/autoload.php';
  * Domain Path:       /languages
  */
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
+require __DIR__ . '/vendor/autoload.php';
 
 define( 'AFA_SUBMISSION_MANAGER_PLUGIN_FILE', __FILE__ );
 define( 'AFA_SUBMISSION_MANAGER_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
-use Includes\Plugins\JWT\JWTPlugin;
+use AFASM\Includes\Plugins\JWT\AFASM_JWT_Plugin;
 use Includes\Routes\Route;
 use Includes\Database\DatabaseInstaller;
 use Includes\Admin\AdminOptions;
-use Includes\Plugins\Constant;
-use Includes\Plugins\Language;
-use Includes\Plugins\Notification\NotificationHooksPlugin;
+use AFASM\Includes\Plugins\AFASM_Constant;
+use AFASM\Includes\Plugins\AFASM_Language;
+use AFASM\Includes\Plugins\Notification\AFASM_Notification_Hooks_Plugin;
 
 /**
  * Init api.
  */
 function afa_submission_manager_rest_init() {
-	$namespace = Constant::API_NAMESPACE . '/' . Constant::API_VERSION;
+	$namespace = AFASM_Constant::API_NAMESPACE . '/' . AFASM_Constant::API_VERSION;
 	( new Route( $namespace ) )->init();
 
-	add_filter( 'rest_pre_dispatch', array( new JWTPlugin(), 'validate_token_rest_pre_dispatch' ), 10, 3 );
+	add_filter( 'rest_pre_dispatch', array( new AFASM_JWT_Plugin(), 'validate_token_rest_pre_dispatch' ), 10, 3 );
 }
 
 /**
@@ -55,8 +55,8 @@ register_activation_hook( AFA_SUBMISSION_MANAGER_PLUGIN_FILE, array( new Databas
 
 ( new AdminOptions() )->init();
 
-add_action( 'plugins_loaded', array( new Language(), 'all_forms_load_textdomain' ) );
+add_action( 'plugins_loaded', array( new AFASM_Language(), 'all_forms_load_textdomain' ) );
 
-add_filter( 'plugin_locale', array( new Language(), 'enforce_locale' ), 10, 2 );
+add_filter( 'plugin_locale', array( new AFASM_Language(), 'enforce_locale' ), 10, 2 );
 
-( new NotificationHooksPlugin() )->loads_hooks();
+( new AFASM_Notification_Hooks_Plugin() )->loads_hooks();

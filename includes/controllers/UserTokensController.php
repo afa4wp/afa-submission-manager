@@ -9,7 +9,7 @@
 namespace Includes\Controllers;
 
 use Includes\Models\UserTokensModel;
-use Includes\Plugins\Helpers\Pagination;
+use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -32,7 +32,7 @@ class UserTokensController {
 	/**
 	 * Pagination Helper
 	 *
-	 * @var Pagination
+	 * @var AFASM_Pagination
 	 */
 	private $pagination_helper;
 
@@ -41,7 +41,7 @@ class UserTokensController {
 	 */
 	public function __construct() {
 		$this->user_tokens_model = new UserTokensModel();
-		$this->pagination_helper = new Pagination();
+		$this->pagination_helper = new AFASM_Pagination();
 	}
 
 	/**

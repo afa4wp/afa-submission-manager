@@ -9,7 +9,7 @@
 namespace Includes\Routes;
 
 use Includes\Controllers\NotificationController;
-use Includes\Plugins\Config;
+use AFASM\Includes\Plugins\AFASM_Config;
 use Includes\Schema\NotificationSchema;
 
 // Exit if accessed directly.
@@ -51,7 +51,7 @@ class NotificationRoute {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new NotificationController(), 'notifications' ),
-					'permission_callback' => array( new Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new NotificationSchema() )->get(),
 				),
 

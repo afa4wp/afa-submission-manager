@@ -8,7 +8,7 @@
 
 namespace Includes\Database;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -33,7 +33,7 @@ class UserQRCodes {
 	 * UserQRCodes constructor.
 	 */
 	public function __construct() {
-		$this->data_base_name = Constant::PLUGIN_TABLE_PREFIX . 'user_qr_codes';
+		$this->data_base_name = AFASM_Constant::PLUGIN_TABLE_PREFIX . 'user_qr_codes';
 	}
 
 	/**

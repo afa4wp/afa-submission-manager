@@ -8,7 +8,7 @@
 
 namespace Includes\Models\GF;
 
-use Includes\Plugins\Helpers\FormModelHelper;
+use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
 use Includes\Models\AbstractFormModel;
 
 // Exit if accessed directly.
@@ -40,9 +40,9 @@ class FormModel extends AbstractFormModel {
 	private $table_name_with_prefix;
 
 	/**
-	 * The FormModelHelper
+	 * The AFASM_Form_Model_Helper
 	 *
-	 * @var FormModelHelper
+	 * @var AFASM_Form_Model_Helper
 	 */
 	public $form_model_helper;
 
@@ -51,7 +51,7 @@ class FormModel extends AbstractFormModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->form_model_helper      = new FormModelHelper( '', self::TABLE_NAME );
+		$this->form_model_helper      = new AFASM_Form_Model_Helper( '', self::TABLE_NAME );
 		$this->table_name_with_prefix = $wpdb->prefix . self::TABLE_NAME;
 	}
 

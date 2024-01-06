@@ -8,7 +8,7 @@
 
 namespace Includes\Database;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -34,7 +34,7 @@ class Notification {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::TABLE_NOTIFICATION;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION;
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Notification {
 		meta_value LONGTEXT NOT NULL,
 		created_at DATETIME NOT NULL,
 		PRIMARY KEY(id),
-        FOREIGN KEY(notification_type_id) REFERENCES ' . $wpdb->prefix . Constant::TABLE_NOTIFICATION_TYPE . '(id)
+        FOREIGN KEY(notification_type_id) REFERENCES ' . $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE . '(id)
       )' . $wpdb->get_charset_collate();
 
 		dbDelta( $sql );

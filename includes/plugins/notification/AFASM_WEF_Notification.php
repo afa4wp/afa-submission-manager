@@ -1,29 +1,30 @@
 <?php
 /**
- * The EFB Notification Class.
+ * The WEF Notification Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Notification;
+namespace AFASM\Includes\Plugins\Notification;
 
 use Includes\Models\UserDevicesModel;
-use Includes\Plugins\Notification\AbstractFormNotification;
+use AFASM\Includes\Plugins\Notification\AFASM_Abstract_Form_Notification;
 use Includes\Models\SupportedPluginsModel;
-use Includes\Models\EFB\EntryModel;
+use Includes\Models\WEF\EntryModel;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
- * Class EFBNotification
+ * Class WEFNotification
  *
- * Manipulate EFB Notification
+ * Manipulate WEF Notification
  *
  * @since 1.0.0
  */
-class EFBNotification extends AbstractFormNotification {
+class AFASM_WEF_Notification extends AFASM_Abstract_Form_Notification {
 
 	/**
 	 * Send push notification in bulk
@@ -35,7 +36,7 @@ class EFBNotification extends AbstractFormNotification {
 	 */
 	public function create( $meta_value, $user_id = null ) {
 
-		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'efb' );
+		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'wef' );
 		$supported_plugin_id              = 0;
 
 		if ( ! empty( $supported_plugins_model_register ) ) {
@@ -88,14 +89,15 @@ class EFBNotification extends AbstractFormNotification {
 	/**
 	 * Load hooks for notifications
 	 *
-	 * @param object $record $record is the form record object.
-	 * @param object $handler $handler is the form handler object.
+	 * @param int   $entry_id      The ID of the submitted entry.
+	 * @param int   $form_id       The ID of the form that the submission belongs to.
+	 * @param int   $page_id       The ID of the page where the form is embedded (if applicable).
+	 * @param array $form_settings The settings of the form.
 	 *
 	 * @return void
 	 */
-	public function submission_notification( $record, $handler ) {
+	public function submission_notification( $entry_id, $form_id, $page_id, $form_settings ) {
 		$entry_model = new EntryModel();
-		$entry_id    = $entry_model->last_entry_id();
 		$entry       = $entry_model->entry_by_id( $entry_id );
 
 		if ( ! empty( $entry ) ) {
@@ -119,7 +121,7 @@ class EFBNotification extends AbstractFormNotification {
 	 * @return void
 	 */
 	public function loads_hooks() {
-		add_action( 'elementor_pro/forms/new_record', array( $this, 'submission_notification' ), 10, 2 );
+		add_action( 'weforms_entry_submission', array( $this, 'submission_notification' ), 10, 4 );
 	}
 
 }

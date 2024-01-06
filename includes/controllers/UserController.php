@@ -10,9 +10,9 @@ namespace Includes\Controllers;
 
 use Includes\Models\UserModel;
 use Includes\Models\UserTokensModel;
-use Includes\Plugins\JWT\JWTPlugin;
+use AFASM\Includes\Plugins\JWT\AFASM_JWT_Plugin;
 use Includes\Models\UserQRCodeModel;
-use Includes\Plugins\Config;
+use AFASM\Includes\Plugins\AFASM_Config;
 use Includes\Database\SupportedPlugins;
 use WP_Error;
 
@@ -54,7 +54,7 @@ class UserController {
 	 */
 	public function __construct() {
 		$this->user_model        = new UserModel();
-		$this->jwt_plugin        = new JWTPlugin();
+		$this->jwt_plugin        = new AFASM_JWT_Plugin();
 		$this->user_tokens_model = new UserTokensModel();
 	}
 
@@ -192,7 +192,7 @@ class UserController {
 
 		$number_of_forms = 0;
 
-		$form = ( new Config() )->form_model( $key );
+		$form = ( new AFASM_Config() )->form_model( $key );
 
 		if ( is_object( $form ) ) {
 			$user            = wp_get_current_user();
@@ -217,7 +217,7 @@ class UserController {
 
 		$number_of_forms = 0;
 
-		$form = ( new Config() )->form_model( $key );
+		$form = ( new AFASM_Config() )->form_model( $key );
 
 		if ( is_object( $form ) ) {
 			$user            = wp_get_current_user();
@@ -235,7 +235,7 @@ class UserController {
 		$result['plugin_name'] = $plugin_name;
 		$result['user_data']   = $user_data;
 
-		$entry = ( new Config() )->entry_model( $key );
+		$entry = ( new AFASM_Config() )->entry_model( $key );
 
 		$offset                     = 0;
 		$number_of_records_per_page = 3;

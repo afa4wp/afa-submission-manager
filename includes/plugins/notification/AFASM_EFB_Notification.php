@@ -1,29 +1,30 @@
 <?php
 /**
- * The WPF Notification Class.
+ * The EFB Notification Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Notification;
+namespace AFASM\Includes\Plugins\Notification;
 
 use Includes\Models\UserDevicesModel;
-use Includes\Plugins\Notification\AbstractFormNotification;
+use AFASM\Includes\Plugins\Notification\AFASM_Abstract_Form_Notification;
 use Includes\Models\SupportedPluginsModel;
-use Includes\Models\WPF\EntryModel;
+use Includes\Models\EFB\EntryModel;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
- * Class WPFNotification
+ * Class EFBNotification
  *
- * Manipulate WPF Notification
+ * Manipulate EFB Notification
  *
  * @since 1.0.0
  */
-class WPFNotification extends AbstractFormNotification {
+class AFASM_EFB_Notification extends AFASM_Abstract_Form_Notification {
 
 	/**
 	 * Send push notification in bulk
@@ -35,7 +36,7 @@ class WPFNotification extends AbstractFormNotification {
 	 */
 	public function create( $meta_value, $user_id = null ) {
 
-		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'wpf' );
+		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'efb' );
 		$supported_plugin_id              = 0;
 
 		if ( ! empty( $supported_plugins_model_register ) ) {
@@ -88,15 +89,14 @@ class WPFNotification extends AbstractFormNotification {
 	/**
 	 * Load hooks for notifications
 	 *
-	 * @param array $fields    Sanitized entry field values/properties.
-	 * @param array $entry     Original $_POST global.
-	 * @param array $form_data Form data and settings.
-	 * @param int   $entry_id  Entry ID. Will return 0 if entry storage is disabled or using WPForms Lite.
+	 * @param object $record $record is the form record object.
+	 * @param object $handler $handler is the form handler object.
 	 *
 	 * @return void
 	 */
-	public function submission_notification( $fields, $entry, $form_data, $entry_id ) {
+	public function submission_notification( $record, $handler ) {
 		$entry_model = new EntryModel();
+		$entry_id    = $entry_model->last_entry_id();
 		$entry       = $entry_model->entry_by_id( $entry_id );
 
 		if ( ! empty( $entry ) ) {
@@ -120,7 +120,7 @@ class WPFNotification extends AbstractFormNotification {
 	 * @return void
 	 */
 	public function loads_hooks() {
-		add_action( 'wpforms_process_complete', array( $this, 'submission_notification' ), 10, 4 );
+		add_action( 'elementor_pro/forms/new_record', array( $this, 'submission_notification' ), 10, 2 );
 	}
 
 }

@@ -9,7 +9,7 @@
 namespace Includes\Schema;
 
 use ExpoSDK\Expo;
-use Includes\Plugins\Language;
+use AFASM\Includes\Plugins\AFASM_Language;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -48,7 +48,7 @@ class UserDevicesSchema {
 				'required'          => true,
 				'type'              => 'string',
 				'validate_callback' => function ( $value, $request, $key ) {
-					return ( new Language() )->is_supported_language( $value );
+					return ( new AFASM_Language() )->is_supported_language( $value );
 				},
 			),
 		);
@@ -73,7 +73,7 @@ class UserDevicesSchema {
 				'required'          => true,
 				'type'              => 'string',
 				'validate_callback' => function ( $value, $request, $key ) {
-					return ( new Language() )->is_supported_language( $value );
+					return ( new AFASM_Language() )->is_supported_language( $value );
 				},
 			),
 		);

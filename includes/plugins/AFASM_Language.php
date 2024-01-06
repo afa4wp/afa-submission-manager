@@ -2,16 +2,17 @@
 /**
  * The Language Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins;
+namespace AFASM\Includes\Plugins;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * Class Language
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class Language {
+class AFASM_Language {
 
 	/**
 	 * Add supported language.
@@ -28,12 +29,12 @@ class Language {
 	 * @var array
 	 */
 	const LANGUAGES = array(
-		'de' => Constant::PLUGIN_LANGUAGE_DOMAIN . '-de',
-		'en' => Constant::PLUGIN_LANGUAGE_DOMAIN . '-en',
-		'es' => Constant::PLUGIN_LANGUAGE_DOMAIN . '-es',
-		'it' => Constant::PLUGIN_LANGUAGE_DOMAIN . '-it',
-		'pt' => Constant::PLUGIN_LANGUAGE_DOMAIN . '-pt',
-		'fr' => Constant::PLUGIN_LANGUAGE_DOMAIN . '-fr',
+		'de' => AFASM_Constant::PLUGIN_LANGUAGE_DOMAIN . '-de',
+		'en' => AFASM_Constant::PLUGIN_LANGUAGE_DOMAIN . '-en',
+		'es' => AFASM_Constant::PLUGIN_LANGUAGE_DOMAIN . '-es',
+		'it' => AFASM_Constant::PLUGIN_LANGUAGE_DOMAIN . '-it',
+		'pt' => AFASM_Constant::PLUGIN_LANGUAGE_DOMAIN . '-pt',
+		'fr' => AFASM_Constant::PLUGIN_LANGUAGE_DOMAIN . '-fr',
 	);
 
 	/**
@@ -88,7 +89,7 @@ class Language {
 	 */
 	public function enforce_locale( $locale, $domain ) {
 
-		if ( Constant::PLUGIN_LANGUAGE_DOMAIN === $domain ) {
+		if ( AFASM_Constant::PLUGIN_LANGUAGE_DOMAIN === $domain ) {
 
 			$language_code = substr( $locale, 0, 2 );
 

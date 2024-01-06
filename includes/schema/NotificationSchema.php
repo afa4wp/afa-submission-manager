@@ -9,7 +9,7 @@
 namespace Includes\Schema;
 
 use Includes\Database\SupportedPlugins;
-use Includes\Plugins\Language;
+use AFASM\Includes\Plugins\AFASM_Language;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -34,7 +34,7 @@ class NotificationSchema {
 				'required'          => true,
 				'type'              => 'string',
 				'validate_callback' => function ( $value, $request, $key ) {
-					return ( new Language() )->is_supported_language( $value );
+					return ( new AFASM_Language() )->is_supported_language( $value );
 				},
 			),
 			'supported_plugin' => array(

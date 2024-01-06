@@ -2,11 +2,15 @@
 /**
  * The Form Entry Helper Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Plugins\Helpers;
+namespace AFASM\AFASM\Includes\Plugins\Helpers;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * Class FormModelHelper
@@ -15,7 +19,7 @@ namespace Includes\Plugins\Helpers;
  *
  * @since 1.0.0
  */
-class EntryModelHelper {
+class AFASM_Entry_Model_Helper {
 	/**
 	 * Table name with WP prefix
 	 *

@@ -8,7 +8,7 @@
 
 namespace Includes\Models;
 
-use Includes\Plugins\Constant;
+use AFASM\Includes\Plugins\AFASM_Constant;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -34,7 +34,7 @@ class UserDevicesModel {
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . Constant::TABLE_USER_DEVICE;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_USER_DEVICE;
 	}
 
 	/**
@@ -176,7 +176,7 @@ class UserDevicesModel {
 	public function get_enabled_register_by_notification_type( $notification_type_id ) {
 		global $wpdb;
 
-		$table_notification_subscription = $wpdb->prefix . Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
+		$table_notification_subscription = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
 
 		$sql = "SELECT afa_tud.id, afa_tud.user_id, afa_tud.expo_token, afa_tud.device_language FROM {$this->table_name} afa_tud INNER JOIN {$table_notification_subscription} afa_tns ON afa_tud.id = afa_tns.user_devices_id AND afa_tns.enabled = 1 WHERE afa_tns.notification_type_id = %d";
 
