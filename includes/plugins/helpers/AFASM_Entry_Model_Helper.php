@@ -6,7 +6,7 @@
  * @since 1.0.0
  */
 
-namespace AFASM\AFASM\Includes\Plugins\Helpers;
+namespace AFASM\Includes\Plugins\Helpers;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly

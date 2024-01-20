@@ -8,9 +8,9 @@
 
 namespace Includes\Controllers;
 
-use Includes\Models\NotificationModel;
+use AFASM\Includes\Models\AFASM_Notification_Model;
 use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
-use Includes\Models\SupportedPluginsModel;
+use AFASM\Includes\Models\AFASM_Supported_Plugins_Model;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -26,7 +26,7 @@ class NotificationController {
 	/**
 	 * User Notification Model
 	 *
-	 * @var NotificationModel
+	 * @var AFASM_Notification_Model
 	 */
 	private $notification_model;
 
@@ -41,7 +41,7 @@ class NotificationController {
 	 * NotificationController constructor.
 	 */
 	public function __construct() {
-		$this->notification_model = new NotificationModel();
+		$this->notification_model = new AFASM_Notification_Model();
 		$this->pagination_helper  = new AFASM_Pagination();
 	}
 
@@ -58,7 +58,7 @@ class NotificationController {
 		$device_language  = sanitize_text_field( $request['device_language'] );
 		$supported_plugin = sanitize_text_field( $request['supported_plugin'] );
 
-		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( $supported_plugin );
+		$supported_plugins_model_register = ( new AFASM_Supported_Plugins_Model() )->get_supported_plugin_by_slug( $supported_plugin );
 		$supported_plugin_id              = 0;
 		if ( ! empty( $supported_plugins_model_register ) ) {
 			$supported_plugin_id = $supported_plugins_model_register->id;

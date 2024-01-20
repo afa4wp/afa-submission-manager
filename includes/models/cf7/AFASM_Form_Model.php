@@ -2,19 +2,21 @@
 /**
  * The Form Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\WEF;
+namespace AFASM\Includes\Models\CF7;
 
-use Includes\Models\WEF\EntryModel;
+use AFASM\Includes\Models\CF7\AFASM_Entry_Model;
 use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
-use Includes\Models\AbstractFormModel;
-use Includes\Models\UserModel;
+use AFASM\Includes\Models\AFASM_Abstract_Form_Model;
+use AFASM\Includes\Models\AFASM_User_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Class AbstractFormModel
  *
@@ -22,11 +24,12 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class FormModel extends AbstractFormModel {
+class AFASM_Form_Model extends AFASM_Abstract_Form_Model {
+
 	/**
 	 * Const to declare shortcode.
 	 */
-	const SHORTCODE = 'weforms';
+	const SHORTCODE = 'contact-form-7';
 
 	/**
 	 * The AFASM_Form_Model_Helper
@@ -39,7 +42,7 @@ class FormModel extends AbstractFormModel {
 	 * Form model constructor
 	 */
 	public function __construct() {
-		$this->form_model_helper = new AFASM_Form_Model_Helper( 'wpuf_contact_form' );
+		$this->form_model_helper = new AFASM_Form_Model_Helper( 'wpcf7_contact_form' );
 	}
 
 	/**
@@ -78,7 +81,7 @@ class FormModel extends AbstractFormModel {
 	}
 
 	/**
-	 * Search Forms
+	 * Get Forms
 	 *
 	 * @param string $post_name The post name.
 	 * @param int    $offset The offset.
@@ -103,7 +106,7 @@ class FormModel extends AbstractFormModel {
 	 */
 	public function prepare_data( $posts ) {
 		$forms      = array();
-		$user_model = new UserModel();
+		$user_model = new AFASM_User_Model();
 
 		while ( $posts->have_posts() ) {
 
@@ -111,14 +114,12 @@ class FormModel extends AbstractFormModel {
 
 			$form['id']           = $posts->post->ID;
 			$form['title']        = $posts->post->post_title;
-			$form['date_created'] = $posts->post->post_date;
-
-			$form['registers'] = ( new EntryModel() )->mumber_of_items_by_form_id( $posts->post->ID );
+			$form['date_created'] = ( new \DateTime( $posts->post->post_date_gmt ) )->format( 'Y-m-d\TH:i:s.v\Z' );
+			$form['registers']    = ( new AFASM_Entry_Model() )->mumber_of_items_by_Channel( $posts->post->post_name );
 
 			$form['user_created'] = $user_model->user_info_by_id( $posts->post->post_author );
 			$form['perma_links']  = parent::pages_links( $posts->post->ID, self::SHORTCODE );
-
-			$forms[] = $form;
+			$forms[]              = $form;
 		}
 
 		return $forms;
@@ -133,7 +134,7 @@ class FormModel extends AbstractFormModel {
 	 */
 	private function prepare_data_array( $results ) {
 		$forms      = array();
-		$user_model = new UserModel();
+		$user_model = new AFASM_User_Model();
 
 		foreach ( $results as $value ) {
 
@@ -141,9 +142,9 @@ class FormModel extends AbstractFormModel {
 
 			$form['id']           = $value->ID;
 			$form['title']        = $value->post_title;
-			$form['date_created'] = $value->post_date;
+			$form['date_created'] = ( new \DateTime( $value->post_date_gmt ) )->format( 'Y-m-d\TH:i:s.v\Z' );
 
-			$form['registers'] = ( new EntryModel() )->mumber_of_items_by_form_id( $value->ID );
+			$form['registers'] = ( new AFASM_Entry_Model() )->mumber_of_items_by_Channel( $value->post_name );
 
 			$form['user_created'] = $user_model->user_info_by_id( $value->post_author );
 			$form['perma_links']  = parent::pages_links( $value->ID, self::SHORTCODE );
@@ -152,6 +153,18 @@ class FormModel extends AbstractFormModel {
 		}
 
 		return $forms;
+
+	}
+
+	/**
+	 * Get Form chanel by id
+	 *
+	 * @param string $id The post id.
+	 *
+	 * @return string
+	 */
+	public function form_chanel_by_id( $id ) {
+		return $this->form_model_helper->form_by_channel( $id );
 	}
 
 	/**

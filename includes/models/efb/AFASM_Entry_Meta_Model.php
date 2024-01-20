@@ -2,16 +2,17 @@
 /**
  * The Entry Meta Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\EFB;
+namespace AFASM\Includes\Models\EFB;
 
-use Includes\Models\EFB\EntryModel;
+use AFASM\Includes\Models\EFB\AFASM_Entry_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryMetaModel
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryMetaModel {
+class AFASM_Entry_Meta_Model {
 
 	/**
 	 * Table name witn entry
@@ -52,7 +53,7 @@ class EntryMetaModel {
 
 		$items = array();
 
-		$entry                    = ( new EntryModel() )->entry_by_id( $entry_id );
+		$entry                    = ( new AFASM_Entry_Model() )->entry_by_id( $entry_id );
 		$elementor_forms_snapshot = $this->get_elementor_forms_snapshot( $entry['form_id'], $entry['elementor_form_id'] );
 		foreach ( $results as $key => $value ) {
 
@@ -113,7 +114,7 @@ class EntryMetaModel {
 
 		foreach ( $results as $key => $value ) {
 
-			$entry                    = ( new EntryModel() )->entry_by_id( $value->submission_id );
+			$entry                    = ( new AFASM_Entry_Model() )->entry_by_id( $value->submission_id );
 			$elementor_forms_snapshot = $this->get_elementor_forms_snapshot( $entry['form_id'], $entry['elementor_form_id'] );
 
 			$item = array();

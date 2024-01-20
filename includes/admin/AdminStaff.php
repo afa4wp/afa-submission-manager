@@ -8,7 +8,7 @@
 
 namespace Includes\Admin;
 
-use Includes\Models\UserModel;
+use AFASM\Includes\Models\AFASM_User_Model;
 use WP_User;
 
 // Exit if accessed directly.
@@ -74,7 +74,7 @@ class AdminStaff {
 	public function add_user_staff_column_content( $output, $column_name, $user_id ) {
 		if ( 'afa_submission_manager_user_staff_column' === $column_name ) {
 
-			$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user_id );
+			$user_can_manage_afa = ( new AFASM_User_Model() )->user_can_manage_afa( $user_id );
 
 			if ( $user_can_manage_afa ) {
 				if ( user_can( $user_id, 'manage_options' ) ) {
@@ -133,7 +133,7 @@ class AdminStaff {
 	 */
 	public function add_staff( $user_id ) {
 
-		$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user_id );
+		$user_can_manage_afa = ( new AFASM_User_Model() )->user_can_manage_afa( $user_id );
 
 		if ( ! $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
@@ -155,7 +155,7 @@ class AdminStaff {
 	 * @return void
 	 */
 	public function remove_staff( $user_id ) {
-		$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user_id );
+		$user_can_manage_afa = ( new AFASM_User_Model() )->user_can_manage_afa( $user_id );
 
 		if ( $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );

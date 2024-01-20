@@ -8,8 +8,8 @@
 
 namespace Includes\Controllers\CF7;
 
-use Includes\Models\CF7\EntryModel;
-use Includes\Models\CF7\FormModel;
+use AFASM\Includes\Models\CF7\AFASM_Entry_Model;
+use AFASM\Includes\Models\CF7\AFASM_Form_Model;
 use Includes\Controllers\AbstractEntryControllers;
 
 // Exit if accessed directly.
@@ -27,7 +27,7 @@ class EntryController extends AbstractEntryControllers {
 	/**
 	 * The form model
 	 *
-	 * @var EntryModel
+	 * @var AFASM_Entry_Model
 	 */
 	private $entry_model;
 
@@ -36,7 +36,7 @@ class EntryController extends AbstractEntryControllers {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->entry_model = new EntryModel();
+		$this->entry_model = new AFASM_Entry_Model();
 	}
 
 	/**
@@ -84,7 +84,7 @@ class EntryController extends AbstractEntryControllers {
 
 		$page = absint( $request['page_number'] );
 
-		$form_model = new FormModel();
+		$form_model = new AFASM_Form_Model();
 
 		$channel = $form_model->form_chanel_by_id( $form_id );
 

@@ -2,15 +2,19 @@
 /**
  * The Entry Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\CF7;
+namespace AFASM\Includes\Models\CF7;
 
-use Includes\Models\UserModel;
-use Includes\Models\CF7\FormModel;
-use Includes\Models\AbstractEntryModel;
+use AFASM\Includes\Models\AFASM_User_Model;
+use AFASM\Includes\Models\CF7\AFASM_Form_Model;
+use AFASM\Includes\Models\AFASM_Abstract_Entry_Model;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbstractEntryModel
@@ -19,7 +23,7 @@ use Includes\Models\AbstractEntryModel;
  *
  * @since 1.0.0
  */
-class EntryModel extends AbstractEntryModel {
+class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 
 	/**
 	 * Const to declare table name.
@@ -125,7 +129,7 @@ class EntryModel extends AbstractEntryModel {
 			return array();
 		}
 
-		$form_model = new FormModel();
+		$form_model = new AFASM_Form_Model();
 		$channel    = $form_model->form_model_helper->form_chanel_by_id( $form_id );
 
 		$results = \Flamingo_Inbound_Message::find(
@@ -236,7 +240,7 @@ class EntryModel extends AbstractEntryModel {
 
 		foreach ( $results as $value ) {
 
-			$form_model    = new FormModel();
+			$form_model    = new AFASM_Form_Model();
 			$post          = $form_model->form_model_helper->form_by_channel( $value->channel );
 			$flamingo_post = get_post( $value->id() );
 
@@ -256,7 +260,7 @@ class EntryModel extends AbstractEntryModel {
 			$user = get_user_by( 'ID', $flamingo_post->post_author );
 
 			if ( $user ) {
-				$user_model           = new UserModel();
+				$user_model           = new AFASM_User_Model();
 				$entry['created_by']  = $user->ID;
 				$entry['author_info'] = $user_model->user_info_by_id( $user->ID );
 			}

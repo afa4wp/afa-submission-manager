@@ -8,9 +8,9 @@
 
 namespace AFASM\Includes\Plugins\Notification;
 
-use Includes\Models\UserDevicesModel;
+use AFASM\Includes\Models\AFASM_User_Devices_Model;
 use AFASM\Includes\Plugins\Notification\AFASM_Abstract_Form_Notification;
-use Includes\Models\SupportedPluginsModel;
+use AFASM\Includes\Models\AFASM_Supported_Plugins_Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -35,7 +35,7 @@ class AFASM_CF7_Notification extends AFASM_Abstract_Form_Notification {
 	 */
 	public function create( $meta_value, $user_id = null ) {
 
-		$supported_plugins_model_register = ( new SupportedPluginsModel() )->get_supported_plugin_by_slug( 'cf7' );
+		$supported_plugins_model_register = ( new AFASM_Supported_Plugins_Model() )->get_supported_plugin_by_slug( 'cf7' );
 		$supported_plugin_id              = 0;
 
 		if ( ! empty( $supported_plugins_model_register ) ) {
@@ -61,7 +61,7 @@ class AFASM_CF7_Notification extends AFASM_Abstract_Form_Notification {
 	private function prepare_push_notification( $notification_type_id, $meta_value, $user_id ) {
 		$push_notifications_data = array();
 
-		$divices = ( new UserDevicesModel() )->get_enabled_register_by_notification_type( $notification_type_id );
+		$divices = ( new AFASM_User_Devices_Model() )->get_enabled_register_by_notification_type( $notification_type_id );
 
 		foreach ( $divices as $key => $divice ) {
 

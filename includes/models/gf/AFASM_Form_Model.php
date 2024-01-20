@@ -2,17 +2,19 @@
 /**
  * The Form Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\GF;
+namespace AFASM\Includes\Models\GF;
 
 use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
-use Includes\Models\AbstractFormModel;
+use AFASM\Includes\Models\AFASM_Abstract_Form_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Class AbstractFormModel
  *
@@ -20,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class FormModel extends AbstractFormModel {
+class AFASM_Form_Model extends AFASM_Abstract_Form_Model {
 
 	/**
 	 * Const to declare table name.

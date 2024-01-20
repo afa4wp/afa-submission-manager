@@ -1,26 +1,27 @@
 <?php
 /**
- * The Notification Type Model Class.
+ * The Supported Plugins Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models;
+namespace AFASM\Includes\Models;
 
 use AFASM\Includes\Plugins\AFASM_Constant;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
- * Class NotificationTypeModel
+ * Class SupportedPluginsModel
  *
- * Hendler with notification_type table
+ * Hendler with table supported_plugins
  *
  * @since 1.0.0
  */
-class NotificationTypeModel {
+class AFASM_Supported_Plugins_Model {
 
 	/**
 	 * Table name
@@ -30,19 +31,19 @@ class NotificationTypeModel {
 	private $table_name;
 
 	/**
-	 * NotificationTypeModel constructor.
+	 * SupportedPluginsModel constructor.
 	 */
 	public function __construct() {
 		global $wpdb;
-		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE;
+		$this->table_name = $wpdb->prefix . AFASM_Constant::TABLE_SUPPORTED_PLUGINS;
 	}
 
 	/**
-	 * Get notification type list
+	 * Get supported plugins list
 	 *
 	 * @return array
 	 */
-	public function get_all_notification_type() {
+	public function get_all_supported_plugins() {
 		global $wpdb;
 		$sql     = "SELECT * FROM {$this->table_name}";
 		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
@@ -51,13 +52,13 @@ class NotificationTypeModel {
 	}
 
 	/**
-	 * Get notification type by id
+	 * Get supported plugin by id
 	 *
-	 * @param int $id The notification type id.
+	 * @param int $id The supported plugin id.
 	 *
 	 * @return object
 	 */
-	public function get_notification_type_by_id( $id ) {
+	public function get_supported_plugin_by_id( $id ) {
 
 		global $wpdb;
 
@@ -76,19 +77,19 @@ class NotificationTypeModel {
 	}
 
 	/**
-	 * Get notification type by type
+	 * Get  supported plugin by slug
 	 *
-	 * @param string $type The notification type.
+	 * @param string $slug The notification type.
 	 *
 	 * @return object
 	 */
-	public function get_notification_type_by_type( $type ) {
+	public function get_supported_plugin_by_slug( $slug ) {
 
 		global $wpdb;
 
-		$sql = "SELECT * FROM {$this->table_name} WHERE `type`=%s";
+		$sql = "SELECT * FROM {$this->table_name} WHERE `slug`=%s";
 
-		$sql = $wpdb->prepare( $sql, array( $type ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $slug ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );

@@ -2,17 +2,18 @@
 /**
  * The Notification Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models;
+namespace AFASM\Includes\Models;
 
 use AFASM\Includes\Plugins\AFASM_Constant;
-use Includes\Models\UserModel;
+use AFASM\Includes\Models\AFASM_User_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class NotificationModel
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class NotificationModel {
+class AFASM_Notification_Model {
 
 	/**
 	 * Table name
@@ -93,7 +94,7 @@ class NotificationModel {
 
 		$modified_results = array();
 
-		$user_model = new UserModel();
+		$user_model = new AFASM_User_Model();
 
 		foreach ( $results as $result ) {
 			$result->meta_value   = maybe_unserialize( $result->meta_value );

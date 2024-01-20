@@ -8,17 +8,17 @@
 
 namespace AFASM\Includes\Plugins;
 
-use Includes\Models\CF7\FormModel as CF7FormModel;
-use Includes\Models\GF\FormModel as GFFormModel;
-use Includes\Models\WEF\FormModel as WEFFormModel;
-use Includes\Models\WPF\FormModel as WPFFormModel;
-use Includes\Models\EFB\FormModel as EFBFormModel;
-use Includes\Models\CF7\EntryModel as CF7EntryModel;
-use Includes\Models\GF\EntryModel as GFEntryModel;
-use Includes\Models\WEF\EntryModel as WEFEntryModel;
-use Includes\Models\WPF\EntryModel as WPFEntryModel;
-use Includes\Models\EFB\EntryModel as EFBEntryModel;
-use Includes\Models\UserModel;
+use AFASM\Includes\Models\CF7\AFASM_Form_Model as AFASM_CF7_Form_Model;
+use AFASM\Includes\Models\GF\AFASM_Form_Model as AFASM_GF_Form_Model;
+use AFASM\Includes\Models\WEF\AFASM_Form_Model as AFASM_WEF_Form_Model;
+use AFASM\Includes\Models\WPF\AFASM_Form_Model as AFASM_WPF_Form_Model;
+use AFASM\Includes\Models\EFB\AFASM_Form_Model as AFASM_EFB_Form_Model;
+use AFASM\Includes\Models\CF7\AFASM_Entry_Model as AFASM_CF7_Entry_Model;
+use AFASM\Includes\Models\GF\AFASM_Entry_Model as AFASM_GF_Entry_Model;
+use AFASM\Includes\Models\WEF\AFASM_Entry_Model as AFASM_WEF_Entry_Model;
+use AFASM\Includes\Models\WPF\AFASM_Entry_Model as AFASM_WPF_Entry_Model;
+use AFASM\Includes\Models\EFB\AFASM_Entry_Model as AFASM_EFB_Entry_Model;
+use AFASM\Includes\Models\AFASM_User_Model;
 use AFASM\Includes\Plugins\AFASM_Constant;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -119,7 +119,7 @@ class AFASM_Config {
 
 		$user = wp_get_current_user();
 
-		$user_can_manage_afa = ( new UserModel() )->user_can_manage_afa( $user->ID );
+		$user_can_manage_afa = ( new AFASM_User_Model() )->user_can_manage_afa( $user->ID );
 
 		if ( ! $user_can_manage_afa ) {
 			return false;
@@ -152,11 +152,11 @@ class AFASM_Config {
 	 */
 	public function form_model( $key ) {
 		$forms = array(
-			AFASM_Constant::FORM_SLUG_CF7 => new CF7FormModel(),
-			AFASM_Constant::FORM_SLUG_GF  => new GFFormModel(),
-			AFASM_Constant::FORM_SLUG_WEF => new WEFFormModel(),
-			AFASM_Constant::FORM_SLUG_WPF => new WPFFormModel(),
-			AFASM_Constant::FORM_SLUG_EFB => new EFBFormModel(),
+			AFASM_Constant::FORM_SLUG_CF7 => new AFASM_CF7_Form_Model(),
+			AFASM_Constant::FORM_SLUG_GF  => new AFASM_GF_Form_Model(),
+			AFASM_Constant::FORM_SLUG_WEF => new AFASM_WEF_Form_Model(),
+			AFASM_Constant::FORM_SLUG_WPF => new AFASM_WPF_Form_Model(),
+			AFASM_Constant::FORM_SLUG_EFB => new AFASM_EFB_Form_Model(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {
@@ -177,11 +177,11 @@ class AFASM_Config {
 	 */
 	public function entry_model( $key ) {
 		$forms = array(
-			AFASM_Constant::FORM_SLUG_CF7 => new CF7EntryModel(),
-			AFASM_Constant::FORM_SLUG_GF  => new GFEntryModel(),
-			AFASM_Constant::FORM_SLUG_WEF => new WEFEntryModel(),
-			AFASM_Constant::FORM_SLUG_WPF => new WPFEntryModel(),
-			AFASM_Constant::FORM_SLUG_EFB => new EFBEntryModel(),
+			AFASM_Constant::FORM_SLUG_CF7 => new AFASM_CF7_Entry_Model(),
+			AFASM_Constant::FORM_SLUG_GF  => new AFASM_GF_Entry_Model(),
+			AFASM_Constant::FORM_SLUG_WEF => new AFASM_WEF_Entry_Model(),
+			AFASM_Constant::FORM_SLUG_WPF => new AFASM_WPF_Entry_Model(),
+			AFASM_Constant::FORM_SLUG_EFB => new AFASM_EFB_Entry_Model(),
 		);
 
 		if ( array_key_exists( $key, $forms ) ) {

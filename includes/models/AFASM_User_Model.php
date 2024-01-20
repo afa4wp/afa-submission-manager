@@ -2,19 +2,20 @@
 /**
  * The User Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models;
+namespace AFASM\Includes\Models;
 
-use Includes\Models\UserTokensModel;
-use Includes\Models\UserDevicesModel;
+use AFASM\Includes\Models\AFASM_User_Tokens_Model;
+use AFASM\Includes\Models\AFASM_User_Devices_Model;
 use WP_Error;
 use WP_User;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class UserModel
@@ -23,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserModel {
+class AFASM_User_Model {
 
 	/**
 	 * Login user
@@ -192,13 +193,13 @@ class UserModel {
 	 * @return int|false
 	 */
 	public function logout( $user_id, $device_id = '' ) {
-		$user_tokens_model = new UserTokensModel();
+		$user_tokens_model = new AFASM_User_Tokens_Model();
 
 		$result = $user_tokens_model->delete_user_token_by_id( $user_id );
 
 		if ( ! empty( $result ) && ! empty( $device_id ) ) {
 
-			$user_devices_model = new UserDevicesModel();
+			$user_devices_model = new AFASM_User_Devices_Model();
 			$device             = $user_devices_model->get_register_by_user_device_id( $device_id );
 
 			if ( ! empty( $device ) ) {

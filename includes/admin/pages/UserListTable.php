@@ -8,7 +8,7 @@
 
 namespace Includes\Admin\Pages;
 
-use Includes\Models\UserModel;
+use AFASM\Includes\Models\AFASM_User_Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -49,7 +49,7 @@ class UserListTable extends \WP_List_Table {
 	/**
 	 * User User Model
 	 *
-	 * @var UserModel;
+	 * @var AFASM_User_Model;
 	 */
 	private $user_model;
 
@@ -67,7 +67,7 @@ class UserListTable extends \WP_List_Table {
 		);
 
 		$this->user_tokens_controller = new UserTokensController();
-		$this->user_model             = new UserModel();
+		$this->user_model             = new AFASM_User_Model();
 	}
 
 	/**

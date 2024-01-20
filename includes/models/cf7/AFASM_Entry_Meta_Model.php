@@ -2,16 +2,18 @@
 /**
  * The Entry Meta Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\CF7;
+namespace AFASM\Includes\Models\CF7;
 
-use Includes\Models\CF7\FormModel;
+use AFASM\Includes\Models\CF7\AFASM_Form_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Class EntryMetaModel
  *
@@ -19,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryMetaModel {
+class AFASM_Entry_Meta_Model {
 
 	/**
 	 * Table name witn entry
@@ -62,7 +64,7 @@ class EntryMetaModel {
 			return array();
 		}
 
-		$form = ( new FormModel() )->form_model_helper->form_by_channel( $post->channel );
+		$form = ( new AFASM_Form_Model() )->form_model_helper->form_by_channel( $post->channel );
 
 		$form_id = null;
 		if ( ! empty( $form ) ) {
@@ -127,7 +129,7 @@ class EntryMetaModel {
 
 			if ( ! empty( $post->channel ) ) {
 
-				$form = ( new FormModel() )->form_model_helper->form_by_channel( $post->channel );
+				$form = ( new AFASM_Form_Model() )->form_model_helper->form_by_channel( $post->channel );
 
 				if ( ! empty( $form ) ) {
 					$form_id = $form->ID;

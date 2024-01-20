@@ -2,17 +2,18 @@
 /**
  * The User QRCOde Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models;
+namespace AFASM\Includes\Models;
 
 use AFASM\Includes\Plugins\AFASM_Constant;
 use WP_Error;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class UserQRCodeModel
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserQRCodeModel {
+class AFASM_User_QR_Code_Model {
 
 	/**
 	 * Expire secret in second

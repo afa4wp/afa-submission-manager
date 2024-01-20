@@ -9,7 +9,7 @@
 namespace AFASM\Includes\Plugins;
 
 use chillerlan\QRCode\QRCode as ChillerlanQRCode;
-use Includes\Models\UserQRCodeModel;
+use AFASM\Includes\Models\AFASM_User_QR_Code_Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -55,7 +55,7 @@ class AFASM_QR_Code {
 	 */
 	private function get_data() {
 
-		$user_qrcode_model = new UserQRCodeModel();
+		$user_qrcode_model = new AFASM_User_QR_Code_Model();
 
 		$url = get_rest_url();
 

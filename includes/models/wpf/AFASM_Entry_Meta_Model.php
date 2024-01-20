@@ -2,14 +2,15 @@
 /**
  * The Entry Meta Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\WPF;
+namespace AFASM\Includes\Models\WPF;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryMetaModel
@@ -18,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryMetaModel {
+class AFASM_Entry_Meta_Model {
 
 	public const TABLE_NAME = 'wpforms_entries';
 

@@ -2,18 +2,20 @@
 /**
  * The Form Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\WPF;
+namespace AFASM\Includes\Models\WPF;
 
 use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
-use Includes\Models\AbstractFormModel;
-use Includes\Models\UserModel;
+use AFASM\Includes\Models\AFASM_Abstract_Form_Model;
+use AFASM\Includes\Models\AFASM_User_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Class AbstractFormModel
  *
@@ -21,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class FormModel extends AbstractFormModel {
+class AFASM_Form_Model extends AFASM_Abstract_Form_Model {
 
 	/**
 	 * Const to declare shortcode.
@@ -116,7 +118,7 @@ class FormModel extends AbstractFormModel {
 		}
 
 		$forms      = array();
-		$user_model = new UserModel();
+		$user_model = new AFASM_User_Model();
 
 		while ( $posts->have_posts() ) {
 
@@ -155,7 +157,7 @@ class FormModel extends AbstractFormModel {
 		}
 
 		$forms      = array();
-		$user_model = new UserModel();
+		$user_model = new AFASM_User_Model();
 
 		foreach ( $results as $value ) {
 

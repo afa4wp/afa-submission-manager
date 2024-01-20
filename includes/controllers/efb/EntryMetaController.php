@@ -8,7 +8,7 @@
 
 namespace Includes\Controllers\EFB;
 
-use Includes\Models\EFB\EntryMetaModel;
+use AFASM\Includes\Models\EFB\AFASM_Entry_Meta_Model;
 use Includes\Controllers\AbstractEntryMetaControllers;
 
 // Exit if accessed directly.
@@ -26,7 +26,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	/**
 	 * The entry meta model
 	 *
-	 * @var EntryMetaModel
+	 * @var AFASM_Entry_Meta_Model
 	 */
 	private $entry_meta_model;
 
@@ -34,7 +34,7 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	 * Entry Controllers constructor
 	 */
 	public function __construct() {
-		$this->entry_meta_model = new EntryMetaModel();
+		$this->entry_meta_model = new AFASM_Entry_Meta_Model();
 
 	}
 

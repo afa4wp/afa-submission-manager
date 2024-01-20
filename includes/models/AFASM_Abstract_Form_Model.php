@@ -2,16 +2,17 @@
 /**
  * The Abstarct Form Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models;
+namespace AFASM\Includes\Models;
 
 use AFASM\Includes\Plugins\Helpers\AFASM_Forms_Shortcode_Finder;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbstractFormModel
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class AbstractFormModel {
+abstract class AFASM_Abstract_Form_Model {
 
 	/**
 	 * Get forms by id

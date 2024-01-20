@@ -2,16 +2,20 @@
 /**
  * The Entry Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\EFB;
+namespace AFASM\Includes\Models\WEF;
 
-use Includes\Models\UserModel;
-use Includes\Models\EFB\FormModel;
-use Includes\Models\AbstractEntryModel;
+use AFASM\Includes\Models\AFASM_User_Model;
+use AFASM\Includes\Models\WEF\AFASM_Form_Model;
+use AFASM\Includes\Models\AFASM_Abstract_Entry_Model;
 use AFASM\Includes\Plugins\Helpers\AFASM_Entry_Model_Helper;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbstractEntryModel
@@ -20,12 +24,12 @@ use AFASM\Includes\Plugins\Helpers\AFASM_Entry_Model_Helper;
  *
  * @since 1.0.0
  */
-class EntryModel extends AbstractEntryModel {
+class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 
 	/**
 	 * Const to declare table name.
 	 */
-	public const TABLE_NAME = 'e_submissions';
+	public const TABLE_NAME = 'weforms_entries';
 
 	/**
 	 * The AFASM_Entry_Model_Helper
@@ -61,11 +65,7 @@ class EntryModel extends AbstractEntryModel {
 	 */
 	public function entries( $offset, $number_of_records_per_page, $order_by = 'id' ) {
 
-		global $wpdb;
-
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE type = 'submission' ORDER BY {$order_by} DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
-		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
+		$results = $this->entry_model_helper->entries( $offset, $number_of_records_per_page, $order_by );
 
 		$entries = $this->prepare_data( $results );
 
@@ -105,14 +105,8 @@ class EntryModel extends AbstractEntryModel {
 	 */
 	public function entries_by_form_id( $form_id, $offset, $number_of_records_per_page ) {
 
-		global $wpdb;
-
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE post_id = %d AND type = 'submission' ORDER BY id DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $form_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
-		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
-
+		$results = $this->entry_model_helper->entries_by_form_id( $form_id, $offset, $number_of_records_per_page, 'id' );
 		$entries = $this->prepare_data( $results );
-
 		return $entries;
 
 	}
@@ -129,11 +123,8 @@ class EntryModel extends AbstractEntryModel {
 	public function search_entries_by_user( $user_info, $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$sql = "SELECT fla.* FROM {$this->table_name_with_prefix} fla 
-        INNER JOIN {$wpdb->users} wpu ON fla.user_id = wpu.id 
-        WHERE (wpu.user_login LIKE %s OR wpu.user_email LIKE %s) 
-        AND fla.type = 'submission'
-        ORDER BY fla.id DESC LIMIT %d,%d ";
+		$sql = "SELECT fla.* FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->users} wpu ON  
+        fla.user_id = wpu.id WHERE wpu.user_login LIKE %s OR wpu.user_email LIKE %s ORDER BY fla.id DESC LIMIT %d,%d ";
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
@@ -153,7 +144,7 @@ class EntryModel extends AbstractEntryModel {
 	 * @return int
 	 */
 	public function mumber_of_items_by_form_id( $form_id ) {
-		return $this->entry_model_helper->mumber_of_items_by_form_id( $form_id, 'post_id' );
+		return $this->entry_model_helper->mumber_of_items_by_form_id( $form_id );
 	}
 
 	/**
@@ -192,20 +183,19 @@ class EntryModel extends AbstractEntryModel {
 
 			$entry = array();
 
-			$entry['id']                = $value->id;
-			$entry['form_id']           = $value->post_id;
-			$entry['elementor_form_id'] = $value->element_id;
-			$entry['date_created']      = $value->created_at;
-			$entry['created_by']        = $value->user_id;
-			$entry['author_info']       = array();
+			$entry['id']           = $value->id;
+			$entry['form_id']      = $value->form_id;
+			$entry['date_created'] = $value->created_at;
+			$entry['created_by']   = $value->user_id;
+			$entry['author_info']  = array();
 
 			if ( ! empty( $value->user_id ) ) {
-				$user_model           = new UserModel();
+				$user_model           = new AFASM_User_Model();
 				$entry['author_info'] = $user_model->user_info_by_id( $value->user_id );
 			}
 
-			$form_model         = new FormModel();
-			$entry['form_info'] = $form_model->form_by_id( $value->post_id );
+			$form_model         = new AFASM_Form_Model();
+			$entry['form_info'] = $form_model->form_by_id( $value->form_id );
 
 			$entries[] = $entry;
 		}
@@ -219,15 +209,7 @@ class EntryModel extends AbstractEntryModel {
 	 * @return int
 	 */
 	public function last_entry_id() {
-		global $wpdb;
-		$id      = 'id';
-		$sql     = "SELECT MAX({$id}) FROM {$this->table_name_with_prefix} WHERE type = 'submission' ";
-		$results = $wpdb->get_results( $sql,  OBJECT);// phpcs:ignore
-
-		if ( empty( $results ) ) {
-			return 0;
-		}
-		$last_inserted_id = intval( reset( $results )->{"MAX({$id})"} );
-		return $last_inserted_id;
+		$result = $this->entry_model_helper->last_entry_id( 'id' );
+		return $result;
 	}
 }

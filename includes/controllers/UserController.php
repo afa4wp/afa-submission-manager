@@ -8,10 +8,10 @@
 
 namespace Includes\Controllers;
 
-use Includes\Models\UserModel;
-use Includes\Models\UserTokensModel;
+use AFASM\Includes\Models\AFASM_User_Model;
+use AFASM\Includes\Models\AFASM_User_Tokens_Model;
 use AFASM\Includes\Plugins\JWT\AFASM_JWT_Plugin;
-use Includes\Models\UserQRCodeModel;
+use AFASM\Includes\Models\AFASM_User_QR_Code_Model;
 use AFASM\Includes\Plugins\AFASM_Config;
 use Includes\Database\SupportedPlugins;
 use WP_Error;
@@ -31,7 +31,7 @@ class UserController {
 	/**
 	 * User Model
 	 *
-	 * @var UserModel
+	 * @var AFASM_User_Model
 	 */
 	private $user_model;
 
@@ -45,7 +45,7 @@ class UserController {
 	/**
 	 * User Tokens Model
 	 *
-	 * @var UserTokensModel
+	 * @var AFASM_User_Tokens_Model
 	 */
 	private $user_tokens_model;
 
@@ -53,9 +53,9 @@ class UserController {
 	 * UserController constructor.
 	 */
 	public function __construct() {
-		$this->user_model        = new UserModel();
+		$this->user_model        = new AFASM_User_Model();
 		$this->jwt_plugin        = new AFASM_JWT_Plugin();
-		$this->user_tokens_model = new UserTokensModel();
+		$this->user_tokens_model = new AFASM_User_Tokens_Model();
 	}
 
 	/**
@@ -141,7 +141,7 @@ class UserController {
 
 		$secret = $result[1];
 
-		$verify_qr_code = ( new UserQRCodeModel() )->verify_qr_code( $user_id, $secret );
+		$verify_qr_code = ( new AFASM_User_QR_Code_Model() )->verify_qr_code( $user_id, $secret );
 
 		if ( is_wp_error( $verify_qr_code ) ) {
 			return rest_ensure_response( $verify_qr_code );
@@ -154,7 +154,7 @@ class UserController {
 
 		$this->user_tokens_model->create( $user->data->ID, $access_token, $access_refresh_token );
 
-		( new UserQRCodeModel() )->delete_qr_code_by_user_id( $user->data->ID );
+		( new AFASM_User_QR_Code_Model() )->delete_qr_code_by_user_id( $user->data->ID );
 
 		$data = array(
 			'access_token'      => $access_token,

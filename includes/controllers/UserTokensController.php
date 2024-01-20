@@ -8,7 +8,7 @@
 
 namespace Includes\Controllers;
 
-use Includes\Models\UserTokensModel;
+use AFASM\Includes\Models\AFASM_User_Tokens_Model;
 use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
 
 // Exit if accessed directly.
@@ -25,7 +25,7 @@ class UserTokensController {
 	/**
 	 * User Tokens Model
 	 *
-	 * @var UserTokensModel
+	 * @var AFASM_User_Tokens_Model
 	 */
 	private $user_tokens_model;
 
@@ -40,7 +40,7 @@ class UserTokensController {
 	 * UserTokensController constructor.
 	 */
 	public function __construct() {
-		$this->user_tokens_model = new UserTokensModel();
+		$this->user_tokens_model = new AFASM_User_Tokens_Model();
 		$this->pagination_helper = new AFASM_Pagination();
 	}
 
@@ -49,7 +49,7 @@ class UserTokensController {
 	 *
 	 * @param int $page The page.
 	 *
-	 * @return array $UserTokensModel the items.
+	 * @return array $AFASM_User_Tokens_Model the items.
 	 */
 	public function paginate( $page = 1 ) {
 
@@ -69,7 +69,7 @@ class UserTokensController {
 	 * @param string $user_info The user info.
 	 * @param int    $page The page.
 	 *
-	 * @return array $UserTokensModel the items.
+	 * @return array $AFASM_User_Tokens_Model the items.
 	 */
 	public function search( $user_info, $page = 1 ) {
 

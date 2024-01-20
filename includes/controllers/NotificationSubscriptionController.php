@@ -8,7 +8,7 @@
 
 namespace Includes\Controllers;
 
-use Includes\Models\NotificationSubscriptionModel;
+use AFASM\Includes\Models\AFASM_Notification_Subscription_Model;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -24,7 +24,7 @@ class NotificationSubscriptionController {
 	/**
 	 * User Notification Subscription Model
 	 *
-	 * @var NotificationSubscriptionModel
+	 * @var AFASM_Notification_Subscription_Model
 	 */
 	private $notification_subscription_model;
 
@@ -32,7 +32,7 @@ class NotificationSubscriptionController {
 	 * NotificationSubscriptionController constructor.
 	 */
 	public function __construct() {
-		$this->notification_subscription_model = new NotificationSubscriptionModel();
+		$this->notification_subscription_model = new AFASM_Notification_Subscription_Model();
 	}
 
 

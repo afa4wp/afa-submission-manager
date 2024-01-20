@@ -8,8 +8,8 @@
 
 namespace Includes\Controllers;
 
-use Includes\Models\UserDevicesModel;
-use Includes\Models\NotificationSubscriptionModel;
+use AFASM\Includes\Models\AFASM_User_Devices_Model;
+use AFASM\Includes\Models\AFASM_Notification_Subscription_Model;
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
@@ -25,7 +25,7 @@ class UserDevicesController {
 	/**
 	 * User Tokens Model
 	 *
-	 * @var UserDevicesModel
+	 * @var AFASM_User_Devices_Model
 	 */
 	private $user_devices_model;
 
@@ -33,7 +33,7 @@ class UserDevicesController {
 	 * UserTokensController constructor.
 	 */
 	public function __construct() {
-		$this->user_devices_model = new UserDevicesModel();
+		$this->user_devices_model = new AFASM_User_Devices_Model();
 	}
 
 
@@ -54,7 +54,7 @@ class UserDevicesController {
 		$result = $this->user_devices_model->create_device_register_if_not_exist( $user->ID, $device_id, $device_language, $expo_token );
 
 		if ( ! empty( $result ) ) {
-			$notification_subscription_model = new NotificationSubscriptionModel();
+			$notification_subscription_model = new AFASM_Notification_Subscription_Model();
 			$notification_subscription_model->subscribe_user_all_notificions_by_expo_token( $expo_token );
 		}
 		return rest_ensure_response( $result );

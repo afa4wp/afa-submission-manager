@@ -8,8 +8,8 @@
 
 namespace AFASM\Includes\Plugins\Notification;
 
-use Includes\Models\NotificationModel;
-use Includes\Models\NotificationTypeModel;
+use AFASM\Includes\Models\AFASM_Notification_Model;
+use AFASM\Includes\Models\AFASM_Notification_Type_Model;
 use AFASM\Includes\Plugins\Notification\AFASM_Push_Notification_Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,7 +28,7 @@ abstract class AFASM_Abstract_Form_Notification {
 	/**
 	 * Table name
 	 *
-	 * @var NotificationModel
+	 * @var AFASM_Notification_Model
 	 */
 	public $notifiacation;
 
@@ -43,7 +43,7 @@ abstract class AFASM_Abstract_Form_Notification {
 	 * CF7Notification constructor.
 	 */
 	public function __construct() {
-		$this->notifiacation     = new NotificationModel();
+		$this->notifiacation     = new AFASM_Notification_Model();
 		$this->push_notification = new AFASM_Push_Notification_Plugin();
 	}
 
@@ -64,7 +64,7 @@ abstract class AFASM_Abstract_Form_Notification {
 	 */
 	public function get_form_submission_notification_type_id() {
 
-		$notification_type_model = new NotificationTypeModel();
+		$notification_type_model = new AFASM_Notification_Type_Model();
 
 		$notification_type = $notification_type_model->get_notification_type_by_type( 'form_submission' );
 

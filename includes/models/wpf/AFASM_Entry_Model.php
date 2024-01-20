@@ -2,16 +2,20 @@
 /**
  * The Entry Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\WPF;
+namespace AFASM\Includes\Models\WPF;
 
-use Includes\Models\UserModel;
-use Includes\Models\WPF\FormModel;
-use Includes\Models\AbstractEntryModel;
+use AFASM\Includes\Models\AFASM_User_Model;
+use AFASM\Includes\Models\WPF\AFASM_Form_Model;
+use AFASM\Includes\Models\AFASM_Abstract_Entry_Model;
 use AFASM\Includes\Plugins\Helpers\AFASM_Entry_Model_Helper;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbstractEntryModel
@@ -20,7 +24,7 @@ use AFASM\Includes\Plugins\Helpers\AFASM_Entry_Model_Helper;
  *
  * @since 1.0.0
  */
-class EntryModel extends AbstractEntryModel {
+class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 
 	/**
 	 * Const to declare table name.
@@ -183,11 +187,11 @@ class EntryModel extends AbstractEntryModel {
 			$entry['author_info']  = array();
 
 			if ( ! empty( $value->user_id ) ) {
-				$user_model           = new UserModel();
+				$user_model           = new AFASM_User_Model();
 				$entry['author_info'] = $user_model->user_info_by_id( $value->user_id );
 			}
 
-			$form_model         = new FormModel();
+			$form_model         = new AFASM_Form_Model();
 			$entry['form_info'] = $form_model->form_by_id( $value->form_id );
 
 			$entries[] = $entry;

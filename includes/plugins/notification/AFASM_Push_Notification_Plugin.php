@@ -10,7 +10,7 @@ namespace AFASM\Includes\Plugins\Notification;
 
 use ExpoSDK\Expo;
 use ExpoSDK\ExpoMessage;
-use Includes\Models\UserDevicesModel;
+use AFASM\Includes\Models\AFASM_User_Devices_Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -20,7 +20,7 @@ Expo::addDevicesNotRegisteredHandler(
 	function ( $tokens ) {
 		// this callback is called once and receives an array of unregistered tokens.
 
-		$user_devices_model = new UserDevicesModel();
+		$user_devices_model = new AFASM_User_Devices_Model();
 
 		foreach ( $tokens as $key => $value ) {
 			$user_devices_model->delete_register_by_expo_token( $value );

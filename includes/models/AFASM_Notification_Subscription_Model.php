@@ -2,18 +2,19 @@
 /**
  * The Notification Subscription Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models;
+namespace AFASM\Includes\Models;
 
 use AFASM\Includes\Plugins\AFASM_Constant;
-use Includes\Models\UserDevicesModel;
-use Includes\Models\NotificationTypeModel;
+use AFASM\Includes\Models\AFASM_User_Devices_Model;
+use AFASM\Includes\Models\AFASM_Notification_Type_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class NotificationSubscriptionModel
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class NotificationSubscriptionModel {
+class AFASM_Notification_Subscription_Model {
 
 	/**
 	 * Table name
@@ -32,7 +33,7 @@ class NotificationSubscriptionModel {
 	private $table_name;
 
 	/**
-	 * NotificationTypeModel constructor.
+	 * AFASM_Notification_Subscription_Model constructor.
 	 */
 	public function __construct() {
 		global $wpdb;
@@ -50,13 +51,13 @@ class NotificationSubscriptionModel {
 
 		global $wpdb;
 
-		$device = ( new UserDevicesModel() )->get_register_by_user_expo_token( $expo_token );
+		$device = ( new AFASM_User_Devices_Model() )->get_register_by_user_expo_token( $expo_token );
 
 		if ( empty( $device ) ) {
 			return false;
 		}
 
-		$notifications_types = ( new NotificationTypeModel() )->get_all_notification_type();
+		$notifications_types = ( new AFASM_Notification_Type_Model() )->get_all_notification_type();
 
 		$controll = true;
 
@@ -93,7 +94,7 @@ class NotificationSubscriptionModel {
 
 		global $wpdb;
 
-		$device = ( new UserDevicesModel() )->get_register_by_user_expo_token( $expo_token );
+		$device = ( new AFASM_User_Devices_Model() )->get_register_by_user_expo_token( $expo_token );
 
 		if ( empty( $device ) ) {
 			return array();
@@ -123,7 +124,7 @@ class NotificationSubscriptionModel {
 	public function unsubscribe( $expo_token ) {
 		global $wpdb;
 
-		$device = ( new UserDevicesModel() )->get_register_by_user_expo_token( $expo_token );
+		$device = ( new AFASM_User_Devices_Model() )->get_register_by_user_expo_token( $expo_token );
 
 		if ( empty( $device ) ) {
 			return false;

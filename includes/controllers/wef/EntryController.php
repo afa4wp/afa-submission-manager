@@ -8,7 +8,7 @@
 
 namespace Includes\Controllers\WEF;
 
-use Includes\Models\WEF\EntryModel;
+use AFASM\Includes\Models\WEF\AFASM_Entry_Model;
 use Includes\Controllers\AbstractEntryControllers;
 
 // Exit if accessed directly.
@@ -26,7 +26,7 @@ class EntryController extends AbstractEntryControllers {
 	/**
 	 * The form model
 	 *
-	 * @var EntryModel
+	 * @var AFASM_Entry_Model
 	 */
 	private $entry_model;
 
@@ -35,7 +35,7 @@ class EntryController extends AbstractEntryControllers {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->entry_model = new EntryModel();
+		$this->entry_model = new AFASM_Entry_Model();
 	}
 
 	/**

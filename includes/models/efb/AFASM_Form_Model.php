@@ -2,19 +2,21 @@
 /**
  * The Form Model Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Models\EFB;
+namespace AFASM\Includes\Models\EFB;
 
 use AFASM\Includes\Plugins\Helpers\AFASM_Form_Model_Helper;
-use Includes\Models\AbstractFormModel;
-use Includes\Models\UserModel;
-use Includes\Models\EFB\EntryModel;
+use AFASM\Includes\Models\AFASM_Abstract_Form_Model;
+use AFASM\Includes\Models\AFASM_User_Model;
+use AFASM\Includes\Models\EFB\AFASM_Entry_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 /**
  * Class AbstractFormModel
  *
@@ -22,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class FormModel extends AbstractFormModel {
+class AFASM_Form_Model extends AFASM_Abstract_Form_Model {
 
 	/**
 	 * Const to declare table name.
@@ -149,7 +151,7 @@ class FormModel extends AbstractFormModel {
 	 */
 	public function prepare_data( $results ) {
 		$forms      = array();
-		$user_model = new UserModel();
+		$user_model = new AFASM_User_Model();
 
 		$modified_results = array();
 
@@ -173,7 +175,7 @@ class FormModel extends AbstractFormModel {
 			$form['title'] = $value->form_name;
 
 			$form['date_created'] = $value->post_date;
-			$form['registers']    = ( new EntryModel() )->mumber_of_items_by_form_id( $value->ID );
+			$form['registers']    = ( new AFASM_Entry_Model() )->mumber_of_items_by_form_id( $value->ID );
 			$form['user_created'] = $user_model->user_info_by_id( $value->post_author );
 
 			$form['perma_links'] = array(

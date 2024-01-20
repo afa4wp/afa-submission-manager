@@ -8,7 +8,7 @@
 
 namespace Includes\Controllers\WPF;
 
-use Includes\Models\WPF\FormModel;
+use AFASM\Includes\Models\WPF\AFASM_Form_Model;
 use Includes\Controllers\AbstractFormControllers;
 
 // Exit if accessed directly.
@@ -26,7 +26,7 @@ class FormController extends AbstractFormControllers {
 	/**
 	 * The form model
 	 *
-	 * @var FormModel
+	 * @var AFASM_Form_Model
 	 */
 	private $form_model;
 
@@ -35,7 +35,7 @@ class FormController extends AbstractFormControllers {
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->form_model = new FormModel();
+		$this->form_model = new AFASM_Form_Model();
 	}
 
 	/**
