@@ -2,14 +2,15 @@
 /**
  * The Abstarct Entry Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes;
+namespace AFASM\Includes\Routes;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbastractEntryRoute
@@ -18,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class AbstractEntryRoute {
+abstract class AFASM_Abstract_Entry_Route {
 
 	/**
 	 * The route name space

@@ -2,18 +2,19 @@
 /**
  * The User Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes;
+namespace AFASM\Includes\Routes;
 
 use Includes\Controllers\UserController;
 use Includes\Schema\UserSchema;
 use AFASM\Includes\Plugins\AFASM_Config;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class Route
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserRoute {
+class AFASM_User_Route {
 
 	/**
 	 * The route name space
@@ -54,7 +55,6 @@ class UserRoute {
 					'permission_callback' => '__return_true',
 					'args'                => ( new UserSchema() )->login(),
 				),
-
 			)
 		);
 	}

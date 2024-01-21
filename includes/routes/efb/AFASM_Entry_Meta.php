@@ -2,18 +2,19 @@
 /**
  * The Form Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes\WPF;
+namespace AFASM\Includes\Routes\EFB;
 
-use Includes\Controllers\WPF\EntryMetaController;
-use Includes\Routes\AbstractEntryMetaRoute;
+use Includes\Controllers\EFB\EntryMetaController;
+use AFASM\Includes\Routes\AFASM_Abstract_Entry_Meta_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryMeta
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryMeta extends AbstractEntryMetaRoute {
+class AFASM_Entry_Meta extends AFASM_Abstract_Entry_Meta_Route {
 
 	/**
 	 * Get entry_meta by entry id
@@ -30,7 +31,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 	public function entry_meta_by_entry_id() {
 		register_rest_route(
 			$this->name,
-			'/wpf/entrymeta/entry_id/(?P<entry_id>[0-9]+)',
+			'/efb/entrymeta/entry_id/(?P<entry_id>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -47,7 +48,7 @@ class EntryMeta extends AbstractEntryMetaRoute {
 	public function search_entry_meta_answer() {
 		register_rest_route(
 			$this->name,
-			'/wpf/entrymeta/search/(?P<answer>\S+)',
+			'/efb/entrymeta/search/(?P<answer>\S+)',
 			array(
 				array(
 					'methods'             => 'GET',

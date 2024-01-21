@@ -2,11 +2,15 @@
 /**
  * The PingRoute Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes;
+namespace AFASM\Includes\Routes;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class PingRoute
@@ -15,7 +19,7 @@ namespace Includes\Routes;
  *
  * @since 1.0.0
  */
-class PingRoute {
+class AFASM_Ping_Route {
 
 	/**
 	 * The route name space

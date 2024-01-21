@@ -2,18 +2,19 @@
 /**
  * The Form Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes\EFB;
+namespace AFASM\Includes\Routes\WEF;
 
-use Includes\Controllers\EFB\FormController;
-use Includes\Routes\AbstractFormRoute;
+use Includes\Controllers\WEF\FormController;
+use AFASM\Includes\Routes\AFASM_Abstract_Form_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class Form
@@ -22,15 +23,15 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class Form extends AbstractFormRoute {
+class AFASM_Form extends AFASM_Abstract_Form_Route {
 
 	/**
-	 * Get all forms
+	 * Get all forms.
 	 */
 	public function forms() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms',
+			'/wef/forms',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -42,12 +43,12 @@ class Form extends AbstractFormRoute {
 	}
 
 	/**
-	 * Get forms by id
+	 * Get form by id.
 	 */
 	public function form_by_id() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms/(?P<id>[0-9]+)',
+			'/wef/forms/(?P<id>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -59,12 +60,12 @@ class Form extends AbstractFormRoute {
 	}
 
 	/**
-	 * Get forms by pagination
+	 * Get forms by pagination.
 	 */
 	public function forms_pagination() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms/page/(?P<page_number>[0-9]+)',
+			'/wef/forms/page/(?P<page_number>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -81,7 +82,7 @@ class Form extends AbstractFormRoute {
 	public function search_forms() {
 		register_rest_route(
 			$this->name,
-			'/efb/forms/search/(?P<post_name>\S+)',
+			'/wef/forms/search/(?P<post_name>\S+)',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -91,4 +92,5 @@ class Form extends AbstractFormRoute {
 			)
 		);
 	}
+
 }

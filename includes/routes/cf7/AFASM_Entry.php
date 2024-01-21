@@ -2,18 +2,19 @@
 /**
  * The Entry Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes\GF;
+namespace AFASM\Includes\Routes\CF7;
 
-use Includes\Controllers\GF\EntryController;
-use Includes\Routes\AbstractEntryRoute;
+use Includes\Controllers\CF7\EntryController;
+use AFASM\Includes\Routes\AFASM_Abstract_Entry_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class Entry
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class Entry extends AbstractEntryRoute {
+class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 
 	/**
 	 * Get all entries
@@ -30,7 +31,7 @@ class Entry extends AbstractEntryRoute {
 	public function entries() {
 		register_rest_route(
 			$this->name,
-			'/gf/entries',
+			'/cf7/entries',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -47,7 +48,7 @@ class Entry extends AbstractEntryRoute {
 	public function entry_by_id() {
 		register_rest_route(
 			$this->name,
-			'/gf/entries/(?P<entry_id>[0-9]+)',
+			'/cf7/entries/(?P<entry_id>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -64,7 +65,7 @@ class Entry extends AbstractEntryRoute {
 	public function entries_by_form_id() {
 		register_rest_route(
 			$this->name,
-			'/gf/entries/form_id/(?P<form_id>[0-9]+)/page/(?P<page_number>[0-9]+)',
+			'/cf7/entries/form_id/(?P<form_id>[0-9]+)/page/(?P<page_number>[0-9]+)',
 			array(
 				array(
 					'methods'             => 'GET',
@@ -81,7 +82,7 @@ class Entry extends AbstractEntryRoute {
 	public function search_entries_by_user() {
 		register_rest_route(
 			$this->name,
-			'/gf/entries/user/search/(?P<user_info>\S+)',
+			'/cf7/entries/user/search/(?P<user_info>\S+)',
 			array(
 				array(
 					'methods'             => 'GET',

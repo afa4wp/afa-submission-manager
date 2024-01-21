@@ -2,18 +2,19 @@
 /**
  * The Form Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes\CF7;
+namespace AFASM\Includes\Routes\CF7;
 
 use Includes\Controllers\CF7\EntryMetaController;
-use Includes\Routes\AbstractEntryMetaRoute;
+use AFASM\Includes\Routes\AFASM_Abstract_Entry_Meta_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryMeta
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryMeta extends AbstractEntryMetaRoute {
+class AFASM_Entry_Meta extends AFASM_Abstract_Entry_Meta_Route {
 
 	/**
 	 * Get entry_meta by entry id

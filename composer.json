@@ -2,12 +2,12 @@
     "name": "claud/afa-submission-manager",
     "autoload": {
         "psr-4": {
-            "Includes\\Routes\\": "includes/routes/",
-            "Includes\\Routes\\GF\\": "includes/routes/gf/",
-            "Includes\\Routes\\WPF\\": "includes/routes/wpf/",
-            "Includes\\Routes\\WEF\\": "includes/routes/wef/",
-            "Includes\\Routes\\CF7\\": "includes/routes/cf7/",
-            "Includes\\Routes\\EFB\\": "includes/routes/efb/",
+            "AFASM\\Includes\\Routes\\": "includes/routes/",
+            "AFASM\\Includes\\Routes\\GF\\": "includes/routes/gf/",
+            "AFASM\\Includes\\Routes\\WPF\\": "includes/routes/wpf/",
+            "AFASM\\Includes\\Routes\\WEF\\": "includes/routes/wef/",
+            "AFASM\\Includes\\Routes\\CF7\\": "includes/routes/cf7/",
+            "AFASM\\Includes\\Routes\\EFB\\": "includes/routes/efb/",
             "Includes\\Controllers\\": "includes/controllers/",
             "Includes\\Controllers\\GF\\": "includes/controllers/gf/",
             "Includes\\Controllers\\WPF\\": "includes/controllers/wpf/",

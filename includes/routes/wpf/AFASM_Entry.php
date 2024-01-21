@@ -2,18 +2,19 @@
 /**
  * The Entry Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes\WPF;
+namespace AFASM\Includes\Routes\WPF;
 
 use Includes\Controllers\WPF\EntryController;
-use Includes\Routes\AbstractEntryRoute;
+use AFASM\Includes\Routes\AFASM_Abstract_Entry_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class Entry
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class Entry extends AbstractEntryRoute {
+class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 
 	/**
 	 * Get all entries.

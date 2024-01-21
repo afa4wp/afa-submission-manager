@@ -25,7 +25,7 @@ define( 'AFA_SUBMISSION_MANAGER_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
 use AFASM\Includes\Plugins\JWT\AFASM_JWT_Plugin;
-use Includes\Routes\Route;
+use AFASM\Includes\Routes\AFASM_Route;
 use Includes\Database\DatabaseInstaller;
 use Includes\Admin\AdminOptions;
 use AFASM\Includes\Plugins\AFASM_Constant;
@@ -37,7 +37,7 @@ use AFASM\Includes\Plugins\Notification\AFASM_Notification_Hooks_Plugin;
  */
 function afa_submission_manager_rest_init() {
 	$namespace = AFASM_Constant::API_NAMESPACE . '/' . AFASM_Constant::API_VERSION;
-	( new Route( $namespace ) )->init();
+	( new AFASM_Route( $namespace ) )->init();
 
 	add_filter( 'rest_pre_dispatch', array( new AFASM_JWT_Plugin(), 'validate_token_rest_pre_dispatch' ), 10, 3 );
 }

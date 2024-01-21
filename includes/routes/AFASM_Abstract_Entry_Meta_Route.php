@@ -2,14 +2,15 @@
 /**
  * The Abstarct Entry Meta Route Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Routes;
+namespace AFASM\Includes\Routes;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbstractEntryMetaRoute
@@ -18,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class AbstractEntryMetaRoute {
+abstract class AFASM_Abstract_Entry_Meta_Route {
 
 	/**
 	 * The route name space
