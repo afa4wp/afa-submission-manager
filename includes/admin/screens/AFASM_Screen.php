@@ -2,14 +2,15 @@
 /**
  * The tab screen.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Admin\Screens;
+namespace AFASM\Includes\Admin\Screens;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class WP_AFA_Screen
@@ -18,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class Screen {
+abstract class AFASM_Screen {
 
 	/**
 	 * Screen ID

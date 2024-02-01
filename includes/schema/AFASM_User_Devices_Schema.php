@@ -2,17 +2,18 @@
 /**
  * The User Device Schema Class
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Schema;
+namespace AFASM\Includes\Schema;
 
 use ExpoSDK\Expo;
 use AFASM\Includes\Plugins\AFASM_Language;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class UserDevicesSchema
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserDevicesSchema {
+class AFASM_User_Devices_Schema {
 
 	/**
 	 * Create new device register schema

@@ -13,7 +13,7 @@ use AFASM\Includes\Models\AFASM_User_Tokens_Model;
 use AFASM\Includes\Plugins\JWT\AFASM_JWT_Plugin;
 use AFASM\Includes\Models\AFASM_User_QR_Code_Model;
 use AFASM\Includes\Plugins\AFASM_Config;
-use Includes\Database\SupportedPlugins;
+use AFASM\Includes\Database\AFASM_Supported_Plugins;
 use WP_Error;
 
 // Exit if accessed directly.
@@ -228,7 +228,7 @@ class UserController {
 
 		$user_data['muber_of_forms'] = $number_of_forms;
 
-		$plugin_name = ( new SupportedPlugins() )->get_plugin_name_by_slug( $key );
+		$plugin_name = ( new AFASM_Supported_Plugins() )->get_plugin_name_by_slug( $key );
 
 		$result = array();
 

@@ -2,17 +2,18 @@
 /**
  * The Screen About
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Admin\Screens;
+namespace AFASM\Includes\Admin\Screens;
 
-use Includes\Admin\Screens\Screen;
-use Includes\Database\SupportedPlugins;
+use AFASM\Includes\Admin\Screens\AFASM_Screen;
+use AFASM\Includes\Database\AFASM_Supported_Plugins;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class ScreenAbout
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class ScreenAbout extends Screen {
+class AFASM_Screen_About extends AFASM_Screen {
 
 	// Tab param .
 	const ID = 'about';
@@ -42,7 +43,7 @@ class ScreenAbout extends Screen {
 	 * @return void
 	 */
 	public function render() {
-		$supported_plugins = new SupportedPlugins();
+		$supported_plugins = new AFASM_Supported_Plugins();
 		$plugins_names     = implode( ', ', $supported_plugins->get_supported_plugins_name_list() );
 		?>
 		<div style='max-width:700px;'>

@@ -2,16 +2,17 @@
 /**
  * The User QRCOdes Class Table.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Database;
+namespace AFASM\Includes\Database;
 
 use AFASM\Includes\Plugins\AFASM_Constant;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class UserQRCodes
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserQRCodes {
+class AFASM_User_QR_Codes {
 
 	/**
 	 * Data base name

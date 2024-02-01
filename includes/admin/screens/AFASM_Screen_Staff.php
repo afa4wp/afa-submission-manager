@@ -2,16 +2,17 @@
 /**
  * The staff tab item for configuration screen
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Admin\Screens;
+namespace AFASM\Includes\Admin\Screens;
 
-use Includes\Admin\Screens\Screen;
+use AFASM\Includes\Admin\Screens\AFASM_Screen;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class ScreenStaff
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class ScreenStaff extends Screen {
+class AFASM_Screen_Staff extends AFASM_Screen {
 
 	/**
 	 * Tab param

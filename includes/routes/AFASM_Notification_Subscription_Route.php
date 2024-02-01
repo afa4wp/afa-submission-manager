@@ -9,7 +9,7 @@
 namespace AFASM\Includes\Routes;
 
 use Includes\Controllers\NotificationSubscriptionController;
-use Includes\Schema\NotificationSubscriptionSchema;
+use AFASM\Includes\Schema\AFASM_Notification_Subscription_Schema;
 use AFASM\Includes\Plugins\AFASM_Config;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -53,7 +53,7 @@ class AFASM_Notification_Subscription_Route {
 					'methods'             => 'POST',
 					'callback'            => array( new NotificationSubscriptionController(), 'subscribe_user' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
-					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
+					'args'                => ( new AFASM_Notification_Subscription_Schema() )->subscribe_user(),
 				),
 
 			)
@@ -72,7 +72,7 @@ class AFASM_Notification_Subscription_Route {
 					'methods'             => 'GET',
 					'callback'            => array( new NotificationSubscriptionController(), 'fetch_subscriptions' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
-					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
+					'args'                => ( new AFASM_Notification_Subscription_Schema() )->subscribe_user(),
 				),
 
 			)
@@ -91,7 +91,7 @@ class AFASM_Notification_Subscription_Route {
 					'methods'             => 'DELETE',
 					'callback'            => array( new NotificationSubscriptionController(), 'unsubscribe' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
-					'args'                => ( new NotificationSubscriptionSchema() )->subscribe_user(),
+					'args'                => ( new AFASM_Notification_Subscription_Schema() )->subscribe_user(),
 				),
 
 			)
@@ -110,7 +110,7 @@ class AFASM_Notification_Subscription_Route {
 					'methods'             => 'PUT',
 					'callback'            => array( new NotificationSubscriptionController(), 'update_subscription_state' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
-					'args'                => ( new NotificationSubscriptionSchema() )->update_subscription_state(),
+					'args'                => ( new AFASM_Notification_Subscription_Schema() )->update_subscription_state(),
 				),
 
 			)

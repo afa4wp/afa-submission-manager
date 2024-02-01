@@ -2,16 +2,16 @@
 /**
  * The UserListTable Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Admin\Pages;
+namespace AFASM\Includes\Admin\Pages;
 
 use AFASM\Includes\Models\AFASM_User_Model;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // Exit if accessed directly.
 }
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
@@ -27,7 +27,7 @@ use Includes\Controllers\UserTokensController;
  *
  * @since 1.0.0
  */
-class UserListTable extends \WP_List_Table {
+class AFASM_User_List_Table extends \WP_List_Table {
 
 	/**
 	 * Const to declare page.

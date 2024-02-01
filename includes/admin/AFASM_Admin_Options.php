@@ -2,18 +2,19 @@
 /**
  * The Admin Options class
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Admin;
+namespace AFASM\Includes\Admin;
 
-use Includes\Admin\Pages\UserListTable;
-use Includes\Admin\Pages\Settings;
-use Includes\Admin\AdminStaff;
+use AFASM\Includes\Admin\Pages\AFASM_User_List_Table;
+use AFASM\Includes\Admin\Pages\AFASM_Settings;
+use AFASM\Includes\Admin\AFASM_Admin_Staff;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * Class AdminOptions
@@ -22,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class AdminOptions {
+class AFASM_Admin_Options {
 
 	/**
 	 * Init options
@@ -38,16 +39,16 @@ class AdminOptions {
 	 * Execute on admin_init hook
 	 */
 	public function admin_init() {
-		new AdminStaff();
+		new AFASM_Admin_Staff();
 	}
 
 	/**
 	 * Add page for plugin
 	 */
 	public function add_page() {
-		add_menu_page( 'AFA', 'AFA', 'manage_options', 'afa_submission_manager', array( new UserListTable(), 'render' ), 'dashicons-rest-api' );
+		add_menu_page( 'AFA', 'AFA', 'manage_options', 'afa_submission_manager', array( new AFASM_User_List_Table(), 'render' ), 'dashicons-rest-api' );
 		add_submenu_page( 'afa_submission_manager', __( 'AFA - Connected Users', 'afa-submission-manager' ), __( 'Connected Users', 'afa-submission-manager' ), 'manage_options', 'afa_submission_manager' );
-		add_submenu_page( 'afa_submission_manager', __( 'AFA - Settings', 'afa-submission-manager' ), __( 'Settings', 'afa-submission-manager' ), 'manage_options', 'afa_submission_manager_settings', array( new Settings(), 'render' ) );
+		add_submenu_page( 'afa_submission_manager', __( 'AFA - Settings', 'afa-submission-manager' ), __( 'Settings', 'afa-submission-manager' ), 'manage_options', 'afa_submission_manager_settings', array( new AFASM_Settings(), 'render' ) );
 	}
 
 	/**

@@ -2,16 +2,17 @@
 /**
  * The NotificationType Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Database;
+namespace AFASM\Includes\Database;
 
 use AFASM\Includes\Plugins\AFASM_Constant;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class NotificationType
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class NotificationType {
+class AFASM_Notification_Type {
 
 	/**
 	 * Table name

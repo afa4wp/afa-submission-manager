@@ -10,7 +10,7 @@ namespace AFASM\Includes\Routes;
 
 use Includes\Controllers\NotificationController;
 use AFASM\Includes\Plugins\AFASM_Config;
-use Includes\Schema\NotificationSchema;
+use AFASM\Includes\Schema\AFASM_Notification_Schema;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -53,7 +53,7 @@ class AFASM_Notification_Route {
 					'methods'             => 'GET',
 					'callback'            => array( new NotificationController(), 'notifications' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
-					'args'                => ( new NotificationSchema() )->get(),
+					'args'                => ( new AFASM_Notification_Schema() )->get(),
 				),
 
 			)

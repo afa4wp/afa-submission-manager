@@ -2,17 +2,18 @@
 /**
  * The Admin staff class for users table
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Admin;
+namespace AFASM\Includes\Admin;
 
 use AFASM\Includes\Models\AFASM_User_Model;
 use WP_User;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
 
 /**
  * Class AdminStaff
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class AdminStaff {
+class AFASM_Admin_Staff {
 
 	/**
 	 * Tab param

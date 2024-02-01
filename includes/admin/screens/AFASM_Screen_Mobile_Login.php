@@ -6,13 +6,14 @@
  * @since 1.0.0
  */
 
-namespace Includes\Admin\Screens;
+namespace AFASM\Includes\Admin\Screens;
 
-use Includes\Admin\Screens\Screen;
+use AFASM\Includes\Admin\Screens\AFASM_Screen;
 use AFASM\Includes\Plugins\AFASM_QR_Code;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class ScreenMobileLogin
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class ScreenMobileLogin extends Screen {
+class AFASM_Screen_Mobile_Login extends AFASM_Screen {
 
 	/**
 	 * Tab param

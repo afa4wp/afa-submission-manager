@@ -9,7 +9,7 @@
 namespace AFASM\Includes\Routes;
 
 use Includes\Controllers\UserDevicesController;
-use Includes\Schema\UserDevicesSchema;
+use AFASM\Includes\Schema\AFASM_User_Devices_Schema;
 use AFASM\Includes\Plugins\AFASM_Config;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -53,7 +53,7 @@ class AFASM_User_Devices_Route {
 					'methods'             => 'POST',
 					'callback'            => array( new UserDevicesController(), 'create' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
-					'args'                => ( new UserDevicesSchema() )->create(),
+					'args'                => ( new AFASM_User_Devices_Schema() )->create(),
 				),
 			)
 		);
@@ -71,7 +71,7 @@ class AFASM_User_Devices_Route {
 					'methods'             => 'PUT',
 					'callback'            => array( new UserDevicesController(), 'language' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
-					'args'                => ( new UserDevicesSchema() )->language(),
+					'args'                => ( new AFASM_User_Devices_Schema() )->language(),
 				),
 			)
 		);

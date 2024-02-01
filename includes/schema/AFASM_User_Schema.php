@@ -2,16 +2,17 @@
 /**
  * The User Schema Class
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Schema;
+namespace AFASM\Includes\Schema;
 
 use AFASM\Includes\Plugins\AFASM_Config;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class UserSchema
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserSchema {
+class AFASM_User_Schema {
 
 	/**
 	 * Create login schema

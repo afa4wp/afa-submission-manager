@@ -26,8 +26,8 @@ define( 'AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basenam
 
 use AFASM\Includes\Plugins\JWT\AFASM_JWT_Plugin;
 use AFASM\Includes\Routes\AFASM_Route;
-use Includes\Database\DatabaseInstaller;
-use Includes\Admin\AdminOptions;
+use AFASM\Includes\Database\AFASM_Database_Installer;
+use AFASM\Includes\Admin\AFASM_Admin_Options;
 use AFASM\Includes\Plugins\AFASM_Constant;
 use AFASM\Includes\Plugins\AFASM_Language;
 use AFASM\Includes\Plugins\Notification\AFASM_Notification_Hooks_Plugin;
@@ -50,10 +50,10 @@ add_action( 'rest_api_init', 'afa_submission_manager_rest_init' );
 /**
 * Register hooks.
 */
-register_activation_hook( AFA_SUBMISSION_MANAGER_PLUGIN_FILE, array( new DatabaseInstaller(), 'install' ) );
+register_activation_hook( AFA_SUBMISSION_MANAGER_PLUGIN_FILE, array( new AFASM_Database_Installer(), 'install' ) );
 
 
-( new AdminOptions() )->init();
+( new AFASM_Admin_Options() )->init();
 
 add_action( 'plugins_loaded', array( new AFASM_Language(), 'all_forms_load_textdomain' ) );
 

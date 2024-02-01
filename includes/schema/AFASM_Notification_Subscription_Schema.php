@@ -2,16 +2,17 @@
 /**
  * The UserNotification Subscription Schema Class
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Schema;
+namespace  AFASM\Includes\Schema;
 
 use ExpoSDK\Expo;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class NotificationSubscriptionSchema
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class NotificationSubscriptionSchema {
+class AFASM_Notification_Subscription_Schema {
 
 	/**
 	 * Create notification subscription schema

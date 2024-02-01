@@ -2,20 +2,21 @@
 /**
  * The Setting Page.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Admin\Pages;
+namespace AFASM\Includes\Admin\Pages;
 
-use Includes\Admin\Screens\Screen;
-use Includes\Admin\Screens\ScreenAbout;
-use Includes\Admin\Screens\ScreenMobileLogin;
-use Includes\Admin\Screens\ScreenStaff;
+use AFASM\Includes\Admin\Screens\AFASM_Screen;
+use AFASM\Includes\Admin\Screens\AFASM_Screen_About;
+use AFASM\Includes\Admin\Screens\AFASM_Screen_Mobile_Login;
+use AFASM\Includes\Admin\Screens\AFASM_Screen_Staff;
 
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class Setting
@@ -24,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class Settings {
+class AFASM_Settings {
 
 	/**
 	 * Base settings page ID
@@ -36,7 +37,7 @@ class Settings {
 	/**
 	 * Settings screens
 	 *
-	 * @var Screen;[]
+	 * @var AFASM_Screen[]
 	 */
 	private $screens;
 
@@ -44,15 +45,15 @@ class Settings {
 	 * Settings constructor.
 	 */
 	public function __construct() {
-		$this->screens[ ScreenMobileLogin::ID ] = new ScreenMobileLogin();
-		$this->screens[ ScreenStaff::ID ]       = new ScreenStaff();
-		$this->screens[ ScreenAbout::ID ]       = new ScreenAbout();
+		$this->screens[ AFASM_Screen_Mobile_Login::ID ] = new AFASM_Screen_Mobile_Login();
+		$this->screens[ AFASM_Screen_Staff::ID ]        = new AFASM_Screen_Staff();
+		$this->screens[ AFASM_Screen_About::ID ]        = new AFASM_Screen_About();
 	}
 
 	/**
 	 * Settings screens
 	 *
-	 * @return Screen[]
+	 * @return AFASM_Screen[]
 	 */
 	public function get_screens() {
 
@@ -60,7 +61,7 @@ class Settings {
 			$this->screens,
 			function( $value ) {
 
-				return $value instanceof Screen;
+				return $value instanceof AFASM_Screen;
 
 			}
 		);
@@ -77,7 +78,7 @@ class Settings {
 
 		$tabs = $this->get_tabs();
 
-		$current_tab = ScreenMobileLogin::ID;
+		$current_tab = AFASM_Screen_Mobile_Login::ID;
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['tab'] ) && in_array( $_GET['tab'], array_keys( $tabs ), true ) ) {

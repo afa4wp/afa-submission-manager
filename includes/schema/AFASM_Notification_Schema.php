@@ -2,17 +2,18 @@
 /**
  * The Notification Schema Class
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Schema;
+namespace AFASM\Includes\Schema;
 
-use Includes\Database\SupportedPlugins;
+use AFASM\Includes\Database\AFASM_Supported_Plugins;
 use AFASM\Includes\Plugins\AFASM_Language;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class NotificationSchema
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class NotificationSchema {
+class AFASM_Notification_Schema {
 
 	/**
 	 * Create notification  schema
@@ -41,7 +42,7 @@ class NotificationSchema {
 				'required'          => true,
 				'type'              => 'string',
 				'validate_callback' => function ( $value, $request, $key ) {
-					return ( new SupportedPlugins() )->is_default_slug_exist( $value );
+					return ( new AFASM_Supported_Plugins() )->is_default_slug_exist( $value );
 				},
 			),
 		);
