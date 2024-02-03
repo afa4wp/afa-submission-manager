@@ -2,17 +2,18 @@
 /**
  * The Form Controller Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers\GF;
+namespace AFASM\Includes\Controllers\GF;
 
 use AFASM\Includes\Models\GF\AFASM_Form_Model;
-use Includes\Controllers\AbstractFormControllers;
+use AFASM\Includes\Controllers\AFASM_Abstract_Form_Controllers;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class FormController
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class FormController extends AbstractFormControllers {
+class AFASM_Form_Controller extends AFASM_Abstract_Form_Controllers {
 
 	/**
 	 * The form model

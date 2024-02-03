@@ -2,16 +2,17 @@
 /**
  * The Abstarct Entry Controllers Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers;
+namespace AFASM\Includes\Controllers;
 
 use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbstractEntryControllers
@@ -20,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class AbstractEntryControllers {
+abstract class AFASM_Abstract_Entry_Controllers {
 
 	/**
 	 * The number of items per page

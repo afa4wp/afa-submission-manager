@@ -2,17 +2,18 @@
 /**
  * The Entry Meta Controllers Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers\GF;
+namespace AFASM\Includes\Controllers\CF7;
 
-use AFASM\Includes\Models\GF\AFASM_Entry_Meta_Model;
-use Includes\Controllers\AbstractEntryMetaControllers;
+use AFASM\Includes\Models\CF7\AFASM_Entry_Meta_Model;
+use AFASM\Includes\Controllers\AFASM_Abstract_Entry_Meta_Controllers;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryMetaController
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryMetaController extends AbstractEntryMetaControllers {
+class AFASM_Entry_Meta_Controller extends AFASM_Abstract_Entry_Meta_Controllers {
 
 	/**
 	 * The entry meta model
@@ -39,11 +40,11 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	}
 
 	/**
-	 * GF forms entry.
+	 * CF7 forms entry.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $entryMeta WPF entries meta
+	 * @return array $entryMeta CF7 entries meta
 	 */
 	public function entry_meta_by_entry_id( $request ) {
 		$entry_id = absint( $request['entry_id'] );
@@ -54,20 +55,18 @@ class EntryMetaController extends AbstractEntryMetaControllers {
 	}
 
 	/**
-	 * GF forms entry.
+	 * Get all entry meta by entry id
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $entryMeta WPF entries meta
+	 * @return array $entryMeta CF7 entries meta
 	 */
 	public function search_entry_meta_answer( $request ) {
-		$number_of_records_per_page = 20;
-		$answer                     = sanitize_text_field( urldecode( $request['answer'] ) );
+		$answer = sanitize_text_field( urldecode( $request['answer'] ) );
 
-		$offset = 0;
-
-		$items = $this->entry_meta_model->search_entry_meta_answer( $answer, $offset, $number_of_records_per_page );
+		$items = $this->entry_meta_model->search_entry_meta_answer( $answer );
 
 		return rest_ensure_response( $items );
 	}
+
 }

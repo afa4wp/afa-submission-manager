@@ -2,18 +2,20 @@
 /**
  * The Notification Controller Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers;
+namespace AFASM\Includes\Controllers;
 
 use AFASM\Includes\Models\AFASM_Notification_Model;
 use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
 use AFASM\Includes\Models\AFASM_Supported_Plugins_Model;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class NotificationController
@@ -22,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class NotificationController {
+class AFASM_Notification_Controller {
 	/**
 	 * User Notification Model
 	 *

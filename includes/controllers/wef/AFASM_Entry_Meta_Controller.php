@@ -2,17 +2,18 @@
 /**
  * The Entry Meta Controllers Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers\WEF;
+namespace AFASM\Includes\Controllers\WEF;
 
 use AFASM\Includes\Models\WEF\AFASM_Entry_Meta_Model;
-use Includes\Controllers\AbstractEntryMetaControllers;
+use AFASM\Includes\Controllers\AFASM_Abstract_Entry_Meta_Controllers;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryMetaController
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryMetaController  extends AbstractEntryMetaControllers {
+class AFASM_Entry_Meta_Controller  extends AFASM_Abstract_Entry_Meta_Controllers {
 
 	/**
 	 * The entry meta model

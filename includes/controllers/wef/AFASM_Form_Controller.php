@@ -2,17 +2,18 @@
 /**
  * The Form Controller Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers\CF7;
+namespace AFASM\Includes\Controllers\WEF;
 
-use AFASM\Includes\Models\CF7\AFASM_Form_Model;
-use Includes\Controllers\AbstractFormControllers;
+use AFASM\Includes\Models\WEF\AFASM_Form_Model;
+use AFASM\Includes\Controllers\AFASM_Abstract_Form_Controllers;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class FormController
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class FormController extends AbstractFormControllers {
+class AFASM_Form_Controller extends AFASM_Abstract_Form_Controllers {
 
 	/**
 	 * The form model
@@ -39,9 +40,9 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * CF7 forms.
+	 * WEF forms.
 	 *
-	 * @return array $forms GF forms.
+	 * @return array $forms WEF forms.
 	 */
 	public function forms() {
 		$count = $this->form_model->form_model_helper->mumber_of_items();
@@ -56,11 +57,11 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * CF7 forms.
+	 * WEF forms.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return object $form CF7 form.
+	 * @return object $form WEF form.
 	 */
 	public function form_by_id( $request ) {
 		$id = absint( $request['id'] );
@@ -71,11 +72,11 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * CF7 forms.
+	 * WEF forms.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms CF7 forms.
+	 * @return array $forms WEF forms.
 	 */
 	public function forms_pagination( $request ) {
 		$page = absint( $request['page_number'] );
@@ -92,11 +93,11 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * CF7 forms.
+	 * WEF forms.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms CF7 forms.
+	 * @return array $forms WEF forms.
 	 */
 	public function search_forms( $request ) {
 		$page = 1;
@@ -114,4 +115,5 @@ class FormController extends AbstractFormControllers {
 		return rest_ensure_response( $forms_results );
 
 	}
+
 }

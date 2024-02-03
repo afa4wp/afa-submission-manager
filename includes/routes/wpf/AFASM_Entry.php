@@ -8,7 +8,7 @@
 
 namespace AFASM\Includes\Routes\WPF;
 
-use Includes\Controllers\WPF\EntryController;
+use AFASM\Includes\Controllers\WPF\AFASM_Entry_Controller;
 use AFASM\Includes\Routes\AFASM_Abstract_Entry_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
@@ -35,7 +35,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryController(), 'entries' ),
+					'callback'            => array( new AFASM_Entry_Controller(), 'entries' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)
@@ -52,7 +52,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryController(), 'entry_by_id' ),
+					'callback'            => array( new AFASM_Entry_Controller(), 'entry_by_id' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)
@@ -69,7 +69,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryController(), 'entries_by_form_id' ),
+					'callback'            => array( new AFASM_Entry_Controller(), 'entries_by_form_id' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)
@@ -86,7 +86,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryController(), 'search_entries_by_user' ),
+					'callback'            => array( new AFASM_Entry_Controller(), 'search_entries_by_user' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)

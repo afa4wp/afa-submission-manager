@@ -8,7 +8,7 @@
 
 namespace AFASM\Includes\Routes;
 
-use Includes\Controllers\UserDevicesController;
+use AFASM\Includes\Controllers\AFASM_User_Devices_Controller;
 use AFASM\Includes\Schema\AFASM_User_Devices_Schema;
 use AFASM\Includes\Plugins\AFASM_Config;
 
@@ -51,7 +51,7 @@ class AFASM_User_Devices_Route {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( new UserDevicesController(), 'create' ),
+					'callback'            => array( new AFASM_User_Devices_Controller(), 'create' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new AFASM_User_Devices_Schema() )->create(),
 				),
@@ -69,7 +69,7 @@ class AFASM_User_Devices_Route {
 			array(
 				array(
 					'methods'             => 'PUT',
-					'callback'            => array( new UserDevicesController(), 'language' ),
+					'callback'            => array( new AFASM_User_Devices_Controller(), 'language' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new AFASM_User_Devices_Schema() )->language(),
 				),

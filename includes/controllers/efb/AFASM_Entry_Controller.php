@@ -2,17 +2,18 @@
 /**
  * The Entry Controllers Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers\EFB;
+namespace AFASM\Includes\Controllers\EFB;
 
 use AFASM\Includes\Models\EFB\AFASM_Entry_Model;
-use Includes\Controllers\AbstractEntryControllers;
+use AFASM\Includes\Controllers\AFASM_Abstract_Entry_Controllers;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryController
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryController extends AbstractEntryControllers {
+class AFASM_Entry_Controller extends AFASM_Abstract_Entry_Controllers {
 
 	/**
 	 * The form model

@@ -2,14 +2,16 @@
 /**
  * The Abstarct Entry Meta Controllers Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers;
+namespace AFASM\Includes\Controllers;
 
 // Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class AbstractEntryMetaControllers
@@ -18,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-abstract class AbstractEntryMetaControllers {
+abstract class AFASM_Abstract_Entry_Meta_Controllers {
 
 	/**
 	 * Get all entry meta by entry id

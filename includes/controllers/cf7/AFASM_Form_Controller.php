@@ -2,26 +2,27 @@
 /**
  * The Form Controller Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers\WPF;
+namespace AFASM\Includes\Controllers\CF7;
 
-use AFASM\Includes\Models\WPF\AFASM_Form_Model;
-use Includes\Controllers\AbstractFormControllers;
+use AFASM\Includes\Models\CF7\AFASM_Form_Model;
+use AFASM\Includes\Controllers\AFASM_Abstract_Form_Controllers;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class FormController
  *
- * Create control functions
+ * Init all routes
  *
  * @since 1.0.0
  */
-class FormController extends AbstractFormControllers {
+class AFASM_Form_Controller extends AFASM_Abstract_Form_Controllers {
 
 	/**
 	 * The form model
@@ -39,12 +40,12 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * WPF forms.
+	 * CF7 forms.
 	 *
 	 * @return array $forms GF forms.
 	 */
 	public function forms() {
-		$count = $this->form_model->mumber_of_items();
+		$count = $this->form_model->form_model_helper->mumber_of_items();
 
 		$offset = 0;
 
@@ -56,11 +57,11 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * WPF forms.
+	 * CF7 forms.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return aobject $form WPF form.
+	 * @return object $form CF7 form.
 	 */
 	public function form_by_id( $request ) {
 		$id = absint( $request['id'] );
@@ -71,16 +72,16 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * WPF forms.
+	 * CF7 forms.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms GF forms.
+	 * @return array $forms CF7 forms.
 	 */
 	public function forms_pagination( $request ) {
 		$page = absint( $request['page_number'] );
 
-		$count = $this->form_model->mumber_of_items();
+		$count = $this->form_model->form_model_helper->mumber_of_items();
 
 		$offset = $this->pagination_helper->get_offset( $page );
 
@@ -92,18 +93,18 @@ class FormController extends AbstractFormControllers {
 	}
 
 	/**
-	 * WEF forms.
+	 * CF7 forms.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WPF forms.
+	 * @return array $forms CF7 forms.
 	 */
 	public function search_forms( $request ) {
+		$page = 1;
+
 		$post_name = sanitize_text_field( urldecode( $request['post_name'] ) );
 
 		$count = $this->form_model->form_model_helper->mumber_of_items_by_post_title( $post_name );
-
-		$page = 1;
 
 		$offset = $this->pagination_helper->get_offset( $page );
 
@@ -114,5 +115,4 @@ class FormController extends AbstractFormControllers {
 		return rest_ensure_response( $forms_results );
 
 	}
-
 }

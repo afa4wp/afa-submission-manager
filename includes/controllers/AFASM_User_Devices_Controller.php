@@ -2,17 +2,18 @@
 /**
  * The User Devices Controller Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers;
+namespace AFASM\Includes\Controllers;
 
 use AFASM\Includes\Models\AFASM_User_Devices_Model;
 use AFASM\Includes\Models\AFASM_Notification_Subscription_Model;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class UserDevicesController
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserDevicesController {
+class AFASM_User_Devices_Controller {
 	/**
 	 * User Tokens Model
 	 *

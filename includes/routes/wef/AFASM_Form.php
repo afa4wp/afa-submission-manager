@@ -8,7 +8,7 @@
 
 namespace AFASM\Includes\Routes\WEF;
 
-use Includes\Controllers\WEF\FormController;
+use AFASM\Includes\Controllers\WEF\AFASM_Form_Controller;
 use AFASM\Includes\Routes\AFASM_Abstract_Form_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
@@ -35,7 +35,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'forms' ),
+					'callback'            => array( new AFASM_Form_Controller(), 'forms' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)
@@ -52,7 +52,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'form_by_id' ),
+					'callback'            => array( new AFASM_Form_Controller(), 'form_by_id' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)
@@ -69,7 +69,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'forms_pagination' ),
+					'callback'            => array( new AFASM_Form_Controller(), 'forms_pagination' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)
@@ -86,7 +86,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new FormController(), 'search_forms' ),
+					'callback'            => array( new AFASM_Form_Controller(), 'search_forms' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)

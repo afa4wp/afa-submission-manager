@@ -2,17 +2,18 @@
 /**
  * The User Tokens Controller Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers;
+namespace AFASM\Includes\Controllers;
 
 use AFASM\Includes\Models\AFASM_User_Tokens_Model;
 use AFASM\Includes\Plugins\Helpers\AFASM_Pagination;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class UserController
@@ -21,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class UserTokensController {
+class AFASM_User_Tokens_Controller {
 	/**
 	 * User Tokens Model
 	 *

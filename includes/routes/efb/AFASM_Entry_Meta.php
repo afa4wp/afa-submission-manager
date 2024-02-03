@@ -8,7 +8,7 @@
 
 namespace AFASM\Includes\Routes\EFB;
 
-use Includes\Controllers\EFB\EntryMetaController;
+use AFASM\Includes\Controllers\EFB\AFASM_Entry_Meta_Controller;
 use AFASM\Includes\Routes\AFASM_Abstract_Entry_Meta_Route;
 use AFASM\Includes\Plugins\AFASM_Config;
 
@@ -35,7 +35,7 @@ class AFASM_Entry_Meta extends AFASM_Abstract_Entry_Meta_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryMetaController(), 'entry_meta_by_entry_id' ),
+					'callback'            => array( new AFASM_Entry_Meta_Controller(), 'entry_meta_by_entry_id' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)
@@ -52,7 +52,7 @@ class AFASM_Entry_Meta extends AFASM_Abstract_Entry_Meta_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new EntryMetaController(), 'search_entry_meta_answer' ),
+					'callback'            => array( new AFASM_Entry_Meta_Controller(), 'search_entry_meta_answer' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 			)

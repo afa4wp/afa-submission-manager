@@ -18,7 +18,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 };
 
-use Includes\Controllers\UserTokensController;
+use AFASM\Includes\Controllers\AFASM_User_Tokens_Controller;
 
 /**
  * Class UserListTable
@@ -42,7 +42,7 @@ class AFASM_User_List_Table extends \WP_List_Table {
 	/**
 	 * User Tokens Controller
 	 *
-	 * @var UserTokensController
+	 * @var AFASM_User_Tokens_Controller
 	 */
 	private $user_tokens_controller;
 
@@ -66,7 +66,7 @@ class AFASM_User_List_Table extends \WP_List_Table {
 			)
 		);
 
-		$this->user_tokens_controller = new UserTokensController();
+		$this->user_tokens_controller = new AFASM_User_Tokens_Controller();
 		$this->user_model             = new AFASM_User_Model();
 	}
 

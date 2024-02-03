@@ -8,7 +8,7 @@
 
 namespace AFASM\Includes\Routes;
 
-use Includes\Controllers\UserController;
+use AFASM\Includes\Controllers\AFASM_User_Controller;
 use AFASM\Includes\Schema\AFASM_User_Schema;
 use AFASM\Includes\Plugins\AFASM_Config;
 
@@ -51,7 +51,7 @@ class AFASM_User_Route {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( new UserController(), 'login' ),
+					'callback'            => array( new AFASM_User_Controller(), 'login' ),
 					'permission_callback' => '__return_true',
 					'args'                => ( new AFASM_User_Schema() )->login(),
 				),
@@ -69,7 +69,7 @@ class AFASM_User_Route {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( new UserController(), 'login_qr_code' ),
+					'callback'            => array( new AFASM_User_Controller(), 'login_qr_code' ),
 					'permission_callback' => '__return_true',
 					'args'                => ( new AFASM_User_Schema() )->login_qr_code(),
 				),
@@ -88,7 +88,7 @@ class AFASM_User_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new UserController(), 'user' ),
+					'callback'            => array( new AFASM_User_Controller(), 'user' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 
@@ -106,7 +106,7 @@ class AFASM_User_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new UserController(), 'user_form_type_me' ),
+					'callback'            => array( new AFASM_User_Controller(), 'user_form_type_me' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new AFASM_User_Schema() )->form_type(),
 				),
@@ -125,7 +125,7 @@ class AFASM_User_Route {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( new UserController(), 'token' ),
+					'callback'            => array( new AFASM_User_Controller(), 'token' ),
 					'permission_callback' => '__return_true',
 					'args'                => ( new AFASM_User_Schema() )->token(),
 				),
@@ -143,7 +143,7 @@ class AFASM_User_Route {
 			array(
 				array(
 					'methods'             => 'POST',
-					'callback'            => array( new UserController(), 'logout' ),
+					'callback'            => array( new AFASM_User_Controller(), 'logout' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new AFASM_User_Schema() )->logout(),
 				),
@@ -161,7 +161,7 @@ class AFASM_User_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new UserController(), 'user_form_type_home' ),
+					'callback'            => array( new AFASM_User_Controller(), 'user_form_type_home' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 					'args'                => ( new AFASM_User_Schema() )->form_type(),
 				),

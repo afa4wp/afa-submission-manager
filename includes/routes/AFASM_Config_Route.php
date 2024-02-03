@@ -8,7 +8,7 @@
 
 namespace AFASM\Includes\Routes;
 
-use Includes\Controllers\ConfigController;
+use AFASM\Includes\Controllers\AFASM_Config_Controller;
 use AFASM\Includes\Plugins\AFASM_Config;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -50,7 +50,7 @@ class AFASM_Config_Route {
 			array(
 				array(
 					'methods'             => 'GET',
-					'callback'            => array( new ConfigController(), 'forms' ),
+					'callback'            => array( new AFASM_Config_Controller(), 'forms' ),
 					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
 				),
 

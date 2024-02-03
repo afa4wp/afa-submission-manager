@@ -2,17 +2,19 @@
 /**
  * The Entry Controllers Class.
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 
-namespace Includes\Controllers\WEF;
+namespace AFASM\Includes\Controllers\CF7;
 
-use AFASM\Includes\Models\WEF\AFASM_Entry_Model;
-use Includes\Controllers\AbstractEntryControllers;
+use AFASM\Includes\Models\CF7\AFASM_Entry_Model;
+use AFASM\Includes\Models\CF7\AFASM_Form_Model;
+use AFASM\Includes\Controllers\AFASM_Abstract_Entry_Controllers;
 
-// Exit if accessed directly.
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Class EntryController
@@ -21,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class EntryController extends AbstractEntryControllers {
+class AFASM_Entry_Controller extends AFASM_Abstract_Entry_Controllers {
 
 	/**
 	 * The form model
@@ -39,12 +41,12 @@ class EntryController extends AbstractEntryControllers {
 	}
 
 	/**
-	 * WEF forms entry.
+	 * CF7 forms entry.
 	 *
-	 * @return array $forms WEF forms.
+	 * @return array $forms CF7 forms.
 	 */
 	public function entries() {
-		$count = $this->entry_model->entry_model_helper->mumber_of_items();
+		$count = $this->entry_model->mumber_of_items();
 
 		$offset = 0;
 
@@ -56,32 +58,38 @@ class EntryController extends AbstractEntryControllers {
 	}
 
 	/**
-	 * WEF forms entry.
+	 * CF7 forms entry.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WEF forms.
+	 * @return array $forms CF7 forms.
 	 */
 	public function entry_by_id( $request ) {
 		$entry_id = absint( $request['entry_id'] );
-		$entry    = $this->entry_model->entry_by_id( $entry_id );
+
+		$entry = $this->entry_model->entry_by_id( $entry_id );
+
 		return rest_ensure_response( $entry );
 
 	}
 
 	/**
-	 * WEF forms entries by id.
+	 * CF7 forms entries by id.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WEF forms.
+	 * @return array $forms CF7 forms.
 	 */
 	public function entries_by_form_id( $request ) {
 		$form_id = absint( $request['form_id'] );
 
 		$page = absint( $request['page_number'] );
 
-		$count = $this->entry_model->mumber_of_items_by_form_id( $form_id );
+		$form_model = new AFASM_Form_Model();
+
+		$channel = $form_model->form_chanel_by_id( $form_id );
+
+		$count = $this->entry_model->mumber_of_items_by_Channel( $channel );
 
 		$offset = $this->pagination_helper->get_offset( $page );
 
@@ -93,11 +101,11 @@ class EntryController extends AbstractEntryControllers {
 	}
 
 	/**
-	 * WEF forms entries by user info.
+	 * CF7 forms entries by user info.
 	 *
 	 * @param WP_REST_Request $request The request.
 	 *
-	 * @return array $forms WEF forms.
+	 * @return array $forms CF7 forms.
 	 */
 	public function search_entries_by_user( $request ) {
 		$user_info = sanitize_text_field( $request['user_info'] );
@@ -112,4 +120,6 @@ class EntryController extends AbstractEntryControllers {
 
 		return rest_ensure_response( $entries_results );
 	}
+
+
 }
