@@ -89,7 +89,7 @@ class AFASM_User_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_User_Controller(), 'user' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 
 			)
@@ -107,7 +107,7 @@ class AFASM_User_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_User_Controller(), 'user_form_type_me' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_User_Schema() )->form_type(),
 				),
 
@@ -144,7 +144,7 @@ class AFASM_User_Route {
 				array(
 					'methods'             => 'POST',
 					'callback'            => array( new AFASM_User_Controller(), 'logout' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_User_Schema() )->logout(),
 				),
 			)
@@ -162,7 +162,7 @@ class AFASM_User_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_User_Controller(), 'user_form_type_home' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_User_Schema() )->form_type(),
 				),
 

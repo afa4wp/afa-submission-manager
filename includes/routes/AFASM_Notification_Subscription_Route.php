@@ -52,7 +52,7 @@ class AFASM_Notification_Subscription_Route {
 				array(
 					'methods'             => 'POST',
 					'callback'            => array( new AFASM_Notification_Subscription_Controller(), 'subscribe_user' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_Notification_Subscription_Schema() )->subscribe_user(),
 				),
 
@@ -71,7 +71,7 @@ class AFASM_Notification_Subscription_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Notification_Subscription_Controller(), 'fetch_subscriptions' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_Notification_Subscription_Schema() )->subscribe_user(),
 				),
 
@@ -90,7 +90,7 @@ class AFASM_Notification_Subscription_Route {
 				array(
 					'methods'             => 'DELETE',
 					'callback'            => array( new AFASM_Notification_Subscription_Controller(), 'unsubscribe' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_Notification_Subscription_Schema() )->subscribe_user(),
 				),
 
@@ -109,7 +109,7 @@ class AFASM_Notification_Subscription_Route {
 				array(
 					'methods'             => 'PUT',
 					'callback'            => array( new AFASM_Notification_Subscription_Controller(), 'update_subscription_state' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_Notification_Subscription_Schema() )->update_subscription_state(),
 				),
 

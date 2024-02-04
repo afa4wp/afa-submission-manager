@@ -224,11 +224,11 @@ class AFASM_JWT_Plugin {
 	 */
 	private function get_access_token_secret_key() {
 
-		if ( defined( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY' ) && ! empty( WP_AFA_ACCESS_TOKEN_SECRET_KEY ) ) {
-			return WP_AFA_ACCESS_TOKEN_SECRET_KEY;
+		if ( defined( 'AFASM_ACCESS_TOKEN_SECRET_KEY' ) && ! empty( AFASM_ACCESS_TOKEN_SECRET_KEY ) ) {
+			return AFASM_ACCESS_TOKEN_SECRET_KEY;
 		}
 
-		return get_option( 'WP_AFA_ACCESS_TOKEN_SECRET_KEY' );
+		return get_option( 'AFASM_ACCESS_TOKEN_SECRET_KEY' );
 
 	}
 
@@ -239,11 +239,11 @@ class AFASM_JWT_Plugin {
 	 */
 	private function get_refresh_token_secret_key() {
 
-		if ( defined( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' ) && ! empty( WP_AFA_REFRESH_TOKEN_SECRET_KEY ) ) {
-			return WP_AFA_REFRESH_TOKEN_SECRET_KEY;
+		if ( defined( 'AFASM_REFRESH_TOKEN_SECRET_KEY' ) && ! empty( AFASM_REFRESH_TOKEN_SECRET_KEY ) ) {
+			return AFASM_REFRESH_TOKEN_SECRET_KEY;
 		}
 
-		return get_option( 'WP_AFA_REFRESH_TOKEN_SECRET_KEY' );
+		return get_option( 'AFASM_REFRESH_TOKEN_SECRET_KEY' );
 
 	}
 

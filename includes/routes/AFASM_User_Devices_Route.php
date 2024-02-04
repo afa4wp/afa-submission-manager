@@ -52,7 +52,7 @@ class AFASM_User_Devices_Route {
 				array(
 					'methods'             => 'POST',
 					'callback'            => array( new AFASM_User_Devices_Controller(), 'create' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_User_Devices_Schema() )->create(),
 				),
 			)
@@ -70,7 +70,7 @@ class AFASM_User_Devices_Route {
 				array(
 					'methods'             => 'PUT',
 					'callback'            => array( new AFASM_User_Devices_Controller(), 'language' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_User_Devices_Schema() )->language(),
 				),
 			)

@@ -179,7 +179,7 @@ class AFASM_User_Devices_Model {
 
 		$table_notification_subscription = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
 
-		$sql = "SELECT afa_tud.id, afa_tud.user_id, afa_tud.expo_token, afa_tud.device_language FROM {$this->table_name} afa_tud INNER JOIN {$table_notification_subscription} afa_tns ON afa_tud.id = afa_tns.user_devices_id AND afa_tns.enabled = 1 WHERE afa_tns.notification_type_id = %d";
+		$sql = "SELECT afasm_tud.id, afasm_tud.user_id, afasm_tud.expo_token, afasm_tud.device_language FROM {$this->table_name} afasm_tud INNER JOIN {$table_notification_subscription} afasm_tns ON afasm_tud.id = afasm_tns.user_devices_id AND afasm_tns.enabled = 1 WHERE afasm_tns.notification_type_id = %d";
 
 		$sql = $wpdb->prepare( $sql, array( $notification_type_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 

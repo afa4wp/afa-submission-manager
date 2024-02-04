@@ -72,7 +72,7 @@ class AFASM_Language {
 			return false;
 		}
 
-		$result = load_textdomain( 'afa-submission-manager', AFA_SUBMISSION_MANAGER_PLUGIN_PATH . 'languages/' . $textdomanin . '.mo' );
+		$result = load_textdomain( 'afa-submission-manager', AFASM_PLUGIN_PATH . 'languages/' . $textdomanin . '.mo' );
 
 		return $result;
 	}
@@ -116,7 +116,7 @@ class AFASM_Language {
 	 * @since 1.0.0
 	 */
 	public function all_forms_load_textdomain() {
-		load_plugin_textdomain( 'afa-submission-manager', false, AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER );
+		load_plugin_textdomain( 'afa-submission-manager', false, AFASM_PLUGIN_LANGUAGE_FOLDER );
 	}
 
 	/**

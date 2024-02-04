@@ -36,7 +36,7 @@ class AFASM_Entry_Meta extends AFASM_Abstract_Entry_Meta_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Entry_Meta_Controller(), 'entry_meta_by_entry_id' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);
@@ -53,7 +53,7 @@ class AFASM_Entry_Meta extends AFASM_Abstract_Entry_Meta_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Entry_Meta_Controller(), 'search_entry_meta_answer' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);

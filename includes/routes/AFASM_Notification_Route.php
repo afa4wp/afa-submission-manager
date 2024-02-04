@@ -52,7 +52,7 @@ class AFASM_Notification_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Notification_Controller(), 'notifications' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 					'args'                => ( new AFASM_Notification_Schema() )->get(),
 				),
 

@@ -2,7 +2,7 @@
 /**
  * The Screen Mobile Login
  *
- * @package  AFA_SUBMISSION_MANAGER
+ * @package  claud/afa-submission-manager
  * @since 1.0.0
  */
 

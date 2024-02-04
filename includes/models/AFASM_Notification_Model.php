@@ -85,7 +85,7 @@ class AFASM_Notification_Model {
 
 		$table_notification_type = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE;
 
-		$sql = "SELECT afa_tn.id, afa_tn.user_id, afa_tn.notification_type_id, afa_tn.meta_value, afa_tn.created_at, afa_tnt.type, afa_tnt.title FROM {$this->table_name} afa_tn INNER JOIN  {$table_notification_type} afa_tnt ON afa_tn.notification_type_id = afa_tnt.id WHERE afa_tn.supported_plugin_id IN (0, %d) ORDER BY id DESC LIMIT %d,%d";
+		$sql = "SELECT afasm_tn.id, afasm_tn.user_id, afasm_tn.notification_type_id, afasm_tn.meta_value, afasm_tn.created_at, afasm_tnt.type, afasm_tnt.title FROM {$this->table_name} afasm_tn INNER JOIN  {$table_notification_type} afasm_tnt ON afasm_tn.notification_type_id = afasm_tnt.id WHERE afasm_tn.supported_plugin_id IN (0, %d) ORDER BY id DESC LIMIT %d,%d";
 
 		$sql = $wpdb->prepare( $sql, array( $supported_plugin_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 

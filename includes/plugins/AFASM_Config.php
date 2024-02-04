@@ -111,7 +111,7 @@ class AFASM_Config {
 	 *
 	 * @return boolean
 	 */
-	public function afa_check_authorization( $request ) {
+	public function afasm_check_authorization( $request ) {
 
 		if ( ! is_user_logged_in() ) {
 			return false;

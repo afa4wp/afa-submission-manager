@@ -134,7 +134,7 @@ class AFASM_User_Model {
 			if ( user_can( $user_id, 'manage_options' ) ) {
 				return true;
 			}
-			if ( in_array( 'afa_staff', $user->roles, true ) ) {
+			if ( in_array( 'afasm_staff', $user->roles, true ) ) {
 				return true;
 			}
 			return false;
@@ -158,7 +158,7 @@ class AFASM_User_Model {
 		if ( ! $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->add_role( 'afa_staff' );
+				$user->add_role( 'afasm_staff' );
 			}
 		}
 
@@ -179,7 +179,7 @@ class AFASM_User_Model {
 		if ( $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->remove_role( 'afa_staff' );
+				$user->remove_role( 'afasm_staff' );
 			}
 		}
 	}

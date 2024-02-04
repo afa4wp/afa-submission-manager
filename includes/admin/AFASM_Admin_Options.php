@@ -46,9 +46,9 @@ class AFASM_Admin_Options {
 	 * Add page for plugin
 	 */
 	public function add_page() {
-		add_menu_page( 'AFA', 'AFA', 'manage_options', 'afa_submission_manager', array( new AFASM_User_List_Table(), 'render' ), 'dashicons-rest-api' );
-		add_submenu_page( 'afa_submission_manager', __( 'AFA - Connected Users', 'afa-submission-manager' ), __( 'Connected Users', 'afa-submission-manager' ), 'manage_options', 'afa_submission_manager' );
-		add_submenu_page( 'afa_submission_manager', __( 'AFA - Settings', 'afa-submission-manager' ), __( 'Settings', 'afa-submission-manager' ), 'manage_options', 'afa_submission_manager_settings', array( new AFASM_Settings(), 'render' ) );
+		add_menu_page( 'AFA', 'AFA', 'manage_options', 'afasm', array( new AFASM_User_List_Table(), 'render' ), 'dashicons-rest-api' );
+		add_submenu_page( 'afasm', __( 'AFA - Connected Users', 'afa-submission-manager' ), __( 'Connected Users', 'afa-submission-manager' ), 'manage_options', 'afasm' );
+		add_submenu_page( 'afasm', __( 'AFA - Settings', 'afa-submission-manager' ), __( 'Settings', 'afa-submission-manager' ), 'manage_options', 'afasm_settings', array( new AFASM_Settings(), 'render' ) );
 	}
 
 	/**
@@ -56,9 +56,9 @@ class AFASM_Admin_Options {
 	 */
 	private function add_role() {
 		add_role(
-			'afa_staff',
+			'afasm_staff',
 			'AFA SUBMISSION MANAGER Staff',
-			array( 'manage_afa' => true )
+			array( 'afasm_manage' => true )
 		);
 
 	}

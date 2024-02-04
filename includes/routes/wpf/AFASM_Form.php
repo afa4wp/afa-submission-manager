@@ -36,7 +36,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Form_Controller(), 'forms' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);
@@ -53,7 +53,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Form_Controller(), 'form_by_id' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);
@@ -70,7 +70,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Form_Controller(), 'forms_pagination' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);
@@ -87,7 +87,7 @@ class AFASM_Form extends AFASM_Abstract_Form_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Form_Controller(), 'search_forms' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);

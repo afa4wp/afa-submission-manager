@@ -36,7 +36,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Entry_Controller(), 'entries' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);
@@ -53,7 +53,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Entry_Controller(), 'entry_by_id' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);
@@ -70,7 +70,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Entry_Controller(), 'entries_by_form_id' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);
@@ -87,7 +87,7 @@ class AFASM_Entry extends AFASM_Abstract_Entry_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Entry_Controller(), 'search_entries_by_user' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 			)
 		);

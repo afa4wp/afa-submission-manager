@@ -32,7 +32,7 @@ class AFASM_User_List_Table extends \WP_List_Table {
 	/**
 	 * Const to declare page.
 	 */
-	const PAGE = 'afa_submission_manager';
+	const PAGE = 'afasm';
 
 	/**
 	 * Const to declare number of posts to show per page in the table.
@@ -60,8 +60,8 @@ class AFASM_User_List_Table extends \WP_List_Table {
 
 		parent::__construct(
 			array(
-				'singular' => 'afa_submission_manager_logged_user', // Singular label.
-				'plural'   => 'afa_submission_manager_logged_users', // plural label, also this well be one of the table css class.
+				'singular' => 'afasm_logged_user', // Singular label.
+				'plural'   => 'afasm_logged_users', // plural label, also this well be one of the table css class.
 				'ajax'     => false, // We won't support Ajax for this table.
 			)
 		);
@@ -253,7 +253,7 @@ class AFASM_User_List_Table extends \WP_List_Table {
 	 */
 	public function handle_table_actions() {
 
-		if ( ! isset( $_REQUEST['page'] ) || 'afa_submission_manager' !== $_REQUEST['page'] ) {
+		if ( ! isset( $_REQUEST['page'] ) || 'afasm' !== $_REQUEST['page'] ) {
 			return;
 		}
 

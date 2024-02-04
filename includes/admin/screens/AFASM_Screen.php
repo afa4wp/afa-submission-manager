@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Class WP_AFA_Screen
+ * Class AFA_Screen
  *
  * Render Staff content
  *

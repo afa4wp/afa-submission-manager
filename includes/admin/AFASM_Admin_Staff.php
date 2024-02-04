@@ -29,7 +29,7 @@ class AFASM_Admin_Staff {
 	 *
 	 * @var string
 	 */
-	const NONCE = 'afa_remove_staff';
+	const NONCE = 'afasm_remove_staff';
 
 	/**
 	 * AdminStaff constructor.
@@ -52,10 +52,10 @@ class AFASM_Admin_Staff {
 	 * @return array
 	 */
 	public function add_user_staff_column( $columns ) {
-		$all_options = get_option( 'afa_submission_manager_settings_staff_options', false );
+		$all_options = get_option( 'afasm_settings_staff_options', false );
 		if ( ! empty( $all_options ) && array_key_exists( 'add_user', $all_options ) ) {
 			if ( 'on' === $all_options['add_user'] ) {
-				$columns['afa_submission_manager_user_staff_column'] = __( 'AFA Staff' );
+				$columns['afasm_user_staff_column'] = __( 'AFA Staff' );
 			}
 		}
 		return $columns;
@@ -73,7 +73,7 @@ class AFASM_Admin_Staff {
 	 * @return array
 	 */
 	public function add_user_staff_column_content( $output, $column_name, $user_id ) {
-		if ( 'afa_submission_manager_user_staff_column' === $column_name ) {
+		if ( 'afasm_user_staff_column' === $column_name ) {
 
 			$user_can_manage_afa = ( new AFASM_User_Model() )->user_can_manage_afa( $user_id );
 
@@ -83,12 +83,12 @@ class AFASM_Admin_Staff {
 				} else {
 					$nonce   = wp_create_nonce( self::NONCE );
 					$output  = sprintf( '<span>' . __( 'AFA Staff' ) . '</span>' );
-					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Remover' ) . '</a>', admin_url( 'users.php?action=afa_remove_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
+					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Remover' ) . '</a>', admin_url( 'users.php?action=afasm_remove_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
 				}
 			} else {
 					$nonce   = wp_create_nonce( self::NONCE );
 					$output  = sprintf( '<span>' . __( 'AFA Staff' ) . '</span>' );
-					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Adicionar' ) . '</a>', admin_url( 'users.php?action=afa_add_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
+					$output .= sprintf( "<br><a href='%s' class='remove'>" . __( 'Adicionar' ) . '</a>', admin_url( 'users.php?action=afasm_add_staff&user=' . $user_id . '&_wpnonce=' . $nonce ) );
 			}
 		}
 		return $output;
@@ -110,11 +110,11 @@ class AFASM_Admin_Staff {
 				$user_id = sanitize_text_field( wp_unslash( $_GET['user'] ) );
 
 				if ( is_numeric( $user_id ) ) {
-					if ( 'afa_add_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
+					if ( 'afasm_add_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
 						$this->add_staff( $user_id );
 					}
 
-					if ( 'afa_remove_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
+					if ( 'afasm_remove_staff' === sanitize_text_field( wp_unslash( $_GET['action'] ) ) ) {
 						$this->remove_staff( $user_id );
 					}
 				}
@@ -139,7 +139,7 @@ class AFASM_Admin_Staff {
 		if ( ! $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->add_role( 'afa_staff' );
+				$user->add_role( 'afasm_staff' );
 			}
 		}
 
@@ -161,7 +161,7 @@ class AFASM_Admin_Staff {
 		if ( $user_can_manage_afa ) {
 			$user = new WP_User( $user_id );
 			if ( $user->exists() ) {
-				$user->remove_role( 'afa_staff' );
+				$user->remove_role( 'afasm_staff' );
 			}
 		}
 

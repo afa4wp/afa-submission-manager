@@ -32,7 +32,7 @@ class AFASM_Settings {
 	 *
 	 * @var string
 	 */
-	const PAGE_ID = 'afa_submission_manager_settings';
+	const PAGE_ID = 'afasm_settings';
 
 	/**
 	 * Settings screens

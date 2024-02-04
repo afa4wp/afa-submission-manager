@@ -56,9 +56,9 @@ class AFASM_Screen_Staff extends AFASM_Screen {
 					<?php esc_html_e( 'Manage User Permissions', 'afa-submission-manager' ); ?>
 				</p>
 			</div>
-			<form action="<?php echo esc_html( admin_url( 'admin.php?page=afa_submission_manager_settings&tab=staff' ) ); ?>" method="POST">
+			<form action="<?php echo esc_html( admin_url( 'admin.php?page=afasm_settings&tab=staff' ) ); ?>" method="POST">
 				<table class="form-table">
-					<?php do_settings_fields( 'afa_submission_manager_settings', 'afa_submission_manager_settings_staff_section' ); ?>
+					<?php do_settings_fields( 'afasm_settings', 'afasm_settings_staff_section' ); ?>
 				</table>
 				<div >
 					<p>
@@ -78,18 +78,18 @@ class AFASM_Screen_Staff extends AFASM_Screen {
 	 * @return void
 	 */
 	public function settings() {
-		$all_options = get_option( 'afa_submission_manager_settings_staff_options', false );
+		$all_options = get_option( 'afasm_settings_staff_options', false );
 
 		if ( empty( $all_options ) ) {
 			$all_options = array();
 		}
 
 		add_settings_field(
-			'afa_submission_manager_add_user',
+			'afasm_add_user',
 			__( 'Add Users', 'afa-submission-manager' ),
 			array( $this, 'input_add_user_render' ),
-			'afa_submission_manager_settings',
-			'afa_submission_manager_settings_staff_section',
+			'afasm_settings',
+			'afasm_settings_staff_section',
 			$all_options
 		);
 	}
@@ -115,8 +115,8 @@ class AFASM_Screen_Staff extends AFASM_Screen {
 
 		?>
 			<fieldset>
-				<label for="afa_submission_manager_add_user">
-					<input name="afa_submission_manager_add_user" id="afa_submission_manager_add_user" type="checkbox" class="" value="on" <?php echo esc_html( $checked ); ?>> 
+				<label for="afasm_add_user">
+					<input name="afasm_add_user" id="afasm_add_user" type="checkbox" class="" value="on" <?php echo esc_html( $checked ); ?>> 
 					<?php esc_html_e( 'Add Users', 'afa-submission-manager' ); ?>
 				</label> 
 				<p class="description"><?php esc_html_e( 'To allow non-admin users to access this app, grant them the required permission', 'afa-submission-manager' ); ?></p>
@@ -135,14 +135,14 @@ class AFASM_Screen_Staff extends AFASM_Screen {
 		$all_options = array();
 		if ( isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'sreen-staff' ) ) {
 
-			if ( ! empty( $_POST['afa_submission_manager_add_user'] ) ) {
-				$add_user                = sanitize_text_field( wp_unslash( $_POST['afa_submission_manager_add_user'] ) );
+			if ( ! empty( $_POST['afasm_add_user'] ) ) {
+				$add_user                = sanitize_text_field( wp_unslash( $_POST['afasm_add_user'] ) );
 				$all_options['add_user'] = $add_user;
 			}
 
-			update_option( 'afa_submission_manager_settings_staff_options', $all_options );
+			update_option( 'afasm_settings_staff_options', $all_options );
 
-			if ( wp_safe_redirect( admin_url( 'admin.php?page=afa_submission_manager_settings&tab=staff' ) ) ) {
+			if ( wp_safe_redirect( admin_url( 'admin.php?page=afasm_settings&tab=staff' ) ) ) {
 				exit;
 			}
 		}

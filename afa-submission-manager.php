@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require __DIR__ . '/vendor/autoload.php';
 
-define( 'AFA_SUBMISSION_MANAGER_PLUGIN_FILE', __FILE__ );
-define( 'AFA_SUBMISSION_MANAGER_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'AFA_SUBMISSION_MANAGER_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+define( 'AFASM_PLUGIN_FILE', __FILE__ );
+define( 'AFASM_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'AFASM_PLUGIN_LANGUAGE_FOLDER', dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
 use AFASM\Includes\Plugins\JWT\AFASM_JWT_Plugin;
 use AFASM\Includes\Routes\AFASM_Route;
@@ -50,7 +50,7 @@ add_action( 'rest_api_init', 'afa_submission_manager_rest_init' );
 /**
 * Register hooks.
 */
-register_activation_hook( AFA_SUBMISSION_MANAGER_PLUGIN_FILE, array( new AFASM_Database_Installer(), 'install' ) );
+register_activation_hook( AFASM_PLUGIN_FILE, array( new AFASM_Database_Installer(), 'install' ) );
 
 
 ( new AFASM_Admin_Options() )->init();

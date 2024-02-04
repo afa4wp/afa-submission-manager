@@ -51,7 +51,7 @@ class AFASM_Config_Route {
 				array(
 					'methods'             => 'GET',
 					'callback'            => array( new AFASM_Config_Controller(), 'forms' ),
-					'permission_callback' => array( new AFASM_Config(), 'afa_check_authorization' ),
+					'permission_callback' => array( new AFASM_Config(), 'afasm_check_authorization' ),
 				),
 
 			)

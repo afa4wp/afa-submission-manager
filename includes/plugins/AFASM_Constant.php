@@ -23,7 +23,7 @@ class AFASM_Constant {
 
 	const PLUGIN_VERSION         = '1.0';
 	const PLUGIN_LANGUAGE_DOMAIN = 'afa-submission-manager';
-	const PLUGIN_TABLE_PREFIX    = 'afa_';
+	const PLUGIN_TABLE_PREFIX    = 'afasm_';
 
 	const API_NAMESPACE                   = self::PLUGIN_LANGUAGE_DOMAIN;
 	const API_VERSION                     = 'v1';
