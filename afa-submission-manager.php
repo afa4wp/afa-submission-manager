@@ -35,7 +35,7 @@ use AFASM\Includes\Plugins\Notification\AFASM_Notification_Hooks_Plugin;
 /**
  * Init api.
  */
-function afa_submission_manager_rest_init() {
+function afasm_rest_init() {
 	$namespace = AFASM_Constant::API_NAMESPACE . '/' . AFASM_Constant::API_VERSION;
 	( new AFASM_Route( $namespace ) )->init();
 
@@ -45,7 +45,7 @@ function afa_submission_manager_rest_init() {
 /**
 * Add actions
 */
-add_action( 'rest_api_init', 'afa_submission_manager_rest_init' );
+add_action( 'rest_api_init', 'afasm_rest_init' );
 
 /**
 * Register hooks.

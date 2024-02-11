@@ -45,7 +45,8 @@ class AFASM_Supported_Plugins_Model {
 	 */
 	public function get_all_supported_plugins() {
 		global $wpdb;
-		$sql     = "SELECT * FROM {$this->table_name}";
+		$sql     = 'SELECT * FROM %i';
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		return $results;
@@ -62,9 +63,9 @@ class AFASM_Supported_Plugins_Model {
 
 		global $wpdb;
 
-		$sql = "SELECT * FROM {$this->table_name} WHERE id=%d";
+		$sql = 'SELECT * FROM %i WHERE id=%d';
 
-		$sql = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
@@ -87,9 +88,9 @@ class AFASM_Supported_Plugins_Model {
 
 		global $wpdb;
 
-		$sql = "SELECT * FROM {$this->table_name} WHERE `slug`=%s";
+		$sql = 'SELECT * FROM %i WHERE `slug`=%s';
 
-		$sql = $wpdb->prepare( $sql, array( $slug ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $slug ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );

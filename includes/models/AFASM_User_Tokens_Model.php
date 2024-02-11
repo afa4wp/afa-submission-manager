@@ -48,8 +48,8 @@ class AFASM_User_Tokens_Model {
 	 */
 	public function check_if_refresh_token_exist( $user_id, $refresh_token ) {
 		global $wpdb;
-		$sql     = "SELECT * FROM {$this->table_name}  WHERE user_id = %d";
-		$results = $wpdb->get_results( $wpdb->prepare( $sql, array( $user_id ) ), OBJECT ); // phpcs:ignore
+		$sql     = 'SELECT * FROM %i WHERE user_id = %d';
+		$results = $wpdb->get_results( $wpdb->prepare( $sql, array( $this->table_name, $user_id ) ), OBJECT ); // phpcs:ignore
 
 		if ( ! ( count( $results ) > 0 ) ) {
 			return false;
@@ -130,9 +130,9 @@ class AFASM_User_Tokens_Model {
 
 		global $wpdb;
 
-		$sql = "SELECT afasm_ut.id, afasm_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afasm_ut INNER JOIN  {$wpdb->users} wp_u ON afasm_ut.user_id = wp_u.ID ORDER BY id DESC LIMIT %d,%d";
+		$sql = 'SELECT afasm_ut.id, afasm_ut.user_id, wp_u.display_name, wp_u.user_login FROM %i afasm_ut INNER JOIN %i wp_u ON afasm_ut.user_id = wp_u.ID ORDER BY id DESC LIMIT %d,%d';
 
-		$sql = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $wpdb->users, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, ARRAY_A );
@@ -153,11 +153,11 @@ class AFASM_User_Tokens_Model {
 
 		global $wpdb;
 
-		$sql = "SELECT afasm_ut.id, afasm_ut.user_id, wp_u.display_name, wp_u.user_login FROM {$this->table_name} afasm_ut INNER JOIN  {$wpdb->users} wp_u ON afasm_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s ORDER BY id DESC LIMIT %d,%d";
+		$sql = 'SELECT afasm_ut.id, afasm_ut.user_id, wp_u.display_name, wp_u.user_login FROM %i afasm_ut INNER JOIN %i wp_u ON afasm_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s ORDER BY id DESC LIMIT %d,%d';
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
-		$sql = $wpdb->prepare( $sql, array( $user_info, $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $wpdb->users, $user_info, $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore 
 		$results = $wpdb->get_results( $sql, ARRAY_A );
@@ -174,8 +174,12 @@ class AFASM_User_Tokens_Model {
 
 		global $wpdb;
 
+		$sql = 'SELECT count(*) as number_of_rows FROM %i';
+
+		$sql = $wpdb->prepare( $sql, array( $this->table_name ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+
 		// phpcs:ignore 
-		$results = $wpdb->get_results( "SELECT count(*) as number_of_rows FROM {$this->table_name}" );
+		$results = $wpdb->get_results( $sql );
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
@@ -193,11 +197,11 @@ class AFASM_User_Tokens_Model {
 
 		global $wpdb;
 
-		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} afasm_ut INNER JOIN {$wpdb->users} wp_u ON afasm_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s";
+		$sql = 'SELECT count(*) as number_of_rows FROM %i afasm_ut INNER JOIN %i wp_u ON afasm_ut.user_id = wp_u.ID WHERE wp_u.user_login LIKE %s OR wp_u.user_email LIKE %s OR wp_u.display_name LIKE %s';
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
-		$sql = $wpdb->prepare( $sql, array( $user_info, $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $wpdb->users, $user_info, $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );

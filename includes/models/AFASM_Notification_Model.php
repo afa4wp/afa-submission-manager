@@ -85,9 +85,9 @@ class AFASM_Notification_Model {
 
 		$table_notification_type = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE;
 
-		$sql = "SELECT afasm_tn.id, afasm_tn.user_id, afasm_tn.notification_type_id, afasm_tn.meta_value, afasm_tn.created_at, afasm_tnt.type, afasm_tnt.title FROM {$this->table_name} afasm_tn INNER JOIN  {$table_notification_type} afasm_tnt ON afasm_tn.notification_type_id = afasm_tnt.id WHERE afasm_tn.supported_plugin_id IN (0, %d) ORDER BY id DESC LIMIT %d,%d";
+		$sql = 'SELECT afasm_tn.id, afasm_tn.user_id, afasm_tn.notification_type_id, afasm_tn.meta_value, afasm_tn.created_at, afasm_tnt.type, afasm_tnt.title FROM %i afasm_tn INNER JOIN %i afasm_tnt ON afasm_tn.notification_type_id = afasm_tnt.id WHERE afasm_tn.supported_plugin_id IN (0, %d) ORDER BY id DESC LIMIT %d,%d';
 
-		$sql = $wpdb->prepare( $sql, array( $supported_plugin_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $table_notification_type, $supported_plugin_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore 
 		$results = $wpdb->get_results( $sql, OBJECT );
@@ -118,9 +118,9 @@ class AFASM_Notification_Model {
 
 		global $wpdb;
 
-		$sql = "SELECT count(*) as number_of_rows FROM {$this->table_name} WHERE supported_plugin_id = %d ";
+		$sql = 'SELECT count(*) as number_of_rows FROM %i WHERE supported_plugin_id = %d ';
 
-		$sql = $wpdb->prepare( $sql, array( $supported_plugin_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $supported_plugin_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore 
 		$results = $wpdb->get_results( $sql );

@@ -103,9 +103,9 @@ class AFASM_Notification_Subscription_Model {
 		$id = $device->id;
 
 		$table_notification_type = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_TYPE;
-		$sql                     = "SELECT afasm_tns.id, afasm_tns.user_devices_id, afasm_tns.notification_type_id, afasm_tns.enabled, afasm_tnt.type, afasm_tnt.title FROM {$this->table_name} afasm_tns INNER JOIN {$table_notification_type} afasm_tnt ON afasm_tns.notification_type_id = afasm_tnt.id WHERE afasm_tns.user_devices_id=%d ";
+		$sql                     = 'SELECT afasm_tns.id, afasm_tns.user_devices_id, afasm_tns.notification_type_id, afasm_tns.enabled, afasm_tnt.type, afasm_tnt.title FROM %i afasm_tns INNER JOIN %i afasm_tnt ON afasm_tns.notification_type_id = afasm_tnt.id WHERE afasm_tns.user_devices_id=%d ';
 
-		$sql = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $table_notification_type, $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );

@@ -120,11 +120,11 @@ class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 	public function search_entries_by_user( $user_info, $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$sql       = "SELECT fla.* FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->users} wpu ON  
-        fla.created_by = wpu.id WHERE wpu.user_login LIKE %s OR wpu.user_email LIKE %s ORDER BY fla.id DESC LIMIT %d,%d";
+		$sql       = 'SELECT fla.* FROM %i fla INNER JOIN %i wpu ON  
+        fla.created_by = wpu.id WHERE wpu.user_login LIKE %s OR wpu.user_email LIKE %s ORDER BY fla.id DESC LIMIT %d,%d';
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
-		$sql     = $wpdb->prepare( $sql, array( $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $wpdb->users, $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 		$entries = $this->prepare_data( $results );
 
@@ -142,11 +142,11 @@ class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 	public function mumber_of_items_by_user_info( $user_info ) {
 		global $wpdb;
 
-		$sql       = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->users} wpu ON  
-        fla.created_by = wpu.id WHERE wpu.user_login LIKE %s OR wpu.user_email LIKE %s ";
+		$sql       = 'SELECT count(*)  as number_of_rows FROM %i fla INNER JOIN %i wpu ON  
+        fla.created_by = wpu.id WHERE wpu.user_login LIKE %s OR wpu.user_email LIKE %s ';
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
-		$sql            = $wpdb->prepare( $sql, array( $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql            = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $wpdb->users, $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results        = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 

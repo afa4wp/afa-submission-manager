@@ -49,8 +49,8 @@ class AFASM_Entry_Model_Helper {
 	public function entries( $offset, $number_of_records_per_page, $order_by = 'id' ) {
 		global $wpdb;
 
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} ORDER BY {$order_by} DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql     = 'SELECT * FROM %i ORDER BY %i DESC LIMIT %d,%d';
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $order_by, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 
 		return $results;
@@ -67,8 +67,8 @@ class AFASM_Entry_Model_Helper {
 	public function entry_by_id( $entry_id, $id = 'id' ) {
 		global $wpdb;
 		$entry_id = (int) $entry_id;
-		$sql      = "SELECT * FROM {$this->table_name_with_prefix} WHERE {$id} = %d ";
-		$sql      = $wpdb->prepare( $sql, array( $entry_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql      = 'SELECT * FROM %i WHERE %i = %d ';
+		$sql      = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $id, $entry_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 
 		return $results;
@@ -87,8 +87,8 @@ class AFASM_Entry_Model_Helper {
 	public function entries_by_form_id( $form_id, $offset, $number_of_records_per_page, $order_by = 'id' ) {
 		global $wpdb;
 
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE form_id = %d ORDER BY {$order_by} DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $form_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql     = 'SELECT * FROM %i WHERE form_id = %d ORDER BY %i DESC LIMIT %d,%d';
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $form_id, $order_by, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 
 		return $results;
@@ -102,8 +102,10 @@ class AFASM_Entry_Model_Helper {
 	public function mumber_of_items() {
 		global $wpdb;
 
+		$sql = 'SELECT count(*)  as number_of_rows FROM %i ';
+		$sql = $wpdb->prepare( $sql, array( $this->table_name_with_prefix ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$results        = $wpdb->get_results( "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} " );// phpcs:ignore
+		$results        = $wpdb->get_results( $sql );// phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
 		return $number_of_rows;
@@ -120,8 +122,8 @@ class AFASM_Entry_Model_Helper {
 	public function mumber_of_items_by_form_id( $form_id, $field = 'form_id' ) {
 		global $wpdb;
 
-		$sql            = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE {$field} = %d ";
-		$sql            = $wpdb->prepare( $sql, array( $form_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql            = 'SELECT count(*)  as number_of_rows FROM %i WHERE %i = %d ';
+		$sql            = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $field, $form_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results        = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
@@ -137,13 +139,15 @@ class AFASM_Entry_Model_Helper {
 	 */
 	public function last_entry_id( $id = 'id' ) {
 		global $wpdb;
-		$sql     = "SELECT MAX({$id}) FROM {$this->table_name_with_prefix} ";
+		$sql     = 'SELECT MAX(%i) FROM %i ';
+		$sql     = $wpdb->prepare( $sql, array( $id, $this->table_name_with_prefix ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results = $wpdb->get_results( $sql,  OBJECT);// phpcs:ignore
 
 		if ( empty( $results ) ) {
 			return 0;
 		}
-		$last_inserted_id = intval( reset( $results )->{"MAX({$id})"} );
+		$max_property_name = $wpdb->prepare( 'MAX(%i)', $id );
+		$last_inserted_id  = intval( reset( $results )->$max_property_name );
 		return $last_inserted_id;
 	}
 }

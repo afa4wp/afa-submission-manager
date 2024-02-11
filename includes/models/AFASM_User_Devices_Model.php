@@ -129,9 +129,9 @@ class AFASM_User_Devices_Model {
 	public function get_register_by_user_expo_token( $expo_token ) {
 		global $wpdb;
 
-		$sql = "SELECT * FROM {$this->table_name} WHERE expo_token=%s";
+		$sql = 'SELECT * FROM %i WHERE expo_token=%s';
 
-		$sql = $wpdb->prepare( $sql, array( $expo_token ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $expo_token ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
@@ -153,9 +153,9 @@ class AFASM_User_Devices_Model {
 	public function get_register_by_user_device_id( $device_id ) {
 		global $wpdb;
 
-		$sql = "SELECT * FROM {$this->table_name} WHERE device_id=%s";
+		$sql = 'SELECT * FROM %i WHERE device_id=%s';
 
-		$sql = $wpdb->prepare( $sql, array( $device_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $device_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
@@ -179,9 +179,9 @@ class AFASM_User_Devices_Model {
 
 		$table_notification_subscription = $wpdb->prefix . AFASM_Constant::TABLE_NOTIFICATION_SUBSCRIPTION;
 
-		$sql = "SELECT afasm_tud.id, afasm_tud.user_id, afasm_tud.expo_token, afasm_tud.device_language FROM {$this->table_name} afasm_tud INNER JOIN {$table_notification_subscription} afasm_tns ON afasm_tud.id = afasm_tns.user_devices_id AND afasm_tns.enabled = 1 WHERE afasm_tns.notification_type_id = %d";
+		$sql = 'SELECT afasm_tud.id, afasm_tud.user_id, afasm_tud.expo_token, afasm_tud.device_language FROM %i afasm_tud INNER JOIN %i afasm_tns ON afasm_tud.id = afasm_tns.user_devices_id AND afasm_tns.enabled = 1 WHERE afasm_tns.notification_type_id = %d';
 
-		$sql = $wpdb->prepare( $sql, array( $notification_type_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( $this->table_name, $table_notification_subscription, $notification_type_id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );

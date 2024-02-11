@@ -94,8 +94,8 @@ class AFASM_Form_Model_Helper {
 	public function forms_from_custom_table( $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} ORDER BY id DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql     = 'SELECT * FROM %i ORDER BY id DESC LIMIT %d,%d';
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		return $results;
@@ -134,8 +134,8 @@ class AFASM_Form_Model_Helper {
 	public function form_by_channel( $channel ) {
 		global $wpdb;
 
-		$sql   = "SELECT * FROM {$this->table_name_with_prefix} WHERE post_name = %s ";
-		$sql   = $wpdb->prepare( $sql, array( $channel ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql   = 'SELECT * FROM %i WHERE post_name = %s ';
+		$sql   = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $channel ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$forms = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		if ( count( $forms ) > 0 ) {
@@ -157,8 +157,8 @@ class AFASM_Form_Model_Helper {
 
 		global $wpdb;
 
-		$sql            = "SELECT count(*) as number_of_rows FROM {$this->table_name_with_prefix} WHERE post_type = %s AND post_status = %s ";
-		$sql            = $wpdb->prepare( $sql, array( $this->post_type, 'publish' ) ); // phpcs:ignore
+		$sql            = 'SELECT count(*) as number_of_rows FROM %i WHERE post_type = %s AND post_status = %s ';
+		$sql            = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $this->post_type, 'publish' ) ); // phpcs:ignore
 		$results        = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
@@ -172,8 +172,10 @@ class AFASM_Form_Model_Helper {
 	public function mumber_of_items_from_custom_table() {
 		global $wpdb;
 
+		$sql = 'SELECT count(*)  as number_of_rows FROM %i ';
+		$sql = $wpdb->prepare( $sql, array( $this->table_name_with_prefix ) );
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$results = $wpdb->get_results( "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} " ); // phpcs:ignore
+		$results = $wpdb->get_results( $sql ); // phpcs:ignore
 
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
@@ -209,8 +211,8 @@ class AFASM_Form_Model_Helper {
 	public function form_chanel_by_id( $id ) {
 		global $wpdb;
 
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE id = %d ";
-		$sql     = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql     = 'SELECT * FROM %i WHERE id = %d ';
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		if ( count( $results ) > 0 ) {
@@ -229,8 +231,8 @@ class AFASM_Form_Model_Helper {
 	public function form_by_id( $id ) {
 		global $wpdb;
 
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE id = %d ";
-		$sql     = $wpdb->prepare( $sql, array( $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql     = 'SELECT * FROM %i WHERE id = %d ';
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $id ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results = $wpdb->get_results( $sql, OBJECT ); // phpcs:ignore
 
 		return $results;

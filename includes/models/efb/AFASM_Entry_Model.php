@@ -67,8 +67,8 @@ class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 
 		global $wpdb;
 
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE type = 'submission' ORDER BY {$order_by} DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql     = "SELECT * FROM %i WHERE type = 'submission' ORDER BY %i DESC LIMIT %d,%d";
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $order_by, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 
 		$entries = $this->prepare_data( $results );
@@ -111,8 +111,8 @@ class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 
 		global $wpdb;
 
-		$sql     = "SELECT * FROM {$this->table_name_with_prefix} WHERE post_id = %d AND type = 'submission' ORDER BY id DESC LIMIT %d,%d";
-		$sql     = $wpdb->prepare( $sql, array( $form_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql     = "SELECT * FROM %i WHERE post_id = %d AND type = 'submission' ORDER BY id DESC LIMIT %d,%d";
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $form_id, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 
 		$entries = $this->prepare_data( $results );
@@ -133,15 +133,15 @@ class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 	public function search_entries_by_user( $user_info, $offset, $number_of_records_per_page ) {
 		global $wpdb;
 
-		$sql = "SELECT fla.* FROM {$this->table_name_with_prefix} fla 
-        INNER JOIN {$wpdb->users} wpu ON fla.user_id = wpu.id 
+		$sql = "SELECT fla.* FROM %i fla 
+        INNER JOIN %i wpu ON fla.user_id = wpu.id 
         WHERE (wpu.user_login LIKE %s OR wpu.user_email LIKE %s) 
         AND fla.type = 'submission'
         ORDER BY fla.id DESC LIMIT %d,%d ";
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
-		$sql     = $wpdb->prepare( $sql, array( $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $wpdb->users, $user_info, $user_info, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 		$entries = $this->prepare_data( $results );
 
@@ -170,12 +170,12 @@ class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 	public function mumber_of_items_by_user_info( $user_info ) {
 		global $wpdb;
 
-		$sql = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} fla INNER JOIN {$wpdb->users} wpu ON  
-        fla.user_id = wpu.id WHERE wpu.user_login LIKE  %s OR wpu.user_email LIKE %s ";
+		$sql = 'SELECT count(*)  as number_of_rows FROM %i fla INNER JOIN %i wpu ON  
+        fla.user_id = wpu.id WHERE wpu.user_login LIKE  %s OR wpu.user_email LIKE %s ';
 
 		$user_info = '%' . $wpdb->esc_like( $user_info ) . '%';
 
-		$sql            = $wpdb->prepare( $sql, array( $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql            = $wpdb->prepare( $sql, array( $this->table_name_with_prefix, $wpdb->users, $user_info, $user_info ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results        = $wpdb->get_results( $sql, OBJECT );// phpcs:ignore
 		$number_of_rows = intval( $results[0]->number_of_rows );
 
@@ -224,14 +224,14 @@ class AFASM_Entry_Model extends AFASM_Abstract_Entry_Model {
 	 */
 	public function last_entry_id() {
 		global $wpdb;
-		$id      = 'id';
-		$sql     = "SELECT MAX({$id}) FROM {$this->table_name_with_prefix} WHERE type = 'submission' ";
+		$sql     = "SELECT MAX(id) FROM %i WHERE type = 'submission' ";
+		$sql     = $wpdb->prepare( $sql, array( $this->table_name_with_prefix ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$results = $wpdb->get_results( $sql,  OBJECT);// phpcs:ignore
 
 		if ( empty( $results ) ) {
 			return 0;
 		}
-		$last_inserted_id = intval( reset( $results )->{"MAX({$id})"} );
+		$last_inserted_id = intval( reset( $results )->{'MAX(id)'} );
 		return $last_inserted_id;
 	}
 }

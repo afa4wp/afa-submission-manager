@@ -102,11 +102,11 @@ class AFASM_Form_Model extends AFASM_Abstract_Form_Model {
 	public function mumber_of_items_by_search( $post_name ) {
 		global $wpdb;
 
-		$query = "SELECT count(*)  as number_of_rows FROM {$this->table_name_with_prefix} WHERE title LIKE %s ";
+		$query = 'SELECT count(*)  as number_of_rows FROM %i WHERE title LIKE %s ';
 
 		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
 
-		$sql = $wpdb->prepare( $query, array( $post_name_esc_like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $query, array( $this->table_name_with_prefix, $post_name_esc_like ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		// phpcs:ignore
 		$results = $wpdb->get_results( $sql, OBJECT );
@@ -160,11 +160,11 @@ class AFASM_Form_Model extends AFASM_Abstract_Form_Model {
 
 		global $wpdb;
 
-		$query = "SELECT * FROM {$this->table_name_with_prefix} WHERE title LIKE %s ORDER BY id DESC LIMIT %d,%d";
+		$query = 'SELECT * FROM %i WHERE title LIKE %s ORDER BY id DESC LIMIT %d,%d';
 
 		$post_name_esc_like = '%' . $wpdb->esc_like( $post_name ) . '%';
 
-		$sql = $wpdb->prepare( $query, array( $post_name_esc_like, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
+		$sql = $wpdb->prepare( $query, array( $this->table_name_with_prefix, $post_name_esc_like, $offset, $number_of_records_per_page ) );// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared 
 
 		// phpcs:ignore 
 		$results = $wpdb->get_results( $sql, OBJECT );
