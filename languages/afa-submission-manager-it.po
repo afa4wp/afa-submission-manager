@@ -16,135 +16,127 @@ msgstr ""
 
 #. Plugin Name of the plugin
 msgid "AFA - Mobile-Ready Submission Manager"
-msgstr "AFA - Mobile-Ready Submission Manager"
+msgstr "AFA - Gestore delle presentazioni pronto per dispositivi mobili"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/afa-submission-manager/afa-submission-manager"
-msgstr ""
+msgstr "https://github.com/afa-submission-manager/afa-submission-manager"
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Simplify form management and gain insights with our robust WordPress plugin."
+msgstr "Semplifica la gestione dei moduli e ottieni approfondimenti con il nostro robusto plugin WordPress."
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
-msgstr ""
+msgstr "claudionhangapc, marciogoes"
 
 #. Author URI of the plugin
 msgid "https://claudionhangapc.com/"
-msgstr "Author URI of the plugin"
+msgstr "https://claudionhangapc.com/"
 
 #: includes/admin/AFASM_Admin_Options.php:50
 msgid "AFA - Connected Users"
-msgstr "AFA - Connected Users"
-
-#: includes/admin/AFASM_Admin_Options.php:50
-msgid "Connected Users"
-msgstr "Connected Users"
+msgstr "Utenti collegati AFA"
 
 #: includes/admin/AFASM_Admin_Options.php:51
 msgid "AFA - Settings"
-msgstr "AFA - Settings"
-
-#: includes/admin/AFASM_Admin_Options.php:51
-msgid "Settings"
-msgstr "Settings"
+msgstr "Impostazioni AFA"
 
 #: includes/admin/pages/AFASM_User_List_Table.php:81
 msgid "User Login"
-msgstr "User Login"
+msgstr "Accesso utente"
 
 #: includes/admin/pages/AFASM_User_List_Table.php:82
 msgid "Display Name"
-msgstr "Display Name"
+msgstr "Nome visualizzato"
 
 #: includes/admin/pages/AFASM_User_List_Table.php:83
 msgid "User Id"
-msgstr "User Id"
+msgstr "ID utente"
 
 #: includes/admin/pages/AFASM_User_List_Table.php:94
 msgid "No users Connected."
-msgstr "No users Connected."
+msgstr "Nessun utente connesso."
 
 #: includes/admin/pages/AFASM_User_List_Table.php:168
 msgid "Select"
-msgstr "Select"
+msgstr "Seleziona"
 
 #: includes/admin/pages/AFASM_User_List_Table.php:211
 msgid "Remove Users"
-msgstr "Remove Users"
+msgstr "Rimuovi utenti"
 
 #: includes/admin/pages/AFASM_User_List_Table.php:270
 #: includes/admin/pages/AFASM_User_List_Table.php:295
 msgid "Security check"
-msgstr "Security check"
+msgstr "Controllo di sicurezza"
 
 #: includes/admin/pages/AFASM_User_List_Table.php:315
 msgid "Search User"
-msgstr "Search User"
+msgstr "Cerca utente"
 
 #: includes/admin/screens/AFASM_Screen_About.php:35
 msgid "About plugin"
-msgstr "About plugin"
+msgstr "Informazioni sul plugin"
 
 #: includes/admin/screens/AFASM_Screen_About.php:51
 msgid "About Our Plugin"
-msgstr "About Our Plugin"
+msgstr "Informazioni sul nostro plugin"
 
 #: includes/admin/screens/AFASM_Screen_About.php:55
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
-msgstr "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
+msgstr "Benvenuti nel nostro potente plugin progettato per migliorare la tua esperienza di gestione dei moduli. Il nostro plugin è progettato per semplificare la gestione delle voci dei moduli, fornendoti gli strumenti necessari per ottimizzare il processo e risparmiare tempo."
 
 #: includes/admin/screens/AFASM_Screen_About.php:58
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
+msgstr "Il nostro plugin va oltre il desktop fornendo un'API robusta che consente ai tuoi utenti di app mobili di visualizzare facilmente le presentazioni dei moduli in movimento. Integra senza problemi il nostro plugin con i popolari generatori di moduli WordPress e concedi ai tuoi utenti la possibilità di supervisionare le presentazioni da qualsiasi luogo."
 
 #: includes/admin/screens/AFASM_Screen_About.php:61
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
+msgstr "Rimani organizzato, ottieni approfondimenti e migliora le interazioni degli utenti, tutto nel tuo cruscotto WordPress e attraverso la nostra API dedicata. Con il nostro plugin facile da usare, puoi rimanere sotto controllo e trasformare il modo in cui gestisci le presentazioni dei moduli. Scopri le possibilità oggi e rivoluziona il tuo approccio alla gestione dei moduli!"
 
 #: includes/admin/screens/AFASM_Screen_About.php:66
 msgid "Supported plugins:"
-msgstr "Supported plugins:"
+msgstr "Plugin supportati:"
 
 #: includes/admin/screens/AFASM_Screen_Mobile_Login.php:39
 msgid "Login"
-msgstr "Login"
+msgstr "Accedi"
 
 #: includes/admin/screens/AFASM_Screen_Mobile_Login.php:57
 msgid "Scan the following QR Code using the AFA app."
-msgstr "Scan the following QR Code using the AFA app."
+msgstr "Scansiona il seguente codice QR utilizzando l'app AFA."
 
 #: includes/admin/screens/AFASM_Screen_Staff.php:38
 msgid "Staff"
-msgstr "Staff"
+msgstr "Personale"
 
 #: includes/admin/screens/AFASM_Screen_Staff.php:56
 msgid "Manage User Permissions"
-msgstr "Manage User Permissions"
+msgstr "Gestisci le autorizzazioni degli utenti"
 
 #: includes/admin/screens/AFASM_Screen_Staff.php:65
 msgid "Save Changes"
-msgstr "Save Changes"
+msgstr "Salva modifiche"
 
 #: includes/admin/screens/AFASM_Screen_Staff.php:89
 #: includes/admin/screens/AFASM_Screen_Staff.php:120
 msgid "Add Users"
-msgstr "Add Users"
+msgstr "Aggiungi utenti"
 
 #: includes/admin/screens/AFASM_Screen_Staff.php:122
 msgid "To allow non-admin users to access this app, grant them the required permission"
-msgstr "To allow non-admin users to access this app, grant them the required permission"
+msgstr "Per consentire agli utenti non amministratori di accedere a questa app, concedi loro le autorizzazioni richieste"
 
 #. translators: %1$s is replaced with the entry_id.
 #: includes/models/AFASM_Notification_Model.php:147
 msgid "Someone filled out a new form: {bold}%1$s{/bold}"
-msgstr "Someone filled out a new form: {bold}%1$s{/bold}"
+msgstr "Qualcuno ha compilato un nuovo modulo: {bold}%1$s{/bold}"
 
 #. translators: %1$s is replaced with the user_name and %1$s entry_id.
 #: includes/models/AFASM_Notification_Model.php:150
 msgid "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
-msgstr "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
+msgstr "{bold}%1$s{/bold} ha compilato un nuovo modulo: {bold}%2$s{/bold}"
 
 #. translators: %1$s is replaced with the site name.
 #: includes/plugins/notification/AFASM_CF7_Notification.php:71
@@ -153,7 +145,7 @@ msgstr "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
 #: includes/plugins/notification/AFASM_WEF_Notification.php:72
 #: includes/plugins/notification/AFASM_WPF_Notification.php:72
 msgid "New Form Submission Received from %1$s. Open app to view"
-msgstr "New Form Submission Received from %1$s. Open app to view"
+msgstr "Nuova presentazione modulo ricevuta da %1$s. Apri l'app per visualizzare"
 
 #: includes/plugins/notification/AFASM_CF7_Notification.php:73
 #: includes/plugins/notification/AFASM_EFB_Notification.php:74
@@ -161,4 +153,4 @@ msgstr "New Form Submission Received from %1$s. Open app to view"
 #: includes/plugins/notification/AFASM_WEF_Notification.php:74
 #: includes/plugins/notification/AFASM_WPF_Notification.php:74
 msgid "New Form Submission"
-msgstr "New Form Submission"
+msgstr "Nuova presentazione modulo"

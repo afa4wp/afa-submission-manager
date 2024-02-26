@@ -1,164 +1,156 @@
-# Copyright (C) 2023 claudionhangapc, marciogoes
+# Copyright (C) 2024 claudionhangapc, marciogoes
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
 "Project-Id-Version: AFA - Mobile-Ready Submission Manager 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/afa-submission-manager\n"
-"Last-Translator: VOLLER NAME <EMAIL@ADRESSE>\n"
-"Language-Team: SPRACHE <LL@li.org>\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-29T14:12:53+00:00\n"
-"PO-Revision-Date: JAHR-MO-TAG STU:MI+FUSEAU\n"
+"POT-Creation-Date: 2024-02-26T20:37:24+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: afa-submission-manager\n"
 
 #. Plugin Name of the plugin
 msgid "AFA - Mobile-Ready Submission Manager"
-msgstr "AFA - Mobile-Ready Submission Manager"
+msgstr "AFA - Mobile-fähiger Einreichungs-Manager"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/afa-submission-manager/afa-submission-manager"
-msgstr ""
+msgstr "https://github.com/afa-submission-manager/afa-submission-manager"
 
 #. Description of the plugin
 msgid "Simplify form management and gain insights with our robust WordPress plugin."
-msgstr "Vereinfachen Sie das Formularmanagement und gewinnen Sie Einblicke mit unserem robusten WordPress-Plugin."
+msgstr "Vereinfachen Sie das Formularmanagement und erhalten Sie Einblicke mit unserem robusten WordPress-Plugin."
 
 #. Author of the plugin
 msgid "claudionhangapc, marciogoes"
-msgstr ""
+msgstr "claudionhangapc, marciogoes"
 
 #. Author URI of the plugin
 msgid "https://claudionhangapc.com/"
-msgstr ""
+msgstr "https://claudionhangapc.com/"
 
-#: includes/admin/AdminOptions.php:49
+#: includes/admin/AFASM_Admin_Options.php:50
 msgid "AFA - Connected Users"
 msgstr "AFA - Verbundene Benutzer"
 
-#: includes/admin/AdminOptions.php:49
-msgid "Connected Users"
-msgstr "Verbundene Benutzer"
-
-#: includes/admin/AdminOptions.php:50
+#: includes/admin/AFASM_Admin_Options.php:51
 msgid "AFA - Settings"
 msgstr "AFA - Einstellungen"
 
-#: includes/admin/AdminOptions.php:50
-msgid "Settings"
-msgstr "Einstellungen"
-
-#: includes/admin/pages/UserListTable.php:81
+#: includes/admin/pages/AFASM_User_List_Table.php:81
 msgid "User Login"
 msgstr "Benutzeranmeldung"
 
-#: includes/admin/pages/UserListTable.php:82
+#: includes/admin/pages/AFASM_User_List_Table.php:82
 msgid "Display Name"
-msgstr "Anzeigename"
+msgstr "Angezeigter Name"
 
-#: includes/admin/pages/UserListTable.php:83
+#: includes/admin/pages/AFASM_User_List_Table.php:83
 msgid "User Id"
 msgstr "Benutzer-ID"
 
-#: includes/admin/pages/UserListTable.php:94
+#: includes/admin/pages/AFASM_User_List_Table.php:94
 msgid "No users Connected."
 msgstr "Keine Benutzer verbunden."
 
-#: includes/admin/pages/UserListTable.php:168
+#: includes/admin/pages/AFASM_User_List_Table.php:168
 msgid "Select"
 msgstr "Auswählen"
 
-#: includes/admin/pages/UserListTable.php:211
+#: includes/admin/pages/AFASM_User_List_Table.php:211
 msgid "Remove Users"
 msgstr "Benutzer entfernen"
 
-#: includes/admin/pages/UserListTable.php:270
-#: includes/admin/pages/UserListTable.php:295
+#: includes/admin/pages/AFASM_User_List_Table.php:270
+#: includes/admin/pages/AFASM_User_List_Table.php:295
 msgid "Security check"
 msgstr "Sicherheitsüberprüfung"
 
-#: includes/admin/pages/UserListTable.php:315
+#: includes/admin/pages/AFASM_User_List_Table.php:315
 msgid "Search User"
 msgstr "Benutzer suchen"
 
-#: includes/admin/screens/ScreenAbout.php:34
+#: includes/admin/screens/AFASM_Screen_About.php:35
 msgid "About plugin"
 msgstr "Über das Plugin"
 
-#: includes/admin/screens/ScreenAbout.php:50
+#: includes/admin/screens/AFASM_Screen_About.php:51
 msgid "About Our Plugin"
 msgstr "Über unser Plugin"
 
-#: includes/admin/screens/ScreenAbout.php:54
+#: includes/admin/screens/AFASM_Screen_About.php:55
 msgid "Welcome to our powerful plugin designed to enhance your form management experience. Our plugin is built to simplify form entry management, providing you with the tools you need to streamline the process and save time."
-msgstr "Willkommen bei unserem leistungsstarken Plugin, das entwickelt wurde, um Ihre Erfahrung im Formularmanagement zu verbessern. Unser Plugin ist darauf ausgelegt, die Verwaltung von Formulareingaben zu vereinfachen und Ihnen die Werkzeuge zur Verfügung zu stellen, die Sie benötigen, um den Prozess zu optimieren und Zeit zu sparen."
+msgstr "Willkommen bei unserem leistungsstarken Plugin, das entwickelt wurde, um Ihre Erfahrung im Formularmanagement zu verbessern. Unser Plugin ist darauf ausgelegt, die Verwaltung von Formulareinträgen zu vereinfachen und Ihnen die Werkzeuge bereitzustellen, die Sie benötigen, um den Prozess zu optimieren und Zeit zu sparen."
 
-#: includes/admin/screens/ScreenAbout.php:57
+#: includes/admin/screens/AFASM_Screen_About.php:58
 msgid "Our plugin goes beyond the desktop by providing a robust API that empowers your mobile app users to effortlessly view form submissions on the go. Seamlessly integrate our plugin with popular WordPress form builders and grant your users the ability to oversee submissions from anywhere."
-msgstr "Unser Plugin geht über den Desktop hinaus, indem es eine robuste API bereitstellt, die es Ihren mobilen App-Benutzern ermöglicht, Formulareinreichungen mühelos unterwegs anzusehen. Integrieren Sie unser Plugin nahtlos mit beliebten WordPress-Formularerstellern und gewähren Sie Ihren Benutzern die Möglichkeit, Einreichungen von überall aus zu überwachen."
+msgstr "Unser Plugin geht über den Desktop hinaus, indem es eine robuste API bereitstellt, mit der Ihre mobilen App-Benutzer problemlos Formularübermittlungen unterwegs anzeigen können. Integrieren Sie unser Plugin nahtlos mit beliebten WordPress-Formulargeneratoren und gewähren Sie Ihren Benutzern die Möglichkeit, Übermittlungen von überall aus zu überwachen."
 
-#: includes/admin/screens/ScreenAbout.php:60
+#: includes/admin/screens/AFASM_Screen_About.php:61
 msgid "Stay organized, gain insights, and enhance user interactions, all within your WordPress dashboard and through our dedicated API. With our user-friendly plugin, you can stay in control and transform the way you manage form submissions. Dive into the possibilities today and revolutionize your approach to form management!"
-msgstr "Bleiben Sie organisiert, gewinnen Sie Einblicke und verbessern Sie die Benutzerinteraktionen, alles innerhalb Ihres WordPress-Dashboards und durch unsere dedizierte API. Mit unserem benutzerfreundlichen Plugin können Sie die Kontrolle behalten und die Art und Weise, wie Sie Formulareinreichungen verwalten, transformieren. Tauchen Sie noch heute in die Möglichkeiten ein und revolutionieren Sie Ihre Herangehensweise an das Formularmanagement!"
+msgstr "Bleiben Sie organisiert, gewinnen Sie Einblicke und verbessern Sie die Benutzerinteraktionen, alles innerhalb Ihres WordPress-Dashboards und durch unsere dedizierte API. Mit unserem benutzerfreundlichen Plugin behalten Sie die Kontrolle und verändern die Art und Weise, wie Sie Formularübermittlungen verwalten. Tauchen Sie noch heute in die Möglichkeiten ein und revolutionieren Sie Ihren Ansatz für das Formularmanagement!"
 
-#: includes/admin/screens/ScreenAbout.php:65
+#: includes/admin/screens/AFASM_Screen_About.php:66
 msgid "Supported plugins:"
 msgstr "Unterstützte Plugins:"
 
-#: includes/admin/screens/ScreenMobileLogin.php:38
+#: includes/admin/screens/AFASM_Screen_Mobile_Login.php:39
 msgid "Login"
 msgstr "Anmelden"
 
-#: includes/admin/screens/ScreenMobileLogin.php:56
+#: includes/admin/screens/AFASM_Screen_Mobile_Login.php:57
 msgid "Scan the following QR Code using the AFA app."
 msgstr "Scannen Sie den folgenden QR-Code mit der AFA-App."
 
-#: includes/admin/screens/ScreenStaff.php:37
+#: includes/admin/screens/AFASM_Screen_Staff.php:38
 msgid "Staff"
-msgstr "Personal"
+msgstr "Mitarbeiter"
 
-#: includes/admin/screens/ScreenStaff.php:55
+#: includes/admin/screens/AFASM_Screen_Staff.php:56
 msgid "Manage User Permissions"
 msgstr "Benutzerberechtigungen verwalten"
 
-#: includes/admin/screens/ScreenStaff.php:64
+#: includes/admin/screens/AFASM_Screen_Staff.php:65
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: includes/admin/screens/ScreenStaff.php:88
-#: includes/admin/screens/ScreenStaff.php:119
+#: includes/admin/screens/AFASM_Screen_Staff.php:89
+#: includes/admin/screens/AFASM_Screen_Staff.php:120
 msgid "Add Users"
 msgstr "Benutzer hinzufügen"
 
-#: includes/admin/screens/ScreenStaff.php:121
+#: includes/admin/screens/AFASM_Screen_Staff.php:122
 msgid "To allow non-admin users to access this app, grant them the required permission"
 msgstr "Um nicht-administrativen Benutzern den Zugriff auf diese App zu ermöglichen, gewähren Sie ihnen die erforderliche Berechtigung"
 
 #. translators: %1$s is replaced with the entry_id.
-#: includes/models/NotificationModel.php:155
+#: includes/models/AFASM_Notification_Model.php:147
 msgid "Someone filled out a new form: {bold}%1$s{/bold}"
 msgstr "Jemand hat ein neues Formular ausgefüllt: {bold}%1$s{/bold}"
 
 #. translators: %1$s is replaced with the user_name and %1$s entry_id.
-#: includes/models/NotificationModel.php:158
+#: includes/models/AFASM_Notification_Model.php:150
 msgid "{bold}%1$s{/bold} filled out a new form: {bold}%2$s{/bold}"
 msgstr "{bold}%1$s{/bold} hat ein neues Formular ausgefüllt: {bold}%2$s{/bold}"
 
 #. translators: %1$s is replaced with the site name.
-#: includes/plugins/notification/CF7Notification.php:78
-#: includes/plugins/notification/EFBNotification.php:79
-#: includes/plugins/notification/GFNotification.php:80
-#: includes/plugins/notification/WEFNotification.php:79
-#: includes/plugins/notification/WPFNotification.php:79
+#: includes/plugins/notification/AFASM_CF7_Notification.php:71
+#: includes/plugins/notification/AFASM_EFB_Notification.php:72
+#: includes/plugins/notification/AFASM_GF_Notification.php:73
+#: includes/plugins/notification/AFASM_WEF_Notification.php:72
+#: includes/plugins/notification/AFASM_WPF_Notification.php:72
 msgid "New Form Submission Received from %1$s. Open app to view"
-msgstr "Neue Formularübermittlung von %1$s erhalten. Öffnen Sie die App, um anzuzeigen"
+msgstr "Neue Formularübermittlung von %1$s erhalten. App öffnen, um anzuzeigen"
 
-#: includes/plugins/notification/CF7Notification.php:80
-#: includes/plugins/notification/EFBNotification.php:81
-#: includes/plugins/notification/GFNotification.php:82
-#: includes/plugins/notification/WEFNotification.php:81
-#: includes/plugins/notification/WPFNotification.php:81
+#: includes/plugins/notification/AFASM_CF7_Notification.php:73
+#: includes/plugins/notification/AFASM_EFB_Notification.php:74
+#: includes/plugins/notification/AFASM_GF_Notification.php:75
+#: includes/plugins/notification/AFASM_WEF_Notification.php:74
+#: includes/plugins/notification/AFASM_WPF_Notification.php:74
 msgid "New Form Submission"
 msgstr "Neue Formularübermittlung"
